@@ -16,6 +16,13 @@ $app = new Illuminate\Foundation\Application(
 );
 
 /*
+| Redirect storage path for Vercel Serverless environment (read-only filesystem)
+*/
+if (isset($_ENV['VERCEL']) || isset($_SERVER['VERCEL']) || getenv('VERCEL') || str_contains(__DIR__, '/var/task')) {
+    $app->useStoragePath('/tmp/storage');
+}
+
+/*
 |--------------------------------------------------------------------------
 | Bind Important Interfaces
 |--------------------------------------------------------------------------

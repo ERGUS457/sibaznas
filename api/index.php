@@ -16,13 +16,11 @@ foreach ($dirs as $dir) {
     }
 }
 
-// Point Laravel compiled views and caches to writable /tmp
+// Point Laravel paths and set environment flags
 putenv("VIEW_COMPILED_PATH={$tmpStorage}/framework/views");
-putenv("APP_CONFIG_CACHE={$tmpStorage}/config.php");
-putenv("APP_EVENTS_CACHE={$tmpStorage}/events.php");
-putenv("APP_PACKAGES_CACHE={$tmpStorage}/packages.php");
-putenv("APP_ROUTES_CACHE={$tmpStorage}/routes.php");
-putenv("APP_SERVICES_CACHE={$tmpStorage}/services.php");
+putenv("VERCEL=1");
+$_ENV['VERCEL'] = '1';
+$_SERVER['VERCEL'] = '1';
 
 // Forward request to Laravel public/index.php
 require __DIR__ . '/../public/index.php';

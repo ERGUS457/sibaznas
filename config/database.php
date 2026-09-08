@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'pgsql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -66,16 +66,16 @@ return [
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
+            'host' => env('DB_HOST', 'ep-plain-lab-aeponamh-pooler.c-2.us-east-2.aws.neon.tech'),
             'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'database' => env('DB_DATABASE', 'neondb'),
+            'username' => env('DB_USERNAME', 'neondb_owner'),
+            'password' => env('DB_PASSWORD', 'npg_Oq8pcS1IMzfg'),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
             'search_path' => 'public',
-            'sslmode' => env('DB_SSLMODE', 'prefer') . (env('DB_ENDPOINT') ? ";options='endpoint=" . env('DB_ENDPOINT') . "'" : (env('DB_OPTIONS') ? ";options='" . env('DB_OPTIONS') . "'" : '')),
+            'sslmode' => env('DB_SSLMODE', 'require') . (env('DB_ENDPOINT', 'ep-plain-lab-aeponamh') ? ";options='endpoint=" . env('DB_ENDPOINT', 'ep-plain-lab-aeponamh') . "'" : ''),
         ],
 
         'sqlsrv' => [
