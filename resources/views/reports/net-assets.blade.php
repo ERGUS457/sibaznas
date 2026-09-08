@@ -1,102 +1,181 @@
 @extends('layouts.app')
 
-@section('title', 'Laporan Perubahan Aset Bersih (DE ISAK 35 Format A)')
+@section('title', 'Laporan Perubahan Aset Neto (DE ISAK 35 Format A)')
 
 @section('content')
 <div class="max-w-4xl mx-auto space-y-6">
-    <div class="flex items-center justify-between no-print">
+    <!-- Action Bar (Hidden on Print) -->
+    <div class="flex items-center justify-between no-print bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
         <div>
-            <h1 class="text-xl font-bold text-slate-900">Laporan Perubahan Aset Bersih</h1>
-            <p class="text-xs text-slate-500">Rekonsiliasi pergerakan saldo aset bersih tanpa pembatasan dan dengan pembatasan.</p>
+            <h1 class="text-base font-bold text-slate-900">Laporan Perubahan Aset Neto (DE ISAK 35)</h1>
+            <p class="text-xs text-slate-500">Format resmi entitas berorientasi nonlaba sesuai lampiran Draf Eksposur ISAK 35 (Hal. 26).</p>
         </div>
         <div class="flex items-center space-x-2">
-            <button onclick="window.print()" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs px-3 py-1.5 rounded-lg shadow-sm flex items-center gap-1.5">
+            <form method="GET" class="flex items-center space-x-2 text-xs">
+                <label for="start_date" class="font-medium text-slate-600">Periode:</label>
+                <input type="date" id="start_date" name="start_date" value="{{ $startDate }}" class="border border-slate-300 rounded px-2 py-1 focus:ring-1 focus:ring-black">
+                <span class="text-slate-400">s/d</span>
+                <input type="date" id="end_date" name="end_date" value="{{ $endDate }}" class="border border-slate-300 rounded px-2 py-1 focus:ring-1 focus:ring-black">
+                <button type="submit" class="bg-slate-800 hover:bg-black text-white px-3 py-1 rounded font-medium">Tampilkan</button>
+            </form>
+            <button onclick="window.print()" class="bg-black hover:bg-slate-800 text-white font-medium text-xs px-3 py-1.5 rounded shadow flex items-center gap-1.5">
                 <i class="fa-solid fa-print"></i>
-                <span>Cetak</span>
+                <span>Cetak Lembar Laporan</span>
             </button>
         </div>
     </div>
 
-    <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm space-y-6">
-        <div class="text-center border-b-2 border-slate-800 pb-4">
-            <h2 class="text-base font-extrabold text-slate-900 uppercase tracking-wide">{{ $upz->name }}</h2>
-            <p class="text-xs text-slate-500">Unit Pengumpul Zakat Pembantu {{ $upz->parent_baznas_name }}</p>
-            <h1 class="text-lg font-black text-emerald-950 uppercase tracking-wider mt-2">LAPORAN PERUBAHAN ASET BERSIH</h1>
-            <p class="text-xs font-semibold text-slate-700">
-                Periode {{ \Carbon\Carbon::parse($startDate)->format('d F Y') }} s/d {{ \Carbon\Carbon::parse($endDate)->format('d F Y') }}
-            </p>
-            <p class="text-[11px] text-slate-400 italic">(Disajikan dalam Rupiah, sesuai DE ISAK 35 Format A)</p>
+    <!-- PURE OFFICIAL STATEMENT SHEET (100% Monokrom Sesuai PDF Hal. 26) -->
+    <div class="report-sheet bg-white p-8 sm:p-12 border border-slate-300 shadow-sm text-black font-serif text-[13px] leading-relaxed">
+        
+        <!-- Black Box Header as in DE ISAK 35 Page 26 -->
+        <div class="bg-black text-white text-center py-3 px-4 mb-6">
+            <div class="font-bold text-base tracking-wider uppercase">{{ $upz->name ?? 'ENTITAS XYZ' }}</div>
+            <div class="font-semibold text-sm tracking-wide mt-0.5 uppercase">LAPORAN PERUBAHAN ASET BERSIH / NETO</div>
+            <div class="text-xs">untuk periode yang berakhir pada tanggal {{ \Carbon\Carbon::parse($endDate)->isoFormat('D MMMM Y') }}</div>
+            <div class="text-xs italic font-normal">(dalam rupiah)</div>
         </div>
 
-        <div class="overflow-x-auto">
-            <table class="w-full text-xs text-left">
-                <thead class="bg-slate-100 text-slate-800 font-bold border-b-2 border-slate-300">
-                    <tr>
-                        <th class="p-3">Uraian Rekonsiliasi</th>
-                        <th class="p-3 text-right">Tanpa Pembatasan (Rp)</th>
-                        <th class="p-3 text-right">Dengan Pembatasan (Rp)</th>
-                        <th class="p-3 text-right">Total Aset Bersih (Rp)</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-100 text-slate-800">
-                    <tr>
-                        <td class="p-3 font-semibold">Saldo Awal Aset Bersih</td>
-                        <td class="p-3 text-right font-mono font-medium">
-                            {{ number_format($report['beginning_unrestricted'], 2, ',', '.') }}
-                        </td>
-                        <td class="p-3 text-right font-mono font-medium">
-                            {{ number_format($report['beginning_restricted'], 2, ',', '.') }}
-                        </td>
-                        <td class="p-3 text-right font-mono font-bold">
-                            {{ number_format($report['beginning_total'], 2, ',', '.') }}
-                        </td>
-                    </tr>
-                    <tr class="bg-emerald-50/30">
-                        <td class="p-3 font-semibold text-emerald-900">
-                            Kenaikan / (Penurunan) Bersih Periode Berjalan
-                        </td>
-                        <td class="p-3 text-right font-mono font-medium text-amber-800">
-                            {{ number_format($report['change_unrestricted'], 2, ',', '.') }}
-                        </td>
-                        <td class="p-3 text-right font-mono font-medium text-emerald-800">
-                            {{ number_format($report['change_restricted'], 2, ',', '.') }}
-                        </td>
-                        <td class="p-3 text-right font-mono font-bold text-emerald-900">
-                            {{ number_format($report['change_total'], 2, ',', '.') }}
-                        </td>
-                    </tr>
-                </tbody>
-                <tfoot class="bg-slate-100 font-extrabold border-t-2 border-slate-300">
-                    <tr>
-                        <td class="p-3 uppercase">Saldo Akhir Aset Bersih</td>
-                        <td class="p-3 text-right font-mono text-amber-900 text-sm">
-                            Rp {{ number_format($report['ending_unrestricted'], 2, ',', '.') }}
-                        </td>
-                        <td class="p-3 text-right font-mono text-emerald-900 text-sm">
-                            Rp {{ number_format($report['ending_restricted'], 2, ',', '.') }}
-                        </td>
-                        <td class="p-3 text-right font-mono text-indigo-950 text-sm">
-                            Rp {{ number_format($report['ending_total'], 2, ',', '.') }}
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
+        <!-- Table Grid -->
+        <table class="w-full border-collapse text-black">
+            <thead>
+                <tr class="font-bold text-right border-b border-black">
+                    <th class="text-left py-1 font-bold"></th>
+                    <th class="py-1 w-36 text-right">{{ \Carbon\Carbon::parse($endDate)->format('Y') }}</th>
+                    <th class="py-1 w-36 text-right">{{ \Carbon\Carbon::parse($endDate)->subYear()->format('Y') }}</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y-0">
+                <!-- ASET NETO TANPA PEMBATASAN -->
+                <tr>
+                    <td colspan="3" class="pt-3 pb-1 font-bold tracking-wide">ASET NETO TANPA PEMBATASAN DARI PEMBERI SUMBER DAYA</td>
+                </tr>
+                <tr>
+                    <td class="py-0.5 pl-8">Saldo awal</td>
+                    <td class="py-0.5 text-right font-mono">{{ number_format($report['beginning_unrestricted'], 0, ',', '.') }}</td>
+                    <td class="py-0.5 text-right font-mono">0</td>
+                </tr>
+                <tr>
+                    <td class="py-0.5 pl-8">Surplus tahun berjalan</td>
+                    <td class="py-0.5 text-right font-mono">{{ number_format($report['change_unrestricted'], 0, ',', '.') }}</td>
+                    <td class="py-0.5 text-right font-mono">0</td>
+                </tr>
+                <tr>
+                    <td class="py-0.5 pl-8">Aset neto yang dibebaskan dari pembatasan (catatan C)</td>
+                    <td class="py-0.5 text-right font-mono">0</td>
+                    <td class="py-0.5 text-right font-mono">0</td>
+                </tr>
+                <tr class="font-bold border-t border-b border-black">
+                    <td class="py-1 pl-4">Saldo akhir</td>
+                    <td class="py-1 text-right font-mono">{{ number_format($report['ending_unrestricted'], 0, ',', '.') }}</td>
+                    <td class="py-1 text-right font-mono">0</td>
+                </tr>
+
+                <!-- Penghasilan Komprehensif Lain -->
+                <tr>
+                    <td colspan="3" class="pt-3 pb-1 font-bold pl-4">Penghasilan Komprehensif Lain</td>
+                </tr>
+                <tr>
+                    <td class="py-0.5 pl-8">Saldo awal</td>
+                    <td class="py-0.5 text-right font-mono">0</td>
+                    <td class="py-0.5 text-right font-mono">0</td>
+                </tr>
+                <tr>
+                    <td class="py-0.5 pl-8">Penghasilan komprehensif tahun berjalan***)</td>
+                    <td class="py-0.5 text-right font-mono">0</td>
+                    <td class="py-0.5 text-right font-mono">0</td>
+                </tr>
+                <tr>
+                    <td class="py-0.5 pl-8">Saldo akhir</td>
+                    <td class="py-0.5 text-right font-mono">0</td>
+                    <td class="py-0.5 text-right font-mono">0</td>
+                </tr>
+                <tr class="font-bold border-t border-b border-black">
+                    <td class="py-1 pl-4">Total</td>
+                    <td class="py-1 text-right font-mono">{{ number_format($report['ending_unrestricted'], 0, ',', '.') }}</td>
+                    <td class="py-1 text-right font-mono">0</td>
+                </tr>
+
+                <!-- ASET NETO DENGAN PEMBATASAN -->
+                <tr>
+                    <td colspan="3" class="pt-4 pb-1 font-bold tracking-wide">ASET NETO DENGAN PEMBATASAN DARI PEMBERI SUMBER DAYA</td>
+                </tr>
+                <tr>
+                    <td class="py-0.5 pl-8">Saldo awal</td>
+                    <td class="py-0.5 text-right font-mono">{{ number_format($report['beginning_restricted'], 0, ',', '.') }}</td>
+                    <td class="py-0.5 text-right font-mono">0</td>
+                </tr>
+                <tr>
+                    <td class="py-0.5 pl-8">Surplus tahun berjalan</td>
+                    <td class="py-0.5 text-right font-mono">{{ number_format($report['change_restricted'], 0, ',', '.') }}</td>
+                    <td class="py-0.5 text-right font-mono">0</td>
+                </tr>
+                <tr>
+                    <td class="py-0.5 pl-8">Aset neto yang dibebaskan dari pembatasan (catatan C)</td>
+                    <td class="py-0.5 text-right font-mono">(0)</td>
+                    <td class="py-0.5 text-right font-mono">(0)</td>
+                </tr>
+                <tr class="font-bold border-t border-b border-black">
+                    <td class="py-1 pl-4">Saldo akhir</td>
+                    <td class="py-1 text-right font-mono">{{ number_format($report['ending_restricted'], 0, ',', '.') }}</td>
+                    <td class="py-1 text-right font-mono">0</td>
+                </tr>
+
+                <!-- TOTAL ASET NETO -->
+                <tr class="font-bold text-base border-t border-black border-b-4 border-double border-black">
+                    <td class="py-1.5 uppercase">TOTAL ASET NETO</td>
+                    <td class="py-1.5 text-right font-mono">{{ number_format($report['ending_total'], 0, ',', '.') }}</td>
+                    <td class="py-1.5 text-right font-mono">0</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Footnote as in DE ISAK 35 Page 26 -->
+        <div class="mt-6 text-[11px] text-black space-y-1">
+            <p>***) Entitas menyajikan informasi penghasilan komprehensif lain tersebut sesuai dengan kelas aset netonya (misalnya, jika penghasilan komprehensif lain berasal dari aset neto dengan pembatasan, maka disajikan dalam kelas aset neto dengan pembatasan).</p>
+            <p class="font-bold">(A) Lihat Laporan Posisi Keuangan (Format A).</p>
         </div>
 
-        <div class="grid grid-cols-2 gap-8 pt-8 text-xs text-center">
-            <div class="space-y-1">
-                <div class="text-slate-500">Mengetahui,</div>
-                <div class="font-bold text-slate-800 uppercase">Ketua UPZ BAZNAS</div>
-                <div class="h-20"></div>
-                <div class="font-bold text-slate-900 border-t border-slate-300 pt-1 inline-block min-w-[160px]">{{ $upz->chairman_name ?? 'Ketua UPZ' }}</div>
+        <!-- Official Signatures (Clean, no text obstructing signature area) -->
+        <div class="grid grid-cols-2 gap-12 mt-12 pt-6 text-xs text-center border-t border-slate-400">
+            <div>
+                <div>Mengetahui,</div>
+                <div class="font-bold uppercase mt-0.5">Ketua Pengurus UPZ</div>
+                <div class="h-24"></div> <!-- Clean open signature space -->
+                <div class="font-bold underline">{{ $upz->chairman_name ?? '............................................' }}</div>
+                <div>NIP/ID: {{ $upz->sk_number ?? '....................................' }}</div>
             </div>
-            <div class="space-y-1">
-                <div class="text-slate-500">{{ $upz->city }}, {{ \Carbon\Carbon::parse($endDate)->format('d F Y') }}</div>
-                <div class="font-bold text-slate-800 uppercase">Bagian Keuangan / Akuntan</div>
-                <div class="h-20"></div>
-                <div class="font-bold text-slate-900 border-t border-slate-300 pt-1 inline-block min-w-[160px]">{{ $upz->treasurer_name ?? 'Bendahara / Akuntan' }}</div>
+            <div>
+                <div>{{ $upz->city ?? 'Jakarta' }}, {{ \Carbon\Carbon::parse($endDate)->isoFormat('D MMMM Y') }}</div>
+                <div class="font-bold uppercase mt-0.5">Bagian Keuangan / Akuntan</div>
+                <div class="h-24"></div> <!-- Clean open signature space -->
+                <div class="font-bold underline">{{ $upz->treasurer_name ?? '............................................' }}</div>
+                <div>Akuntan UPZ BAZNAS</div>
             </div>
         </div>
+
     </div>
 </div>
+
+<style>
+@media print {
+    body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-family: 'Times New Roman', Times, Georgia, serif !important;
+    }
+    .no-print, aside, header, nav {
+        display: none !important;
+    }
+    .report-sheet {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+    }
+}
+</style>
 @endsection
+

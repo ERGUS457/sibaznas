@@ -2,108 +2,145 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BSZ - {{ $collection->bsz_number }}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        body {
+            font-family: 'Times New Roman', Times, Georgia, serif;
+            color: #000000;
+            background-color: #f8fafc;
+        }
         @media print {
             .no-print { display: none !important; }
-            body { background: white !important; font-size: 11pt; }
-            .print-container { border: 2px solid #047857 !important; }
+            body { 
+                background: #ffffff !important; 
+                color: #000000 !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            .bsz-card { 
+                border: 2px solid #000000 !important; 
+                box-shadow: none !important; 
+                width: 100% !important;
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 24px !important;
+            }
         }
     </style>
 </head>
-<body class="bg-slate-100 p-4 md:p-8 flex flex-col items-center">
+<body class="p-4 md:p-8 flex flex-col items-center">
     <!-- Action Bar (Hidden on print) -->
     <div class="max-w-3xl w-full mb-4 flex justify-between items-center no-print">
-        <a href="{{ route('collections.show', $collection->id) }}" class="text-xs font-semibold text-slate-600 hover:text-slate-900">
-            &larr; Kembali ke Detail
+        <a href="{{ route('collections.show', $collection->id) }}" class="text-xs font-sans font-semibold text-slate-600 hover:text-black">
+            &larr; Kembali ke Detail Transaksi
         </a>
-        <button onclick="window.print()" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs px-4 py-2 rounded-lg shadow flex items-center gap-2">
+        <button onclick="window.print()" class="bg-black hover:bg-slate-800 text-white font-sans font-semibold text-xs px-4 py-2 rounded shadow flex items-center gap-2">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
             <span>Cetak Lembar BSZ</span>
         </button>
     </div>
 
-    <!-- Official BSZ Certificate Box -->
-    <div class="max-w-3xl w-full bg-white border-2 border-emerald-700 rounded-2xl p-8 shadow-xl print-container relative overflow-hidden">
-        <!-- Watermark Background -->
-        <div class="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none select-none">
-            <span class="text-8xl font-black uppercase tracking-widest text-emerald-900">BAZNAS</span>
-        </div>
-
-        <!-- Official Header -->
-        <div class="border-b-2 border-emerald-800 pb-4 flex items-center justify-between">
-            <div class="flex items-center space-x-4">
-                <div class="w-16 h-16 rounded-xl bg-emerald-800 text-white flex flex-col items-center justify-center font-bold text-xs shadow-inner">
-                    <span class="text-lg">BAZNAS</span>
-                    <span class="text-[8px] tracking-tighter">UPZ RESMI</span>
+    <!-- Official Monochrome BSZ Sheet (100% Sesuai Ketentuan BAZNAS) -->
+    <div class="bsz-card max-w-3xl w-full bg-white border-2 border-black p-8 shadow-md text-black leading-relaxed">
+        
+        <!-- Official Kop UPZ BAZNAS -->
+        <div class="border-b-2 border-black pb-4 flex items-center justify-between">
+            <div class="space-y-0.5">
+                <div class="font-bold text-xs uppercase tracking-widest text-black">BADAN AMIL ZAKAT NASIONAL</div>
+                <div class="font-extrabold text-base uppercase tracking-wider text-black">{{ $collection->upzProfile->name }}</div>
+                <div class="text-xs text-black">
+                    Unit Pengumpul Zakat Pembantu {{ $collection->upzProfile->parent_baznas_name }}
                 </div>
-                <div>
-                    <h2 class="font-extrabold text-slate-900 text-lg tracking-wide uppercase">{{ $collection->upzProfile->name }}</h2>
-                    <p class="text-xs text-slate-600 font-medium">
-                        Unit Pengumpul Zakat Pembantu {{ $collection->upzProfile->parent_baznas_name }}
-                    </p>
-                    <p class="text-[11px] text-emerald-800 font-mono font-semibold">
-                        SK BAZNAS: {{ $collection->upzProfile->sk_number }} &bull; Kode UPZ: {{ $collection->upzProfile->code }}
-                    </p>
+                <div class="text-[11px] text-black">
+                    SK BAZNAS: {{ $collection->upzProfile->sk_number }} &bull; Kode UPZ: {{ $collection->upzProfile->code }}
                 </div>
             </div>
-            <div class="text-right">
-                <div class="bg-emerald-50 border border-emerald-300 rounded-lg px-3 py-1.5 inline-block">
-                    <div class="text-[10px] uppercase font-bold text-emerald-800 tracking-wider">No. Bukti Setor Zakat</div>
-                    <div class="text-sm font-mono font-extrabold text-emerald-900">{{ $collection->bsz_number }}</div>
+            <div class="text-right border-l border-black pl-4">
+                <div class="border border-black px-3 py-1.5 inline-block text-center">
+                    <div class="text-[10px] uppercase font-bold tracking-wider">NO. BUKTI SETOR ZAKAT</div>
+                    <div class="text-sm font-mono font-bold">{{ $collection->bsz_number }}</div>
                 </div>
-                <div class="text-[11px] text-slate-500 mt-1">Tanggal: {{ $collection->transaction_date->format('d/m/Y') }}</div>
+                <div class="text-[11px] mt-1">Tanggal: {{ $collection->transaction_date->format('d/m/Y') }}</div>
             </div>
         </div>
 
         <!-- Title -->
         <div class="text-center my-6">
-            <h1 class="text-xl font-extrabold tracking-wider text-emerald-900 uppercase">BUKTI SETOR ZAKAT (BSZ)</h1>
-            <p class="text-xs text-slate-500">Berdasarkan Ketentuan Peraturan BAZNAS No. 2 Tahun 2016</p>
+            <h1 class="text-lg font-bold tracking-widest uppercase underline">BUKTI SETOR ZAKAT (BSZ)</h1>
+            <p class="text-xs mt-1">Berdasarkan Ketentuan Peraturan BAZNAS No. 2 Tahun 2016</p>
         </div>
 
         <!-- Muzakki Profile Box -->
-        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-xs space-y-2 mb-6">
-            <div class="font-bold text-slate-700 uppercase tracking-wider text-[11px] border-b border-slate-200 pb-1 mb-2">
-                Identitas Pembayar (Muzakki / Munfiq)
+        <div class="border border-black p-4 text-xs space-y-2 mb-6">
+            <div class="font-bold uppercase tracking-wider text-[11px] border-b border-black pb-1 mb-2">
+                IDENTITAS PEMBAYAR (MUZAKKI / MUNFIQ)
             </div>
-            <div class="grid grid-cols-2 gap-y-1.5">
-                <div><span class="text-slate-500">Nama Lengkap:</span> <strong class="text-slate-900 ml-1">{{ $collection->muzakki->name }}</strong></div>
-                <div><span class="text-slate-500">Nomor NPWZ:</span> <span class="font-mono font-bold text-emerald-800 ml-1">{{ $collection->muzakki->npwz ?? '-' }}</span></div>
-                <div><span class="text-slate-500">NIK / NPWP:</span> <span class="font-mono text-slate-800 ml-1">{{ $collection->muzakki->nik_or_npwp ?? '-' }}</span></div>
-                <div><span class="text-slate-500">Kategori:</span> <span class="capitalize ml-1">{{ $collection->muzakki->type }}</span></div>
-                <div><span class="text-slate-500">Unit / Instansi:</span> <span class="ml-1">{{ $collection->muzakki->workplace_or_agency ?? '-' }}</span></div>
-                <div><span class="text-slate-500">Alamat:</span> <span class="ml-1">{{ $collection->muzakki->address ?? '-' }}</span></div>
-            </div>
+            <table class="w-full text-xs">
+                <tbody>
+                    <tr>
+                        <td class="w-36 py-0.5 font-bold">Nama Muzakki</td>
+                        <td class="w-4">:</td>
+                        <td class="font-bold uppercase">{{ $collection->muzakki->name }}</td>
+                        <td class="w-28 py-0.5 font-bold">Nomor NPWZ</td>
+                        <td class="w-4">:</td>
+                        <td class="font-mono">{{ $collection->muzakki->npwz ?? '-' }}</td>
+                    </tr>
+                    <tr>
+                        <td class="py-0.5">NIK / NPWP</td>
+                        <td>:</td>
+                        <td class="font-mono">{{ $collection->muzakki->nik_or_npwp ?? '-' }}</td>
+                        <td class="py-0.5">Kategori</td>
+                        <td>:</td>
+                        <td class="capitalize">{{ $collection->muzakki->type }}</td>
+                    </tr>
+                    <tr>
+                        <td class="py-0.5">Instansi / Unit</td>
+                        <td>:</td>
+                        <td colspan="4">{{ $collection->muzakki->workplace_or_agency ?? '-' }}</td>
+                    </tr>
+                    <tr>
+                        <td class="py-0.5">Alamat</td>
+                        <td>:</td>
+                        <td colspan="4">{{ $collection->muzakki->address ?? '-' }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
         <!-- Payment Details Table -->
-        <div class="border border-slate-200 rounded-xl overflow-hidden mb-6 text-xs">
-            <table class="w-full">
-                <thead class="bg-emerald-800 text-white font-bold">
-                    <tr>
-                        <th class="p-3 text-left">Deskripsi Penerimaan Dana</th>
-                        <th class="p-3 text-center">Metode Setor</th>
-                        <th class="p-3 text-right">Jumlah / Nominal</th>
+        <div class="mb-6 text-xs">
+            <table class="w-full border-collapse border border-black">
+                <thead>
+                    <tr class="bg-gray-100 font-bold border-b border-black text-center">
+                        <th class="border border-black p-2.5 w-12">No</th>
+                        <th class="border border-black p-2.5 text-left">Jenis Penerimaan ZIS / DSKL</th>
+                        <th class="border border-black p-2.5 w-32 text-center">Metode Setor</th>
+                        <th class="border border-black p-2.5 w-48 text-right">Jumlah / Nominal (Rp)</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-slate-200">
+                <tbody>
                     <tr>
-                        <td class="p-3">
-                            <div class="font-bold text-slate-900">{{ $collection->fund_type_label }}</div>
-                            <div class="text-slate-500 text-[11px]">{{ $collection->fund_subtype ?? $collection->description }}</div>
+                        <td class="border border-black p-2.5 text-center">1.</td>
+                        <td class="border border-black p-2.5">
+                            <div class="font-bold">{{ $collection->fund_type_label }}</div>
+                            @if($collection->fund_subtype || $collection->description)
+                                <div class="text-[11px] text-gray-700 italic">{{ $collection->fund_subtype ?? $collection->description }}</div>
+                            @endif
                         </td>
-                        <td class="p-3 text-center text-slate-700 font-medium">{{ $collection->payment_method_label }}</td>
-                        <td class="p-3 text-right font-extrabold text-base text-emerald-800">
-                            Rp {{ number_format($collection->amount, 0, ',', '.') }}
+                        <td class="border border-black p-2.5 text-center">{{ $collection->payment_method_label }}</td>
+                        <td class="border border-black p-2.5 text-right font-mono font-bold text-sm">
+                            {{ number_format($collection->amount, 0, ',', '.') }}
                         </td>
                     </tr>
                 </tbody>
-                <tfoot class="bg-slate-50 font-bold border-t border-slate-200">
-                    <tr>
-                        <td colspan="2" class="p-3 text-right uppercase text-slate-600">Total Pembayaran ZIS:</td>
-                        <td class="p-3 text-right text-lg text-emerald-900">
+                <tfoot>
+                    <tr class="font-bold bg-gray-50 border-t-2 border-black">
+                        <td colspan="3" class="border border-black p-2.5 text-right uppercase tracking-wider">
+                            TOTAL PEMBAYARAN:
+                        </td>
+                        <td class="border border-black p-2.5 text-right font-mono text-sm font-extrabold">
                             Rp {{ number_format($collection->amount, 0, ',', '.') }}
                         </td>
                     </tr>
@@ -112,35 +149,39 @@
         </div>
 
         <!-- Syariah Prayer Box -->
-        <div class="bg-emerald-50/70 border border-emerald-200 rounded-xl p-4 text-center mb-6">
-            <div class="text-lg font-serif text-emerald-950 font-bold mb-1" dir="rtl">
+        <div class="border border-black p-3 text-center mb-6">
+            <div class="text-base font-serif font-bold mb-1" dir="rtl">
                 آجَرَكَ اللهُ فِيْمَا أَعْطَيْتَ، وَبَارَكَ فِيْمَا أَبْقَيْتَ، وَجَعَلَهُ لَكَ طَهُوْرًا
             </div>
-            <div class="text-[11px] text-emerald-800 italic">
+            <div class="text-[11px] italic">
                 "Semoga Allah memberikan pahala atas apa yang engkau tunaikan, melimpahkan keberkahan atas harta yang engkau pertahankan, dan menjadikannya pembersih lahir batin bagimu."
             </div>
         </div>
 
-        <!-- Legal Disclaimer & Signatures -->
+        <!-- Tax Notice & Signatures -->
         <div class="grid grid-cols-2 gap-6 pt-2 text-xs">
-            <div class="space-y-2">
-                <div class="bg-slate-100 p-2.5 rounded-lg border border-slate-200 text-[10px] text-slate-600 leading-relaxed">
-                    <strong>Pemberitahuan Pajak:</strong> Sesuai UU No. 23 Tahun 2011 Pasal 22, zakat atau sumbangan keagamaan yang dibayarkan melalui BAZNAS atau Lembaga/UPZ resmi dapat diperhitungkan sebagai <u>pengurang penghasilan bruto</u> dalam pelaporan SPT Tahunan PPh.
-                </div>
-                <div class="text-[10px] text-slate-400 font-mono">
-                    Verifikasi Keaslian: {{ md5($collection->bsz_number . $collection->created_at) }}
+            <div class="space-y-2 border border-black p-3 text-[10px] leading-relaxed">
+                <div><strong>Keterangan Resmi Perpajakan:</strong></div>
+                <div>Sesuai UU No. 23 Tahun 2011 Pasal 22, bukti pembayaran zakat atau sumbangan keagamaan yang sifatnya wajib yang dibayarkan melalui Badan/Lembaga/UPZ resmi yang disahkan pemerintah dapat diperhitungkan sebagai <strong>pengurang penghasilan bruto</strong> dalam perhitungan pajak penghasilan (PPh).</div>
+                <div class="font-mono text-[9px] pt-1 border-t border-black">
+                    Validasi Sistem: {{ strtoupper(substr(md5($collection->bsz_number . $collection->created_at), 0, 16)) }}
                 </div>
             </div>
-            <div class="text-center space-y-1">
-                <div class="text-slate-600">{{ $collection->upzProfile->city }}, {{ $collection->transaction_date->format('d F Y') }}</div>
-                <div class="font-bold text-slate-800 uppercase text-[11px]">Pengurus UPZ Penerima,</div>
-                <div class="h-16"></div>
-                <div class="font-extrabold text-slate-900 border-t border-slate-300 pt-1 inline-block min-w-[160px]">
-                    {{ $collection->receivedBy->name ?? 'Petugas Amil UPZ' }}
+            <div class="text-center space-y-1 flex flex-col justify-between">
+                <div>
+                    <div>{{ $collection->upzProfile->city ?? 'Jakarta' }}, {{ $collection->transaction_date->translatedFormat('d F Y') }}</div>
+                    <div class="font-bold uppercase text-[11px] mt-1">Petugas Penerima UPZ,</div>
                 </div>
-                <div class="text-[10px] text-slate-500">Amil Pelaksana UPZ BAZNAS</div>
+                <div>
+                    <div class="h-20"></div> <!-- Ruang tanda tangan bersih tanpa penghalang -->
+                    <div class="font-bold border-t border-black pt-1 inline-block min-w-[180px]">
+                        {{ $collection->receivedBy->name ?? 'Petugas Amil UPZ' }}
+                    </div>
+                    <div class="text-[10px]">Amil Pelaksana UPZ BAZNAS</div>
+                </div>
             </div>
         </div>
+
     </div>
 </body>
 </html>

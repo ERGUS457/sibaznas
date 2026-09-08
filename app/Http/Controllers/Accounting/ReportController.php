@@ -117,4 +117,141 @@ class ReportController extends Controller
             'complianceStatus'
         ));
     }
+
+    /**
+     * Lampiran I Perbaznas 2/2016: Rencana Penerimaan
+     */
+    public function perbaznasLampiran1(Request $request)
+    {
+        $year = $request->input('year', Carbon::now()->year);
+        $upz = UpzProfile::first() ?? new UpzProfile();
+
+        $zakatMalPerorangan = (float) ZisCollection::where('upz_profile_id', $upz->id)->whereYear('transaction_date', $year)->where('fund_type', 'zakat_mal_perorangan')->sum('amount');
+        $zakatMalBadan = (float) ZisCollection::where('upz_profile_id', $upz->id)->whereYear('transaction_date', $year)->where('fund_type', 'zakat_mal_badan')->sum('amount');
+        $zakatFitrah = (float) ZisCollection::where('upz_profile_id', $upz->id)->whereYear('transaction_date', $year)->where('fund_type', 'zakat_fitrah')->sum('amount');
+        $totalZakat = $zakatMalPerorangan + $zakatMalBadan + $zakatFitrah;
+
+        $infakSedekah = (float) ZisCollection::where('upz_profile_id', $upz->id)->whereYear('transaction_date', $year)->where('fund_type', 'infak_sedekah')->sum('amount');
+        $dskl = (float) ZisCollection::where('upz_profile_id', $upz->id)->whereYear('transaction_date', $year)->where('fund_type', 'dskl')->sum('amount');
+        $totalPenerimaan = $totalZakat + $infakSedekah + $dskl;
+
+        return view('reports.perbaznas.lampiran1', compact(
+            'upz', 'year', 'zakatMalPerorangan', 'zakatMalBadan', 'zakatFitrah', 'totalZakat', 'infakSedekah', 'dskl', 'totalPenerimaan'
+        ));
+    }
+
+    /**
+     * Lampiran II Perbaznas 2/2016: Pendistribusian Berdasarkan Asnaf
+     */
+    public function perbaznasLampiran2(Request $request)
+    {
+        $year = $request->input('year', Carbon::now()->year);
+        $upz = UpzProfile::first() ?? new UpzProfile();
+
+        $asnafs = ['fakir', 'miskin', 'amil', 'mualaf', 'riqab', 'gharimin', 'fisabilillah', 'ibnu_sabil'];
+        $distData = [];
+
+        foreach ($asnafs as $asnaf) {
+            $distData[$asnaf] = [
+                'zakat' => (float) ZisDistribution::where('upz_profile_id', $upz->id)->whereYear('distribution_date', $year)->where('asnaf_category', $asnaf)->where('fund_type', 'LIKE', '%zakat%')->sum('amount'),
+                'infak' => (float) ZisDistribution::where('upz_profile_id', $upz->id)->whereYear('distribution_date', $year)->where('asnaf_category', $asnaf)->where('fund_type', 'infak_sedekah')->sum('amount'),
+                'dskl' => (float) ZisDistribution::where('upz_profile_id', $upz->id)->whereYear('distribution_date', $year)->where('asnaf_category', $asnaf)->where('fund_type', 'dskl')->sum('amount'),
+            ];
+            // If fund_type not specified strictly on legacy records, default to zakat
+            $totalAsnaf = (float) ZisDistribution::where('upz_profile_id', $upz->id)->whereYear('distribution_date', $year)->where('asnaf_category', $asnaf)->sum('amount');
+            if ($distData[$asnaf]['zakat'] == 0 && $distData[$asnaf]['infak'] == 0 && $distData[$asnaf]['dskl'] == 0 && $totalAsnaf > 0) {
+                $distData[$asnaf]['zakat'] = $totalAsnaf;
+            }
+        }
+
+        $totalZakat = array_sum(array_column($distData, 'zakat'));
+        $totalInfak = array_sum(array_column($distData, 'infak'));
+        $totalDskl = array_sum(array_column($distData, 'dskl'));
+        $grandTotal = $totalZakat + $totalInfak + $totalDskl;
+
+        return view('reports.perbaznas.lampiran2', compact('upz', 'year', 'distData', 'totalZakat', 'totalInfak', 'totalDskl', 'grandTotal'));
+    }
+
+    /**
+     * Lampiran III Perbaznas 2/2016: Pendistribusian Berdasarkan Program
+     */
+    public function perbaznasLampiran3(Request $request)
+    {
+        $year = $request->input('year', Carbon::now()->year);
+        $upz = UpzProfile::first() ?? new UpzProfile();
+
+        $programs = ['pendidikan', 'kesehatan', 'kemanusiaan', 'ekonomi', 'dakwah_advokasi'];
+        $progData = [];
+
+        foreach ($programs as $prog) {
+            $progData[$prog] = [
+                'zakat' => (float) ZisDistribution::where('upz_profile_id', $upz->id)->whereYear('distribution_date', $year)->where('program_name', 'LIKE', "%{$prog}%")->where('fund_type', 'LIKE', '%zakat%')->sum('amount'),
+                'infak' => (float) ZisDistribution::where('upz_profile_id', $upz->id)->whereYear('distribution_date', $year)->where('program_name', 'LIKE', "%{$prog}%")->where('fund_type', 'infak_sedekah')->sum('amount'),
+                'dskl' => (float) ZisDistribution::where('upz_profile_id', $upz->id)->whereYear('distribution_date', $year)->where('program_name', 'LIKE', "%{$prog}%")->where('fund_type', 'dskl')->sum('amount'),
+            ];
+            $totalProg = (float) ZisDistribution::where('upz_profile_id', $upz->id)->whereYear('distribution_date', $year)->where('program_name', 'LIKE', "%{$prog}%")->sum('amount');
+            if ($progData[$prog]['zakat'] == 0 && $progData[$prog]['infak'] == 0 && $progData[$prog]['dskl'] == 0 && $totalProg > 0) {
+                $progData[$prog]['zakat'] = $totalProg;
+            }
+        }
+
+        $totalZakat = array_sum(array_column($progData, 'zakat'));
+        $totalInfak = array_sum(array_column($progData, 'infak'));
+        $totalDskl = array_sum(array_column($progData, 'dskl'));
+        $grandTotal = $totalZakat + $totalInfak + $totalDskl;
+
+        return view('reports.perbaznas.lampiran3', compact('upz', 'year', 'progData', 'totalZakat', 'totalInfak', 'totalDskl', 'grandTotal'));
+    }
+
+    /**
+     * Lampiran V Perbaznas 2/2016: Penerimaan dan Penggunaan Dana Operasional
+     */
+    public function perbaznasLampiran5(Request $request)
+    {
+        $year = $request->input('year', Carbon::now()->year);
+        $upz = UpzProfile::first() ?? new UpzProfile();
+
+        $amilFromZakat = (float) ZisCollection::where('upz_profile_id', $upz->id)->whereYear('transaction_date', $year)->sum('amil_amount');
+        $institutionalGrant = 0.0;
+        $totalPenerimaanOperasional = $amilFromZakat + $institutionalGrant;
+
+        // Operating expenses from journal or estimate
+        $employeeExpenses = (float) \App\Models\Accounting\JournalItem::whereHas('account', fn($q) => $q->where('code', 'LIKE', '5.1.01%'))
+            ->whereHas('journalEntry', fn($q) => $q->whereYear('entry_date', $year))
+            ->sum('debit');
+        $adminExpenses = (float) \App\Models\Accounting\JournalItem::whereHas('account', fn($q) => $q->where('code', 'LIKE', '5.1.02%'))
+            ->whereHas('journalEntry', fn($q) => $q->whereYear('entry_date', $year))
+            ->sum('debit');
+        $depreciationExpenses = (float) \App\Models\Accounting\JournalItem::whereHas('account', fn($q) => $q->where('code', 'LIKE', '5.1.03%'))
+            ->whereHas('journalEntry', fn($q) => $q->whereYear('entry_date', $year))
+            ->sum('debit');
+
+        $totalPenggunaanOperasional = $employeeExpenses + $adminExpenses + $depreciationExpenses;
+
+        return view('reports.perbaznas.lampiran5', compact(
+            'upz', 'year', 'amilFromZakat', 'institutionalGrant', 'totalPenerimaanOperasional',
+            'employeeExpenses', 'adminExpenses', 'depreciationExpenses', 'totalPenggunaanOperasional'
+        ));
+    }
+
+    /**
+     * Lampiran VII Perbaznas 2/2016: Laporan Pendistribusian dan Pendayagunaan Dana
+     */
+    public function perbaznasLampiran7(Request $request)
+    {
+        $month = $request->input('month', Carbon::now()->month);
+        $year = $request->input('year', Carbon::now()->year);
+        $upz = UpzProfile::first() ?? new UpzProfile();
+
+        $distributions = ZisDistribution::with('mustahiq')
+            ->where('upz_profile_id', $upz->id)
+            ->whereYear('distribution_date', $year)
+            ->when($month, fn($q) => $q->whereMonth('distribution_date', $month))
+            ->orderBy('distribution_date')
+            ->get();
+
+        $totalDana = $distributions->sum('amount');
+
+        return view('reports.perbaznas.lampiran7', compact('upz', 'month', 'year', 'distributions', 'totalDana'));
+    }
 }

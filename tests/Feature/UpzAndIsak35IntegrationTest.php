@@ -156,14 +156,44 @@ class UpzAndIsak35IntegrationTest extends TestCase
         $this->assertGuest();
     }
 
-    public function test_user_can_logout(): void
+    public function test_perbaznas_official_lampiran_reports_render_successfully(): void
     {
-        $admin = \App\Models\User::where('username', 'admin')->first();
-        if ($admin) {
-            $this->actingAs($admin);
-            $response = $this->post(route('logout'));
-            $response->assertRedirect(route('landing'));
-            $this->assertGuest();
+        // Lampiran I: Rencana Penerimaan
+        $r1 = $this->get(route('reports.perbaznas.lampiran1'));
+        $r1->assertStatus(200);
+        $r1->assertSee('LAMPIRAN I');
+        $r1->assertSee('RENCANA PENERIMAAN');
+
+        // Lampiran II: Asnaf
+        $r2 = $this->get(route('reports.perbaznas.lampiran2'));
+        $r2->assertStatus(200);
+        $r2->assertSee('LAMPIRAN II');
+        $r2->assertSee('RENCANA PENDISTRIBUSIAN DAN PENDAYAGUNAAN BERDASARKAN ASNAF');
+
+        // Lampiran III: Program
+        $r3 = $this->get(route('reports.perbaznas.lampiran3'));
+        $r3->assertStatus(200);
+        $r3->assertSee('LAMPIRAN III');
+        $r3->assertSee('RENCANA PENDISTRIBUSIAN DAN PENDAYAGUNAAN BERDASARKAN PROGRAM');
+
+        // Lampiran V: Dana Operasional
+        $r5 = $this->get(route('reports.perbaznas.lampiran5'));
+        $r5->assertStatus(200);
+        $r5->assertSee('LAMPIRAN V');
+        $r5->assertSee('RENCANA PENERIMAAN DAN PENGGUNAAN DANA OPERASIONAL');
+
+        // Lampiran VII: Penyaluran Dana
+        $r7 = $this->get(route('reports.perbaznas.lampiran7'));
+        $r7->assertStatus(200);
+        $r7->assertSee('LAMPIRAN VII');
+        $r7->assertSee('LAPORAN PENDISTRIBUSIAN DAN PENDAYAGUNAAN DANA');
+
+        // Bukti Setor Zakat (BSZ) Print Sheet
+        $col = ZisCollection::first();
+        if ($col) {
+            $rBsz = $this->get(route('collections.print-bsz', $col->id));
+            $rBsz->assertStatus(200);
+            $rBsz->assertSee('BUKTI SETOR ZAKAT (BSZ)');
         }
     }
 }

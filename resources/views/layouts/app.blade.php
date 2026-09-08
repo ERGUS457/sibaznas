@@ -284,9 +284,9 @@
                             <i class="fa-solid fa-money-bill-transfer w-4 text-center {{ request()->routeIs('reports.cash-flow') ? 'text-emerald-600' : 'text-slate-400' }}"></i>
                             <span>Laporan Arus Kas</span>
                         </a>
-                        <a href="{{ route('reports.perbaznas-compliance') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('reports.perbaznas-compliance') ? 'clay-card-soft font-bold text-emerald-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
-                            <i class="fa-solid fa-stamp w-4 text-center {{ request()->routeIs('reports.perbaznas-compliance') ? 'text-emerald-600' : 'text-slate-400' }}"></i>
-                            <span>Rekap UPZ Perbaznas</span>
+                        <a href="{{ route('reports.perbaznas-compliance') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('reports.perbaznas*') ? 'clay-card-soft font-bold text-emerald-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
+                            <i class="fa-solid fa-stamp w-4 text-center {{ request()->routeIs('reports.perbaznas*') ? 'text-emerald-600' : 'text-slate-400' }}"></i>
+                            <span>Laporan UPZ (Perbaznas)</span>
                         </a>
                     </div>
                 </div>

@@ -56,4 +56,9 @@ Route::prefix('reports')->name('reports.')->group(function () {
     Route::get('net-assets', [ReportController::class, 'netAssets'])->name('net-assets');
     Route::get('cash-flow', [ReportController::class, 'cashFlow'])->name('cash-flow');
     Route::get('perbaznas-compliance', [ReportController::class, 'perbaznasCompliance'])->name('perbaznas-compliance');
+    Route::get('perbaznas/lampiran-1', [ReportController::class, 'perbaznasLampiran1'])->name('perbaznas.lampiran1');
+    Route::get('perbaznas/lampiran-2', [ReportController::class, 'perbaznasLampiran2'])->name('perbaznas.lampiran2');
+    Route::get('perbaznas/lampiran-3', [ReportController::class, 'perbaznasLampiran3'])->name('perbaznas.lampiran3');
+    Route::get('perbaznas/lampiran-5', [ReportController::class, 'perbaznasLampiran5'])->name('perbaznas.lampiran5');
+    Route::get('perbaznas/lampiran-7', [ReportController::class, 'perbaznasLampiran7'])->name('perbaznas.lampiran7');
 });

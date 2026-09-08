@@ -3,17 +3,41 @@
 @section('title', 'Laporan Kepatuhan Tata Kerja UPZ (Perbaznas No. 2/2016)')
 
 @section('content')
-<div class="max-w-4xl mx-auto space-y-6">
-    <div class="flex items-center justify-between no-print">
-        <div>
-            <h1 class="text-xl font-bold text-slate-900">Laporan Kepatuhan Tata Kerja UPZ BAZNAS</h1>
-            <p class="text-xs text-slate-500">Evaluasi tata kelola operasional dan batasan hak amil sesuai Perbaznas No. 2 Tahun 2016.</p>
+<div class="max-w-5xl mx-auto space-y-6">
+    <!-- Navigation Tabs for Perbaznas No. 2/2016 (Hidden on Print) -->
+    <div class="no-print bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-3">
+            <div>
+                <h1 class="text-base font-bold text-slate-900">Format Laporan Peraturan BAZNAS No. 2 Tahun 2016</h1>
+                <p class="text-xs text-slate-500">Pilih lembar lampiran resmi untuk dicetak sesuai format asli standar BAZNAS RI:</p>
+            </div>
+            <div class="flex items-center gap-2">
+                <button onclick="window.print()" class="bg-black hover:bg-slate-800 text-white font-medium text-xs px-3 py-1.5 rounded shadow flex items-center gap-1.5">
+                    <i class="fa-solid fa-print"></i>
+                    <span>Cetak Halaman Ini</span>
+                </button>
+            </div>
         </div>
-        <div class="flex items-center space-x-2">
-            <button onclick="window.print()" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs px-3 py-1.5 rounded-lg shadow-sm flex items-center gap-1.5">
-                <i class="fa-solid fa-print"></i>
-                <span>Cetak Laporan</span>
-            </button>
+
+        <div class="flex flex-wrap gap-2 text-xs">
+            <a href="{{ route('reports.perbaznas-compliance') }}" class="px-3 py-1.5 rounded-lg bg-black text-white font-semibold">
+                Ringkasan Kepatuhan
+            </a>
+            <a href="{{ route('reports.perbaznas.lampiran1') }}" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">
+                Lampiran I: Penerimaan
+            </a>
+            <a href="{{ route('reports.perbaznas.lampiran2') }}" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">
+                Lampiran II: Asnaf
+            </a>
+            <a href="{{ route('reports.perbaznas.lampiran3') }}" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">
+                Lampiran III: Program
+            </a>
+            <a href="{{ route('reports.perbaznas.lampiran5') }}" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">
+                Lampiran V: Operasional (12,5%)
+            </a>
+            <a href="{{ route('reports.perbaznas.lampiran7') }}" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">
+                Lampiran VII: Penyaluran Dana
+            </a>
         </div>
     </div>
 
