@@ -29,7 +29,7 @@
         "DB_USERNAME": "neondb_owner",
         "DB_PASSWORD": "npg_Oq8pcS1IMzfg",
         "DB_SSLMODE": "require",
-        "DB_ENDPOINT": "ep-plain-lab-aeponamh",
+        "DB_ENDPOINT": "ep-plain-lab-aeponamh-pooler",
         "APP_CONFIG_CACHE": "/tmp/config.php",
         "APP_EVENTS_CACHE": "/tmp/events.php",
         "APP_PACKAGES_CACHE": "/tmp/packages.php",
