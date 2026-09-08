@@ -78,18 +78,6 @@
                         <th class="border border-black p-2 w-24">Asnaf</th>
                         <th class="border border-black p-2 w-28">Kategori Program</th>
                         <th class="border border-black p-2 w-32 text-right">Jumlah Dana<br>(Rupiah)</th>
-                    </tr>
-                    <tr class="bg-gray-50 text-[10px] text-center italic border-b border-black">
-                        <td class="border border-black p-1">1</td>
-                        <td class="border border-black p-1">2</td>
-                        <td class="border border-black p-1">3</td>
-                        <td class="border border-black p-1">4</td>
-                        <td class="border border-black p-1">5</td>
-                        <td class="border border-black p-1">6</td>
-                        <td class="border border-black p-1">7</td>
-                        <td class="border border-black p-1">8</td>
-                        <td class="border border-black p-1">9</td>
-                    </tr>
                 </thead>
                 <tbody>
                     @forelse($distributions as $index => $dist)
