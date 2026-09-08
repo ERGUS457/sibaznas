@@ -85,6 +85,7 @@ class ZisDistributionService
         $entryNumber = sprintf('JV/%s/%04d', Carbon::parse($distribution->distribution_date)->format('Ym'), $entryCount);
 
         $journalEntry = JournalEntry::create([
+            'upz_profile_id' => $distribution->upz_profile_id,
             'voucher_number' => $entryNumber,
             'entry_date' => $distribution->distribution_date,
             'description' => "Penyaluran ZIS No. {$distribution->distribution_number} ({$distribution->program_name} - Asnaf " . ucfirst($distribution->asnaf_category) . ")",

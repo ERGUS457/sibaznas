@@ -13,6 +13,7 @@ class JournalEntry extends Model
     protected $table = 'journal_entries';
 
     protected $fillable = [
+        'upz_profile_id',
         'entry_date',
         'voucher_number',
         'description',
@@ -21,6 +22,7 @@ class JournalEntry extends Model
 
     protected $casts = [
         'entry_date' => 'date',
+        'upz_profile_id' => 'integer',
     ];
 
     public const SOURCE_MODULES = [
@@ -83,8 +85,16 @@ class JournalEntry extends Model
         return $this->description;
     }
 
-    public function setMemoAttribute(?string $value): void
+    public function upzProfile(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        $this->attributes['description'] = $value;
+        return $this->belongsTo(\App\Models\Upz\UpzProfile::class, 'upz_profile_id');
+    }
+
+    public function scopeForOrganization($query, ?int $upzId)
+    {
+        if ($upzId) {
+            return $query->where('upz_profile_id', $upzId);
+        }
+        return $query;
     }
 }

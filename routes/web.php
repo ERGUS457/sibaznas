@@ -5,6 +5,7 @@ use App\Http\Controllers\Accounting\ReportController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\OrganizationManagementController;
 use App\Http\Controllers\PortalController;
 use App\Http\Controllers\Upz\BaznasRemittanceController;
 use App\Http\Controllers\Upz\MustahiqController;
@@ -33,6 +34,15 @@ Route::get('portal', [PortalController::class, 'index'])->name('portal');
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('dashboard/isak35', [DashboardController::class, 'indexIsak35'])->name('dashboard.isak35');
 Route::get('dashboard/baznas', [DashboardController::class, 'indexBaznas'])->name('dashboard.baznas');
+
+// Multi-Organization / UPZ Workspace Management
+Route::get('organizations', [OrganizationManagementController::class, 'index'])->name('organizations.index');
+Route::get('organizations/create', [OrganizationManagementController::class, 'create'])->name('organizations.create');
+Route::post('organizations', [OrganizationManagementController::class, 'store'])->name('organizations.store');
+Route::get('organizations/{id}/edit', [OrganizationManagementController::class, 'edit'])->name('organizations.edit');
+Route::put('organizations/{id}', [OrganizationManagementController::class, 'update'])->name('organizations.update');
+Route::post('organizations/{id}/switch', [OrganizationManagementController::class, 'switchOrganization'])->name('organizations.switch');
+Route::post('organizations/{id}/reset', [OrganizationManagementController::class, 'resetData'])->name('organizations.reset');
 
 // UPZ Module 1: ZIS & DSKL Collections (Penerimaan & BSZ)
 Route::resource('collections', ZisCollectionController::class)->only(['index', 'create', 'store', 'show']);

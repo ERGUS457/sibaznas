@@ -99,6 +99,7 @@ class ZisCollectionService
         $entryNumber = sprintf('JV/%s/%04d', Carbon::parse($collection->transaction_date)->format('Ym'), $entryCount);
 
         $journalEntry = JournalEntry::create([
+            'upz_profile_id' => $collection->upz_profile_id,
             'voucher_number' => $entryNumber,
             'entry_date' => $collection->transaction_date,
             'description' => "Penerimaan {$collection->fund_type_label} No. {$collection->bsz_number} (Muzakki: {$collection->muzakki->name})",

@@ -104,6 +104,83 @@
 
     <!-- Main Content: Welcome & Cards -->
     <main class="max-w-6xl mx-auto w-full flex-1 flex flex-col justify-center">
+        <!-- Flash Alerts -->
+        @if(session('success'))
+        <div class="mb-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs flex items-center justify-between shadow-xs">
+            <div class="flex items-center space-x-2.5">
+                <i class="fa-solid fa-circle-check text-emerald-600 text-base"></i>
+                <span class="font-semibold">{{ session('success') }}</span>
+            </div>
+            <button onclick="this.parentElement.remove()" class="text-emerald-500 hover:text-emerald-700 text-base leading-none font-bold">&times;</button>
+        </div>
+        @endif
+
+        @if(session('error'))
+        <div class="mb-6 p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-900 text-xs flex items-center justify-between shadow-xs">
+            <div class="flex items-center space-x-2.5">
+                <i class="fa-solid fa-circle-exclamation text-rose-600 text-base"></i>
+                <span class="font-semibold">{{ session('error') }}</span>
+            </div>
+            <button onclick="this.parentElement.remove()" class="text-rose-500 hover:text-rose-700 text-base leading-none font-bold">&times;</button>
+        </div>
+        @endif
+
+        <!-- Active Organization Workspace Card -->
+        <div class="formal-card p-4 sm:p-5 mb-8 bg-white border-slate-200">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div class="flex items-center gap-3.5">
+                    <div class="w-11 h-11 rounded-lg bg-emerald-700 text-white flex items-center justify-center text-lg font-bold flex-shrink-0 shadow-xs">
+                        <i class="fa-solid fa-building-shield"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <span class="text-[10px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-800 px-2 py-0.5 rounded border border-emerald-200">
+                                ENTITAS ORGANISASI AKTIF
+                            </span>
+                            <span class="text-xs text-slate-500 font-mono font-semibold">
+                                Kode: {{ $upz->code }}
+                            </span>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-900 mt-0.5">
+                            {{ $upz->name }}
+                        </h3>
+                        <p class="text-xs text-slate-500">
+                            {{ ucfirst(str_replace('_', ' ', $upz->institution_type ?? 'Organisasi')) }} &bull; 
+                            Pembina: {{ $upz->parent_baznas_name ?? 'BAZNAS' }} &bull; 
+                            SK: {{ $upz->sk_number ?? 'Belum ada SK' }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2.5 flex-wrap">
+                    @if(count($allOrganizations ?? []) > 1)
+                    <form action="" method="POST" id="portalOrgSwitchForm" class="flex items-center gap-1.5">
+                        @csrf
+                        <select onchange="if(this.value){ this.form.action = '/organizations/' + this.value + '/switch'; this.form.submit(); }" 
+                                class="btn-formal-outline px-3 py-2 text-xs font-semibold bg-white cursor-pointer"
+                                title="Beralih Entitas Organisasi">
+                            @foreach($allOrganizations as $availOrg)
+                                <option value="{{ $availOrg->id }}" {{ $availOrg->id === $upz->id ? 'selected' : '' }}>
+                                    {{ $availOrg->name }} ({{ $availOrg->code }})
+                                </option>
+                            @endforeach
+                        </select>
+                    </form>
+                    @endif
+
+                    <a href="{{ route('organizations.create') }}" class="btn-formal-primary px-3.5 py-2 text-xs flex items-center gap-1.5">
+                        <i class="fa-solid fa-plus text-[11px]"></i>
+                        <span>Organisasi Baru</span>
+                    </a>
+
+                    <a href="{{ route('organizations.index') }}" class="btn-formal-outline px-3 py-2 text-xs flex items-center gap-1.5" title="Kelola Semua Organisasi">
+                        <i class="fa-solid fa-sliders text-slate-400"></i>
+                        <span>Kelola</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
         <!-- Title & Subtitle -->
         <div class="text-center mb-10">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold border border-slate-200 mb-3">
@@ -114,7 +191,7 @@
                 Pilih Ruang Kerja Aplikasi
             </h2>
             <p class="text-sm text-slate-600 max-w-2xl mx-auto mt-2 font-normal">
-                Sistem telah dipisahkan ke dalam modul independen agar pembukuan internal organisasi dan penatausahaan zakat dapat dikelola secara terfokus, rapi, dan sesuai standar masing-masing.
+                Data keuangan dan operasional di bawah ini secara otomatis disesuaikan dengan organisasi aktif: <strong class="text-slate-900">{{ $upz->name }}</strong>.
             </p>
         </div>
 

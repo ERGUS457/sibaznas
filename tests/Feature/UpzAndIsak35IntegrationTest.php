@@ -218,4 +218,60 @@ class UpzAndIsak35IntegrationTest extends TestCase
             $rBsz->assertSee('BUKTI SETOR ZAKAT (BSZ)');
         }
     }
+
+    public function test_multi_organization_registration_and_switching(): void
+    {
+        // 1. Check organizations index page
+        $indexResp = $this->get(route('organizations.index'));
+        $indexResp->assertStatus(200);
+        $indexResp->assertSee('Entitas Organisasi');
+
+        // 2. Check create page
+        $createResp = $this->get(route('organizations.create'));
+        $createResp->assertStatus(200);
+        $createResp->assertSee('Pendaftaran Organisasi');
+
+        // 3. Register a new organization
+        $uniqueCode = 'UPZ-TEST-' . time();
+        $storeResp = $this->post(route('organizations.store'), [
+            'name' => 'Yayasan Generasi Gemilang',
+            'code' => $uniqueCode,
+            'institution_type' => 'yayasan',
+            'parent_baznas_level' => 'kab_kota',
+            'parent_baznas_name' => 'BAZNAS Kota Surabaya',
+            'sk_number' => 'SK/2026/YGG/001',
+            'chairman_name' => 'Dr. H. Ahmad Santoso',
+            'bank_name' => 'Bank Syariah Indonesia',
+            'bank_account_number' => '7890123456',
+            'bank_account_name' => 'YAYASAN GENERASI GEMILANG',
+            'amil_share_percentage' => 12.50,
+        ]);
+
+        $storeResp->assertRedirect(route('portal'));
+
+        // Verify organization created
+        $newOrg = UpzProfile::where('code', $uniqueCode)->first();
+        $this->assertNotNull($newOrg);
+        $this->assertEquals('Yayasan Generasi Gemilang', $newOrg->name);
+
+        // Verify session active org switched
+        $this->assertEquals($newOrg->id, session('active_upz_id'));
+
+        // Verify it starts completely clean (0 transactions)
+        $orgContext = app(\App\Services\OrganizationContextService::class);
+        $stats = $orgContext->getStatistics($newOrg->id);
+        $this->assertEquals(0, $stats['total_zis_collected']);
+        $this->assertEquals(0, $stats['total_distributed']);
+        $this->assertEquals(0, $stats['journal_entries_count']);
+        $this->assertEquals(0, $stats['muzakki_count']);
+        $this->assertEquals(0, $stats['mustahiq_count']);
+
+        // 4. Test switching back to demo organization (ID 1)
+        $switchResp = $this->from(route('portal'))->post(route('organizations.switch', 1));
+        $switchResp->assertStatus(302);
+        $this->assertEquals(1, session('active_upz_id'));
+
+        // Clean up test organization
+        $newOrg->delete();
+    }
 }

@@ -3,10 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Accounting\JournalEntry;
-use App\Models\Mustahik;
-use App\Models\Muzaki;
-use App\Models\UpzDistribution as NewUpzDistribution;
-use App\Models\UpzReceipt;
 use App\Models\Upz\BaznasRemittance;
 use App\Models\Upz\Mustahiq;
 use App\Models\Upz\Muzakki;
@@ -14,10 +10,18 @@ use App\Models\Upz\UpzProfile;
 use App\Models\Upz\ZisCollection;
 use App\Models\Upz\ZisDistribution;
 use App\Services\Accounting\Isak35ReportService;
+use App\Services\OrganizationContextService;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+    protected OrganizationContextService $orgContext;
+
+    public function __construct(OrganizationContextService $orgContext)
+    {
+        $this->orgContext = $orgContext;
+    }
+
     /**
      * Default dashboard route redirects to multi-module portal.
      */
@@ -31,9 +35,9 @@ class DashboardController extends Controller
      */
     public function indexIsak35(Isak35ReportService $reportService)
     {
-        $upz = UpzProfile::first() ?? new UpzProfile();
-        $financialPosition = $reportService->getStatementOfFinancialPosition();
-        $recentJournals = JournalEntry::latest('entry_date')->take(8)->get();
+        $upz = $this->orgContext->getActiveOrganization();
+        $financialPosition = $reportService->getStatementOfFinancialPosition(null, $upz->id);
+        $recentJournals = JournalEntry::where('upz_profile_id', $upz->id)->latest('entry_date')->take(8)->get();
 
         return view('dashboard-isak35', compact(
             'upz',
@@ -47,34 +51,21 @@ class DashboardController extends Controller
      */
     public function indexBaznas()
     {
-        $upz = UpzProfile::first() ?? new UpzProfile();
+        $upz = $this->orgContext->getActiveOrganization();
+        $stats = $this->orgContext->getStatistics($upz->id);
 
-        // Operational ZIS Metrics (Perbaznas No. 2/2016)
-        $collectionsTotal = (float) ZisCollection::sum('amount');
-        $receiptsTotal = (float) UpzReceipt::sum('amount');
-        $totalZisCollected = $receiptsTotal > 0 ? ($receiptsTotal + $collectionsTotal) : $collectionsTotal;
+        $totalZisCollected = $stats['total_zis_collected'];
+        $totalAmilRetained = $stats['total_amil_retained'];
+        $totalDistributed = $stats['total_distributed'];
+        $totalRemittedToBaznas = $stats['total_remitted_to_baznas'];
+        $availableZisCash = $stats['available_zis_cash'];
+        $effectiveAmilPercentage = $stats['effective_amil_percentage'];
+        $muzakkiCount = $stats['muzakki_count'];
+        $mustahiqCount = $stats['mustahiq_count'];
 
-        $totalAmilRetained = (float) ZisCollection::sum('amil_amount');
-
-        $distTotalOld = (float) ZisDistribution::sum('amount');
-        $distTotalNew = (float) NewUpzDistribution::sum('amount');
-        $totalDistributed = $distTotalNew > 0 ? ($distTotalNew + $distTotalOld) : $distTotalOld;
-
-        $totalRemittedToBaznas = (float) BaznasRemittance::where('status', 'verified_by_baznas')->sum('amount_remitted');
-
-        // Net Available ZIS Funds
-        $availableZisCash = max(0, $totalZisCollected - $totalDistributed - $totalRemittedToBaznas);
-
-        $effectiveAmilPercentage = $totalZisCollected > 0 
-            ? ($totalAmilRetained / $totalZisCollected) * 100 
-            : 0;
-
-        $muzakkiCount = Muzakki::count() + Muzaki::count();
-        $mustahiqCount = Mustahiq::count() + Mustahik::count();
-
-        // Recent Activity
-        $recentCollections = ZisCollection::with('muzakki')->latest('transaction_date')->take(5)->get();
-        $recentDistributions = ZisDistribution::with('mustahiq')->latest('distribution_date')->take(5)->get();
+        // Recent Activity for this active organization
+        $recentCollections = ZisCollection::where('upz_profile_id', $upz->id)->with('muzakki')->latest('transaction_date')->take(5)->get();
+        $recentDistributions = ZisDistribution::where('upz_profile_id', $upz->id)->with('mustahiq')->latest('distribution_date')->take(5)->get();
 
         return view('dashboard-baznas', compact(
             'upz',

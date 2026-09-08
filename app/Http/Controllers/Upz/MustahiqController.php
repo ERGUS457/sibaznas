@@ -5,13 +5,22 @@ namespace App\Http\Controllers\Upz;
 use App\Http\Controllers\Controller;
 use App\Models\Upz\Mustahiq;
 use App\Models\Upz\UpzProfile;
+use App\Services\OrganizationContextService;
 use Illuminate\Http\Request;
 
 class MustahiqController extends Controller
 {
+    protected OrganizationContextService $orgContext;
+
+    public function __construct(OrganizationContextService $orgContext)
+    {
+        $this->orgContext = $orgContext;
+    }
+
     public function index(Request $request)
     {
-        $query = Mustahiq::withCount('distributions')->latest();
+        $upz = $this->orgContext->getActiveOrganization();
+        $query = Mustahiq::where('upz_profile_id', $upz->id)->withCount('distributions')->latest();
 
         if ($request->filled('asnaf')) {
             $query->where('asnaf_category', $request->asnaf);
@@ -32,7 +41,7 @@ class MustahiqController extends Controller
 
     public function create()
     {
-        $upz = UpzProfile::firstOrFail();
+        $upz = $this->orgContext->getActiveOrganization();
 
         return view('upz.mustahiqs.create', compact('upz'));
     }

@@ -6,36 +6,40 @@ use App\Http\Controllers\Controller;
 use App\Models\Upz\Mustahiq;
 use App\Models\Upz\UpzProfile;
 use App\Models\Upz\ZisDistribution;
+use App\Services\OrganizationContextService;
 use App\Services\Upz\ZisDistributionService;
 use Illuminate\Http\Request;
 
 class ZisDistributionController extends Controller
 {
     protected ZisDistributionService $service;
+    protected OrganizationContextService $orgContext;
 
-    public function __construct(ZisDistributionService $service)
+    public function __construct(ZisDistributionService $service, OrganizationContextService $orgContext)
     {
         $this->service = $service;
+        $this->orgContext = $orgContext;
     }
 
     public function index(Request $request)
     {
-        $query = ZisDistribution::with(['mustahiq', 'upzProfile'])->latest('distribution_date');
+        $upz = $this->orgContext->getActiveOrganization();
+        $query = ZisDistribution::where('upz_profile_id', $upz->id)->with(['mustahiq', 'upzProfile'])->latest('distribution_date');
 
         if ($request->filled('asnaf_category')) {
             $query->where('asnaf_category', $request->asnaf_category);
         }
 
         $distributions = $query->paginate(15)->withQueryString();
-        $totalDistributed = ZisDistribution::sum('amount');
+        $totalDistributed = ZisDistribution::where('upz_profile_id', $upz->id)->sum('amount');
 
         return view('upz.distributions.index', compact('distributions', 'totalDistributed'));
     }
 
     public function create()
     {
-        $upz = UpzProfile::firstOrFail();
-        $mustahiqs = Mustahiq::where('is_active', true)->orderBy('name')->get();
+        $upz = $this->orgContext->getActiveOrganization();
+        $mustahiqs = Mustahiq::where('upz_profile_id', $upz->id)->where('is_active', true)->orderBy('name')->get();
 
         return view('upz.distributions.create', compact('upz', 'mustahiqs'));
     }

@@ -71,4 +71,9 @@ class UpzProfile extends Model
     {
         return $this->hasMany(BaznasRemittance::class);
     }
+
+    public function journalEntries(): HasMany
+    {
+        return $this->hasMany(\App\Models\Accounting\JournalEntry::class, 'upz_profile_id');
+    }
 }

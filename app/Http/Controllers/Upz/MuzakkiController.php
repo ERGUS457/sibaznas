@@ -5,13 +5,22 @@ namespace App\Http\Controllers\Upz;
 use App\Http\Controllers\Controller;
 use App\Models\Upz\Muzakki;
 use App\Models\Upz\UpzProfile;
+use App\Services\OrganizationContextService;
 use Illuminate\Http\Request;
 
 class MuzakkiController extends Controller
 {
+    protected OrganizationContextService $orgContext;
+
+    public function __construct(OrganizationContextService $orgContext)
+    {
+        $this->orgContext = $orgContext;
+    }
+
     public function index(Request $request)
     {
-        $query = Muzakki::withCount('collections')->latest();
+        $upz = $this->orgContext->getActiveOrganization();
+        $query = Muzakki::where('upz_profile_id', $upz->id)->withCount('collections')->latest();
 
         if ($request->filled('search')) {
             $search = $request->search;
@@ -29,7 +38,7 @@ class MuzakkiController extends Controller
 
     public function create()
     {
-        $upz = UpzProfile::firstOrFail();
+        $upz = $this->orgContext->getActiveOrganization();
 
         return view('upz.muzakkis.create', compact('upz'));
     }

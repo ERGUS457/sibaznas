@@ -79,9 +79,12 @@ class Account extends Model
     /**
      * Calculate balance within a given date range.
      */
-    public function getBalanceBetween(?string $startDate = null, ?string $endDate = null): float
+    public function getBalanceBetween(?string $startDate = null, ?string $endDate = null, ?int $upzId = null): float
     {
-        $query = $this->journalItems()->whereHas('journalEntry', function ($q) use ($startDate, $endDate) {
+        $query = $this->journalItems()->whereHas('journalEntry', function ($q) use ($startDate, $endDate, $upzId) {
+            if ($upzId) {
+                $q->where('upz_profile_id', $upzId);
+            }
             if ($startDate) {
                 $q->where('entry_date', '>=', $startDate);
             }

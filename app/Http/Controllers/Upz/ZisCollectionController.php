@@ -6,21 +6,25 @@ use App\Http\Controllers\Controller;
 use App\Models\Upz\Muzakki;
 use App\Models\Upz\UpzProfile;
 use App\Models\Upz\ZisCollection;
+use App\Services\OrganizationContextService;
 use App\Services\Upz\ZisCollectionService;
 use Illuminate\Http\Request;
 
 class ZisCollectionController extends Controller
 {
     protected ZisCollectionService $service;
+    protected OrganizationContextService $orgContext;
 
-    public function __construct(ZisCollectionService $service)
+    public function __construct(ZisCollectionService $service, OrganizationContextService $orgContext)
     {
         $this->service = $service;
+        $this->orgContext = $orgContext;
     }
 
     public function index(Request $request)
     {
-        $query = ZisCollection::with(['muzakki', 'upzProfile'])->latest('transaction_date');
+        $upz = $this->orgContext->getActiveOrganization();
+        $query = ZisCollection::where('upz_profile_id', $upz->id)->with(['muzakki', 'upzProfile'])->latest('transaction_date');
 
         if ($request->filled('fund_type')) {
             $query->where('fund_type', $request->fund_type);
@@ -38,16 +42,16 @@ class ZisCollectionController extends Controller
         }
 
         $collections = $query->paginate(15)->withQueryString();
-        $totalAmount = ZisCollection::sum('amount');
-        $totalAmil = ZisCollection::sum('amil_amount');
+        $totalAmount = ZisCollection::where('upz_profile_id', $upz->id)->sum('amount');
+        $totalAmil = ZisCollection::where('upz_profile_id', $upz->id)->sum('amil_amount');
 
         return view('upz.collections.index', compact('collections', 'totalAmount', 'totalAmil'));
     }
 
     public function create()
     {
-        $upz = UpzProfile::firstOrFail();
-        $muzakkis = Muzakki::active()->orderBy('name')->get();
+        $upz = $this->orgContext->getActiveOrganization();
+        $muzakkis = Muzakki::where('upz_profile_id', $upz->id)->active()->orderBy('name')->get();
 
         return view('upz.collections.create', compact('upz', 'muzakkis'));
     }

@@ -10,10 +10,12 @@ use Illuminate\Support\Facades\DB;
 class Isak35ReportService
 {
     /**
-     * Batch calculate account balances using a single aggregated SQL query.
+     * Batch calculate account balances using a single aggregated SQL query scoped to organization.
      */
-    public function getAccountBalancesBatch(?string $startDate = null, ?string $endDate = null): array
+    public function getAccountBalancesBatch(?string $startDate = null, ?string $endDate = null, ?int $upzId = null): array
     {
+        $orgId = $upzId ?? app(\App\Services\OrganizationContextService::class)->getActiveOrganization()->id;
+
         $query = JournalItem::query()
             ->join('journal_entries', 'journal_items.journal_entry_id', '=', 'journal_entries.id');
 
@@ -22,6 +24,9 @@ class Isak35ReportService
         }
         if ($endDate) {
             $query->where('journal_entries.entry_date', '<=', $endDate);
+        }
+        if ($orgId) {
+            $query->where('journal_entries.upz_profile_id', $orgId);
         }
 
         $records = $query->select(
@@ -46,11 +51,18 @@ class Isak35ReportService
     /**
      * Laporan Posisi Keuangan (Statement of Financial Position) - DE ISAK 35 Format A
      */
-    public function getStatementOfFinancialPosition(?string $asOfDate = null): array
+    public function getStatementOfFinancialPosition($asOfDate = null, ?int $upzId = null): array
     {
+        if (is_int($asOfDate)) {
+            $upzId = $asOfDate;
+            $asOfDate = null;
+        }
+
+        $orgId = $upzId ?? app(\App\Services\OrganizationContextService::class)->getActiveOrganization()->id;
         $asOfDate = $asOfDate ? Carbon::parse($asOfDate)->endOfDay()->toDateString() : now()->toDateString();
         $accounts = Account::active()->orderBy('code')->get();
-        $batchBalances = $this->getAccountBalancesBatch(null, $asOfDate);
+        $batchBalances = $this->getAccountBalancesBatch(null, $asOfDate, $orgId);
+        $incomeStatement = $this->getStatementOfComprehensiveIncome(null, $asOfDate, $orgId);
 
         // 1. Assets
         $currentAssets = [];
@@ -107,7 +119,7 @@ class Isak35ReportService
         }
 
         // Calculate Surplus / Deficit from Comprehensive Income for the period and integrate into Net Assets
-        $incomeStatement = $this->getStatementOfComprehensiveIncome(null, $asOfDate);
+        $incomeStatement = $this->getStatementOfComprehensiveIncome(null, $asOfDate, $orgId);
         $totalUnrestrictedNetAssets += $incomeStatement['change_unrestricted_net_assets'];
         $totalRestrictedNetAssets += $incomeStatement['change_restricted_net_assets'];
 
@@ -143,13 +155,14 @@ class Isak35ReportService
     /**
      * Laporan Penghasilan Komprehensif (Statement of Comprehensive Income) - DE ISAK 35 Format A
      */
-    public function getStatementOfComprehensiveIncome(?string $startDate = null, ?string $endDate = null): array
+    public function getStatementOfComprehensiveIncome(?string $startDate = null, ?string $endDate = null, ?int $upzId = null): array
     {
+        $orgId = $upzId ?? app(\App\Services\OrganizationContextService::class)->getActiveOrganization()->id;
         $startDate = $startDate ? Carbon::parse($startDate)->startOfDay()->toDateString() : Carbon::now()->startOfYear()->toDateString();
         $endDate = $endDate ? Carbon::parse($endDate)->endOfDay()->toDateString() : now()->toDateString();
 
         $accounts = Account::active()->orderBy('code')->get();
-        $batchBalances = $this->getAccountBalancesBatch($startDate, $endDate);
+        $batchBalances = $this->getAccountBalancesBatch($startDate, $endDate, $orgId);
 
         // 1. Unrestricted Activities
         $unrestrictedRevenues = [];
@@ -214,15 +227,16 @@ class Isak35ReportService
     /**
      * Laporan Perubahan Aset Bersih (Statement of Changes in Net Assets) - DE ISAK 35 Format A
      */
-    public function getStatementOfChangesInNetAssets(?string $startDate = null, ?string $endDate = null): array
+    public function getStatementOfChangesInNetAssets(?string $startDate = null, ?string $endDate = null, ?int $upzId = null): array
     {
+        $orgId = $upzId ?? app(\App\Services\OrganizationContextService::class)->getActiveOrganization()->id;
         $startDate = $startDate ? Carbon::parse($startDate)->startOfDay()->toDateString() : Carbon::now()->startOfYear()->toDateString();
         $endDate = $endDate ? Carbon::parse($endDate)->endOfDay()->toDateString() : now()->toDateString();
 
-        $incomeStatement = $this->getStatementOfComprehensiveIncome($startDate, $endDate);
+        $incomeStatement = $this->getStatementOfComprehensiveIncome($startDate, $endDate, $orgId);
 
         // Saldo awal aset bersih
-        $priorBalances = $this->getAccountBalancesBatch(null, Carbon::parse($startDate)->subDay()->toDateString());
+        $priorBalances = $this->getAccountBalancesBatch(null, Carbon::parse($startDate)->subDay()->toDateString(), $orgId);
         $accounts = Account::active()->get();
         $beginningUnrestricted = 0;
         $beginningRestricted = 0;
@@ -260,15 +274,16 @@ class Isak35ReportService
     /**
      * Laporan Arus Kas (Statement of Cash Flows) - DE ISAK 35
      */
-    public function getStatementOfCashFlows(?string $startDate = null, ?string $endDate = null): array
+    public function getStatementOfCashFlows(?string $startDate = null, ?string $endDate = null, ?int $upzId = null): array
     {
+        $orgId = $upzId ?? app(\App\Services\OrganizationContextService::class)->getActiveOrganization()->id;
         $startDate = $startDate ? Carbon::parse($startDate)->startOfDay()->toDateString() : Carbon::now()->startOfYear()->toDateString();
         $endDate = $endDate ? Carbon::parse($endDate)->endOfDay()->toDateString() : now()->toDateString();
 
-        $income = $this->getStatementOfComprehensiveIncome($startDate, $endDate);
-        $periodBalances = $this->getAccountBalancesBatch($startDate, $endDate);
-        $allPriorBalances = $this->getAccountBalancesBatch(null, Carbon::parse($startDate)->subDay()->toDateString());
-        $allEndBalances = $this->getAccountBalancesBatch(null, $endDate);
+        $income = $this->getStatementOfComprehensiveIncome($startDate, $endDate, $orgId);
+        $periodBalances = $this->getAccountBalancesBatch($startDate, $endDate, $orgId);
+        $allPriorBalances = $this->getAccountBalancesBatch(null, Carbon::parse($startDate)->subDay()->toDateString(), $orgId);
+        $allEndBalances = $this->getAccountBalancesBatch(null, $endDate, $orgId);
 
         // Kas dari Aktivitas Operasi
         $cashFromZisCollections = $income['total_restricted_revenue'];

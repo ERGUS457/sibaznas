@@ -6,32 +6,37 @@ use App\Http\Controllers\Controller;
 use App\Models\Upz\BaznasRemittance;
 use App\Models\Upz\UpzProfile;
 use App\Models\Upz\ZisCollection;
+use App\Services\OrganizationContextService;
 use App\Services\Upz\BaznasRemittanceService;
 use Illuminate\Http\Request;
 
 class BaznasRemittanceController extends Controller
 {
     protected BaznasRemittanceService $service;
+    protected OrganizationContextService $orgContext;
 
-    public function __construct(BaznasRemittanceService $service)
+    public function __construct(BaznasRemittanceService $service, OrganizationContextService $orgContext)
     {
         $this->service = $service;
+        $this->orgContext = $orgContext;
     }
 
     public function index()
     {
-        $remittances = BaznasRemittance::with(['upzProfile', 'submittedBy'])
+        $upz = $this->orgContext->getActiveOrganization();
+        $remittances = BaznasRemittance::where('upz_profile_id', $upz->id)
+            ->with(['upzProfile', 'submittedBy'])
             ->latest('remittance_date')
             ->paginate(15);
 
-        $totalRemitted = BaznasRemittance::where('status', 'verified_by_baznas')->sum('amount_remitted');
+        $totalRemitted = BaznasRemittance::where('upz_profile_id', $upz->id)->where('status', 'verified_by_baznas')->sum('amount_remitted');
 
         return view('upz.remittances.index', compact('remittances', 'totalRemitted'));
     }
 
     public function create()
     {
-        $upz = UpzProfile::firstOrFail();
+        $upz = $this->orgContext->getActiveOrganization();
         $totalCollected = ZisCollection::where('upz_profile_id', $upz->id)->sum('amount');
         $totalAmil = ZisCollection::where('upz_profile_id', $upz->id)->sum('amil_amount');
         $totalAlreadyRemitted = BaznasRemittance::where('upz_profile_id', $upz->id)->sum('amount_remitted');

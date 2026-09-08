@@ -74,6 +74,7 @@ class BaznasRemittanceService
         $entryNumber = sprintf('JV/%s/%04d', Carbon::parse($remittance->remittance_date)->format('Ym'), $entryCount);
 
         $journalEntry = JournalEntry::create([
+            'upz_profile_id' => $remittance->upz_profile_id,
             'voucher_number' => $entryNumber,
             'entry_date' => $remittance->remittance_date,
             'description' => "Penyetoran ZIS ke BAZNAS No. {$remittance->remittance_number} (Periode {$remittance->period_label})",
