@@ -36,146 +36,135 @@
     <style>
         [x-cloak] { display: none !important; }
         /* ========================================================= */
-        /* MAXIMALIST DESIGN SYSTEM (Bold Borders & Hard Shadows)    */
+        /* FORMAL CORPORATE & INSTITUTIONAL DESIGN SYSTEM            */
         /* ========================================================= */
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #f1f5f9;
-            background-image: 
-                radial-gradient(#94a3b8 1.2px, transparent 1.2px),
-                radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.12) 0px, transparent 40%),
-                radial-gradient(at 100% 100%, rgba(2, 132, 199, 0.12) 0px, transparent 40%);
-            background-size: 24px 24px, 100% 100%, 100% 100%;
+            background-color: #f8fafc;
+            color: #1e293b;
         }
 
-        /* Maximalist Cards */
+        /* Formal Cards */
         .maxi-card, .clay-card {
             background: #ffffff;
-            border: 2px solid #0f172a;
-            border-radius: 20px;
-            box-shadow: 5px 5px 0px 0px #0f172a;
-            transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+            transition: all 0.15s ease-in-out;
         }
         .maxi-card:hover, .clay-card:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 7px 7px 0px 0px #0f172a;
+            border-color: #cbd5e1;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
         }
 
         .maxi-card-soft, .clay-card-soft {
             background: #f8fafc;
-            border: 2px solid #1e293b;
-            border-radius: 16px;
-            box-shadow: 3px 3px 0px 0px #1e293b;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
         }
 
         .maxi-sidebar, .clay-sidebar {
             background: #ffffff;
-            border-right: 3px solid #0f172a;
-            box-shadow: 4px 0px 0px 0px rgba(15, 23, 42, 0.08);
+            border-right: 1px solid #e2e8f0;
+            box-shadow: none;
         }
 
         .maxi-topbar, .clay-topbar {
             background: #ffffff;
-            border: 2px solid #0f172a;
-            border-radius: 18px;
-            box-shadow: 4px 4px 0px 0px #0f172a;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
         }
 
-        /* Maximalist Buttons */
+        /* Formal Buttons */
         .maxi-btn-emerald, .clay-btn-emerald {
-            background: #10b981;
+            background: #047857;
             color: #ffffff;
-            border: 2px solid #0f172a;
-            border-radius: 14px;
-            font-weight: 800;
-            box-shadow: 4px 4px 0px 0px #0f172a;
+            border: 1px solid #047857;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             transition: all 0.15s ease-in-out;
         }
         .maxi-btn-emerald:hover, .clay-btn-emerald:hover {
-            background: #059669;
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px 0px #0f172a;
+            background: #065f46;
+            border-color: #065f46;
         }
         .maxi-btn-emerald:active, .clay-btn-emerald:active {
-            transform: translate(2px, 2px);
-            box-shadow: 0px 0px 0px 0px #0f172a;
+            transform: scale(0.99);
         }
 
         .maxi-btn-sky, .clay-btn-sky {
-            background: #0284c7;
+            background: #0f172a;
             color: #ffffff;
-            border: 2px solid #0f172a;
-            border-radius: 14px;
-            font-weight: 800;
-            box-shadow: 4px 4px 0px 0px #0f172a;
+            border: 1px solid #0f172a;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             transition: all 0.15s ease-in-out;
         }
         .maxi-btn-sky:hover, .clay-btn-sky:hover {
-            background: #0369a1;
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px 0px #0f172a;
+            background: #1e293b;
+            border-color: #1e293b;
         }
         .maxi-btn-sky:active, .clay-btn-sky:active {
-            transform: translate(2px, 2px);
-            box-shadow: 0px 0px 0px 0px #0f172a;
+            transform: scale(0.99);
         }
 
         .maxi-btn-white, .clay-btn-white {
             background: #ffffff;
-            color: #0f172a;
-            border: 2px solid #0f172a;
-            border-radius: 14px;
-            font-weight: 800;
-            box-shadow: 3px 3px 0px 0px #0f172a;
+            color: #334155;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
             transition: all 0.15s ease-in-out;
         }
         .maxi-btn-white:hover, .clay-btn-white:hover {
-            background: #f1f5f9;
-            transform: translate(-1px, -1px);
-            box-shadow: 5px 5px 0px 0px #0f172a;
+            background: #f8fafc;
+            color: #0f172a;
+            border-color: #94a3b8;
         }
         .maxi-btn-white:active, .clay-btn-white:active {
-            transform: translate(2px, 2px);
-            box-shadow: 0px 0px 0px 0px #0f172a;
+            transform: scale(0.99);
         }
 
         .maxi-btn-rose, .clay-btn-rose {
-            background: #f43f5e;
-            color: #ffffff;
-            border: 2px solid #0f172a;
-            border-radius: 14px;
-            font-weight: 800;
-            box-shadow: 3px 3px 0px 0px #0f172a;
+            background: #ffffff;
+            color: #dc2626;
+            border: 1px solid #fca5a5;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
             transition: all 0.15s ease-in-out;
         }
         .maxi-btn-rose:hover, .clay-btn-rose:hover {
-            background: #e11d48;
-            transform: translate(-1px, -1px);
-            box-shadow: 5px 5px 0px 0px #0f172a;
+            background: #fef2f2;
+            border-color: #f87171;
+            color: #b91c1c;
         }
         .maxi-btn-rose:active, .clay-btn-rose:active {
-            transform: translate(2px, 2px);
-            box-shadow: 0px 0px 0px 0px #0f172a;
+            transform: scale(0.99);
         }
 
         .maxi-input, .clay-input {
             background: #ffffff;
-            border: 2px solid #0f172a;
-            border-radius: 12px;
-            box-shadow: 2px 2px 0px 0px #0f172a;
-            transition: all 0.15s ease;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            box-shadow: none;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
         }
         .maxi-input:focus, .clay-input:focus {
             outline: none;
-            border-color: #10b981;
-            box-shadow: 3px 3px 0px 0px #10b981;
+            border-color: #047857;
+            box-shadow: 0 0 0 2px rgba(4, 120, 87, 0.15);
         }
 
-        .maxi-pill, .clay-pill {
-            border: 2px solid #0f172a;
+        .maxi-pill, .clay-pill, .maxi-badge {
+            border: 1px solid #cbd5e1;
             border-radius: 9999px;
-            box-shadow: 2px 2px 0px 0px #0f172a;
-            font-weight: 800;
+            font-weight: 600;
+            box-shadow: none;
         }
 
         @media print {
@@ -224,51 +213,51 @@
             class="fixed lg:static inset-y-0 left-0 z-50 w-72 clay-sidebar text-slate-700 flex flex-col flex-shrink-0 transition-transform duration-200 ease-in-out no-print">
             
             <!-- Header Brand -->
-            <div class="h-20 px-5 border-b border-slate-100 flex items-center justify-between">
+            <div class="h-16 px-5 border-b border-slate-200 flex items-center justify-between bg-white">
                 @if($isIsak35)
                     <a href="{{ route('dashboard.isak35') }}" class="flex items-center space-x-3">
-                        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-sky-500 to-blue-600 flex items-center justify-center text-white text-lg font-bold shadow-md">
+                        <div class="w-9 h-9 rounded-lg bg-slate-800 flex items-center justify-center text-white text-base font-semibold shadow-xs">
                             <i class="fa-solid fa-book-journal-whills"></i>
                         </div>
                         <div>
-                            <span class="font-extrabold text-slate-900 text-sm tracking-tight block">AKUNTANSI NONLABA</span>
-                            <span class="text-[10px] font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded-full border border-sky-200">DE ISAK 35 FORMAT A</span>
+                            <span class="font-bold text-slate-900 text-xs tracking-tight block">AKUNTANSI NONLABA</span>
+                            <span class="text-[10px] font-semibold text-slate-600 bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">DE ISAK 35 FORMAT A</span>
                         </div>
                     </a>
                 @elseif($isBaznas)
                     <a href="{{ route('dashboard.baznas') }}" class="flex items-center space-x-3">
-                        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white text-lg font-bold shadow-md">
+                        <div class="w-9 h-9 rounded-lg bg-emerald-700 flex items-center justify-center text-white text-base font-semibold shadow-xs">
                             <i class="fa-solid fa-hand-holding-dollar"></i>
                         </div>
                         <div>
-                            <span class="font-extrabold text-slate-900 text-sm tracking-tight block">PENGELOLAAN ZAKAT</span>
-                            <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">PERBAZNAS 2/2016</span>
+                            <span class="font-bold text-slate-900 text-xs tracking-tight block">PENGELOLAAN ZAKAT</span>
+                            <span class="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">PERBAZNAS 2/2016</span>
                         </div>
                     </a>
                 @else
                     <a href="{{ route('portal') }}" class="flex items-center space-x-3">
-                        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center text-white text-lg font-bold shadow-md">
+                        <div class="w-9 h-9 rounded-lg bg-slate-900 flex items-center justify-center text-white text-base font-semibold shadow-xs">
                             <i class="fa-solid fa-layer-group"></i>
                         </div>
                         <div>
-                            <span class="font-extrabold text-slate-900 text-sm tracking-tight block">SIM-ORGANISASI</span>
-                            <span class="text-[10px] font-bold text-slate-700 bg-slate-100 px-2 py-0.5 rounded-full border border-slate-200">PORTAL MULTI-MODUL</span>
+                            <span class="font-bold text-slate-900 text-xs tracking-tight block">SIM-ORGANISASI</span>
+                            <span class="text-[10px] font-semibold text-slate-600 bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">PORTAL MULTI-MODUL</span>
                         </div>
                     </a>
                 @endif
                 <button @click="sidebarOpen = false" class="lg:hidden text-slate-400 hover:text-slate-600 p-1">
-                    <i class="fa-solid fa-xmark text-lg"></i>
+                    <i class="fa-solid fa-xmark text-base"></i>
                 </button>
             </div>
 
             <!-- Workspace Switcher Button -->
-            <div class="p-3 border-b border-slate-100 bg-slate-50/60">
-                <a href="{{ route('portal') }}" class="clay-btn-white w-full py-2 px-3 text-xs font-bold flex items-center justify-between text-slate-700 hover:text-black">
+            <div class="p-3 border-b border-slate-200 bg-slate-50/70">
+                <a href="{{ route('portal') }}" class="clay-btn-white w-full py-1.5 px-3 text-xs font-semibold flex items-center justify-between text-slate-700 hover:text-slate-900">
                     <span class="flex items-center gap-2">
-                        <i class="fa-solid fa-arrow-left text-slate-400"></i>
+                        <i class="fa-solid fa-arrow-left text-slate-400 text-[11px]"></i>
                         <span>Kembali ke Portal</span>
                     </span>
-                    <span class="text-[10px] uppercase font-bold text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded">Ganti Modul</span>
+                    <span class="text-[10px] uppercase font-semibold text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">Ganti Modul</span>
                 </a>
             </div>
 
@@ -454,27 +443,27 @@
 
         <!-- Main Content Area -->
         <div class="flex-1 flex flex-col min-w-0 overflow-y-auto">
-            <!-- Top App Bar (Claymorphic) -->
-            <header class="px-4 sm:px-8 pt-4 pb-2 no-print sticky top-0 z-10">
-                <div class="clay-topbar px-5 py-3 flex items-center justify-between">
+            <!-- Top App Bar (Formal Corporate) -->
+            <header class="px-4 sm:px-8 pt-4 pb-2 no-print sticky top-0 z-10 bg-slate-50/80 backdrop-blur-xs">
+                <div class="clay-topbar px-5 py-2.5 flex items-center justify-between border border-slate-200 bg-white shadow-xs">
                     <div class="flex items-center space-x-3">
-                        <button @click="sidebarOpen = true" class="lg:hidden text-slate-600 hover:text-slate-900 p-2 rounded-xl hover:bg-slate-100">
-                            <i class="fa-solid fa-bars text-base"></i>
+                        <button @click="sidebarOpen = true" class="lg:hidden text-slate-600 hover:text-slate-900 p-2 rounded-lg hover:bg-slate-100">
+                            <i class="fa-solid fa-bars text-sm"></i>
                         </button>
                         <div class="flex items-center space-x-2 text-xs">
-                            <a href="{{ route('portal') }}" class="clay-btn-white px-2.5 py-1 text-xs font-bold flex items-center gap-1.5 text-slate-700 hover:text-black">
-                                <i class="fa-solid fa-grid-2 text-slate-400"></i>
+                            <a href="{{ route('portal') }}" class="clay-btn-white px-2.5 py-1 text-xs font-semibold flex items-center gap-1.5 text-slate-700 hover:text-slate-900">
+                                <i class="fa-solid fa-grip text-slate-400"></i>
                                 <span class="hidden sm:inline">Portal</span>
                             </a>
                             <span class="text-slate-300">/</span>
                             @if($isIsak35)
-                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 text-sky-800 border border-sky-200 font-bold clay-pill">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-sky-500 animate-pulse"></span>
+                                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-800 border border-slate-200 font-semibold text-xs">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-slate-700"></span>
                                     <span>Modul: Akuntansi DE ISAK 35</span>
                                 </span>
                             @elseif($isBaznas)
-                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 font-bold clay-pill">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 font-semibold text-xs">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
                                     <span>Modul: Pengelolaan Zakat BAZNAS</span>
                                 </span>
                             @endif
@@ -482,19 +471,19 @@
                     </div>
                     <div class="flex items-center space-x-2 sm:space-x-3">
                         @if($isBaznas)
-                            <a href="{{ route('collections.create') }}" class="clay-btn-emerald text-xs font-bold px-3.5 py-2 flex items-center space-x-1.5">
+                            <a href="{{ route('collections.create') }}" class="clay-btn-emerald text-xs font-semibold px-3 py-1.5 flex items-center space-x-1.5">
                                 <i class="fa-solid fa-plus text-[11px]"></i>
                                 <span>Input BSZ</span>
                             </a>
                         @elseif($isIsak35)
-                            <a href="{{ route('reports.financial-position') }}" class="clay-btn-sky text-xs font-bold px-3.5 py-2 flex items-center space-x-1.5">
+                            <a href="{{ route('reports.financial-position') }}" class="clay-btn-sky text-xs font-semibold px-3 py-1.5 flex items-center space-x-1.5">
                                 <i class="fa-solid fa-scale-balanced text-[11px]"></i>
                                 <span>Posisi Keuangan</span>
                             </a>
                         @endif
                         <form action="{{ route('logout') }}" method="POST" class="inline sm:hidden">
                             @csrf
-                            <button type="submit" class="clay-btn-rose p-2 text-xs" title="Keluar">
+                            <button type="submit" class="clay-btn-rose p-1.5 text-xs" title="Keluar">
                                 <i class="fa-solid fa-arrow-right-from-bracket"></i>
                             </button>
                         </form>

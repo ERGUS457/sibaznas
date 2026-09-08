@@ -14,77 +14,70 @@
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #f1f5f9;
-            background-image: 
-                radial-gradient(#94a3b8 1.2px, transparent 1.2px),
-                radial-gradient(at 10% 15%, rgba(16, 185, 129, 0.15) 0px, transparent 40%),
-                radial-gradient(at 90% 85%, rgba(2, 132, 199, 0.15) 0px, transparent 40%);
-            background-size: 24px 24px, 100% 100%, 100% 100%;
+            background-color: #f8fafc;
+            color: #1e293b;
         }
 
-        /* Maximalist Design System */
+        /* Formal Corporate Cards */
         .clay-card, .maxi-card {
             background: #ffffff;
-            border: 2.5px solid #0f172a;
-            border-radius: 24px;
-            box-shadow: 6px 6px 0px 0px #0f172a;
-            transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+            transition: all 0.2s ease-in-out;
         }
         .clay-card-interactive:hover, .maxi-card:hover {
-            transform: translate(-3px, -3px);
-            box-shadow: 9px 9px 0px 0px #0f172a;
+            border-color: #cbd5e1;
+            box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
         }
 
         .clay-card-soft, .maxi-card-soft {
             background: #f8fafc;
-            border: 2px solid #0f172a;
-            border-radius: 18px;
-            box-shadow: 4px 4px 0px 0px #0f172a;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
         }
 
         .clay-btn-emerald, .maxi-btn-emerald {
-            background: #10b981;
+            background: #047857;
             color: #ffffff;
-            border: 2px solid #0f172a;
-            border-radius: 16px;
-            font-weight: 800;
-            box-shadow: 4px 4px 0px 0px #0f172a;
+            border: 1px solid #047857;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             transition: all 0.15s ease-in-out;
         }
         .clay-btn-emerald:hover, .maxi-btn-emerald:hover {
-            background: #059669;
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px 0px #0f172a;
+            background: #065f46;
+            border-color: #065f46;
         }
         .clay-btn-emerald:active, .maxi-btn-emerald:active {
-            transform: translate(2px, 2px);
-            box-shadow: 0px 0px 0px 0px #0f172a;
+            transform: scale(0.99);
         }
 
         .clay-btn-white, .maxi-btn-white {
             background: #ffffff;
-            color: #0f172a;
-            border: 2px solid #0f172a;
-            border-radius: 16px;
-            font-weight: 800;
-            box-shadow: 3px 3px 0px 0px #0f172a;
+            color: #334155;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
             transition: all 0.15s ease-in-out;
         }
         .clay-btn-white:hover, .maxi-btn-white:hover {
-            background: #f1f5f9;
-            transform: translate(-1px, -1px);
-            box-shadow: 5px 5px 0px 0px #0f172a;
+            background: #f8fafc;
+            color: #0f172a;
+            border-color: #94a3b8;
         }
         .clay-btn-white:active, .maxi-btn-white:active {
-            transform: translate(2px, 2px);
-            box-shadow: 0px 0px 0px 0px #0f172a;
+            transform: scale(0.99);
         }
 
         .clay-pill, .maxi-pill {
-            border: 2px solid #0f172a;
+            border: 1px solid #cbd5e1;
             border-radius: 9999px;
-            box-shadow: 2px 2px 0px 0px #0f172a;
-            font-weight: 800;
+            font-weight: 600;
+            box-shadow: none;
         }
     </style>
 </head>
@@ -95,15 +88,15 @@
         <nav class="clay-card px-5 py-3.5 flex items-center justify-between">
             <!-- Brand Logo -->
             <a href="{{ route('landing') }}" class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white flex items-center justify-center text-lg font-bold" style="box-shadow: 4px 6px 14px rgba(16, 185, 129, 0.35), inset 1px 1px 3px rgba(255,255,255,0.4), inset -2px -2px 4px rgba(0,0,0,0.2);">
+                <div class="w-10 h-10 rounded-lg bg-emerald-700 text-white flex items-center justify-center text-lg font-semibold shadow-xs">
                     <i class="fa-solid fa-layer-group"></i>
                 </div>
                 <div>
                     <div class="flex items-center gap-1.5">
-                        <span class="font-extrabold text-slate-900 text-base tracking-tight">SIM-UPZ BAZNAS</span>
-                        <span class="text-[10px] font-bold text-emerald-700 bg-emerald-100/70 px-2 py-0.5 rounded-full border border-emerald-300/60">RESMI</span>
+                        <span class="font-bold text-slate-900 text-base tracking-tight">SIM-UPZ BAZNAS</span>
+                        <span class="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">RESMI</span>
                     </div>
-                    <span class="text-[11px] font-bold text-slate-500 tracking-wide block">DE ISAK 35 FORMAT A</span>
+                    <span class="text-[11px] font-medium text-slate-500 tracking-wide block">DE ISAK 35 FORMAT A</span>
                 </div>
             </a>
 
@@ -496,7 +489,7 @@
         <!-- ============================================================= -->
         <section id="panduan-login" class="clay-card p-8 sm:p-10 scroll-mt-24 bg-gradient-to-b from-white to-emerald-50/40">
             <div class="max-w-3xl mx-auto text-center space-y-6">
-                <div class="inline-flex items-center justify-center w-16 h-16 rounded-3xl bg-emerald-600 text-white text-3xl shadow-lg" style="box-shadow: 6px 10px 20px rgba(16, 185, 129, 0.4), inset 2px 2px 4px rgba(255,255,255,0.4), inset -2px -3px 6px rgba(0,0,0,0.2);">
+                <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-emerald-700 text-white text-xl shadow-xs mx-auto">
                     <i class="fa-solid fa-key"></i>
                 </div>
 
