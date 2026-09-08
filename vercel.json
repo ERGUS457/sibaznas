@@ -27,7 +27,7 @@
         "DB_PORT": "5432",
         "DB_DATABASE": "neondb",
         "DB_USERNAME": "neondb_owner",
-        "DB_PASSWORD": "endpoint=ep-plain-lab-aeponamh;npg_Oq8pcS1IMzfg",
+        "DB_PASSWORD": "npg_Oq8pcS1IMzfg",
         "DB_SSLMODE": "require",
         "DB_ENDPOINT": "ep-plain-lab-aeponamh",
         "APP_CONFIG_CACHE": "/tmp/config.php",

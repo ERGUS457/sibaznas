@@ -70,14 +70,12 @@ return [
             'port' => env('DB_PORT', '5432'),
             'database' => env('DB_DATABASE', 'neondb'),
             'username' => env('DB_USERNAME', 'neondb_owner'),
-            'password' => (env('DB_ENDPOINT') && !str_contains(env('DB_PASSWORD', ''), 'endpoint='))
-                ? 'endpoint=' . env('DB_ENDPOINT') . ';' . env('DB_PASSWORD', 'npg_Oq8pcS1IMzfg')
-                : env('DB_PASSWORD', 'npg_Oq8pcS1IMzfg'),
+            'password' => env('DB_PASSWORD', 'npg_Oq8pcS1IMzfg'),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
             'search_path' => 'public',
-            'sslmode' => env('DB_SSLMODE', 'require'),
+            'sslmode' => env('DB_SSLMODE', 'require') . (env('DB_ENDPOINT') ? ";options='endpoint=" . env('DB_ENDPOINT') . "'" : ''),
         ],
 
         'sqlsrv' => [
