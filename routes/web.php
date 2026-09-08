@@ -5,6 +5,7 @@ use App\Http\Controllers\Accounting\ReportController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\PortalController;
 use App\Http\Controllers\Upz\BaznasRemittanceController;
 use App\Http\Controllers\Upz\MustahiqController;
 use App\Http\Controllers\Upz\MuzakkiController;
@@ -27,8 +28,11 @@ Route::post('login', [AuthController::class, 'login'])->name('login.submit');
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('logout', [AuthController::class, 'logout']);
 
-// Main Dashboard Panel
+// Multi-Module Portal (Workspace Selector)
+Route::get('portal', [PortalController::class, 'index'])->name('portal');
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('dashboard/isak35', [DashboardController::class, 'indexIsak35'])->name('dashboard.isak35');
+Route::get('dashboard/baznas', [DashboardController::class, 'indexBaznas'])->name('dashboard.baznas');
 
 // UPZ Module 1: ZIS & DSKL Collections (Penerimaan & BSZ)
 Route::resource('collections', ZisCollectionController::class)->only(['index', 'create', 'store', 'show']);

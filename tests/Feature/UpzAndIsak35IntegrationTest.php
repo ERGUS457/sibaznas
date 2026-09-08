@@ -141,8 +141,30 @@ class UpzAndIsak35IntegrationTest extends TestCase
             'password' => 'admin123',
         ]);
 
-        $response->assertRedirect(route('dashboard'));
+        $response->assertRedirect(route('portal'));
         $this->assertAuthenticated();
+    }
+
+    public function test_portal_and_modular_dashboards_render_successfully(): void
+    {
+        // 1. Portal Workspace Selector
+        $portalResponse = $this->get(route('portal'));
+        $portalResponse->assertStatus(200);
+        $portalResponse->assertSee('Pilih Ruang Kerja Aplikasi');
+        $portalResponse->assertSee('Akuntansi Keuangan Organisasi (DE ISAK 35)');
+        $portalResponse->assertSee('Pengelolaan &amp; Pelaporan Zakat (BAZNAS RI)', false);
+
+        // 2. ISAK 35 Organizational Accounting Dashboard
+        $isakResponse = $this->get(route('dashboard.isak35'));
+        $isakResponse->assertStatus(200);
+        $isakResponse->assertSee('Pembukuan &amp; Laporan Keuangan DE ISAK 35', false);
+        $isakResponse->assertSee('Total Aset');
+
+        // 3. BAZNAS Zakat Operations Dashboard
+        $baznasResponse = $this->get(route('dashboard.baznas'));
+        $baznasResponse->assertStatus(200);
+        $baznasResponse->assertSee('Pengelolaan &amp; Pelaporan Zakat UPZ', false);
+        $baznasResponse->assertSee('Total ZIS Dihimpun');
     }
 
     public function test_login_fails_with_invalid_credentials(): void

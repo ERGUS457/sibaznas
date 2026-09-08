@@ -192,6 +192,23 @@
         <!-- Backdrop for mobile -->
         <div x-show="sidebarOpen" @click="sidebarOpen = false" x-cloak class="fixed inset-0 z-40 bg-slate-900/30 backdrop-blur-xs lg:hidden no-print"></div>
 
+@php
+    $isIsak35 = request()->routeIs('dashboard.isak35') 
+        || request()->routeIs('journals.*') 
+        || request()->routeIs('reports.financial-position') 
+        || request()->routeIs('reports.comprehensive-income') 
+        || request()->routeIs('reports.net-assets') 
+        || request()->routeIs('reports.cash-flow');
+
+    $isBaznas = request()->routeIs('dashboard.baznas') 
+        || request()->routeIs('collections.*') 
+        || request()->routeIs('distributions.*') 
+        || request()->routeIs('remittances.*') 
+        || request()->routeIs('muzakkis.*') 
+        || request()->routeIs('mustahiqs.*') 
+        || request()->routeIs('reports.perbaznas*');
+@endphp
+
         <!-- Sidebar Navigation (Claymorphic Panel) -->
         <aside 
             :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'"
@@ -199,108 +216,219 @@
             
             <!-- Header Brand -->
             <div class="h-20 px-5 border-b border-slate-100 flex items-center justify-between">
-                <a href="{{ route('dashboard') }}" class="flex items-center space-x-3">
-                    <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white text-lg font-bold shadow-md" style="box-shadow: 4px 6px 14px rgba(16, 185, 129, 0.35), inset 1px 1px 3px rgba(255,255,255,0.4), inset -2px -2px 4px rgba(0,0,0,0.2);">
-                        <i class="fa-solid fa-layer-group"></i>
-                    </div>
-                    <div>
-                        <span class="font-extrabold text-slate-900 text-sm tracking-tight block">SIM-UPZ BAZNAS</span>
-                        <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">DE ISAK 35 FORMAT A</span>
-                    </div>
-                </a>
+                @if($isIsak35)
+                    <a href="{{ route('dashboard.isak35') }}" class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-sky-500 to-blue-600 flex items-center justify-center text-white text-lg font-bold shadow-md">
+                            <i class="fa-solid fa-book-journal-whills"></i>
+                        </div>
+                        <div>
+                            <span class="font-extrabold text-slate-900 text-sm tracking-tight block">AKUNTANSI NONLABA</span>
+                            <span class="text-[10px] font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded-full border border-sky-200">DE ISAK 35 FORMAT A</span>
+                        </div>
+                    </a>
+                @elseif($isBaznas)
+                    <a href="{{ route('dashboard.baznas') }}" class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white text-lg font-bold shadow-md">
+                            <i class="fa-solid fa-hand-holding-dollar"></i>
+                        </div>
+                        <div>
+                            <span class="font-extrabold text-slate-900 text-sm tracking-tight block">PENGELOLAAN ZAKAT</span>
+                            <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">PERBAZNAS 2/2016</span>
+                        </div>
+                    </a>
+                @else
+                    <a href="{{ route('portal') }}" class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center text-white text-lg font-bold shadow-md">
+                            <i class="fa-solid fa-layer-group"></i>
+                        </div>
+                        <div>
+                            <span class="font-extrabold text-slate-900 text-sm tracking-tight block">SIM-ORGANISASI</span>
+                            <span class="text-[10px] font-bold text-slate-700 bg-slate-100 px-2 py-0.5 rounded-full border border-slate-200">PORTAL MULTI-MODUL</span>
+                        </div>
+                    </a>
+                @endif
                 <button @click="sidebarOpen = false" class="lg:hidden text-slate-400 hover:text-slate-600 p-1">
                     <i class="fa-solid fa-xmark text-lg"></i>
                 </button>
             </div>
 
+            <!-- Workspace Switcher Button -->
+            <div class="p-3 border-b border-slate-100 bg-slate-50/60">
+                <a href="{{ route('portal') }}" class="clay-btn-white w-full py-2 px-3 text-xs font-bold flex items-center justify-between text-slate-700 hover:text-black">
+                    <span class="flex items-center gap-2">
+                        <i class="fa-solid fa-arrow-left text-slate-400"></i>
+                        <span>Kembali ke Portal</span>
+                    </span>
+                    <span class="text-[10px] uppercase font-bold text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded">Ganti Modul</span>
+                </a>
+            </div>
+
             <!-- Navigation Links (Claymorphic) -->
             <nav class="flex-1 overflow-y-auto p-4 space-y-6 text-xs">
-                <!-- Nav Section: Menu Utama -->
-                <div class="space-y-1">
-                    <a href="{{ route('dashboard') }}" class="flex items-center space-x-3 px-3.5 py-2.5 rounded-2xl {{ request()->routeIs('dashboard') ? 'clay-card-soft font-extrabold text-emerald-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-semibold' }} transition">
-                        <i class="fa-solid fa-gauge-high w-4 text-center {{ request()->routeIs('dashboard') ? 'text-emerald-600' : 'text-slate-400' }}"></i>
-                        <span>Dashboard Utama</span>
-                    </a>
-                    <a href="{{ route('landing') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl text-slate-500 hover:bg-slate-50 hover:text-slate-800 font-medium transition">
-                        <i class="fa-solid fa-compass w-4 text-center text-slate-400"></i>
-                        <span>Landing Page &amp; Panduan</span>
-                    </a>
-                </div>
-
-                <!-- Modul 1: Operasional UPZ -->
-                <div>
-                    <div class="px-3 mb-2 text-[10px] font-extrabold uppercase tracking-wider text-slate-400 flex items-center justify-between">
-                        <span>Operasional UPZ</span>
-                        <span class="text-[9px] bg-emerald-100/80 text-emerald-800 px-1.5 py-0.5 rounded-md font-bold">Perbaznas 2/2016</span>
-                    </div>
+                
+                @if($isIsak35)
+                    <!-- ================= MODUL ISAK 35 MENU ================= -->
                     <div class="space-y-1">
-                        <a href="{{ route('collections.index') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('collections.*') ? 'clay-card-soft font-bold text-emerald-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
-                            <i class="fa-solid fa-receipt w-4 text-center {{ request()->routeIs('collections.*') ? 'text-emerald-600' : 'text-slate-400' }}"></i>
-                            <span>Penerimaan ZIS &amp; BSZ</span>
-                        </a>
-                        <a href="{{ route('distributions.index') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('distributions.*') ? 'clay-card-soft font-bold text-emerald-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
-                            <i class="fa-solid fa-parachute-box w-4 text-center {{ request()->routeIs('distributions.*') ? 'text-emerald-600' : 'text-slate-400' }}"></i>
-                            <span>Penyaluran (8 Asnaf)</span>
-                        </a>
-                        <a href="{{ route('remittances.index') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('remittances.*') ? 'clay-card-soft font-bold text-emerald-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
-                            <i class="fa-solid fa-building-columns w-4 text-center {{ request()->routeIs('remittances.*') ? 'text-emerald-600' : 'text-slate-400' }}"></i>
-                            <span>Setoran ke BAZNAS</span>
-                        </a>
-                        <a href="{{ route('muzakkis.index') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('muzakkis.*') ? 'clay-card-soft font-bold text-emerald-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
-                            <i class="fa-solid fa-users w-4 text-center {{ request()->routeIs('muzakkis.*') ? 'text-emerald-600' : 'text-slate-400' }}"></i>
-                            <span>Data Muzaki</span>
-                        </a>
-                        <a href="{{ route('mustahiqs.index') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('mustahiqs.*') ? 'clay-card-soft font-bold text-emerald-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
-                            <i class="fa-solid fa-people-roof w-4 text-center {{ request()->routeIs('mustahiqs.*') ? 'text-emerald-600' : 'text-slate-400' }}"></i>
-                            <span>Data Mustahik</span>
+                        <a href="{{ route('dashboard.isak35') }}" class="flex items-center space-x-3 px-3.5 py-2.5 rounded-2xl {{ request()->routeIs('dashboard.isak35') ? 'clay-card-soft font-extrabold text-sky-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-semibold' }} transition">
+                            <i class="fa-solid fa-gauge-high w-4 text-center {{ request()->routeIs('dashboard.isak35') ? 'text-sky-600' : 'text-slate-400' }}"></i>
+                            <span>Dashboard ISAK 35</span>
                         </a>
                     </div>
-                </div>
 
-                <!-- Modul 2: Akuntansi Keuangan & Laporan ISAK 35 -->
-                <div>
-                    <div class="px-3 mb-2 text-[10px] font-extrabold uppercase tracking-wider text-slate-400 flex items-center justify-between">
-                        <span>Akuntansi &amp; ISAK 35</span>
-                        <span class="text-[9px] bg-sky-100/80 text-sky-800 px-1.5 py-0.5 rounded-md font-bold">Format A</span>
+                    <!-- Buku Akuntansi -->
+                    <div>
+                        <div class="px-3 mb-2 text-[10px] font-extrabold uppercase tracking-wider text-slate-400">
+                            Pembukuan &amp; Jurnal
+                        </div>
+                        <div class="space-y-1">
+                            <a href="{{ route('journals.index') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('journals.index') ? 'clay-card-soft font-bold text-sky-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
+                                <i class="fa-solid fa-book-journal-whills w-4 text-center {{ request()->routeIs('journals.index') ? 'text-sky-600' : 'text-slate-400' }}"></i>
+                                <span>Jurnal Umum</span>
+                            </a>
+                            <a href="{{ route('journals.ledger') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('journals.ledger') ? 'clay-card-soft font-bold text-sky-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
+                                <i class="fa-solid fa-book w-4 text-center {{ request()->routeIs('journals.ledger') ? 'text-sky-600' : 'text-slate-400' }}"></i>
+                                <span>Buku Besar Akun</span>
+                            </a>
+                            <a href="{{ route('journals.trial-balance') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('journals.trial-balance') ? 'clay-card-soft font-bold text-sky-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
+                                <i class="fa-solid fa-list-check w-4 text-center {{ request()->routeIs('journals.trial-balance') ? 'text-sky-600' : 'text-slate-400' }}"></i>
+                                <span>Neraca Saldo</span>
+                            </a>
+                        </div>
                     </div>
+
+                    <!-- 4 Laporan Pokok DE ISAK 35 Format A -->
+                    <div>
+                        <div class="px-3 mb-2 text-[10px] font-extrabold uppercase tracking-wider text-slate-400 flex items-center justify-between">
+                            <span>Laporan DE ISAK 35</span>
+                            <span class="text-[9px] bg-sky-100 text-sky-800 px-1.5 py-0.5 rounded font-bold">Format A</span>
+                        </div>
+                        <div class="space-y-1">
+                            <a href="{{ route('reports.financial-position') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('reports.financial-position') ? 'clay-card-soft font-bold text-sky-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
+                                <i class="fa-solid fa-scale-balanced w-4 text-center {{ request()->routeIs('reports.financial-position') ? 'text-sky-600' : 'text-slate-400' }}"></i>
+                                <span>Posisi Keuangan</span>
+                            </a>
+                            <a href="{{ route('reports.comprehensive-income') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('reports.comprehensive-income') ? 'clay-card-soft font-bold text-sky-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
+                                <i class="fa-solid fa-chart-line w-4 text-center {{ request()->routeIs('reports.comprehensive-income') ? 'text-sky-600' : 'text-slate-400' }}"></i>
+                                <span>Penghasilan Komprehensif</span>
+                            </a>
+                            <a href="{{ route('reports.net-assets') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('reports.net-assets') ? 'clay-card-soft font-bold text-sky-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
+                                <i class="fa-solid fa-layer-group w-4 text-center {{ request()->routeIs('reports.net-assets') ? 'text-sky-600' : 'text-slate-400' }}"></i>
+                                <span>Perubahan Aset Neto</span>
+                            </a>
+                            <a href="{{ route('reports.cash-flow') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('reports.cash-flow') ? 'clay-card-soft font-bold text-sky-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
+                                <i class="fa-solid fa-money-bill-transfer w-4 text-center {{ request()->routeIs('reports.cash-flow') ? 'text-sky-600' : 'text-slate-400' }}"></i>
+                                <span>Laporan Arus Kas</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Quick Switch to BAZNAS -->
+                    <div class="pt-4 border-t border-slate-100">
+                        <a href="{{ route('dashboard.baznas') }}" class="flex items-center justify-between p-3 rounded-xl bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100 transition font-bold text-[11px]">
+                            <span class="flex items-center gap-2">
+                                <i class="fa-solid fa-hand-holding-dollar text-emerald-600"></i>
+                                <span>Ke Modul Zakat BAZNAS</span>
+                            </span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+
+                @else
+                    <!-- ================= MODUL BAZNAS MENU ================= -->
                     <div class="space-y-1">
-                        <a href="{{ route('journals.index') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('journals.*') ? 'clay-card-soft font-bold text-emerald-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
-                            <i class="fa-solid fa-book-journal-whills w-4 text-center {{ request()->routeIs('journals.*') ? 'text-emerald-600' : 'text-slate-400' }}"></i>
-                            <span>Jurnal &amp; Buku Besar</span>
-                        </a>
-                        <a href="{{ route('reports.financial-position') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('reports.financial-position') ? 'clay-card-soft font-bold text-emerald-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
-                            <i class="fa-solid fa-scale-balanced w-4 text-center {{ request()->routeIs('reports.financial-position') ? 'text-emerald-600' : 'text-slate-400' }}"></i>
-                            <span>Posisi Keuangan</span>
-                        </a>
-                        <a href="{{ route('reports.comprehensive-income') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('reports.comprehensive-income') ? 'clay-card-soft font-bold text-emerald-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
-                            <i class="fa-solid fa-chart-line w-4 text-center {{ request()->routeIs('reports.comprehensive-income') ? 'text-emerald-600' : 'text-slate-400' }}"></i>
-                            <span>Penghasilan Komprehensif</span>
-                        </a>
-                        <a href="{{ route('reports.net-assets') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('reports.net-assets') ? 'clay-card-soft font-bold text-emerald-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
-                            <i class="fa-solid fa-layer-group w-4 text-center {{ request()->routeIs('reports.net-assets') ? 'text-emerald-600' : 'text-slate-400' }}"></i>
-                            <span>Perubahan Aset Neto</span>
-                        </a>
-                        <a href="{{ route('reports.cash-flow') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('reports.cash-flow') ? 'clay-card-soft font-bold text-emerald-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
-                            <i class="fa-solid fa-money-bill-transfer w-4 text-center {{ request()->routeIs('reports.cash-flow') ? 'text-emerald-600' : 'text-slate-400' }}"></i>
-                            <span>Laporan Arus Kas</span>
-                        </a>
-                        <a href="{{ route('reports.perbaznas-compliance') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('reports.perbaznas*') ? 'clay-card-soft font-bold text-emerald-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
-                            <i class="fa-solid fa-stamp w-4 text-center {{ request()->routeIs('reports.perbaznas*') ? 'text-emerald-600' : 'text-slate-400' }}"></i>
-                            <span>Laporan UPZ (Perbaznas)</span>
+                        <a href="{{ route('dashboard.baznas') }}" class="flex items-center space-x-3 px-3.5 py-2.5 rounded-2xl {{ request()->routeIs('dashboard.baznas') ? 'clay-card-soft font-extrabold text-emerald-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-semibold' }} transition">
+                            <i class="fa-solid fa-gauge-high w-4 text-center {{ request()->routeIs('dashboard.baznas') ? 'text-emerald-600' : 'text-slate-400' }}"></i>
+                            <span>Dashboard BAZNAS</span>
                         </a>
                     </div>
-                </div>
+
+                    <!-- Operasional UPZ -->
+                    <div>
+                        <div class="px-3 mb-2 text-[10px] font-extrabold uppercase tracking-wider text-slate-400 flex items-center justify-between">
+                            <span>Operasional UPZ</span>
+                            <span class="text-[9px] bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded font-bold">ZIS &amp; DSKL</span>
+                        </div>
+                        <div class="space-y-1">
+                            <a href="{{ route('collections.index') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('collections.*') ? 'clay-card-soft font-bold text-emerald-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
+                                <i class="fa-solid fa-receipt w-4 text-center {{ request()->routeIs('collections.*') ? 'text-emerald-600' : 'text-slate-400' }}"></i>
+                                <span>Penerimaan ZIS &amp; BSZ</span>
+                            </a>
+                            <a href="{{ route('distributions.index') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('distributions.*') ? 'clay-card-soft font-bold text-emerald-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
+                                <i class="fa-solid fa-parachute-box w-4 text-center {{ request()->routeIs('distributions.*') ? 'text-emerald-600' : 'text-slate-400' }}"></i>
+                                <span>Penyaluran (8 Asnaf)</span>
+                            </a>
+                            <a href="{{ route('remittances.index') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('remittances.*') ? 'clay-card-soft font-bold text-emerald-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
+                                <i class="fa-solid fa-building-columns w-4 text-center {{ request()->routeIs('remittances.*') ? 'text-emerald-600' : 'text-slate-400' }}"></i>
+                                <span>Setoran ke BAZNAS</span>
+                            </a>
+                            <a href="{{ route('muzakkis.index') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('muzakkis.*') ? 'clay-card-soft font-bold text-emerald-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
+                                <i class="fa-solid fa-users w-4 text-center {{ request()->routeIs('muzakkis.*') ? 'text-emerald-600' : 'text-slate-400' }}"></i>
+                                <span>Data Muzaki</span>
+                            </a>
+                            <a href="{{ route('mustahiqs.index') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('mustahiqs.*') ? 'clay-card-soft font-bold text-emerald-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
+                                <i class="fa-solid fa-people-roof w-4 text-center {{ request()->routeIs('mustahiqs.*') ? 'text-emerald-600' : 'text-slate-400' }}"></i>
+                                <span>Data Mustahik</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Laporan Peraturan BAZNAS No. 2/2016 -->
+                    <div>
+                        <div class="px-3 mb-2 text-[10px] font-extrabold uppercase tracking-wider text-slate-400 flex items-center justify-between">
+                            <span>Laporan Perbaznas</span>
+                            <span class="text-[9px] bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded font-bold">No. 2/2016</span>
+                        </div>
+                        <div class="space-y-1">
+                            <a href="{{ route('reports.perbaznas-compliance') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('reports.perbaznas-compliance') ? 'clay-card-soft font-bold text-emerald-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
+                                <i class="fa-solid fa-stamp w-4 text-center {{ request()->routeIs('reports.perbaznas-compliance') ? 'text-emerald-600' : 'text-slate-400' }}"></i>
+                                <span>Ringkasan Kepatuhan</span>
+                            </a>
+                            <a href="{{ route('reports.perbaznas.lampiran1') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('reports.perbaznas.lampiran1') ? 'clay-card-soft font-bold text-emerald-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
+                                <i class="fa-solid fa-file-invoice w-4 text-center {{ request()->routeIs('reports.perbaznas.lampiran1') ? 'text-emerald-600' : 'text-slate-400' }}"></i>
+                                <span>Lampiran I: Penerimaan</span>
+                            </a>
+                            <a href="{{ route('reports.perbaznas.lampiran2') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('reports.perbaznas.lampiran2') ? 'clay-card-soft font-bold text-emerald-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
+                                <i class="fa-solid fa-file-contract w-4 text-center {{ request()->routeIs('reports.perbaznas.lampiran2') ? 'text-emerald-600' : 'text-slate-400' }}"></i>
+                                <span>Lampiran II: Asnaf</span>
+                            </a>
+                            <a href="{{ route('reports.perbaznas.lampiran3') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('reports.perbaznas.lampiran3') ? 'clay-card-soft font-bold text-emerald-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
+                                <i class="fa-solid fa-file-lines w-4 text-center {{ request()->routeIs('reports.perbaznas.lampiran3') ? 'text-emerald-600' : 'text-slate-400' }}"></i>
+                                <span>Lampiran III: Program</span>
+                            </a>
+                            <a href="{{ route('reports.perbaznas.lampiran5') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('reports.perbaznas.lampiran5') ? 'clay-card-soft font-bold text-emerald-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
+                                <i class="fa-solid fa-file-circle-check w-4 text-center {{ request()->routeIs('reports.perbaznas.lampiran5') ? 'text-emerald-600' : 'text-slate-400' }}"></i>
+                                <span>Lampiran V: Operasional</span>
+                            </a>
+                            <a href="{{ route('reports.perbaznas.lampiran7') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('reports.perbaznas.lampiran7') ? 'clay-card-soft font-bold text-emerald-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
+                                <i class="fa-solid fa-file-shield w-4 text-center {{ request()->routeIs('reports.perbaznas.lampiran7') ? 'text-emerald-600' : 'text-slate-400' }}"></i>
+                                <span>Lampiran VII: Penyaluran</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Quick Switch to ISAK 35 -->
+                    <div class="pt-4 border-t border-slate-100">
+                        <a href="{{ route('dashboard.isak35') }}" class="flex items-center justify-between p-3 rounded-xl bg-sky-50 text-sky-800 border border-sky-200 hover:bg-sky-100 transition font-bold text-[11px]">
+                            <span class="flex items-center gap-2">
+                                <i class="fa-solid fa-book-journal-whills text-sky-600"></i>
+                                <span>Ke Modul ISAK 35</span>
+                            </span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                @endif
+
             </nav>
 
             <!-- Sidebar Footer: Active User Profile & Logout -->
             <div class="p-4 border-t border-slate-100 bg-slate-50/70 space-y-3">
                 <div class="flex items-center space-x-3 overflow-hidden">
-                    <div class="w-9 h-9 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white flex items-center justify-center font-extrabold text-xs shadow-sm flex-shrink-0">
+                    <div class="w-9 h-9 rounded-2xl bg-gradient-to-br from-slate-700 to-slate-900 text-white flex items-center justify-center font-extrabold text-xs shadow-sm flex-shrink-0">
                         {{ strtoupper(substr(auth()->user()->name ?? 'A', 0, 1)) }}
                     </div>
                     <div class="overflow-hidden flex-1">
                         <div class="text-xs font-bold text-slate-800 truncate">{{ auth()->user()->name ?? 'Administrator' }}</div>
-                        <div class="text-[10px] text-emerald-700 font-semibold truncate">{{ auth()->user()->username ?? 'admin' }} &bull; Superadmin</div>
+                        <div class="text-[10px] text-slate-500 font-semibold truncate">{{ auth()->user()->username ?? 'admin' }} &bull; Superadmin</div>
                     </div>
                 </div>
 
@@ -324,20 +452,37 @@
                         <button @click="sidebarOpen = true" class="lg:hidden text-slate-600 hover:text-slate-900 p-2 rounded-xl hover:bg-slate-100">
                             <i class="fa-solid fa-bars text-base"></i>
                         </button>
-                        <div class="hidden sm:flex items-center space-x-2 text-xs text-slate-500">
-                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 font-bold clay-pill">
-                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                                <span>Neon PostgreSQL Terhubung</span>
-                            </span>
-                            <span class="text-slate-400">&bull;</span>
-                            <span class="font-medium text-slate-600">{{ $upz->name ?? 'UPZ BAZNAS' }}</span>
+                        <div class="flex items-center space-x-2 text-xs">
+                            <a href="{{ route('portal') }}" class="clay-btn-white px-2.5 py-1 text-xs font-bold flex items-center gap-1.5 text-slate-700 hover:text-black">
+                                <i class="fa-solid fa-grid-2 text-slate-400"></i>
+                                <span class="hidden sm:inline">Portal</span>
+                            </a>
+                            <span class="text-slate-300">/</span>
+                            @if($isIsak35)
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 text-sky-800 border border-sky-200 font-bold clay-pill">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-sky-500 animate-pulse"></span>
+                                    <span>Modul: Akuntansi DE ISAK 35</span>
+                                </span>
+                            @elseif($isBaznas)
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 font-bold clay-pill">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                                    <span>Modul: Pengelolaan Zakat BAZNAS</span>
+                                </span>
+                            @endif
                         </div>
                     </div>
                     <div class="flex items-center space-x-2 sm:space-x-3">
-                        <a href="{{ route('collections.create') }}" class="clay-btn-emerald text-xs font-bold px-3.5 py-2 flex items-center space-x-1.5">
-                            <i class="fa-solid fa-plus text-[11px]"></i>
-                            <span>Input Penerimaan</span>
-                        </a>
+                        @if($isBaznas)
+                            <a href="{{ route('collections.create') }}" class="clay-btn-emerald text-xs font-bold px-3.5 py-2 flex items-center space-x-1.5">
+                                <i class="fa-solid fa-plus text-[11px]"></i>
+                                <span>Input BSZ</span>
+                            </a>
+                        @elseif($isIsak35)
+                            <a href="{{ route('reports.financial-position') }}" class="clay-btn-sky text-xs font-bold px-3.5 py-2 flex items-center space-x-1.5">
+                                <i class="fa-solid fa-scale-balanced text-[11px]"></i>
+                                <span>Posisi Keuangan</span>
+                            </a>
+                        @endif
                         <form action="{{ route('logout') }}" method="POST" class="inline sm:hidden">
                             @csrf
                             <button type="submit" class="clay-btn-rose p-2 text-xs" title="Keluar">

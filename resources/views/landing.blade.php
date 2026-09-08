@@ -183,9 +183,9 @@
             <!-- CTA Buttons -->
             <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
                 @auth
-                <a href="{{ route('dashboard') }}" class="clay-btn-emerald px-6 py-3.5 text-sm font-bold flex items-center gap-2">
-                    <i class="fa-solid fa-gauge-high"></i>
-                    <span>Menuju Panel Kerja</span>
+                <a href="{{ route('portal') }}" class="clay-btn-emerald px-6 py-3.5 text-sm font-bold flex items-center gap-2">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <span>Buka Portal Ruang Kerja</span>
                 </a>
                 @else
                 <a href="{{ route('login') }}" class="clay-btn-emerald px-7 py-3.5 text-sm font-bold flex items-center gap-2">
