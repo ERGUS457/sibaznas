@@ -35,155 +35,164 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         [x-cloak] { display: none !important; }
+        /* ========================================================= */
+        /* MAXIMALIST DESIGN SYSTEM (Bold Borders & Hard Shadows)    */
+        /* ========================================================= */
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #eef2f7;
+            background-color: #f1f5f9;
             background-image: 
-                radial-gradient(at 10% 15%, rgba(16, 185, 129, 0.08) 0px, transparent 40%),
-                radial-gradient(at 90% 85%, rgba(14, 165, 233, 0.08) 0px, transparent 40%);
+                radial-gradient(#94a3b8 1.2px, transparent 1.2px),
+                radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.12) 0px, transparent 40%),
+                radial-gradient(at 100% 100%, rgba(2, 132, 199, 0.12) 0px, transparent 40%);
+            background-size: 24px 24px, 100% 100%, 100% 100%;
         }
 
-        /* Claymorphism Theme Styles */
-        .clay-card {
+        /* Maximalist Cards */
+        .maxi-card, .clay-card {
             background: #ffffff;
-            border-radius: 26px;
-            box-shadow: 
-                14px 18px 36px rgba(160, 175, 200, 0.25),
-                -10px -10px 24px rgba(255, 255, 255, 0.95),
-                inset 2px 2px 5px rgba(255, 255, 255, 0.9),
-                inset -3px -4px 8px rgba(160, 175, 200, 0.14);
-            border: 1px solid rgba(255, 255, 255, 0.85);
-            transition: all 0.2s ease-in-out;
+            border: 2px solid #0f172a;
+            border-radius: 20px;
+            box-shadow: 5px 5px 0px 0px #0f172a;
+            transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .maxi-card:hover, .clay-card:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 7px 7px 0px 0px #0f172a;
         }
 
-        .clay-sidebar {
-            background: #ffffff;
-            box-shadow: 
-                12px 0 30px rgba(160, 175, 200, 0.2),
-                inset -2px 0 6px rgba(160, 175, 200, 0.1);
-            border-right: 1px solid rgba(255, 255, 255, 0.9);
-        }
-
-        .clay-topbar {
-            background: #ffffff;
-            border-radius: 22px;
-            box-shadow: 
-                8px 12px 24px rgba(160, 175, 200, 0.2),
-                -6px -6px 18px rgba(255, 255, 255, 0.95),
-                inset 2px 2px 4px rgba(255, 255, 255, 0.9),
-                inset -2px -3px 6px rgba(160, 175, 200, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.9);
-        }
-
-        .clay-card-soft {
+        .maxi-card-soft, .clay-card-soft {
             background: #f8fafc;
-            border-radius: 18px;
-            box-shadow: 
-                6px 8px 18px rgba(160, 175, 200, 0.18),
-                -4px -4px 12px rgba(255, 255, 255, 0.9),
-                inset 2px 2px 3px rgba(255, 255, 255, 0.85),
-                inset -2px -2px 5px rgba(160, 175, 200, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.9);
-        }
-
-        .clay-btn-emerald {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: #ffffff;
+            border: 2px solid #1e293b;
             border-radius: 16px;
-            box-shadow: 
-                5px 8px 18px rgba(5, 150, 105, 0.35),
-                -3px -3px 10px rgba(255, 255, 255, 0.9),
-                inset 2px 2px 4px rgba(255, 255, 255, 0.45),
-                inset -2px -3px 5px rgba(0, 0, 0, 0.2);
-            transition: all 0.15s ease-in-out;
-        }
-        .clay-btn-emerald:hover {
-            transform: translateY(-1px);
-            box-shadow: 
-                7px 11px 22px rgba(5, 150, 105, 0.42),
-                -4px -4px 12px rgba(255, 255, 255, 0.95),
-                inset 2px 2px 4px rgba(255, 255, 255, 0.55),
-                inset -2px -3px 5px rgba(0, 0, 0, 0.25);
-        }
-        .clay-btn-emerald:active {
-            transform: translateY(2px) scale(0.98);
-            box-shadow: 
-                2px 3px 6px rgba(5, 150, 105, 0.25),
-                inset 3px 3px 6px rgba(0, 0, 0, 0.25);
+            box-shadow: 3px 3px 0px 0px #1e293b;
         }
 
-        .clay-btn-white {
+        .maxi-sidebar, .clay-sidebar {
             background: #ffffff;
-            color: #1e293b;
-            border-radius: 16px;
-            box-shadow: 
-                5px 8px 16px rgba(160, 175, 200, 0.2),
-                -3px -3px 10px rgba(255, 255, 255, 0.95),
-                inset 2px 2px 3px rgba(255, 255, 255, 0.9),
-                inset -2px -2px 5px rgba(160, 175, 200, 0.1);
-            transition: all 0.15s ease-in-out;
-        }
-        .clay-btn-white:hover {
-            transform: translateY(-1px);
-            box-shadow: 
-                7px 10px 20px rgba(160, 175, 200, 0.25),
-                -4px -4px 12px rgba(255, 255, 255, 0.98);
-        }
-        .clay-btn-white:active {
-            transform: translateY(2px) scale(0.98);
-            box-shadow: 
-                2px 3px 6px rgba(160, 175, 200, 0.15),
-                inset 3px 3px 5px rgba(160, 175, 200, 0.18);
+            border-right: 3px solid #0f172a;
+            box-shadow: 4px 0px 0px 0px rgba(15, 23, 42, 0.08);
         }
 
-        .clay-btn-rose {
-            background: #fff1f2;
-            color: #be123c;
+        .maxi-topbar, .clay-topbar {
+            background: #ffffff;
+            border: 2px solid #0f172a;
+            border-radius: 18px;
+            box-shadow: 4px 4px 0px 0px #0f172a;
+        }
+
+        /* Maximalist Buttons */
+        .maxi-btn-emerald, .clay-btn-emerald {
+            background: #10b981;
+            color: #ffffff;
+            border: 2px solid #0f172a;
             border-radius: 14px;
-            box-shadow: 
-                4px 6px 12px rgba(244, 63, 94, 0.15),
-                -2px -2px 8px rgba(255, 255, 255, 0.9),
-                inset 1px 1px 3px rgba(255, 255, 255, 0.8),
-                inset -2px -2px 4px rgba(244, 63, 94, 0.1);
-            border: 1px solid rgba(254, 205, 211, 0.7);
+            font-weight: 800;
+            box-shadow: 4px 4px 0px 0px #0f172a;
+            transition: all 0.15s ease-in-out;
+        }
+        .maxi-btn-emerald:hover, .clay-btn-emerald:hover {
+            background: #059669;
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px 0px #0f172a;
+        }
+        .maxi-btn-emerald:active, .clay-btn-emerald:active {
+            transform: translate(2px, 2px);
+            box-shadow: 0px 0px 0px 0px #0f172a;
+        }
+
+        .maxi-btn-sky, .clay-btn-sky {
+            background: #0284c7;
+            color: #ffffff;
+            border: 2px solid #0f172a;
+            border-radius: 14px;
+            font-weight: 800;
+            box-shadow: 4px 4px 0px 0px #0f172a;
+            transition: all 0.15s ease-in-out;
+        }
+        .maxi-btn-sky:hover, .clay-btn-sky:hover {
+            background: #0369a1;
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px 0px #0f172a;
+        }
+        .maxi-btn-sky:active, .clay-btn-sky:active {
+            transform: translate(2px, 2px);
+            box-shadow: 0px 0px 0px 0px #0f172a;
+        }
+
+        .maxi-btn-white, .clay-btn-white {
+            background: #ffffff;
+            color: #0f172a;
+            border: 2px solid #0f172a;
+            border-radius: 14px;
+            font-weight: 800;
+            box-shadow: 3px 3px 0px 0px #0f172a;
+            transition: all 0.15s ease-in-out;
+        }
+        .maxi-btn-white:hover, .clay-btn-white:hover {
+            background: #f1f5f9;
+            transform: translate(-1px, -1px);
+            box-shadow: 5px 5px 0px 0px #0f172a;
+        }
+        .maxi-btn-white:active, .clay-btn-white:active {
+            transform: translate(2px, 2px);
+            box-shadow: 0px 0px 0px 0px #0f172a;
+        }
+
+        .maxi-btn-rose, .clay-btn-rose {
+            background: #f43f5e;
+            color: #ffffff;
+            border: 2px solid #0f172a;
+            border-radius: 14px;
+            font-weight: 800;
+            box-shadow: 3px 3px 0px 0px #0f172a;
+            transition: all 0.15s ease-in-out;
+        }
+        .maxi-btn-rose:hover, .clay-btn-rose:hover {
+            background: #e11d48;
+            transform: translate(-1px, -1px);
+            box-shadow: 5px 5px 0px 0px #0f172a;
+        }
+        .maxi-btn-rose:active, .clay-btn-rose:active {
+            transform: translate(2px, 2px);
+            box-shadow: 0px 0px 0px 0px #0f172a;
+        }
+
+        .maxi-input, .clay-input {
+            background: #ffffff;
+            border: 2px solid #0f172a;
+            border-radius: 12px;
+            box-shadow: 2px 2px 0px 0px #0f172a;
             transition: all 0.15s ease;
         }
-        .clay-btn-rose:hover {
-            background: #ffe4e6;
-            color: #9f1239;
-        }
-
-        .clay-pill {
-            border-radius: 9999px;
-            box-shadow: 
-                3px 4px 8px rgba(160, 175, 200, 0.16),
-                -2px -2px 6px rgba(255, 255, 255, 0.9),
-                inset 1px 1px 2px rgba(255, 255, 255, 0.7),
-                inset -1px -2px 3px rgba(160, 175, 200, 0.1);
-        }
-
-        .clay-input {
-            background: #f1f5f9;
-            border-radius: 16px;
-            border: 1px solid rgba(203, 213, 225, 0.7);
-            box-shadow: 
-                inset 3px 3px 6px rgba(160, 175, 200, 0.25),
-                inset -2px -2px 6px rgba(255, 255, 255, 0.9);
-            transition: all 0.2s ease;
-        }
-        .clay-input:focus {
-            background: #ffffff;
+        .maxi-input:focus, .clay-input:focus {
+            outline: none;
             border-color: #10b981;
-            box-shadow: 
-                0 0 0 4px rgba(16, 185, 129, 0.18),
-                inset 2px 2px 4px rgba(160, 175, 200, 0.1);
+            box-shadow: 3px 3px 0px 0px #10b981;
+        }
+
+        .maxi-pill, .clay-pill {
+            border: 2px solid #0f172a;
+            border-radius: 9999px;
+            box-shadow: 2px 2px 0px 0px #0f172a;
+            font-weight: 800;
         }
 
         @media print {
             .no-print { display: none !important; }
             .print-only { display: block !important; }
-            body { background: white !important; font-size: 11pt; color: #000 !important; }
-            .clay-card, .clay-card-soft { box-shadow: none !important; border: 1px solid #e2e8f0 !important; }
+            body { 
+                background: white !important; 
+                font-size: 11pt; 
+                color: #000 !important; 
+                font-family: 'Times New Roman', Times, Georgia, serif !important;
+                background-image: none !important;
+            }
+            .maxi-card, .clay-card, .maxi-card-soft, .clay-card-soft { 
+                box-shadow: none !important; 
+                border: 1px solid #000000 !important; 
+                background: #ffffff !important;
+            }
         }
     </style>
 </head>

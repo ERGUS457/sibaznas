@@ -14,104 +14,77 @@
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #eef2f7;
+            background-color: #f1f5f9;
             background-image: 
-                radial-gradient(at 10% 15%, rgba(16, 185, 129, 0.12) 0px, transparent 45%),
-                radial-gradient(at 90% 25%, rgba(14, 165, 233, 0.12) 0px, transparent 45%),
-                radial-gradient(at 50% 80%, rgba(245, 158, 11, 0.08) 0px, transparent 50%);
+                radial-gradient(#94a3b8 1.2px, transparent 1.2px),
+                radial-gradient(at 10% 15%, rgba(16, 185, 129, 0.15) 0px, transparent 40%),
+                radial-gradient(at 90% 85%, rgba(2, 132, 199, 0.15) 0px, transparent 40%);
+            background-size: 24px 24px, 100% 100%, 100% 100%;
         }
 
-        /* Claymorphism Design System */
-        .clay-card {
+        /* Maximalist Design System */
+        .clay-card, .maxi-card {
             background: #ffffff;
-            border-radius: 28px;
-            box-shadow: 
-                14px 18px 36px rgba(160, 175, 200, 0.28),
-                -10px -10px 26px rgba(255, 255, 255, 0.95),
-                inset 2px 2px 5px rgba(255, 255, 255, 0.9),
-                inset -3px -4px 8px rgba(160, 175, 200, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.85);
-            transition: all 0.2s ease-in-out;
+            border: 2.5px solid #0f172a;
+            border-radius: 24px;
+            box-shadow: 6px 6px 0px 0px #0f172a;
+            transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
-        .clay-card-interactive:hover {
-            transform: translateY(-3px);
-            box-shadow: 
-                18px 24px 44px rgba(160, 175, 200, 0.35),
-                -12px -12px 30px rgba(255, 255, 255, 0.98),
-                inset 2px 2px 5px rgba(255, 255, 255, 0.9),
-                inset -3px -4px 8px rgba(160, 175, 200, 0.15);
+        .clay-card-interactive:hover, .maxi-card:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 9px 9px 0px 0px #0f172a;
         }
 
-        .clay-card-soft {
+        .clay-card-soft, .maxi-card-soft {
             background: #f8fafc;
-            border-radius: 22px;
-            box-shadow: 
-                8px 10px 22px rgba(160, 175, 200, 0.2),
-                -6px -6px 18px rgba(255, 255, 255, 0.9),
-                inset 2px 2px 4px rgba(255, 255, 255, 0.85),
-                inset -2px -3px 6px rgba(160, 175, 200, 0.12);
-            border: 1px solid rgba(255, 255, 255, 0.9);
+            border: 2px solid #0f172a;
+            border-radius: 18px;
+            box-shadow: 4px 4px 0px 0px #0f172a;
         }
 
-        .clay-btn-emerald {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        .clay-btn-emerald, .maxi-btn-emerald {
+            background: #10b981;
             color: #ffffff;
-            border-radius: 20px;
-            box-shadow: 
-                6px 10px 22px rgba(5, 150, 105, 0.35),
-                -4px -4px 12px rgba(255, 255, 255, 0.9),
-                inset 2px 2px 4px rgba(255, 255, 255, 0.45),
-                inset -2px -3px 6px rgba(0, 0, 0, 0.2);
+            border: 2px solid #0f172a;
+            border-radius: 16px;
+            font-weight: 800;
+            box-shadow: 4px 4px 0px 0px #0f172a;
             transition: all 0.15s ease-in-out;
         }
-        .clay-btn-emerald:hover {
-            transform: translateY(-2px);
-            box-shadow: 
-                8px 14px 26px rgba(5, 150, 105, 0.42),
-                -5px -5px 14px rgba(255, 255, 255, 0.95),
-                inset 2px 2px 4px rgba(255, 255, 255, 0.55),
-                inset -2px -3px 6px rgba(0, 0, 0, 0.25);
+        .clay-btn-emerald:hover, .maxi-btn-emerald:hover {
+            background: #059669;
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px 0px #0f172a;
         }
-        .clay-btn-emerald:active {
-            transform: translateY(2px) scale(0.98);
-            box-shadow: 
-                2px 4px 8px rgba(5, 150, 105, 0.25),
-                inset 3px 3px 6px rgba(0, 0, 0, 0.25);
+        .clay-btn-emerald:active, .maxi-btn-emerald:active {
+            transform: translate(2px, 2px);
+            box-shadow: 0px 0px 0px 0px #0f172a;
         }
 
-        .clay-btn-white {
+        .clay-btn-white, .maxi-btn-white {
             background: #ffffff;
-            color: #1e293b;
-            border-radius: 20px;
-            box-shadow: 
-                6px 10px 20px rgba(160, 175, 200, 0.22),
-                -4px -4px 12px rgba(255, 255, 255, 0.95),
-                inset 2px 2px 4px rgba(255, 255, 255, 0.9),
-                inset -2px -3px 6px rgba(160, 175, 200, 0.12);
+            color: #0f172a;
+            border: 2px solid #0f172a;
+            border-radius: 16px;
+            font-weight: 800;
+            box-shadow: 3px 3px 0px 0px #0f172a;
             transition: all 0.15s ease-in-out;
         }
-        .clay-btn-white:hover {
-            transform: translateY(-2px);
-            box-shadow: 
-                8px 12px 24px rgba(160, 175, 200, 0.28),
-                -5px -5px 14px rgba(255, 255, 255, 0.98),
-                inset 2px 2px 4px rgba(255, 255, 255, 0.95),
-                inset -2px -3px 6px rgba(160, 175, 200, 0.12);
+        .clay-btn-white:hover, .maxi-btn-white:hover {
+            background: #f1f5f9;
+            transform: translate(-1px, -1px);
+            box-shadow: 5px 5px 0px 0px #0f172a;
         }
-        .clay-btn-white:active {
-            transform: translateY(2px) scale(0.98);
-            box-shadow: 
-                2px 4px 8px rgba(160, 175, 200, 0.15),
-                inset 3px 3px 6px rgba(160, 175, 200, 0.2);
+        .clay-btn-white:active, .maxi-btn-white:active {
+            transform: translate(2px, 2px);
+            box-shadow: 0px 0px 0px 0px #0f172a;
         }
 
-        .clay-pill {
+        .clay-pill, .maxi-pill {
+            border: 2px solid #0f172a;
             border-radius: 9999px;
-            box-shadow: 
-                3px 4px 10px rgba(160, 175, 200, 0.18),
-                -2px -2px 8px rgba(255, 255, 255, 0.9),
-                inset 1px 1px 3px rgba(255, 255, 255, 0.7),
-                inset -1px -2px 4px rgba(160, 175, 200, 0.1);
+            box-shadow: 2px 2px 0px 0px #0f172a;
+            font-weight: 800;
         }
     </style>
 </head>
