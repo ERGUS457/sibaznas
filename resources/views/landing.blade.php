@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIM-UPZ BAZNAS &bull; Terintegrasi DE ISAK 35 FORMAT A</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #eef2f7;
+            background-image: 
+                radial-gradient(at 10% 15%, rgba(16, 185, 129, 0.12) 0px, transparent 45%),
+                radial-gradient(at 90% 25%, rgba(14, 165, 233, 0.12) 0px, transparent 45%),
+                radial-gradient(at 50% 80%, rgba(245, 158, 11, 0.08) 0px, transparent 50%);
+        }
+
+        /* Claymorphism Design System */
+        .clay-card {
+            background: #ffffff;
+            border-radius: 28px;
+            box-shadow: 
+                14px 18px 36px rgba(160, 175, 200, 0.28),
+                -10px -10px 26px rgba(255, 255, 255, 0.95),
+                inset 2px 2px 5px rgba(255, 255, 255, 0.9),
+                inset -3px -4px 8px rgba(160, 175, 200, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            transition: all 0.2s ease-in-out;
+        }
+        .clay-card-interactive:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                18px 24px 44px rgba(160, 175, 200, 0.35),
+                -12px -12px 30px rgba(255, 255, 255, 0.98),
+                inset 2px 2px 5px rgba(255, 255, 255, 0.9),
+                inset -3px -4px 8px rgba(160, 175, 200, 0.15);
+        }
+
+        .clay-card-soft {
+            background: #f8fafc;
+            border-radius: 22px;
+            box-shadow: 
+                8px 10px 22px rgba(160, 175, 200, 0.2),
+                -6px -6px 18px rgba(255, 255, 255, 0.9),
+                inset 2px 2px 4px rgba(255, 255, 255, 0.85),
+                inset -2px -3px 6px rgba(160, 175, 200, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+        }
+
+        .clay-btn-emerald {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 
+                6px 10px 22px rgba(5, 150, 105, 0.35),
+                -4px -4px 12px rgba(255, 255, 255, 0.9),
+                inset 2px 2px 4px rgba(255, 255, 255, 0.45),
+                inset -2px -3px 6px rgba(0, 0, 0, 0.2);
+            transition: all 0.15s ease-in-out;
+        }
+        .clay-btn-emerald:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                8px 14px 26px rgba(5, 150, 105, 0.42),
+                -5px -5px 14px rgba(255, 255, 255, 0.95),
+                inset 2px 2px 4px rgba(255, 255, 255, 0.55),
+                inset -2px -3px 6px rgba(0, 0, 0, 0.25);
+        }
+        .clay-btn-emerald:active {
+            transform: translateY(2px) scale(0.98);
+            box-shadow: 
+                2px 4px 8px rgba(5, 150, 105, 0.25),
+                inset 3px 3px 6px rgba(0, 0, 0, 0.25);
+        }
+
+        .clay-btn-white {
+            background: #ffffff;
+            color: #1e293b;
+            border-radius: 20px;
+            box-shadow: 
+                6px 10px 20px rgba(160, 175, 200, 0.22),
+                -4px -4px 12px rgba(255, 255, 255, 0.95),
+                inset 2px 2px 4px rgba(255, 255, 255, 0.9),
+                inset -2px -3px 6px rgba(160, 175, 200, 0.12);
+            transition: all 0.15s ease-in-out;
+        }
+        .clay-btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                8px 12px 24px rgba(160, 175, 200, 0.28),
+                -5px -5px 14px rgba(255, 255, 255, 0.98),
+                inset 2px 2px 4px rgba(255, 255, 255, 0.95),
+                inset -2px -3px 6px rgba(160, 175, 200, 0.12);
+        }
+        .clay-btn-white:active {
+            transform: translateY(2px) scale(0.98);
+            box-shadow: 
+                2px 4px 8px rgba(160, 175, 200, 0.15),
+                inset 3px 3px 6px rgba(160, 175, 200, 0.2);
+        }
+
+        .clay-pill {
+            border-radius: 9999px;
+            box-shadow: 
+                3px 4px 10px rgba(160, 175, 200, 0.18),
+                -2px -2px 8px rgba(255, 255, 255, 0.9),
+                inset 1px 1px 3px rgba(255, 255, 255, 0.7),
+                inset -1px -2px 4px rgba(160, 175, 200, 0.1);
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased selection:bg-emerald-500 selection:text-white">
+
+    <!-- Top Sticky Clay Navigation Bar -->
+    <header class="sticky top-4 z-50 px-4 sm:px-8 max-w-7xl mx-auto">
+        <nav class="clay-card px-5 py-3.5 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="{{ route('landing') }}" class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white flex items-center justify-center text-lg font-bold" style="box-shadow: 4px 6px 14px rgba(16, 185, 129, 0.35), inset 1px 1px 3px rgba(255,255,255,0.4), inset -2px -2px 4px rgba(0,0,0,0.2);">
+                    <i class="fa-solid fa-layer-group"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-1.5">
+                        <span class="font-extrabold text-slate-900 text-base tracking-tight">SIM-UPZ BAZNAS</span>
+                        <span class="text-[10px] font-bold text-emerald-700 bg-emerald-100/70 px-2 py-0.5 rounded-full border border-emerald-300/60">RESMI</span>
+                    </div>
+                    <span class="text-[11px] font-bold text-slate-500 tracking-wide block">DE ISAK 35 FORMAT A</span>
+                </div>
+            </a>
+
+            <!-- Nav Links (Desktop) -->
+            <div class="hidden md:flex items-center space-x-6 text-xs font-semibold text-slate-600">
+                <a href="#modul-operasional" class="hover:text-emerald-700 transition">Modul Operasional</a>
+                <a href="#modul-akuntansi" class="hover:text-emerald-700 transition">Modul Akuntansi</a>
+                <a href="#alur-kerja" class="hover:text-emerald-700 transition">Alur Kerja</a>
+                <a href="#panduan-login" class="hover:text-emerald-700 transition">Kredensial Login</a>
+            </div>
+
+            <!-- CTA Button -->
+            <div class="flex items-center space-x-3">
+                @auth
+                <a href="{{ route('dashboard') }}" class="clay-btn-emerald px-4 py-2 text-xs font-bold flex items-center gap-1.5">
+                    <i class="fa-solid fa-gauge-high text-xs"></i>
+                    <span>Buka Panel Kerja</span>
+                </a>
+                @else
+                <a href="{{ route('login') }}" class="clay-btn-emerald px-4 py-2 text-xs font-bold flex items-center gap-1.5">
+                    <i class="fa-solid fa-arrow-right-to-bracket text-xs"></i>
+                    <span>Masuk (admin)</span>
+                </a>
+                @endauth
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-8 py-8 sm:py-12 space-y-16 sm:space-y-24">
+
+        <!-- ============================================================= -->
+        <!-- 1. HERO SECTION (Claymorphic)                                 -->
+        <!-- ============================================================= -->
+        <section class="text-center space-y-6 pt-4">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 clay-pill bg-white text-emerald-800 text-xs font-bold">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>Standar Kepatuhan: Perbaznas No. 2 Tahun 2016 &bull; Format A DE ISAK 35</span>
+            </div>
+
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight max-w-4xl mx-auto">
+                Sistem Terpadu Pengelolaan <br class="hidden sm:inline">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-700">UPZ BAZNAS &amp; Akuntansi Nonlaba</span>
+            </h1>
+
+            <p class="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
+                Platform modern untuk mencatat penerimaan ZIS, penerbitan Bukti Setor Zakat (BSZ) resmi, penyaluran 8 Asnaf, serta otomasi pembukuan jurnal dan 4 laporan keuangan standar IAI untuk pertanggungjawaban amil.
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+                @auth
+                <a href="{{ route('dashboard') }}" class="clay-btn-emerald px-6 py-3.5 text-sm font-bold flex items-center gap-2">
+                    <i class="fa-solid fa-gauge-high"></i>
+                    <span>Menuju Panel Kerja</span>
+                </a>
+                @else
+                <a href="{{ route('login') }}" class="clay-btn-emerald px-7 py-3.5 text-sm font-bold flex items-center gap-2">
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    <span>Masuk ke Aplikasi</span>
+                </a>
+                @endauth
+                <a href="#modul-operasional" class="clay-btn-white px-6 py-3.5 text-sm font-bold flex items-center gap-2 text-slate-700">
+                    <i class="fa-solid fa-book-bookmark text-emerald-600"></i>
+                    <span>Pelajari Modul Penggunaan</span>
+                </a>
+            </div>
+
+            <!-- Live Stats Row (Clay Cards) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 pt-8 text-left">
+                <!-- 1. Total Pengumpulan ZIS -->
+                <div class="clay-card clay-card-interactive p-5">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Total Pengumpulan ZIS</span>
+                        <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm font-bold">
+                            <i class="fa-solid fa-hand-holding-dollar"></i>
+                        </div>
+                    </div>
+                    <div class="text-xl font-extrabold text-slate-900 font-mono mt-3">
+                        Rp {{ number_format($totalZisCollected, 0, ',', '.') }}
+                    </div>
+                    <div class="text-[11px] text-slate-500 mt-1 flex items-center gap-1">
+                        <i class="fa-solid fa-users text-emerald-600"></i>
+                        <span>{{ $muzakkiCount }} Muzaki terdaftar</span>
+                    </div>
+                </div>
+
+                <!-- 2. Tersalurkan ke Mustahik -->
+                <div class="clay-card clay-card-interactive p-5">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tersalurkan ke Mustahik</span>
+                        <div class="w-9 h-9 rounded-xl bg-teal-100 text-teal-700 flex items-center justify-center text-sm font-bold">
+                            <i class="fa-solid fa-parachute-box"></i>
+                        </div>
+                    </div>
+                    <div class="text-xl font-extrabold text-slate-900 font-mono mt-3">
+                        Rp {{ number_format($totalDistributed, 0, ',', '.') }}
+                    </div>
+                    <div class="text-[11px] text-slate-500 mt-1 flex items-center gap-1">
+                        <i class="fa-solid fa-people-roof text-teal-600"></i>
+                        <span>8 Asnaf &bull; 5 Bidang Program</span>
+                    </div>
+                </div>
+
+                <!-- 3. Kas Siap Disalurkan -->
+                <div class="clay-card clay-card-interactive p-5">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Kas ZIS Siap Salur</span>
+                        <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-sm font-bold">
+                            <i class="fa-solid fa-wallet"></i>
+                        </div>
+                    </div>
+                    <div class="text-xl font-extrabold text-emerald-700 font-mono mt-3">
+                        Rp {{ number_format($availableZisCash, 0, ',', '.') }}
+                    </div>
+                    <div class="text-[11px] text-slate-500 mt-1 flex items-center gap-1">
+                        <i class="fa-solid fa-shield-check text-amber-600"></i>
+                        <span>Hak amil terjaga maks 12,5%</span>
+                    </div>
+                </div>
+
+                <!-- 4. Neraca DE ISAK 35 -->
+                <div class="clay-card clay-card-interactive p-5">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Status Neraca</span>
+                        <div class="w-9 h-9 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center text-sm font-bold">
+                            <i class="fa-solid fa-scale-balanced"></i>
+                        </div>
+                    </div>
+                    <div class="text-xl font-extrabold text-slate-900 mt-3 flex items-center gap-2">
+                        @if($financialPosition['is_balanced'] ?? true)
+                        <span class="text-emerald-700">Seimbang</span>
+                        <i class="fa-solid fa-circle-check text-emerald-600 text-sm"></i>
+                        @else
+                        <span class="text-rose-700">Perlu Koreksi</span>
+                        @endif
+                    </div>
+                    <div class="text-[11px] text-slate-500 mt-1">
+                        <span>Aset = Liabilitas + Aset Neto</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 2. MODUL 1: OPERASIONAL UPZ (Perbaznas No. 2/2016)           -->
+        <!-- ============================================================= -->
+        <section id="modul-operasional" class="space-y-8 scroll-mt-24">
+            <div class="text-center space-y-2">
+                <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider clay-pill px-3.5 py-1 bg-emerald-50 inline-block">
+                    Modul 1 &bull; Peraturan BAZNAS No. 2 Tahun 2016
+                </span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
+                    Modul Operasional UPZ BAZNAS
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto">
+                    Panduan teknis dan alur operasional pengumpulan, penyaluran, serta pelaporan pertanggungjawaban amil.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Fitur 1: Penerimaan & BSZ -->
+                <div class="clay-card clay-card-interactive p-6 space-y-4">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-receipt"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-slate-900">1. Penerimaan ZIS &amp; Bukti Setor Zakat (BSZ)</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Sesuai <strong>Lampiran 1 &amp; 6 Perbaznas</strong>. Amil mencatat penerimaan Zakat Maal, Fitrah, Infak/Sedekah, dan DSKL. Sistem secara otomatis menerbitkan dokumen resmi <strong>Bukti Setor Zakat (BSZ)</strong> dengan verifikasi hash keaslian yang dapat dicetak langsung dan diperhitungkan sebagai <u>pengurang penghasilan bruto (UU No. 23/2011 Pasal 22)</u>.
+                    </p>
+                    <div class="pt-2 border-t border-slate-100 text-[11px] text-emerald-800 font-semibold flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-check text-emerald-600"></i>
+                        <span>Cetak BSZ Standar BAZNAS RI</span>
+                    </div>
+                </div>
+
+                <!-- Fitur 2: Penyaluran 8 Asnaf -->
+                <div class="clay-card clay-card-interactive p-6 space-y-4">
+                    <div class="w-12 h-12 rounded-2xl bg-teal-100 text-teal-800 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-parachute-box"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-slate-900">2. Penyaluran ke 8 Asnaf Mustahik</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Sesuai <strong>Lampiran 2, 3, &amp; 7 Perbaznas</strong>. Penyaluran dana zakat diklasifikasikan secara ketat ke 8 Asnaf syariah (Fakir, Miskin, Amil, Mualaf, Riqab, Gharimin, Fii Sabilillah, Ibnu Sabil) ke dalam 5 Pilar Program BAZNAS: <em>Pendidikan, Kesehatan, Kemanusiaan, Ekonomi, dan Dakwah &amp; Advokasi</em>.
+                    </p>
+                    <div class="pt-2 border-t border-slate-100 text-[11px] text-teal-800 font-semibold flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-check text-teal-600"></i>
+                        <span>Validasi Kategori Mustahik &amp; Asnaf</span>
+                    </div>
+                </div>
+
+                <!-- Fitur 3: Penyetoran BAZNAS -->
+                <div class="clay-card clay-card-interactive p-6 space-y-4">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-building-columns"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-slate-900">3. Penyetoran ke Rekening BAZNAS</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Sesuai <strong>Lampiran 5 Perbaznas</strong>. Bagi UPZ pengumpul yang bertugas menyetorkan dana ke BAZNAS Pusat/Daerah, modul ini mencatat nomor bukti transfer bank, validasi verifikasi BAZNAS, serta mengurangi kewajiban utang penyetoran secara akuntansi otomatis.
+                    </p>
+                    <div class="pt-2 border-t border-slate-100 text-[11px] text-amber-800 font-semibold flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-check text-amber-600"></i>
+                        <span>Rekonsiliasi Bukti Setor Bank Resmi</span>
+                    </div>
+                </div>
+
+                <!-- Fitur 4: Proteksi Hak Amil -->
+                <div class="clay-card clay-card-interactive p-6 space-y-4">
+                    <div class="w-12 h-12 rounded-2xl bg-indigo-100 text-indigo-800 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-slate-900">4. Pembatasan Hak Amil Maksimal 12.5%</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Sistem dilengkapi dengan <em>validation rule</em> otomatis di mana persentase bagian amil dibatasi maksimal <strong>12,50%</strong> (atau 1/8 bagian asnaf amil). Jika ada input melebihi batas regulasi, sistem akan menolak transaksi secara otomatis demi menjamin kepatuhan syariah dan regulasi.
+                    </p>
+                    <div class="pt-2 border-t border-slate-100 text-[11px] text-indigo-800 font-semibold flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-check text-indigo-600"></i>
+                        <span>Pencegahan Pelanggaran Batas Amil</span>
+                    </div>
+                </div>
+
+                <!-- Fitur 5: Master Data Muzaki & Mustahik -->
+                <div class="clay-card clay-card-interactive p-6 space-y-4">
+                    <div class="w-12 h-12 rounded-2xl bg-sky-100 text-sky-800 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-address-book"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-slate-900">5. Basis Data Muzaki &amp; Mustahik</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Penyimpanan riwayat donatur (*Muzaki*) lengkap dengan Nomor Pokok Wajib Zakat (NPWZ), NIK, nomor telepon, dan email untuk pengiriman tanda terima elektronik. Serta direktori penerima manfaat (*Mustahik*) untuk memastikan akuntabilitas penyaluran tepat sasaran.
+                    </p>
+                    <div class="pt-2 border-t border-slate-100 text-[11px] text-sky-800 font-semibold flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-check text-sky-600"></i>
+                        <span>Manajemen Database Terintegrasi</span>
+                    </div>
+                </div>
+
+                <!-- Fitur 6: Laporan Rekapitulasi UPZ -->
+                <div class="clay-card clay-card-interactive p-6 space-y-4">
+                    <div class="w-12 h-12 rounded-2xl bg-rose-100 text-rose-800 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-file-contract"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-slate-900">6. Laporan Pertanggungjawaban UPZ</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Merekapitulasi seluruh kepatuhan tata kerja UPZ (Lampiran 1 hingga Lampiran 7) dalam satu dokumen konsolidasi yang rapi, siap ditandatangani oleh Ketua UPZ dan Bagian Keuangan untuk diserahkan ke BAZNAS pembina saat audit periodik.
+                    </p>
+                    <div class="pt-2 border-t border-slate-100 text-[11px] text-rose-800 font-semibold flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-check text-rose-600"></i>
+                        <span>Format Laporan Siap Audit &amp; Cetak</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 3. MODUL 2: AKUNTANSI ISAK 35 (FORMAT A)                      -->
+        <!-- ============================================================= -->
+        <section id="modul-akuntansi" class="space-y-8 scroll-mt-24">
+            <div class="text-center space-y-2">
+                <span class="text-xs font-bold text-sky-700 uppercase tracking-wider clay-pill px-3.5 py-1 bg-sky-50 inline-block">
+                    Modul 2 &bull; DE ISAK 35 Format A (IAI)
+                </span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
+                    Modul Akuntansi Keuangan Entitas Nonlaba
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto">
+                    Otomatisasi penjurnalan berpasangan (*double-entry*) dan 4 laporan keuangan standar untuk kepatuhan akuntansi.
+                </p>
+            </div>
+
+            <!-- Otomasi Penjurnalan Banner -->
+            <div class="clay-card p-6 sm:p-8 bg-gradient-to-r from-white to-slate-50">
+                <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
+                    <div class="space-y-2">
+                        <span class="text-[11px] font-extrabold uppercase tracking-wider text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full">
+                            Zero Manual Journal Entry
+                        </span>
+                        <h3 class="text-xl font-bold text-slate-900">Penjurnalan Otomatis dari Transaksi Amil</h3>
+                        <p class="text-xs text-slate-600 max-w-2xl leading-relaxed">
+                            Amil operasional tidak perlu memahami debit dan kredit akuntansi. Saat amil menginput penerimaan ZIS atau penyaluran ke mustahik di Modul 1, sistem secara otomatis membentuk ayat jurnal umum berpasangan di Buku Jurnal Umum dan memutakhirkan Buku Besar secara real-time.
+                        </p>
+                    </div>
+                    <div class="flex-shrink-0">
+                        <div class="clay-card-soft p-4 text-xs font-mono space-y-1 text-slate-700">
+                            <div class="text-slate-400 text-[10px]">Contoh Ayat Jurnal Otomatis:</div>
+                            <div class="text-emerald-700 font-bold">(D) 1101 Kas ZIS di Bank &bull; Rp 10.000.000</div>
+                            <div class="text-slate-700 font-medium pl-4">(K) 4201 Pendapatan Amil &bull; Rp 1.250.000</div>
+                            <div class="text-slate-700 font-medium pl-4">(K) 4101 Penerimaan Zakat Terikat &bull; Rp 8.750.000</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4 Financial Statements Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+                <!-- 1. Posisi Keuangan -->
+                <div class="clay-card clay-card-interactive p-6 space-y-3">
+                    <div class="text-xs font-bold text-emerald-700">01. Format A (Hal. 21)</div>
+                    <h3 class="text-base font-bold text-slate-900">Laporan Posisi Keuangan</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Neraca entitas nonlaba yang menyajikan Aset Lancar, Aset Tetap, Liabilitas Penyetoran, dan Ekuitas Aset Neto (Tanpa Pembatasan Amil &amp; Dengan Pembatasan ZIS).
+                    </p>
+                </div>
+
+                <!-- 2. Penghasilan Komprehensif -->
+                <div class="clay-card clay-card-interactive p-6 space-y-3">
+                    <div class="text-xs font-bold text-emerald-700">02. Format A (Hal. 24)</div>
+                    <h3 class="text-base font-bold text-slate-900">Penghasilan Komprehensif</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Laporan aktivitas yang menyajikan pendapatan donasi muzaki, beban operasional amil, beban bantuan mustahik, dan surplus/defisit bersih periode berjalan.
+                    </p>
+                </div>
+
+                <!-- 3. Perubahan Aset Neto -->
+                <div class="clay-card clay-card-interactive p-6 space-y-3">
+                    <div class="text-xs font-bold text-emerald-700">03. Format A (Hal. 26)</div>
+                    <h3 class="text-base font-bold text-slate-900">Perubahan Aset Neto</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Menelusuri mutasi saldo awal dana amil dan dana ZIS, penerimaan periode berjalan, alokasi penggunaan, serta saldo akhir aset neto siap disalurkan.
+                    </p>
+                </div>
+
+                <!-- 4. Arus Kas -->
+                <div class="clay-card clay-card-interactive p-6 space-y-3">
+                    <div class="text-xs font-bold text-emerald-700">04. Format A (Hal. 27)</div>
+                    <h3 class="text-base font-bold text-slate-900">Laporan Arus Kas</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Metode langsung untuk memetakan arus kas masuk dari muzaki, pembayaran kas untuk program mustahik, serta saldo akhir kas dan setara kas di rekening UPZ.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 4. ALUR KERJA TERINTEGRASI (End-to-End Workflow)              -->
+        <!-- ============================================================= -->
+        <section id="alur-kerja" class="space-y-8 scroll-mt-24">
+            <div class="text-center space-y-2">
+                <span class="text-xs font-bold text-amber-700 uppercase tracking-wider clay-pill px-3.5 py-1 bg-amber-50 inline-block">
+                    Alur Transaksi &bull; End-to-End
+                </span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
+                    Bagaimana Aplikasi Bekerja
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto">
+                    Dari penerimaan dana dari Muzaki hingga penerbitan laporan keuangan siap audit.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Step 1 -->
+                <div class="clay-card p-6 space-y-3 relative">
+                    <div class="w-8 h-8 rounded-full bg-emerald-600 text-white font-extrabold text-sm flex items-center justify-center">1</div>
+                    <h4 class="font-bold text-sm text-slate-900">Muzaki Berzakat</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Petugas menginput penerimaan dana ZIS. Sistem menerbitkan Bukti Setor Zakat (BSZ) resmi ber-hash unik untuk donatur.
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="clay-card p-6 space-y-3 relative">
+                    <div class="w-8 h-8 rounded-full bg-teal-600 text-white font-extrabold text-sm flex items-center justify-center">2</div>
+                    <h4 class="font-bold text-sm text-slate-900">Auto-Journaling</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Sistem memisahkan porsi hak amil (maks 12,5%) dan dana mustahik, lalu mendebit kas bank dan mengkredit pendapatan ZIS.
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="clay-card p-6 space-y-3 relative">
+                    <div class="w-8 h-8 rounded-full bg-sky-600 text-white font-extrabold text-sm flex items-center justify-center">3</div>
+                    <h4 class="font-bold text-sm text-slate-900">Penyaluran 8 Asnaf</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Petugas mendistribusikan dana kepada mustahik terdaftar. Sistem mencatat beban program dan mengurangi kas saldo ZIS.
+                    </p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="clay-card p-6 space-y-3 relative">
+                    <div class="w-8 h-8 rounded-full bg-amber-600 text-white font-extrabold text-sm flex items-center justify-center">4</div>
+                    <h4 class="font-bold text-sm text-slate-900">Laporan Siap Saji</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Seluruh 4 laporan DE ISAK 35 dan laporan tata kerja UPZ Perbaznas langsung terbentuk secara otomatis tanpa perlu rekap manual.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 5. KREDENSIAL LOGIN & AKSES CEPAT (Clay Card)                 -->
+        <!-- ============================================================= -->
+        <section id="panduan-login" class="clay-card p-8 sm:p-10 scroll-mt-24 bg-gradient-to-b from-white to-emerald-50/40">
+            <div class="max-w-3xl mx-auto text-center space-y-6">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-3xl bg-emerald-600 text-white text-3xl shadow-lg" style="box-shadow: 6px 10px 20px rgba(16, 185, 129, 0.4), inset 2px 2px 4px rgba(255,255,255,0.4), inset -2px -3px 6px rgba(0,0,0,0.2);">
+                    <i class="fa-solid fa-key"></i>
+                </div>
+
+                <div class="space-y-2">
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
+                        Akses Sistem &bull; Kredensial Login
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-600 max-w-lg mx-auto">
+                        Gunakan akun administrator berikut untuk masuk ke panel kerja operasional UPZ dan akuntansi keuangan:
+                    </p>
+                </div>
+
+                <!-- Inset Box Credential -->
+                <div class="clay-card-soft p-5 max-w-md mx-auto space-y-3 text-left">
+                    <div class="flex items-center justify-between pb-2 border-b border-slate-200 text-xs font-bold text-slate-600">
+                        <span>Akun Administrator Bawaan</span>
+                        <span class="text-emerald-700 bg-emerald-100 px-2.5 py-0.5 rounded-full text-[10px]">Aktif &amp; Terverifikasi</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 text-xs font-mono">
+                        <div class="bg-white p-2.5 rounded-xl border border-slate-200">
+                            <span class="text-[10px] text-slate-400 block font-sans">Username</span>
+                            <span class="text-base font-extrabold text-slate-900">admin</span>
+                        </div>
+                        <div class="bg-white p-2.5 rounded-xl border border-slate-200">
+                            <span class="text-[10px] text-slate-400 block font-sans">Password</span>
+                            <span class="text-base font-extrabold text-slate-900">admin123</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA Button to Login -->
+                <div class="pt-2">
+                    <a href="{{ route('login') }}" class="clay-btn-emerald inline-flex items-center space-x-2 px-8 py-4 font-bold text-sm tracking-wide">
+                        <span>Buka Halaman Login Sekarang</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Claymorphic Footer -->
+    <footer class="mt-16 py-8 border-t border-slate-200/80 bg-white/70 text-center text-xs text-slate-500 space-y-2">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div class="flex items-center space-x-2">
+                <span class="font-extrabold text-slate-800">SIM-UPZ BAZNAS</span>
+                <span>&bull;</span>
+                <span>Terintegrasi DE ISAK 35 FORMAT A</span>
+            </div>
+            <div>
+                Regulasi: <strong>Perbaznas No. 2/2016</strong> &bull; Standar: <strong>DE ISAK 35 Format A</strong>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

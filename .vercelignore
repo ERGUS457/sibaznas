@@ -1,0 +1,11 @@
+.git
+.env
+.env.*
+!.env.example
+/storage/logs/*.log
+/storage/framework/views/*.php
+/storage/framework/sessions/*
+/storage/framework/cache/*
+/tests
+/scratch
+phpunit.xml
