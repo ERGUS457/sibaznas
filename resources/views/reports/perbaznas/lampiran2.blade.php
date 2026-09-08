@@ -211,11 +211,11 @@
         </table>
 
         <!-- Signature Section (Clean, no obstruction) -->
-        <div class="mt-12 flex justify-end text-xs font-serif text-black">
+        <div class="signature-block mt-10 flex justify-end text-xs font-serif text-black">
             <div class="text-center w-72">
                 <div>{{ $upz->city ?? 'Jakarta' }}, {{ now()->isoFormat('D MMMM Y') }}</div>
                 <div class="font-bold mt-1 uppercase">Pengurus UPZ {{ $upz->name ?? 'BAZNAS' }}</div>
-                <div class="h-24"></div> <!-- Clean signature space -->
+                <div class="h-16"></div> <!-- Clean signature space -->
                 <div class="font-bold underline">{{ $upz->chairman_name ?? '............................................' }}</div>
                 <div>Ketua UPZ</div>
             </div>
@@ -226,21 +226,12 @@
 
 <style>
 @media print {
-    body {
-        background: #ffffff !important;
-        color: #000000 !important;
-        font-family: 'Times New Roman', Times, Georgia, serif !important;
+    @page {
+        size: A4 portrait;
+        margin: 10mm 12mm 12mm 12mm;
     }
-    .no-print, aside, header, nav {
-        display: none !important;
-    }
-    .report-sheet {
-        border: none !important;
-        box-shadow: none !important;
-        padding: 0 !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        margin: 0 !important;
+    .signature-block {
+        page-break-inside: avoid !important;
     }
 }
 </style>

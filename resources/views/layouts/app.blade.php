@@ -168,19 +168,133 @@
         }
 
         @media print {
-            .no-print { display: none !important; }
-            .print-only { display: block !important; }
-            body { 
-                background: white !important; 
-                font-size: 11pt; 
-                color: #000 !important; 
-                font-family: 'Times New Roman', Times, Georgia, serif !important;
-                background-image: none !important;
+            @page {
+                size: A4 portrait;
+                margin: 10mm 12mm 12mm 12mm;
             }
-            .maxi-card, .clay-card, .maxi-card-soft, .clay-card-soft { 
-                box-shadow: none !important; 
-                border: 1px solid #000000 !important; 
+
+            .no-print,
+            aside,
+            header,
+            nav,
+            footer,
+            button,
+            form,
+            [x-cloak],
+            .backdrop-blur-xs {
+                display: none !important;
+            }
+
+            .print-only {
+                display: block !important;
+            }
+
+            /* 1. Root & Viewport Reset: Crucial for multi-page pagination without clipping in Chromium */
+            html,
+            body {
+                height: auto !important;
+                min-height: 0 !important;
+                max-height: none !important;
+                overflow: visible !important;
+                overflow-x: visible !important;
+                overflow-y: visible !important;
+                position: static !important;
                 background: #ffffff !important;
+                background-image: none !important;
+                color: #000000 !important;
+                font-family: 'Times New Roman', Times, Georgia, serif !important;
+                font-size: 10pt !important;
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            /* 2. Container Unwrapping: Remove Flexbox & Scrolling constraints that cause 1-page cut-off */
+            body > div,
+            .min-h-screen,
+            .h-full,
+            .flex,
+            .flex-1,
+            .overflow-y-auto,
+            .overflow-x-auto,
+            main,
+            .max-w-4xl,
+            .max-w-5xl,
+            .max-w-6xl,
+            .max-w-7xl,
+            .space-y-6 {
+                display: block !important;
+                height: auto !important;
+                min-height: 0 !important;
+                max-height: none !important;
+                overflow: visible !important;
+                overflow-x: visible !important;
+                overflow-y: visible !important;
+                position: static !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                float: none !important;
+                flex: none !important;
+            }
+
+            /* 3. Official Report Sheet Print Rules */
+            .report-sheet,
+            .bsz-card {
+                display: block !important;
+                border: none !important;
+                box-shadow: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                background: #ffffff !important;
+                color: #000000 !important;
+                font-family: 'Times New Roman', Times, Georgia, serif !important;
+                font-size: 9.5pt !important;
+                line-height: 1.25 !important;
+            }
+
+            /* 4. Table Pagination & Avoid Bad Breaks */
+            table {
+                width: 100% !important;
+                border-collapse: collapse !important;
+                page-break-inside: auto !important;
+            }
+
+            thead {
+                display: table-header-group !important;
+            }
+
+            tfoot {
+                display: table-footer-group !important;
+            }
+
+            tr {
+                page-break-inside: avoid !important;
+                page-break-after: auto !important;
+            }
+
+            td, th {
+                padding-top: 1.5px !important;
+                padding-bottom: 1.5px !important;
+            }
+
+            /* 5. Headers & Signature Blocks */
+            h1, h2, h3, h4, h5, h6 {
+                page-break-after: avoid !important;
+            }
+
+            .signature-block,
+            .signature-section,
+            .signatures {
+                page-break-inside: avoid !important;
+                page-break-before: auto !important;
+                margin-top: 16px !important;
+                padding-top: 8px !important;
             }
         }
     </style>

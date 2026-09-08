@@ -219,18 +219,18 @@
         </table>
 
         <!-- Official Signatures (Clean, no text obstructing signature area) -->
-        <div class="grid grid-cols-2 gap-12 mt-12 pt-6 text-xs text-center border-t border-slate-400">
+        <div class="signature-block grid grid-cols-2 gap-12 mt-8 pt-4 text-xs text-center border-t border-black">
             <div>
                 <div>Mengetahui,</div>
                 <div class="font-bold uppercase mt-0.5">Ketua Pengurus UPZ</div>
-                <div class="h-24"></div> <!-- Clean open signature space -->
+                <div class="h-16"></div> <!-- Clean open signature space -->
                 <div class="font-bold underline">{{ $upz->chairman_name ?? '............................................' }}</div>
                 <div>NIP/ID: {{ $upz->sk_number ?? '....................................' }}</div>
             </div>
             <div>
                 <div>{{ $upz->city ?? 'Jakarta' }}, {{ \Carbon\Carbon::parse($endDate)->isoFormat('D MMMM Y') }}</div>
                 <div class="font-bold uppercase mt-0.5">Bagian Keuangan / Akuntan</div>
-                <div class="h-24"></div> <!-- Clean open signature space -->
+                <div class="h-16"></div> <!-- Clean open signature space -->
                 <div class="font-bold underline">{{ $upz->treasurer_name ?? '............................................' }}</div>
                 <div>Akuntan UPZ BAZNAS</div>
             </div>
@@ -241,21 +241,12 @@
 
 <style>
 @media print {
-    body {
-        background: #ffffff !important;
-        color: #000000 !important;
-        font-family: 'Times New Roman', Times, Georgia, serif !important;
+    @page {
+        size: A4 portrait;
+        margin: 10mm 12mm 12mm 12mm;
     }
-    .no-print, aside, header, nav {
-        display: none !important;
-    }
-    .report-sheet {
-        border: none !important;
-        box-shadow: none !important;
-        padding: 0 !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        margin: 0 !important;
+    .signature-block {
+        page-break-inside: avoid !important;
     }
 }
 </style>

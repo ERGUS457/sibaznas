@@ -202,18 +202,30 @@
         </div>
 
         <!-- Official Signatures -->
-        <div class="grid grid-cols-2 gap-8 pt-8 text-xs text-center">
+        <div class="signature-block grid grid-cols-2 gap-8 pt-8 text-xs text-center">
             <div class="space-y-1">
                 <div class="text-slate-500">Ketua Pengurus UPZ BAZNAS,</div>
-                <div class="h-20"></div>
+                <div class="h-16"></div>
                 <div class="font-bold text-slate-900 border-t border-slate-300 pt-1 inline-block min-w-[160px]">{{ $upz->chairman_name ?? 'Ketua UPZ' }}</div>
             </div>
             <div class="space-y-1">
                 <div class="text-slate-500">Sekretaris UPZ BAZNAS,</div>
-                <div class="h-20"></div>
+                <div class="h-16"></div>
                 <div class="font-bold text-slate-900 border-t border-slate-300 pt-1 inline-block min-w-[160px]">{{ $upz->secretary_name ?? 'Sekretaris UPZ' }}</div>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+@media print {
+    @page {
+        size: A4 portrait;
+        margin: 10mm 12mm 12mm 12mm;
+    }
+    .signature-block {
+        page-break-inside: avoid !important;
+    }
+}
+</style>
 @endsection

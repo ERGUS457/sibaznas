@@ -122,7 +122,7 @@
         </div>
 
         <!-- 3-Column Official Verification Section (Sesuai Hal. 39 PDF) -->
-        <div class="mt-12 pt-6">
+        <div class="signature-block mt-8 pt-4">
             <div class="grid grid-cols-3 gap-6 text-center text-xs font-serif text-black">
                 <!-- Kolom 1: Dibuat Oleh -->
                 <div class="border border-black p-4 flex flex-col justify-between">
@@ -132,7 +132,7 @@
                     </div>
                     <div>
                         <div class="text-left text-[11px] mb-1">Tanggal: ..............................</div>
-                        <div class="h-20"></div> <!-- Clean signature space -->
+                        <div class="h-16"></div> <!-- Clean signature space -->
                         <div class="border-t border-black pt-1 font-bold">
                             ................................................
                         </div>
@@ -148,7 +148,7 @@
                     </div>
                     <div>
                         <div class="text-left text-[11px] mb-1">Tanggal: ..............................</div>
-                        <div class="h-20"></div> <!-- Clean signature space -->
+                        <div class="h-16"></div> <!-- Clean signature space -->
                         <div class="border-t border-black pt-1 font-bold">
                             {{ $upz->treasurer_name ?? '................................................' }}
                         </div>
@@ -164,7 +164,7 @@
                     </div>
                     <div>
                         <div class="text-left text-[11px] mb-1">Tanggal: ..............................</div>
-                        <div class="h-20"></div> <!-- Clean signature space -->
+                        <div class="h-16"></div> <!-- Clean signature space -->
                         <div class="border-t border-black pt-1 font-bold underline">
                             {{ $upz->chairman_name ?? '................................................' }}
                         </div>
@@ -179,31 +179,12 @@
 
 <style>
 @media print {
-    body {
-        background: #ffffff !important;
-        color: #000000 !important;
-        font-family: 'Times New Roman', Times, Georgia, serif !important;
+    @page {
+        size: A4 landscape;
+        margin: 8mm 10mm 8mm 10mm;
     }
-    .no-print, aside, header, nav {
-        display: none !important;
-    }
-    .report-sheet {
-        border: none !important;
-        box-shadow: none !important;
-        padding: 0 !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        margin: 0 !important;
-    }
-    table {
-        page-break-inside: auto;
-    }
-    tr {
-        page-break-inside: avoid;
-        page-break-after: auto;
-    }
-    thead {
-        display: table-header-group;
+    .signature-block {
+        page-break-inside: avoid !important;
     }
 }
 </style>
