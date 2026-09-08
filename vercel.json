@@ -19,7 +19,7 @@
     ],
     "env": {
         "APP_ENV": "production",
-        "APP_DEBUG": "true",
+        "APP_DEBUG": "false",
         "APP_URL": "https://sibaznas.vercel.app",
         "APP_KEY": "base64:qbWHNYwu318i5PmB87nKyAy8M/q4lLQjZGUrLkgvDy4=",
         "DB_CONNECTION": "pgsql",
