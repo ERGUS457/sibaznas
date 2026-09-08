@@ -3,9 +3,9 @@
 @section('title', 'Laporan Penghasilan Komprehensif (DE ISAK 35 Format A)')
 
 @section('content')
-<div class="max-w-4xl mx-auto space-y-6">
-    <!-- Action Bar (Hidden on Print) -->
-    <div class="flex items-center justify-between no-print bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+<div class="max-w-4xl mx-auto space-y-6 print:max-w-none print:space-y-0 print:m-0 print:p-0">
+    <!-- Action Bar (Strictly Hidden on Print) -->
+    <div class="no-print print:hidden flex items-center justify-between bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
         <div>
             <h1 class="text-base font-bold text-slate-900">Laporan Penghasilan Komprehensif (DE ISAK 35 Format A)</h1>
             <p class="text-xs text-slate-500">Format resmi entitas berorientasi nonlaba sesuai lampiran Draf Eksposur ISAK 35 (Hal. 24).</p>
@@ -26,7 +26,7 @@
     </div>
 
     <!-- PURE OFFICIAL STATEMENT SHEET (100% Monokrom Sesuai PDF Hal. 24) -->
-    <div class="report-sheet bg-white p-8 sm:p-12 border border-slate-300 shadow-sm text-black font-serif text-[13px] leading-relaxed">
+    <div class="report-sheet bg-white p-8 sm:p-12 border border-slate-300 shadow-sm text-black font-serif text-[13px] leading-relaxed print:p-0 print:border-none print:shadow-none">
         
         <!-- Black Box Header as in DE ISAK 35 Page 24 -->
         <div class="bg-black text-white text-center py-3 px-4 mb-6">
@@ -243,10 +243,36 @@
 @media print {
     @page {
         size: A4 portrait;
-        margin: 10mm 12mm 12mm 12mm;
+        margin: 12mm 15mm 12mm 15mm;
+    }
+    .no-print,
+    .no-print *,
+    [class*="no-print"] {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        position: absolute !important;
+        left: -99999px !important;
+    }
+    .report-sheet {
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        font-size: 9.5pt !important;
+        line-height: 1.25 !important;
+    }
+    table {
+        font-size: 9pt !important;
+    }
+    td, th {
+        padding: 2px 4px !important;
     }
     .signature-block {
         page-break-inside: avoid !important;
+        margin-top: 24px !important;
     }
 }
 </style>

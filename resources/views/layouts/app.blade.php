@@ -173,22 +173,6 @@
                 margin: 10mm 12mm 12mm 12mm;
             }
 
-            .no-print,
-            aside,
-            header,
-            nav,
-            footer,
-            button,
-            form,
-            [x-cloak],
-            .backdrop-blur-xs {
-                display: none !important;
-            }
-
-            .print-only {
-                display: block !important;
-            }
-
             /* 1. Root & Viewport Reset: Crucial for multi-page pagination without clipping in Chromium */
             html,
             body {
@@ -211,20 +195,11 @@
                 print-color-adjust: exact !important;
             }
 
-            /* 2. Container Unwrapping: Remove Flexbox & Scrolling constraints that cause 1-page cut-off */
-            body > div,
+            /* 2. Structural Unwrapping: Unwrap only layout wrappers without overriding utility or hiding classes */
+            body > div:not(.no-print),
             .min-h-screen,
             .h-full,
-            .flex,
-            .flex-1,
-            .overflow-y-auto,
-            .overflow-x-auto,
-            main,
-            .max-w-4xl,
-            .max-w-5xl,
-            .max-w-6xl,
-            .max-w-7xl,
-            .space-y-6 {
+            main:not(.no-print) {
                 display: block !important;
                 height: auto !important;
                 min-height: 0 !important;
@@ -239,6 +214,27 @@
                 padding: 0 !important;
                 float: none !important;
                 flex: none !important;
+                background: transparent !important;
+            }
+
+            .max-w-4xl:not(.no-print),
+            .max-w-5xl:not(.no-print),
+            .max-w-6xl:not(.no-print),
+            .max-w-7xl:not(.no-print) {
+                max-width: 100% !important;
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .space-y-6:not(.no-print) {
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .space-y-6:not(.no-print) > :not(.no-print) {
+                margin-top: 0 !important;
+                margin-bottom: 0 !important;
             }
 
             /* 3. Official Report Sheet Print Rules */
@@ -295,6 +291,43 @@
                 page-break-before: auto !important;
                 margin-top: 16px !important;
                 padding-top: 8px !important;
+            }
+
+            /* 6. ABSOLUTE HIDING OF UI & NON-PRINT ELEMENTS (DECLARED LAST) */
+            .no-print,
+            .no-print *,
+            [class*="no-print"],
+            .print\:hidden,
+            aside,
+            header,
+            nav,
+            footer,
+            button,
+            form,
+            input,
+            select,
+            [x-cloak],
+            .backdrop-blur-xs {
+                display: none !important;
+                visibility: hidden !important;
+                height: 0 !important;
+                width: 0 !important;
+                min-height: 0 !important;
+                max-height: 0 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                border: none !important;
+                outline: none !important;
+                box-shadow: none !important;
+                position: absolute !important;
+                left: -99999px !important;
+                top: -99999px !important;
+                overflow: hidden !important;
+                pointer-events: none !important;
+            }
+
+            .print-only {
+                display: block !important;
             }
         }
     </style>

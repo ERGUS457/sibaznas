@@ -3,9 +3,9 @@
 @section('title', 'Lampiran III - Rencana Pendistribusian Berdasarkan Program (Perbaznas No. 2/2016)')
 
 @section('content')
-<div class="max-w-4xl mx-auto space-y-6">
-    <!-- Action Bar (Hidden on Print) -->
-    <div class="flex items-center justify-between no-print bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+<div class="max-w-4xl mx-auto space-y-6 print:max-w-none print:space-y-0 print:m-0 print:p-0">
+    <!-- Action Bar (Strictly Hidden on Print) -->
+    <div class="no-print print:hidden flex items-center justify-between bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
         <div>
             <div class="flex items-center gap-2">
                 <a href="{{ route('reports.perbaznas-compliance') }}" class="text-slate-500 hover:text-black font-semibold text-xs flex items-center gap-1">
@@ -29,10 +29,10 @@
     </div>
 
     <!-- PURE OFFICIAL STATEMENT SHEET (100% Monokrom Sesuai PDF Hal. 35) -->
-    <div class="report-sheet bg-white p-8 sm:p-12 border border-slate-300 shadow-sm text-black font-serif text-[13px] leading-relaxed">
+    <div class="report-sheet bg-white p-8 sm:p-12 border border-slate-300 shadow-sm text-black font-serif text-[13px] leading-relaxed print:p-0 print:border-none print:shadow-none">
         
-        <!-- Official Regulation Header (Top Left) -->
-        <div class="text-left text-xs uppercase font-bold tracking-wider leading-snug mb-6 border-b border-black pb-3">
+        <!-- Official Regulation Header (Top Left, no underline as in PDF) -->
+        <div class="text-left text-xs uppercase font-bold tracking-wider leading-snug mb-5">
             <div>LAMPIRAN III</div>
             <div>PERATURAN BADAN AMIL ZAKAT NASIONAL</div>
             <div>NOMOR 2 TAHUN 2016</div>
@@ -40,12 +40,12 @@
             <div>PEMBENTUKAN DAN TATA KERJA UNIT PENGUMPUL ZAKAT</div>
         </div>
 
-        <!-- Center Entity Header -->
+        <!-- Center Entity Header (no underline as in PDF) -->
         <div class="text-center font-bold text-sm tracking-wide uppercase mb-6 space-y-0.5">
             <div>{{ $upz->parent_baznas_name ?? 'BAZNAS / BAZNAS PROVINSI / BAZNAS KABUPATEN/KOTA' }}</div>
             <div>UNIT PENGUMPUL ZAKAT {{ $upz->name ?? '...' }}</div>
-            <div class="text-base font-extrabold mt-2 underline">RENCANA PENDISTRIBUSIAN DAN PENDAYAGUNAAN BERDASARKAN PROGRAM</div>
-            <div class="text-xs font-normal normal-case mt-1">Periode 1 Januari s/d 31 Desember Tahun {{ $year }}</div>
+            <div class="text-base font-extrabold mt-1">RENCANA PENDISTRIBUSIAN DAN PENDAYAGUNAAN BERDASARKAN PROGRAM</div>
+            <div class="text-xs font-normal normal-case">Periode 1 Januari s/d 31 Desember Tahun {{ $year }}</div>
         </div>
 
         <!-- Official Table as in Page 35 -->
@@ -180,10 +180,36 @@
 @media print {
     @page {
         size: A4 portrait;
-        margin: 10mm 12mm 12mm 12mm;
+        margin: 12mm 15mm 12mm 15mm;
+    }
+    .no-print,
+    .no-print *,
+    [class*="no-print"] {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        position: absolute !important;
+        left: -99999px !important;
+    }
+    .report-sheet {
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        font-size: 10pt !important;
+        line-height: 1.25 !important;
+    }
+    table {
+        font-size: 9.5pt !important;
+    }
+    td, th {
+        padding: 2.5px 5px !important;
     }
     .signature-block {
         page-break-inside: avoid !important;
+        margin-top: 24px !important;
     }
 }
 </style>

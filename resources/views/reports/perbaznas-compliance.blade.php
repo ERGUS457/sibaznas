@@ -3,9 +3,9 @@
 @section('title', 'Laporan Kepatuhan Tata Kerja UPZ (Perbaznas No. 2/2016)')
 
 @section('content')
-<div class="max-w-5xl mx-auto space-y-6">
+<div class="max-w-5xl mx-auto space-y-6 print:max-w-none print:space-y-0 print:m-0 print:p-0">
     <!-- Navigation Tabs for Perbaznas No. 2/2016 (Hidden on Print) -->
-    <div class="no-print bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
+    <div class="no-print print:hidden bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
         <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-3">
             <div>
                 <h1 class="text-base font-bold text-slate-900">Format Laporan Peraturan BAZNAS No. 2 Tahun 2016</h1>
@@ -221,7 +221,19 @@
 @media print {
     @page {
         size: A4 portrait;
-        margin: 10mm 12mm 12mm 12mm;
+        margin: 12mm 15mm 12mm 15mm;
+    }
+    .no-print,
+    .no-print *,
+    [class*="no-print"] {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        position: absolute !important;
+        left: -99999px !important;
     }
     .signature-block {
         page-break-inside: avoid !important;
