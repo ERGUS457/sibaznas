@@ -41,13 +41,21 @@ class AuthController extends Controller
             'password' => $request->input('password'),
         ];
 
-        if (Auth::attempt($credentials, $request->boolean('remember'))) {
-            $request->session()->regenerate();
+        try {
+            if (Auth::attempt($credentials, $request->boolean('remember'))) {
+                $request->session()->regenerate();
 
-            return redirect()->intended(route('dashboard'))->with(
-                'success',
-                'Selamat datang kembali, ' . Auth::user()->name . '!'
-            );
+                return redirect()->intended(route('dashboard'))->with(
+                    'success',
+                    'Selamat datang kembali, ' . Auth::user()->name . '!'
+                );
+            }
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::error('Login error: ' . $e->getMessage());
+
+            return back()->withErrors([
+                'username' => 'Gagal menghubungkan ke server database: ' . $e->getMessage(),
+            ])->onlyInput('username');
         }
 
         return back()->withErrors([
