@@ -14,7 +14,7 @@ class Isak35ReportService
      */
     public function getAccountBalancesBatch(?string $startDate = null, ?string $endDate = null, ?int $upzId = null): array
     {
-        $orgId = $upzId ?? app(\App\Services\OrganizationContextService::class)->getActiveOrganization()->id;
+        $orgId = $upzId ?? auth()->user()?->upz_profile_id ?? \App\Models\Upz\UpzProfile::first()?->id;
 
         $query = JournalItem::query()
             ->join('journal_entries', 'journal_items.journal_entry_id', '=', 'journal_entries.id');
@@ -58,7 +58,7 @@ class Isak35ReportService
             $asOfDate = null;
         }
 
-        $orgId = $upzId ?? app(\App\Services\OrganizationContextService::class)->getActiveOrganization()->id;
+        $orgId = $upzId ?? auth()->user()?->upz_profile_id ?? \App\Models\Upz\UpzProfile::first()?->id;
         $asOfDate = $asOfDate ? Carbon::parse($asOfDate)->endOfDay()->toDateString() : now()->toDateString();
         $accounts = Account::active()->orderBy('code')->get();
         $batchBalances = $this->getAccountBalancesBatch(null, $asOfDate, $orgId);
@@ -157,7 +157,7 @@ class Isak35ReportService
      */
     public function getStatementOfComprehensiveIncome(?string $startDate = null, ?string $endDate = null, ?int $upzId = null): array
     {
-        $orgId = $upzId ?? app(\App\Services\OrganizationContextService::class)->getActiveOrganization()->id;
+        $orgId = $upzId ?? auth()->user()?->upz_profile_id ?? \App\Models\Upz\UpzProfile::first()?->id;
         $startDate = $startDate ? Carbon::parse($startDate)->startOfDay()->toDateString() : Carbon::now()->startOfYear()->toDateString();
         $endDate = $endDate ? Carbon::parse($endDate)->endOfDay()->toDateString() : now()->toDateString();
 
@@ -229,7 +229,7 @@ class Isak35ReportService
      */
     public function getStatementOfChangesInNetAssets(?string $startDate = null, ?string $endDate = null, ?int $upzId = null): array
     {
-        $orgId = $upzId ?? app(\App\Services\OrganizationContextService::class)->getActiveOrganization()->id;
+        $orgId = $upzId ?? auth()->user()?->upz_profile_id ?? \App\Models\Upz\UpzProfile::first()?->id;
         $startDate = $startDate ? Carbon::parse($startDate)->startOfDay()->toDateString() : Carbon::now()->startOfYear()->toDateString();
         $endDate = $endDate ? Carbon::parse($endDate)->endOfDay()->toDateString() : now()->toDateString();
 
@@ -276,7 +276,7 @@ class Isak35ReportService
      */
     public function getStatementOfCashFlows(?string $startDate = null, ?string $endDate = null, ?int $upzId = null): array
     {
-        $orgId = $upzId ?? app(\App\Services\OrganizationContextService::class)->getActiveOrganization()->id;
+        $orgId = $upzId ?? auth()->user()?->upz_profile_id ?? \App\Models\Upz\UpzProfile::first()?->id;
         $startDate = $startDate ? Carbon::parse($startDate)->startOfDay()->toDateString() : Carbon::now()->startOfYear()->toDateString();
         $endDate = $endDate ? Carbon::parse($endDate)->endOfDay()->toDateString() : now()->toDateString();
 

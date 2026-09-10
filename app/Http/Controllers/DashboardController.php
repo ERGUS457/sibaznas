@@ -10,16 +10,24 @@ use App\Models\Upz\UpzProfile;
 use App\Models\Upz\ZisCollection;
 use App\Models\Upz\ZisDistribution;
 use App\Services\Accounting\Isak35ReportService;
-use App\Services\OrganizationContextService;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    protected OrganizationContextService $orgContext;
-
-    public function __construct(OrganizationContextService $orgContext)
+    /**
+     * Ambil UPZ milik user yang sedang login.
+     * Superadmin mendapatkan UPZ pertama jika belum memiliki UPZ sendiri.
+     */
+    protected function getUpz(): UpzProfile
     {
-        $this->orgContext = $orgContext;
+        $user = auth()->user();
+
+        if ($user->upzProfile) {
+            return $user->upzProfile;
+        }
+
+        // Superadmin fallback ke UPZ pertama (untuk monitoring)
+        return UpzProfile::firstOrFail();
     }
 
     /**
@@ -35,9 +43,12 @@ class DashboardController extends Controller
      */
     public function indexIsak35(Isak35ReportService $reportService)
     {
-        $upz = $this->orgContext->getActiveOrganization();
+        $upz = $this->getUpz();
         $financialPosition = $reportService->getStatementOfFinancialPosition(null, $upz->id);
-        $recentJournals = JournalEntry::where('upz_profile_id', $upz->id)->latest('entry_date')->take(8)->get();
+        $recentJournals = JournalEntry::where('upz_profile_id', $upz->id)
+            ->latest('entry_date')
+            ->take(8)
+            ->get();
 
         return view('dashboard-isak35', compact(
             'upz',
@@ -51,21 +62,32 @@ class DashboardController extends Controller
      */
     public function indexBaznas()
     {
-        $upz = $this->orgContext->getActiveOrganization();
-        $stats = $this->orgContext->getStatistics($upz->id);
+        $upz = $this->getUpz();
+        $id  = $upz->id;
 
-        $totalZisCollected = $stats['total_zis_collected'];
-        $totalAmilRetained = $stats['total_amil_retained'];
-        $totalDistributed = $stats['total_distributed'];
-        $totalRemittedToBaznas = $stats['total_remitted_to_baznas'];
-        $availableZisCash = $stats['available_zis_cash'];
-        $effectiveAmilPercentage = $stats['effective_amil_percentage'];
-        $muzakkiCount = $stats['muzakki_count'];
-        $mustahiqCount = $stats['mustahiq_count'];
+        $totalZisCollected    = (float) ZisCollection::where('upz_profile_id', $id)->sum('amount');
+        $totalAmilRetained    = (float) ZisCollection::where('upz_profile_id', $id)->sum('amil_amount');
+        $totalDistributed     = (float) ZisDistribution::where('upz_profile_id', $id)->sum('amount');
+        $totalRemittedToBaznas = (float) BaznasRemittance::where('upz_profile_id', $id)
+            ->where('status', 'verified_by_baznas')
+            ->sum('amount_remitted');
+        $availableZisCash     = max(0, $totalZisCollected - $totalDistributed - $totalRemittedToBaznas);
+        $effectiveAmilPercentage = $totalZisCollected > 0
+            ? ($totalAmilRetained / $totalZisCollected) * 100
+            : 0;
+        $muzakkiCount  = Muzakki::where('upz_profile_id', $id)->count();
+        $mustahiqCount = Mustahiq::where('upz_profile_id', $id)->count();
 
-        // Recent Activity for this active organization
-        $recentCollections = ZisCollection::where('upz_profile_id', $upz->id)->with('muzakki')->latest('transaction_date')->take(5)->get();
-        $recentDistributions = ZisDistribution::where('upz_profile_id', $upz->id)->with('mustahiq')->latest('distribution_date')->take(5)->get();
+        $recentCollections   = ZisCollection::where('upz_profile_id', $id)
+            ->with('muzakki')
+            ->latest('transaction_date')
+            ->take(5)
+            ->get();
+        $recentDistributions = ZisDistribution::where('upz_profile_id', $id)
+            ->with('mustahiq')
+            ->latest('distribution_date')
+            ->take(5)
+            ->get();
 
         return view('dashboard-baznas', compact(
             'upz',

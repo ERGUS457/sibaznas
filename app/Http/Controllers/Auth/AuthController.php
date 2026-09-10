@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     /**
-     * Display the Claymorphic login view.
+     * Display the login view.
      */
     public function showLoginForm()
     {
@@ -34,7 +34,7 @@ class AuthController extends Controller
         ]);
 
         $loginInput = trim($request->input('username'));
-        $fieldType = filter_var($loginInput, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        $fieldType  = filter_var($loginInput, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
         $credentials = [
             $fieldType => $loginInput,
@@ -45,9 +45,32 @@ class AuthController extends Controller
             if (Auth::attempt($credentials, $request->boolean('remember'))) {
                 $request->session()->regenerate();
 
+                $user = Auth::user();
+
+                // Cek status akun
+                if ($user->isPending()) {
+                    Auth::logout();
+                    $request->session()->invalidate();
+                    $request->session()->regenerateToken();
+
+                    return redirect()->route('pending-approval')
+                        ->with('info', 'Akun Anda masih menunggu verifikasi dari administrator.');
+                }
+
+                if ($user->isRejected()) {
+                    Auth::logout();
+                    $request->session()->invalidate();
+                    $request->session()->regenerateToken();
+
+                    return back()->withErrors([
+                        'username' => 'Pendaftaran akun Anda ditolak oleh administrator.' .
+                            ($user->rejection_reason ? ' Alasan: ' . $user->rejection_reason : ''),
+                    ])->onlyInput('username');
+                }
+
                 return redirect()->intended(route('portal'))->with(
                     'success',
-                    'Selamat datang kembali, ' . Auth::user()->name . '!'
+                    'Selamat datang kembali, ' . $user->name . '!'
                 );
             }
         } catch (\Throwable $e) {

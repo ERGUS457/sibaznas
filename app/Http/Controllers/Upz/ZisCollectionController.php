@@ -6,25 +6,30 @@ use App\Http\Controllers\Controller;
 use App\Models\Upz\Muzakki;
 use App\Models\Upz\UpzProfile;
 use App\Models\Upz\ZisCollection;
-use App\Services\OrganizationContextService;
 use App\Services\Upz\ZisCollectionService;
 use Illuminate\Http\Request;
 
 class ZisCollectionController extends Controller
 {
     protected ZisCollectionService $service;
-    protected OrganizationContextService $orgContext;
 
-    public function __construct(ZisCollectionService $service, OrganizationContextService $orgContext)
+    public function __construct(ZisCollectionService $service)
     {
         $this->service = $service;
-        $this->orgContext = $orgContext;
+    }
+
+    protected function getUpz(): UpzProfile
+    {
+        $user = auth()->user();
+        return $user->upzProfile ?? UpzProfile::firstOrFail();
     }
 
     public function index(Request $request)
     {
-        $upz = $this->orgContext->getActiveOrganization();
-        $query = ZisCollection::where('upz_profile_id', $upz->id)->with(['muzakki', 'upzProfile'])->latest('transaction_date');
+        $upz   = $this->getUpz();
+        $query = ZisCollection::where('upz_profile_id', $upz->id)
+            ->with(['muzakki', 'upzProfile'])
+            ->latest('transaction_date');
 
         if ($request->filled('fund_type')) {
             $query->where('fund_type', $request->fund_type);
@@ -36,21 +41,21 @@ class ZisCollectionController extends Controller
                 $q->where('bsz_number', 'like', "%{$search}%")
                   ->orWhereHas('muzakki', function ($mq) use ($search) {
                       $mq->where('name', 'like', "%{$search}%")
-                        ->orWhere('npwz', 'like', "%{$search}%");
+                         ->orWhere('npwz', 'like', "%{$search}%");
                   });
             });
         }
 
         $collections = $query->paginate(15)->withQueryString();
         $totalAmount = ZisCollection::where('upz_profile_id', $upz->id)->sum('amount');
-        $totalAmil = ZisCollection::where('upz_profile_id', $upz->id)->sum('amil_amount');
+        $totalAmil   = ZisCollection::where('upz_profile_id', $upz->id)->sum('amil_amount');
 
         return view('upz.collections.index', compact('collections', 'totalAmount', 'totalAmil'));
     }
 
     public function create()
     {
-        $upz = $this->orgContext->getActiveOrganization();
+        $upz      = $this->getUpz();
         $muzakkis = Muzakki::where('upz_profile_id', $upz->id)->active()->orderBy('name')->get();
 
         return view('upz.collections.create', compact('upz', 'muzakkis'));
@@ -59,15 +64,15 @@ class ZisCollectionController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'upz_profile_id' => 'required|exists:upz_profiles,id',
-            'muzakki_id' => 'required|exists:muzakkis,id',
+            'upz_profile_id'   => 'required|exists:upz_profiles,id',
+            'muzakki_id'       => 'required|exists:muzakkis,id',
             'transaction_date' => 'required|date',
-            'fund_type' => 'required|string',
-            'fund_subtype' => 'nullable|string',
-            'payment_method' => 'required|string',
-            'amount' => 'required|numeric|min:1',
-            'amil_percentage' => 'nullable|numeric|min:0|max:12.50',
-            'description' => 'nullable|string',
+            'fund_type'        => 'required|string',
+            'fund_subtype'     => 'nullable|string',
+            'payment_method'   => 'required|string',
+            'amount'           => 'required|numeric|min:1',
+            'amil_percentage'  => 'nullable|numeric|min:0|max:12.50',
+            'description'      => 'nullable|string',
             'reference_number' => 'nullable|string',
         ]);
 

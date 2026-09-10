@@ -6,22 +6,23 @@ use App\Http\Controllers\Controller;
 use App\Models\Accounting\Account;
 use App\Models\Accounting\JournalEntry;
 use App\Models\Accounting\JournalItem;
-use App\Services\OrganizationContextService;
+use App\Models\Upz\UpzProfile;
 use Illuminate\Http\Request;
 
 class JournalController extends Controller
 {
-    protected OrganizationContextService $orgContext;
-
-    public function __construct(OrganizationContextService $orgContext)
+    protected function getUpz(): UpzProfile
     {
-        $this->orgContext = $orgContext;
+        $user = auth()->user();
+        return $user->upzProfile ?? UpzProfile::firstOrFail();
     }
 
     public function index(Request $request)
     {
-        $upz = $this->orgContext->getActiveOrganization();
-        $query = JournalEntry::where('upz_profile_id', $upz->id)->with('items.account')->latest('entry_date');
+        $upz   = $this->getUpz();
+        $query = JournalEntry::where('upz_profile_id', $upz->id)
+            ->with('items.account')
+            ->latest('entry_date');
 
         if ($request->filled('start_date')) {
             $query->where('entry_date', '>=', $request->start_date);
@@ -30,8 +31,8 @@ class JournalController extends Controller
             $query->where('entry_date', '<=', $request->end_date);
         }
 
-        $entries = $query->paginate(15)->withQueryString();
-        $totalDebit = JournalItem::whereHas('journalEntry', fn($q) => $q->where('upz_profile_id', $upz->id))->sum('debit');
+        $entries     = $query->paginate(15)->withQueryString();
+        $totalDebit  = JournalItem::whereHas('journalEntry', fn($q) => $q->where('upz_profile_id', $upz->id))->sum('debit');
         $totalCredit = JournalItem::whereHas('journalEntry', fn($q) => $q->where('upz_profile_id', $upz->id))->sum('credit');
 
         return view('accounting.journals.index', compact('entries', 'totalDebit', 'totalCredit'));
@@ -39,10 +40,10 @@ class JournalController extends Controller
 
     public function ledger(Request $request)
     {
-        $upz = $this->orgContext->getActiveOrganization();
-        $accounts = Account::active()->orderBy('code')->get();
+        $upz             = $this->getUpz();
+        $accounts        = Account::active()->orderBy('code')->get();
         $selectedAccount = null;
-        $items = collect();
+        $items           = collect();
 
         if ($request->filled('account_id')) {
             $selectedAccount = Account::findOrFail($request->account_id);
@@ -66,12 +67,12 @@ class JournalController extends Controller
 
     public function trialBalance(Request $request)
     {
-        $upz = $this->orgContext->getActiveOrganization();
+        $upz      = $this->getUpz();
         $asOfDate = $request->input('as_of_date', now()->toDateString());
         $accounts = Account::active()->orderBy('code')->get();
 
-        $rows = [];
-        $grandDebit = 0;
+        $rows        = [];
+        $grandDebit  = 0;
         $grandCredit = 0;
 
         foreach ($accounts as $account) {
@@ -80,16 +81,16 @@ class JournalController extends Controller
                 continue;
             }
 
-            $debit = strtoupper($account->normal_balance ?? '') === 'DEBIT' ? $balance : 0;
+            $debit  = strtoupper($account->normal_balance ?? '') === 'DEBIT'  ? $balance : 0;
             $credit = strtoupper($account->normal_balance ?? '') === 'CREDIT' ? $balance : 0;
 
-            $grandDebit += $debit;
+            $grandDebit  += $debit;
             $grandCredit += $credit;
 
             $rows[] = [
                 'account' => $account,
-                'debit' => $debit,
-                'credit' => $credit,
+                'debit'   => $debit,
+                'credit'  => $credit,
             ];
         }
 

@@ -137,6 +137,18 @@
                 </div>
             </div>
 
+            <!-- Registration Card Section -->
+            <div class="pt-3 border-t border-slate-200 text-center space-y-2.5">
+                <div class="text-xs text-slate-600 font-medium">
+                    Belum memiliki akun organisasi / UPZ?
+                </div>
+                <a href="{{ route('register.step1') }}" 
+                   class="w-full py-2.5 px-4 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold transition border border-emerald-300 flex items-center justify-center gap-2 shadow-xs">
+                    <i class="fa-solid fa-building-user text-xs"></i>
+                    <span>Daftarkan Organisasi Baru</span>
+                </a>
+            </div>
+
             <!-- Footer links -->
             <div class="text-center pt-1">
                 <a href="{{ route('landing') }}" class="text-xs font-medium text-slate-500 hover:text-slate-800 flex items-center justify-center gap-1.5 transition">

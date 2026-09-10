@@ -72,6 +72,16 @@ class UpzProfile extends Model
         return $this->hasMany(BaznasRemittance::class);
     }
 
+    public function zisCollections(): HasMany
+    {
+        return $this->hasMany(ZisCollection::class);
+    }
+
+    public function zisDistributions(): HasMany
+    {
+        return $this->hasMany(ZisDistribution::class);
+    }
+
     public function journalEntries(): HasMany
     {
         return $this->hasMany(\App\Models\Accounting\JournalEntry::class, 'upz_profile_id');

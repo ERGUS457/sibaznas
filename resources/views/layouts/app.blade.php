@@ -397,27 +397,24 @@
                 </button>
             </div>
 
-            <!-- Active Organization Badge & Switcher Trigger -->
-            @if(isset($currentOrganization) && $currentOrganization)
+
+            {{-- User's Organization Badge --}}
+            @php $userUpz = auth()->user()?->upzProfile; @endphp
+            @if($userUpz)
             <div class="px-4 py-2.5 border-b border-slate-200 bg-slate-50/50">
-                <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center justify-between mb-1">
-                    <span>Ruang Kerja Aktif</span>
-                    <a href="{{ route('organizations.index') }}" class="text-emerald-700 hover:text-emerald-900 font-semibold text-[10px] flex items-center gap-1">
-                        <span>Ganti</span>
-                        <i class="fa-solid fa-arrow-right-arrow-left text-[9px]"></i>
-                    </a>
-                </div>
-                <a href="{{ route('organizations.index') }}" class="flex items-center gap-2.5 text-slate-800 hover:text-slate-950 group">
-                    <div class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs font-bold flex-shrink-0 group-hover:bg-emerald-200 transition">
+                <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Organisasi Saya</div>
+                <div class="flex items-center gap-2.5 text-slate-800">
+                    <div class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs font-bold flex-shrink-0">
                         <i class="fa-solid fa-building"></i>
                     </div>
                     <div class="truncate">
-                        <span class="font-bold text-xs block truncate text-slate-900">{{ $currentOrganization->name }}</span>
-                        <span class="text-[10px] text-slate-500 font-medium truncate block">Kode: {{ $currentOrganization->code }} &bull; {{ ucfirst(str_replace('_', ' ', $currentOrganization->institution_type ?? 'UPZ')) }}</span>
+                        <span class="font-bold text-xs block truncate text-slate-900">{{ $userUpz->name }}</span>
+                        <span class="text-[10px] text-slate-500 font-medium truncate block">{{ $userUpz->code }}</span>
                     </div>
-                </a>
+                </div>
             </div>
             @endif
+
 
             <!-- Workspace Switcher Button -->
             <div class="p-3 border-b border-slate-200 bg-slate-50/70">
@@ -585,25 +582,27 @@
                     </div>
                 @endif
 
-                <!-- Entitas Organisasi & UPZ -->
+                <!-- Admin Menu (Superadmin only) -->
+                @if(auth()->user()?->isSuperAdmin())
                 <div class="pt-4 border-t border-slate-100">
-                    <div class="px-3 mb-2 text-[10px] font-extrabold uppercase tracking-wider text-slate-400 flex items-center justify-between">
-                        <span>Organisasi / UPZ</span>
-                        <span class="text-[9px] bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded font-bold">Multi-Entitas</span>
+                    <div class="px-3 mb-2 text-[10px] font-extrabold uppercase tracking-wider text-slate-400">
+                        <span>Administrasi</span>
                     </div>
                     <div class="space-y-1">
-                        <a href="{{ route('organizations.index') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('organizations.index') ? 'clay-card-soft font-bold text-slate-900' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
-                            <i class="fa-solid fa-building-user w-4 text-center {{ request()->routeIs('organizations.index') ? 'text-emerald-700' : 'text-slate-400' }}"></i>
-                            <span>Kelola Organisasi</span>
-                        </a>
-                        <a href="{{ route('organizations.create') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('organizations.create') ? 'clay-card-soft font-bold text-slate-900' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
-                            <i class="fa-solid fa-plus w-4 text-center {{ request()->routeIs('organizations.create') ? 'text-emerald-700' : 'text-slate-400' }}"></i>
-                            <span>+ Daftarkan Baru</span>
+                        <a href="{{ route('admin.users.index') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('admin.*') ? 'clay-card-soft font-bold text-slate-900' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
+                            <i class="fa-solid fa-users-cog w-4 text-center {{ request()->routeIs('admin.*') ? 'text-emerald-700' : 'text-slate-400' }}"></i>
+                            <span>Manajemen Pengguna</span>
+                            @php $pendingCount = \App\Models\User::where('status', 'pending')->count(); @endphp
+                            @if($pendingCount > 0)
+                                <span class="ml-auto bg-amber-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">{{ $pendingCount }}</span>
+                            @endif
                         </a>
                     </div>
                 </div>
+                @endif
 
             </nav>
+
 
             <!-- Sidebar Footer: Active User Profile & Logout -->
             <div class="p-4 border-t border-slate-100 bg-slate-50/70 space-y-3">
@@ -613,7 +612,16 @@
                     </div>
                     <div class="overflow-hidden flex-1">
                         <div class="text-xs font-bold text-slate-800 truncate">{{ auth()->user()->name ?? 'Administrator' }}</div>
-                        <div class="text-[10px] text-slate-500 font-semibold truncate">{{ auth()->user()->username ?? 'admin' }} &bull; Superadmin</div>
+                        <div class="text-[10px] text-slate-500 font-semibold truncate">
+                            {{ auth()->user()->username ?? 'admin' }} &bull;
+                            {{ match(auth()->user()->role ?? '') {
+                                'superadmin' => 'Superadmin',
+                                'pengurus_upz' => 'Pengurus UPZ',
+                                'akuntan' => 'Akuntan',
+                                'baznas_supervisor' => 'Supervisor BAZNAS',
+                                default => 'Pengguna'
+                            } }}
+                        </div>
                     </div>
                 </div>
 
@@ -657,48 +665,15 @@
                         </div>
                     </div>
                     <div class="flex items-center space-x-2 sm:space-x-3">
-                        <!-- Organization Switcher Dropdown (Alpine.js) -->
-                        @if(isset($currentOrganization) && $currentOrganization)
-                        <div class="relative" x-data="{ orgOpen: false }">
-                            <button @click="orgOpen = !orgOpen" @click.away="orgOpen = false" type="button" 
-                                    class="clay-btn-white px-2.5 py-1.5 text-xs font-semibold flex items-center gap-1.5 text-slate-700 hover:text-slate-900 border-slate-200">
-                                <i class="fa-solid fa-building-shield text-emerald-700 text-[11px]"></i>
-                                <span class="max-w-[120px] sm:max-w-[190px] truncate font-bold text-slate-800">{{ $currentOrganization->name }}</span>
-                                <i class="fa-solid fa-chevron-down text-[9px] text-slate-400"></i>
-                            </button>
-
-                            <!-- Dropdown Menu -->
-                            <div x-show="orgOpen" x-cloak 
-                                 class="absolute right-0 mt-1.5 w-72 rounded-xl bg-white border border-slate-200 shadow-xl py-2 z-50 text-xs">
-                                <div class="px-3 py-1.5 border-b border-slate-100 flex items-center justify-between">
-                                    <span class="font-bold text-[10px] text-slate-400 uppercase tracking-wider">Ruang Kerja Aktif</span>
-                                    <a href="{{ route('organizations.index') }}" class="text-[11px] text-emerald-700 hover:underline font-semibold">Kelola</a>
-                                </div>
-                                <div class="max-h-60 overflow-y-auto py-1">
-                                    @foreach($availableOrganizations ?? [] as $availOrg)
-                                    <form action="{{ route('organizations.switch', $availOrg->id) }}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="w-full px-3 py-2 text-left flex items-center justify-between hover:bg-slate-50 transition {{ $availOrg->id === $currentOrganization->id ? 'bg-emerald-50/70 font-bold text-emerald-950' : 'text-slate-700' }}">
-                                            <div class="truncate mr-2">
-                                                <div class="truncate text-xs">{{ $availOrg->name }}</div>
-                                                <div class="text-[10px] text-slate-400 font-normal">{{ $availOrg->code }} &bull; {{ ucfirst(str_replace('_', ' ', $availOrg->institution_type)) }}</div>
-                                            </div>
-                                            @if($availOrg->id === $currentOrganization->id)
-                                                <i class="fa-solid fa-check text-emerald-600 text-xs flex-shrink-0"></i>
-                                            @endif
-                                        </button>
-                                    </form>
-                                    @endforeach
-                                </div>
-                                <div class="px-3 pt-2 border-t border-slate-100">
-                                    <a href="{{ route('organizations.create') }}" class="w-full py-1.5 px-2.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-semibold flex items-center justify-center gap-1.5 text-xs transition">
-                                        <i class="fa-solid fa-plus text-[10px]"></i>
-                                        <span>+ Daftarkan Organisasi Baru</span>
-                                    </a>
-                                </div>
-                            </div>
+                        {{-- User Organization Badge (simple, no switcher) --}}
+                        @php $topbarUpz = auth()->user()?->upzProfile; @endphp
+                        @if($topbarUpz)
+                        <div class="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-700">
+                            <i class="fa-solid fa-building text-emerald-700 text-[11px]"></i>
+                            <span class="max-w-[150px] truncate">{{ $topbarUpz->name }}</span>
                         </div>
                         @endif
+
 
                         @if($isBaznas)
                             <a href="{{ route('collections.create') }}" class="clay-btn-emerald text-xs font-semibold px-3 py-1.5 flex items-center space-x-1.5">

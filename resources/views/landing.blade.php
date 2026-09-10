@@ -109,16 +109,20 @@
             </div>
 
             <!-- CTA Button -->
-            <div class="flex items-center space-x-3">
+            <div class="flex items-center space-x-2 sm:space-x-3">
                 @auth
-                <a href="{{ route('dashboard') }}" class="clay-btn-emerald px-4 py-2 text-xs font-bold flex items-center gap-1.5">
-                    <i class="fa-solid fa-gauge-high text-xs"></i>
-                    <span>Buka Panel Kerja</span>
+                <a href="{{ route('portal') }}" class="clay-btn-emerald px-4 py-2 text-xs font-bold flex items-center gap-1.5">
+                    <i class="fa-solid fa-layer-group text-xs"></i>
+                    <span>Portal Kerja</span>
                 </a>
                 @else
+                <a href="{{ route('register.step1') }}" class="clay-btn-white px-3.5 py-2 text-xs font-bold flex items-center gap-1.5 text-emerald-700 border-emerald-300 hover:bg-emerald-50">
+                    <i class="fa-solid fa-building-user text-xs"></i>
+                    <span>Daftar Organisasi</span>
+                </a>
                 <a href="{{ route('login') }}" class="clay-btn-emerald px-4 py-2 text-xs font-bold flex items-center gap-1.5">
                     <i class="fa-solid fa-arrow-right-to-bracket text-xs"></i>
-                    <span>Masuk (admin)</span>
+                    <span>Masuk</span>
                 </a>
                 @endauth
             </div>
@@ -154,14 +158,18 @@
                     <span>Buka Portal Ruang Kerja</span>
                 </a>
                 @else
-                <a href="{{ route('login') }}" class="clay-btn-emerald px-7 py-3.5 text-sm font-bold flex items-center gap-2">
-                    <i class="fa-solid fa-right-to-bracket"></i>
+                <a href="{{ route('register.step1') }}" class="clay-btn-emerald px-7 py-3.5 text-sm font-bold flex items-center gap-2 shadow-sm">
+                    <i class="fa-solid fa-building-user"></i>
+                    <span>Daftar Organisasi Baru</span>
+                </a>
+                <a href="{{ route('login') }}" class="clay-btn-white px-6 py-3.5 text-sm font-bold flex items-center gap-2 text-slate-800 border-slate-300">
+                    <i class="fa-solid fa-right-to-bracket text-emerald-600"></i>
                     <span>Masuk ke Aplikasi</span>
                 </a>
                 @endauth
-                <a href="#modul-operasional" class="clay-btn-white px-6 py-3.5 text-sm font-bold flex items-center gap-2 text-slate-700">
-                    <i class="fa-solid fa-book-bookmark text-emerald-600"></i>
-                    <span>Pelajari Modul Penggunaan</span>
+                <a href="#modul-operasional" class="clay-btn-white px-5 py-3.5 text-sm font-bold flex items-center gap-2 text-slate-600">
+                    <i class="fa-solid fa-book-bookmark text-slate-400"></i>
+                    <span>Pelajari Modul</span>
                 </a>
             </div>
 
@@ -520,11 +528,15 @@
                     </div>
                 </div>
 
-                <!-- CTA Button to Login -->
-                <div class="pt-2">
-                    <a href="{{ route('login') }}" class="clay-btn-emerald inline-flex items-center space-x-2 px-8 py-4 font-bold text-sm tracking-wide">
-                        <span>Buka Halaman Login Sekarang</span>
+                <!-- CTA Button to Login & Register -->
+                <div class="pt-2 flex flex-wrap items-center justify-center gap-3">
+                    <a href="{{ route('login') }}" class="clay-btn-emerald inline-flex items-center space-x-2 px-8 py-3.5 font-bold text-sm tracking-wide">
+                        <span>Buka Halaman Login</span>
                         <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                    <a href="{{ route('register.step1') }}" class="clay-btn-white inline-flex items-center space-x-2 px-6 py-3.5 font-bold text-sm text-emerald-800 border-emerald-300 hover:bg-emerald-50">
+                        <i class="fa-solid fa-building-user text-emerald-600 text-xs"></i>
+                        <span>Daftarkan Organisasi Baru</span>
                     </a>
                 </div>
             </div>

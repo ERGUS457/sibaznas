@@ -14,6 +14,13 @@ use Tests\TestCase;
 
 class UpzAndIsak35IntegrationTest extends TestCase
 {
+    protected function authenticateAdmin(): \App\Models\User
+    {
+        $admin = \App\Models\User::where('role', 'superadmin')->first();
+        $this->actingAs($admin);
+        return $admin;
+    }
+
     public function test_dashboard_loads_successfully(): void
     {
         $response = $this->get('/');
@@ -25,6 +32,7 @@ class UpzAndIsak35IntegrationTest extends TestCase
 
     public function test_collections_index_and_bsz_display(): void
     {
+        $this->authenticateAdmin();
         $response = $this->get(route('collections.index'));
         $response->assertStatus(200);
         $response->assertSee('Penerimaan ZIS & DSKL');
@@ -43,6 +51,7 @@ class UpzAndIsak35IntegrationTest extends TestCase
 
     public function test_distributions_and_remittances_pages(): void
     {
+        $this->authenticateAdmin();
         $distResponse = $this->get(route('distributions.index'));
         $distResponse->assertStatus(200);
         $distResponse->assertSee('Penyaluran ZIS (Mustahiq 8 Asnaf)');
@@ -54,6 +63,7 @@ class UpzAndIsak35IntegrationTest extends TestCase
 
     public function test_accounting_journals_and_ledger(): void
     {
+        $this->authenticateAdmin();
         $journalResponse = $this->get(route('journals.index'));
         $journalResponse->assertStatus(200);
         $journalResponse->assertSee('Jurnal Umum (General Journal)');
@@ -65,6 +75,7 @@ class UpzAndIsak35IntegrationTest extends TestCase
 
     public function test_de_isak35_financial_reports(): void
     {
+        $this->authenticateAdmin();
         // 1. Posisi Keuangan (Neraca)
         $fpResponse = $this->get(route('reports.financial-position'));
         $fpResponse->assertStatus(200);
@@ -147,6 +158,7 @@ class UpzAndIsak35IntegrationTest extends TestCase
 
     public function test_portal_and_modular_dashboards_render_successfully(): void
     {
+        $this->authenticateAdmin();
         // 1. Portal Workspace Selector
         $portalResponse = $this->get(route('portal'));
         $portalResponse->assertStatus(200);
@@ -180,6 +192,7 @@ class UpzAndIsak35IntegrationTest extends TestCase
 
     public function test_perbaznas_official_lampiran_reports_render_successfully(): void
     {
+        $this->authenticateAdmin();
         // Lampiran I: Rencana Penerimaan
         $r1 = $this->get(route('reports.perbaznas.lampiran1'));
         $r1->assertStatus(200);
@@ -219,59 +232,80 @@ class UpzAndIsak35IntegrationTest extends TestCase
         }
     }
 
-    public function test_multi_organization_registration_and_switching(): void
+    public function test_user_registration_and_admin_approval_workflow(): void
     {
-        // 1. Check organizations index page
-        $indexResp = $this->get(route('organizations.index'));
-        $indexResp->assertStatus(200);
-        $indexResp->assertSee('Entitas Organisasi');
+        // 1. Visit Register Step 1
+        $step1Get = $this->get(route('register.step1'));
+        $step1Get->assertStatus(200);
+        $step1Get->assertSee('Buat Akun Baru');
 
-        // 2. Check create page
-        $createResp = $this->get(route('organizations.create'));
-        $createResp->assertStatus(200);
-        $createResp->assertSee('Pendaftaran Organisasi');
+        // 2. Submit Step 1 (User Account Data)
+        $suffix = time();
+        $step1Post = $this->post(route('register.step1.submit'), [
+            'name' => 'Ahmad Pengurus Baru',
+            'username' => 'ahmad_upz_' . $suffix,
+            'email' => 'ahmad_' . $suffix . '@masjid.or.id',
+            'phone' => '081234567890',
+            'password' => 'password123',
+            'password_confirmation' => 'password123',
+        ]);
+        $step1Post->assertRedirect(route('register.step2'));
 
-        // 3. Register a new organization
-        $uniqueCode = 'UPZ-TEST-' . time();
-        $storeResp = $this->post(route('organizations.store'), [
-            'name' => 'Yayasan Generasi Gemilang',
-            'code' => $uniqueCode,
-            'institution_type' => 'yayasan',
-            'parent_baznas_level' => 'kab_kota',
+        // 3. Visit Register Step 2
+        $step2Get = $this->get(route('register.step2'));
+        $step2Get->assertStatus(200);
+        $step2Get->assertSee('Data Organisasi / UPZ');
+
+        // 4. Submit Step 2 (UPZ Organization Data)
+        $uniqueCode = 'UPZ-REG-' . $suffix;
+        $step2Post = $this->post(route('register.step2.submit'), [
+            'upz_name' => 'UPZ Masjid Jami Al-Hidayah',
+            'upz_code' => $uniqueCode,
+            'institution_type' => 'Masjid',
+            'parent_baznas_level' => 'BAZNAS Kab/Kota',
             'parent_baznas_name' => 'BAZNAS Kota Surabaya',
-            'sk_number' => 'SK/2026/YGG/001',
-            'chairman_name' => 'Dr. H. Ahmad Santoso',
+            'sk_number' => 'SK/2026/MJA/001',
+            'address' => 'Jl. Masjid No. 45',
+            'city' => 'Surabaya',
+            'province' => 'Jawa Timur',
+            'chairman_name' => 'H. Ahmad Syamsuddin',
             'bank_name' => 'Bank Syariah Indonesia',
-            'bank_account_number' => '7890123456',
-            'bank_account_name' => 'YAYASAN GENERASI GEMILANG',
+            'bank_account_number' => '7123456789',
+            'bank_account_name' => 'UPZ MASJID AL-HIDAYAH',
             'amil_share_percentage' => 12.50,
         ]);
+        $step2Post->assertRedirect(route('pending-approval'));
 
-        $storeResp->assertRedirect(route('portal'));
+        // 5. Verify User and UPZ were created in database with pending status
+        $user = \App\Models\User::where('username', 'ahmad_upz_' . $suffix)->first();
+        $this->assertNotNull($user);
+        $this->assertEquals('pending', $user->status);
+        $this->assertTrue($user->isPending());
 
-        // Verify organization created
-        $newOrg = UpzProfile::where('code', $uniqueCode)->first();
-        $this->assertNotNull($newOrg);
-        $this->assertEquals('Yayasan Generasi Gemilang', $newOrg->name);
+        $upz = \App\Models\Upz\UpzProfile::where('code', $uniqueCode)->first();
+        $this->assertNotNull($upz);
+        $this->assertEquals('UPZ Masjid Jami Al-Hidayah', $upz->name);
+        $this->assertEquals($upz->id, $user->upz_profile_id);
 
-        // Verify session active org switched
-        $this->assertEquals($newOrg->id, session('active_upz_id'));
+        // 6. Test Admin User Approval Workflow
+        $admin = \App\Models\User::where('role', 'superadmin')->first();
+        $this->actingAs($admin);
 
-        // Verify it starts completely clean (0 transactions)
-        $orgContext = app(\App\Services\OrganizationContextService::class);
-        $stats = $orgContext->getStatistics($newOrg->id);
-        $this->assertEquals(0, $stats['total_zis_collected']);
-        $this->assertEquals(0, $stats['total_distributed']);
-        $this->assertEquals(0, $stats['journal_entries_count']);
-        $this->assertEquals(0, $stats['muzakki_count']);
-        $this->assertEquals(0, $stats['mustahiq_count']);
+        $adminIndex = $this->get(route('admin.users.index'));
+        $adminIndex->assertStatus(200);
+        $adminIndex->assertSee('Manajemen Pengguna');
+        $adminIndex->assertSee('Ahmad Pengurus Baru');
 
-        // 4. Test switching back to demo organization (ID 1)
-        $switchResp = $this->from(route('portal'))->post(route('organizations.switch', 1));
-        $switchResp->assertStatus(302);
-        $this->assertEquals(1, session('active_upz_id'));
+        // 7. Approve the pending user
+        $approveResp = $this->post(route('admin.users.approve', $user->id));
+        $approveResp->assertStatus(302);
 
-        // Clean up test organization
-        $newOrg->delete();
+        $user->refresh();
+        $this->assertEquals('active', $user->status);
+        $this->assertTrue($user->isActive());
+
+        // Clean up test records
+        $user->delete();
+        $upz->delete();
     }
 }

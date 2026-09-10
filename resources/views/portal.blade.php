@@ -125,7 +125,7 @@
         </div>
         @endif
 
-        <!-- Active Organization Workspace Card -->
+        <!-- Organization Workspace Card -->
         <div class="formal-card p-4 sm:p-5 mb-8 bg-white border-slate-200">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div class="flex items-center gap-3.5">
@@ -135,7 +135,7 @@
                     <div>
                         <div class="flex items-center gap-2 flex-wrap">
                             <span class="text-[10px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-800 px-2 py-0.5 rounded border border-emerald-200">
-                                ENTITAS ORGANISASI AKTIF
+                                ENTITAS ORGANISASI / UPZ
                             </span>
                             <span class="text-xs text-slate-500 font-mono font-semibold">
                                 Kode: {{ $upz->code }}
@@ -153,30 +153,16 @@
                 </div>
 
                 <div class="flex items-center gap-2.5 flex-wrap">
-                    @if(count($allOrganizations ?? []) > 1)
-                    <form action="" method="POST" id="portalOrgSwitchForm" class="flex items-center gap-1.5">
-                        @csrf
-                        <select onchange="if(this.value){ this.form.action = '/organizations/' + this.value + '/switch'; this.form.submit(); }" 
-                                class="btn-formal-outline px-3 py-2 text-xs font-semibold bg-white cursor-pointer"
-                                title="Beralih Entitas Organisasi">
-                            @foreach($allOrganizations as $availOrg)
-                                <option value="{{ $availOrg->id }}" {{ $availOrg->id === $upz->id ? 'selected' : '' }}>
-                                    {{ $availOrg->name }} ({{ $availOrg->code }})
-                                </option>
-                            @endforeach
-                        </select>
-                    </form>
+                    @if(auth()->user()?->isSuperAdmin())
+                        @php $pendingCount = \App\Models\User::where('status', 'pending')->count(); @endphp
+                        <a href="{{ route('admin.users.index') }}" class="btn-formal-primary px-3.5 py-2 text-xs flex items-center gap-2">
+                            <i class="fa-solid fa-users-gear text-[11px]"></i>
+                            <span>Manajemen Pengguna</span>
+                            @if($pendingCount > 0)
+                                <span class="bg-amber-400 text-slate-900 text-[10px] font-bold px-1.5 py-0.2 rounded-full">{{ $pendingCount }}</span>
+                            @endif
+                        </a>
                     @endif
-
-                    <a href="{{ route('organizations.create') }}" class="btn-formal-primary px-3.5 py-2 text-xs flex items-center gap-1.5">
-                        <i class="fa-solid fa-plus text-[11px]"></i>
-                        <span>Organisasi Baru</span>
-                    </a>
-
-                    <a href="{{ route('organizations.index') }}" class="btn-formal-outline px-3 py-2 text-xs flex items-center gap-1.5" title="Kelola Semua Organisasi">
-                        <i class="fa-solid fa-sliders text-slate-400"></i>
-                        <span>Kelola</span>
-                    </a>
                 </div>
             </div>
         </div>

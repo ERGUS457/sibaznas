@@ -5,22 +5,22 @@ namespace App\Http\Controllers\Upz;
 use App\Http\Controllers\Controller;
 use App\Models\Upz\Muzakki;
 use App\Models\Upz\UpzProfile;
-use App\Services\OrganizationContextService;
 use Illuminate\Http\Request;
 
 class MuzakkiController extends Controller
 {
-    protected OrganizationContextService $orgContext;
-
-    public function __construct(OrganizationContextService $orgContext)
+    protected function getUpz(): UpzProfile
     {
-        $this->orgContext = $orgContext;
+        $user = auth()->user();
+        return $user->upzProfile ?? UpzProfile::firstOrFail();
     }
 
     public function index(Request $request)
     {
-        $upz = $this->orgContext->getActiveOrganization();
-        $query = Muzakki::where('upz_profile_id', $upz->id)->withCount('collections')->latest();
+        $upz   = $this->getUpz();
+        $query = Muzakki::where('upz_profile_id', $upz->id)
+            ->withCount('collections')
+            ->latest();
 
         if ($request->filled('search')) {
             $search = $request->search;
@@ -38,7 +38,7 @@ class MuzakkiController extends Controller
 
     public function create()
     {
-        $upz = $this->orgContext->getActiveOrganization();
+        $upz = $this->getUpz();
 
         return view('upz.muzakkis.create', compact('upz'));
     }
@@ -46,16 +46,16 @@ class MuzakkiController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'upz_profile_id' => 'required|exists:upz_profiles,id',
-            'type' => 'required|in:individu,badan',
-            'name' => 'required|string|max:255',
-            'nik_or_npwp' => 'nullable|string',
-            'npwz' => 'nullable|string',
-            'email' => 'nullable|email',
-            'phone' => 'nullable|string',
-            'workplace_or_agency' => 'nullable|string',
-            'address' => 'nullable|string',
-            'city' => 'nullable|string',
+            'upz_profile_id'        => 'required|exists:upz_profiles,id',
+            'type'                  => 'required|in:individu,badan',
+            'name'                  => 'required|string|max:255',
+            'nik_or_npwp'           => 'nullable|string',
+            'npwz'                  => 'nullable|string',
+            'email'                 => 'nullable|email',
+            'phone'                 => 'nullable|string',
+            'workplace_or_agency'   => 'nullable|string',
+            'address'               => 'nullable|string',
+            'city'                  => 'nullable|string',
         ]);
 
         $muzakki = Muzakki::create($validated);

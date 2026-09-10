@@ -8,19 +8,22 @@ use App\Models\Upz\UpzProfile;
 use App\Models\Upz\ZisCollection;
 use App\Models\Upz\ZisDistribution;
 use App\Services\Accounting\Isak35ReportService;
-use App\Services\OrganizationContextService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
     protected Isak35ReportService $reportService;
-    protected OrganizationContextService $orgContext;
 
-    public function __construct(Isak35ReportService $reportService, OrganizationContextService $orgContext)
+    public function __construct(Isak35ReportService $reportService)
     {
         $this->reportService = $reportService;
-        $this->orgContext = $orgContext;
+    }
+
+    protected function getUpz(): UpzProfile
+    {
+        $user = auth()->user();
+        return $user?->upzProfile ?? UpzProfile::firstOrFail();
     }
 
     /**
@@ -29,7 +32,7 @@ class ReportController extends Controller
     public function financialPosition(Request $request)
     {
         $asOfDate = $request->input('as_of_date', now()->toDateString());
-        $upz = $this->orgContext->getActiveOrganization();
+        $upz = $this->getUpz();
         $report = $this->reportService->getStatementOfFinancialPosition($asOfDate, $upz->id);
 
         return view('reports.financial-position', compact('report', 'upz', 'asOfDate'));
@@ -42,7 +45,7 @@ class ReportController extends Controller
     {
         $startDate = $request->input('start_date', Carbon::now()->startOfYear()->toDateString());
         $endDate = $request->input('end_date', now()->toDateString());
-        $upz = $this->orgContext->getActiveOrganization();
+        $upz = $this->getUpz();
         $report = $this->reportService->getStatementOfComprehensiveIncome($startDate, $endDate, $upz->id);
 
         return view('reports.comprehensive-income', compact('report', 'upz', 'startDate', 'endDate'));
@@ -55,7 +58,7 @@ class ReportController extends Controller
     {
         $startDate = $request->input('start_date', Carbon::now()->startOfYear()->toDateString());
         $endDate = $request->input('end_date', now()->toDateString());
-        $upz = $this->orgContext->getActiveOrganization();
+        $upz = $this->getUpz();
         $report = $this->reportService->getStatementOfChangesInNetAssets($startDate, $endDate, $upz->id);
 
         return view('reports.net-assets', compact('report', 'upz', 'startDate', 'endDate'));
@@ -68,7 +71,7 @@ class ReportController extends Controller
     {
         $startDate = $request->input('start_date', Carbon::now()->startOfYear()->toDateString());
         $endDate = $request->input('end_date', now()->toDateString());
-        $upz = $this->orgContext->getActiveOrganization();
+        $upz = $this->getUpz();
         $report = $this->reportService->getStatementOfCashFlows($startDate, $endDate, $upz->id);
 
         return view('reports.cash-flow', compact('report', 'upz', 'startDate', 'endDate'));
@@ -80,7 +83,7 @@ class ReportController extends Controller
     public function perbaznasCompliance(Request $request)
     {
         $year = $request->input('year', Carbon::now()->year);
-        $upz = $this->orgContext->getActiveOrganization();
+        $upz = $this->getUpz();
 
         $collectionsByFund = ZisCollection::where('upz_profile_id', $upz->id)
             ->whereYear('transaction_date', $year)
@@ -127,7 +130,7 @@ class ReportController extends Controller
     public function perbaznasLampiran1(Request $request)
     {
         $year = $request->input('year', Carbon::now()->year);
-        $upz = $this->orgContext->getActiveOrganization();
+        $upz = $this->getUpz();
 
         $zakatMalPerorangan = (float) ZisCollection::where('upz_profile_id', $upz->id)->whereYear('transaction_date', $year)->where('fund_type', 'zakat_mal_perorangan')->sum('amount');
         $zakatMalBadan = (float) ZisCollection::where('upz_profile_id', $upz->id)->whereYear('transaction_date', $year)->where('fund_type', 'zakat_mal_badan')->sum('amount');
@@ -149,7 +152,7 @@ class ReportController extends Controller
     public function perbaznasLampiran2(Request $request)
     {
         $year = $request->input('year', Carbon::now()->year);
-        $upz = $this->orgContext->getActiveOrganization();
+        $upz = $this->getUpz();
 
         $asnafs = ['fakir', 'miskin', 'amil', 'mualaf', 'riqab', 'gharimin', 'fisabilillah', 'ibnu_sabil'];
         $distData = [];
@@ -181,7 +184,7 @@ class ReportController extends Controller
     public function perbaznasLampiran3(Request $request)
     {
         $year = $request->input('year', Carbon::now()->year);
-        $upz = $this->orgContext->getActiveOrganization();
+        $upz = $this->getUpz();
 
         $programs = ['pendidikan', 'kesehatan', 'kemanusiaan', 'ekonomi', 'dakwah_advokasi'];
         $progData = [];
@@ -212,7 +215,7 @@ class ReportController extends Controller
     public function perbaznasLampiran5(Request $request)
     {
         $year = $request->input('year', Carbon::now()->year);
-        $upz = $this->orgContext->getActiveOrganization();
+        $upz = $this->getUpz();
 
         $amilFromZakat = (float) ZisCollection::where('upz_profile_id', $upz->id)->whereYear('transaction_date', $year)->sum('amil_amount');
         $institutionalGrant = 0.0;
@@ -244,7 +247,7 @@ class ReportController extends Controller
     {
         $month = $request->input('month', Carbon::now()->month);
         $year = $request->input('year', Carbon::now()->year);
-        $upz = $this->orgContext->getActiveOrganization();
+        $upz = $this->getUpz();
 
         $distributions = ZisDistribution::with('mustahiq')
             ->where('upz_profile_id', $upz->id)

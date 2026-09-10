@@ -25,12 +25,17 @@ class User extends Authenticatable
         'role',
         'phone',
         'upz_profile_id',
+        'status',
+        'rejection_reason',
+        'verified_at',
     ];
 
     public function upzProfile(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(\App\Models\Upz\UpzProfile::class);
     }
+
+    // ─── Role Helpers ───────────────────────────────────────────────────────────
 
     public function isSuperAdmin(): bool
     {
@@ -52,6 +57,43 @@ class User extends Authenticatable
         return in_array($this->role, ['superadmin', 'baznas_supervisor']);
     }
 
+    // ─── Status Helpers ──────────────────────────────────────────────────────────
+
+    public function isPending(): bool
+    {
+        return $this->status === 'pending';
+    }
+
+    public function isActive(): bool
+    {
+        return $this->status === 'active';
+    }
+
+    public function isRejected(): bool
+    {
+        return $this->status === 'rejected';
+    }
+
+    public function getStatusLabelAttribute(): string
+    {
+        return match ($this->status) {
+            'pending'  => 'Menunggu Verifikasi',
+            'active'   => 'Aktif',
+            'rejected' => 'Ditolak',
+            default    => 'Tidak Diketahui',
+        };
+    }
+
+    public function getStatusColorAttribute(): string
+    {
+        return match ($this->status) {
+            'pending'  => 'yellow',
+            'active'   => 'emerald',
+            'rejected' => 'red',
+            default    => 'gray',
+        };
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -69,5 +111,6 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'verified_at'       => 'datetime',
     ];
 }
