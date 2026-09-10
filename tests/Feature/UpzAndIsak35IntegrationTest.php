@@ -68,6 +68,10 @@ class UpzAndIsak35IntegrationTest extends TestCase
         $journalResponse->assertStatus(200);
         $journalResponse->assertSee('Jurnal Umum (General Journal)');
 
+        $createResponse = $this->get(route('journals.create'));
+        $createResponse->assertStatus(200);
+        $createResponse->assertSee('Input Transaksi Keuangan / Jurnal Umum');
+
         $trialBalanceResponse = $this->get(route('journals.trial-balance'));
         $trialBalanceResponse->assertStatus(200);
         $trialBalanceResponse->assertSee('Neraca Saldo (Trial Balance)');

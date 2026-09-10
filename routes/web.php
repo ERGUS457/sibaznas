@@ -69,6 +69,8 @@ Route::middleware(['auth', 'active'])->group(function () {
 
     // Module 2: Accounting & General Ledger
     Route::get('journals', [JournalController::class, 'index'])->name('journals.index');
+    Route::get('journals/create', [JournalController::class, 'create'])->name('journals.create');
+    Route::post('journals', [JournalController::class, 'store'])->name('journals.store');
     Route::get('journals/ledger', [JournalController::class, 'ledger'])->name('journals.ledger');
     Route::get('journals/trial-balance', [JournalController::class, 'trialBalance'])->name('journals.trial-balance');
 

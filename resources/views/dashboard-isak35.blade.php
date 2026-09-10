@@ -24,11 +24,15 @@
         </div>
 
         <div class="flex items-center gap-2 flex-wrap">
+            <a href="{{ route('journals.create') }}" class="clay-btn-sky px-3.5 py-2 text-xs font-semibold flex items-center gap-2">
+                <i class="fa-solid fa-plus text-[11px]"></i>
+                <span>Input Data Keuangan</span>
+            </a>
             <a href="{{ route('portal') }}" class="clay-btn-white px-3.5 py-2 text-xs font-semibold flex items-center gap-2 text-slate-700">
                 <i class="fa-solid fa-arrow-left text-slate-400"></i>
                 <span>Ganti Modul</span>
             </a>
-            <a href="{{ route('reports.financial-position') }}" class="clay-btn-sky px-3.5 py-2 text-xs font-semibold flex items-center gap-2">
+            <a href="{{ route('reports.financial-position') }}" class="clay-btn-white px-3.5 py-2 text-xs font-semibold flex items-center gap-2 text-slate-700">
                 <i class="fa-solid fa-file-invoice-dollar text-[11px]"></i>
                 <span>Posisi Keuangan</span>
             </a>

@@ -10,6 +10,10 @@
             <p class="text-xs text-slate-500">Pencatatan berpasangan (Double-Entry Bookkeeping) transaksi penerimaan, penyaluran, dan setoran BAZNAS.</p>
         </div>
         <div class="flex items-center space-x-2">
+            <a href="{{ route('journals.create') }}" class="clay-btn-sky text-xs font-semibold px-3 py-2 rounded-xl flex items-center gap-1.5 shadow-xs">
+                <i class="fa-solid fa-plus text-[11px]"></i>
+                <span>Input Transaksi Keuangan</span>
+            </a>
             <a href="{{ route('journals.ledger') }}" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 text-xs font-semibold px-3 py-2 rounded-xl transition">
                 <i class="fa-solid fa-table-list mr-1"></i> Buku Besar
             </a>
