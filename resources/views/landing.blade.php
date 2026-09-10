@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIM-UPZ BAZNAS &bull; Terintegrasi DE ISAK 35 FORMAT A</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -88,9 +89,7 @@
         <nav class="clay-card px-5 py-3.5 flex items-center justify-between">
             <!-- Brand Logo -->
             <a href="{{ route('landing') }}" class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-lg bg-emerald-700 text-white flex items-center justify-center text-lg font-semibold shadow-xs">
-                    <i class="fa-solid fa-layer-group"></i>
-                </div>
+                <img src="{{ asset('images/logo.png') }}" alt="Logo SIM-UPZ BAZNAS" class="w-10 h-10 rounded-lg object-contain bg-white border border-slate-200 p-0.5 shadow-xs flex-shrink-0">
                 <div>
                     <div class="flex items-center gap-1.5">
                         <span class="font-bold text-slate-900 text-base tracking-tight">SIM-UPZ BAZNAS</span>

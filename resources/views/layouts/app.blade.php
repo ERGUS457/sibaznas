@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'SIM-UPZ BAZNAS & ISAK 35')</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -363,9 +364,7 @@
             <div class="h-16 px-5 border-b border-slate-200 flex items-center justify-between bg-white">
                 @if($isIsak35)
                     <a href="{{ route('dashboard.isak35') }}" class="flex items-center space-x-3">
-                        <div class="w-9 h-9 rounded-lg bg-slate-800 flex items-center justify-center text-white text-base font-semibold shadow-xs">
-                            <i class="fa-solid fa-book-journal-whills"></i>
-                        </div>
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo SIBAZNAS" class="w-9 h-9 rounded-lg object-contain bg-white border border-slate-200 p-0.5 shadow-xs flex-shrink-0">
                         <div>
                             <span class="font-bold text-slate-900 text-xs tracking-tight block">AKUNTANSI NONLABA</span>
                             <span class="text-[10px] font-semibold text-slate-600 bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">DE ISAK 35 FORMAT A</span>
@@ -373,9 +372,7 @@
                     </a>
                 @elseif($isBaznas)
                     <a href="{{ route('dashboard.baznas') }}" class="flex items-center space-x-3">
-                        <div class="w-9 h-9 rounded-lg bg-emerald-700 flex items-center justify-center text-white text-base font-semibold shadow-xs">
-                            <i class="fa-solid fa-hand-holding-dollar"></i>
-                        </div>
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo SIBAZNAS" class="w-9 h-9 rounded-lg object-contain bg-white border border-slate-200 p-0.5 shadow-xs flex-shrink-0">
                         <div>
                             <span class="font-bold text-slate-900 text-xs tracking-tight block">PENGELOLAAN ZAKAT</span>
                             <span class="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">PERBAZNAS 2/2016</span>
@@ -383,9 +380,7 @@
                     </a>
                 @else
                     <a href="{{ route('portal') }}" class="flex items-center space-x-3">
-                        <div class="w-9 h-9 rounded-lg bg-slate-900 flex items-center justify-center text-white text-base font-semibold shadow-xs">
-                            <i class="fa-solid fa-layer-group"></i>
-                        </div>
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo SIBAZNAS" class="w-9 h-9 rounded-lg object-contain bg-white border border-slate-200 p-0.5 shadow-xs flex-shrink-0">
                         <div>
                             <span class="font-bold text-slate-900 text-xs tracking-tight block">SIM-ORGANISASI</span>
                             <span class="text-[10px] font-semibold text-slate-600 bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">PORTAL MULTI-MODUL</span>

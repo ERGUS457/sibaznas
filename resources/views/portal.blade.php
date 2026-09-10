@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal Ruang Kerja - SIM-UPZ BAZNAS &amp; DE ISAK 35</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -78,9 +79,7 @@
     <!-- Top Navigation Bar -->
     <header class="max-w-6xl mx-auto w-full flex items-center justify-between mb-8 sm:mb-12">
         <div class="flex items-center space-x-3">
-            <div class="w-10 h-10 rounded-lg bg-slate-900 text-white flex items-center justify-center text-lg font-bold shadow-xs">
-                <i class="fa-solid fa-layer-group"></i>
-            </div>
+            <img src="{{ asset('images/logo.png') }}" alt="Logo SIBAZNAS" class="w-10 h-10 rounded-lg object-contain bg-white border border-slate-200 p-0.5 shadow-xs flex-shrink-0">
             <div>
                 <h1 class="text-base font-bold text-slate-900 tracking-tight">SIM-ORGANISASI &amp; ZAKAT</h1>
                 <p class="text-xs text-slate-500 font-medium">Portal Ruang Kerja Multi-Modul</p>

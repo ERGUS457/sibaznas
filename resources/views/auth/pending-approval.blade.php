@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menunggu Verifikasi — SIBAZNAS</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
     <style>
@@ -18,6 +19,12 @@
 </head>
 <body class="min-h-screen flex items-center justify-center p-4">
     <div class="w-full max-w-md">
+
+        {{-- Brand Logo Header --}}
+        <div class="text-center mb-6">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo SIBAZNAS" class="w-16 h-16 rounded-2xl object-contain bg-white border border-slate-200 p-1 shadow-md mx-auto mb-2">
+            <h2 class="text-xl font-bold text-gray-800">SIBAZNAS</h2>
+        </div>
 
         {{-- Success card --}}
         <div class="clay-card p-8 text-center">

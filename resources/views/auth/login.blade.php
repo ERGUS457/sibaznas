@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Masuk Sistem - SIM-UPZ BAZNAS &amp; ISAK 35</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,9 +29,7 @@
 
             <!-- Logo & Brand Header -->
             <div class="text-center space-y-2">
-                <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-emerald-700 text-white text-xl shadow-xs mx-auto mb-1">
-                    <i class="fa-solid fa-layer-group"></i>
-                </div>
+                <img src="{{ asset('images/logo.png') }}" alt="Logo SIM-UPZ BAZNAS" class="w-16 h-16 rounded-xl object-contain bg-white border border-slate-200 p-1 shadow-xs mx-auto mb-1">
                 <h1 class="text-xl font-bold text-slate-900 tracking-tight">SIM-UPZ BAZNAS</h1>
                 <div class="inline-block text-[11px] font-semibold text-emerald-800 bg-emerald-50 py-0.5 px-2.5 rounded border border-emerald-200">
                     DE ISAK 35 FORMAT A &bull; PERBAZNAS 2/2016
