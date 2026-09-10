@@ -308,4 +308,83 @@ class UpzAndIsak35IntegrationTest extends TestCase
         $user->delete();
         $upz->delete();
     }
+
+    public function test_admin_user_edit_and_forgot_password_request_workflow(): void
+    {
+        $admin = $this->authenticateAdmin();
+        $suffix = time() . '_' . rand(100, 999);
+
+        // 1. Submit Forgot Password Request from Login page
+        $forgotResponse = $this->post(route('password.request.send'), [
+            'name' => 'Pengurus UPZ Pengujian',
+            'username_or_email' => 'pengurus_' . $suffix,
+            'phone' => '08987654321',
+            'message' => 'Tolong bantu reset password akun kami karena lupa kata sandi.',
+        ]);
+        $forgotResponse->assertRedirect();
+        $forgotResponse->assertSessionHas('success');
+
+        $req = \App\Models\PasswordResetRequest::where('username_or_email', 'pengurus_' . $suffix)->first();
+        $this->assertNotNull($req);
+        $this->assertEquals('pending', $req->status);
+        $this->assertTrue($req->isPending());
+
+        // 2. Admin views index and sees the request
+        $indexResp = $this->get(route('admin.users.index'));
+        $indexResp->assertStatus(200);
+        $indexResp->assertSee('Pengurus UPZ Pengujian');
+        $indexResp->assertSee('Permohonan Bantuan Lupa Password');
+
+        // 3. Create a temporary user to test edit & password reset
+        $targetUser = \App\Models\User::create([
+            'name' => 'Target Edit User ' . $suffix,
+            'username' => 'target_' . $suffix,
+            'email' => 'target_' . $suffix . '@example.com',
+            'password' => bcrypt('oldpassword123'),
+            'role' => 'pengurus_upz',
+            'status' => 'active',
+        ]);
+
+        // 4. Admin visits edit page
+        $editResp = $this->get(route('admin.users.edit', $targetUser));
+        $editResp->assertStatus(200);
+        $editResp->assertSee('Edit Data Pengguna');
+        $editResp->assertSee($targetUser->name);
+
+        // 5. Admin updates target user with new name and new password
+        $updateResp = $this->put(route('admin.users.update', $targetUser), [
+            'name' => 'Target User Updated',
+            'username' => 'target_' . $suffix,
+            'email' => 'target_' . $suffix . '@example.com',
+            'phone' => '08111222333',
+            'role' => 'akuntan',
+            'status' => 'active',
+            'password' => 'newsecretpassword123',
+            'password_confirmation' => 'newsecretpassword123',
+        ]);
+        $updateResp->assertRedirect(route('admin.users.index'));
+        $updateResp->assertSessionHas('success');
+
+        $targetUser->refresh();
+        $this->assertEquals('Target User Updated', $targetUser->name);
+        $this->assertEquals('akuntan', $targetUser->role);
+        $this->assertTrue(\Illuminate\Support\Facades\Hash::check('newsecretpassword123', $targetUser->password));
+
+        // 6. Admin resolves the password reset request
+        $this->from(route('admin.users.index'));
+        $resolveResp = $this->post(route('admin.password-requests.resolve', $req), [
+            'admin_notes' => 'Password telah direset ke default oleh Superadmin.',
+        ]);
+        $resolveResp->assertRedirect(route('admin.users.index'));
+        $resolveResp->assertSessionHas('success');
+
+        $req->refresh();
+        $this->assertEquals('resolved', $req->status);
+        $this->assertTrue($req->isResolved());
+        $this->assertNotNull($req->resolved_at);
+
+        // Clean up
+        $targetUser->delete();
+        $req->delete();
+    }
 }

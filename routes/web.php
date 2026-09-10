@@ -29,6 +29,7 @@ Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('login', [AuthController::class, 'login'])->name('login.submit');
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('logout', [AuthController::class, 'logout']);
+Route::post('forgot-password-request', [AuthController::class, 'sendForgotPasswordRequest'])->name('password.request.send');
 
 // ─── Registration Routes (2-Step) ────────────────────────────────────────────
 Route::middleware('guest')->group(function () {
@@ -88,9 +89,12 @@ Route::middleware(['auth', 'active'])->group(function () {
     // ─── Admin Routes (Superadmin Only) ──────────────────────────────────────
     Route::middleware('superadmin')->prefix('admin')->name('admin.')->group(function () {
         Route::get('users', [UserApprovalController::class, 'index'])->name('users.index');
+        Route::get('users/{user}/edit', [UserApprovalController::class, 'edit'])->name('users.edit');
+        Route::put('users/{user}', [UserApprovalController::class, 'update'])->name('users.update');
         Route::post('users/{user}/approve', [UserApprovalController::class, 'approve'])->name('users.approve');
         Route::post('users/{user}/reject', [UserApprovalController::class, 'reject'])->name('users.reject');
         Route::post('users/{user}/reactivate', [UserApprovalController::class, 'reactivate'])->name('users.reactivate');
         Route::post('users/{user}/suspend', [UserApprovalController::class, 'suspend'])->name('users.suspend');
+        Route::post('password-requests/{resetRequest}/resolve', [UserApprovalController::class, 'resolveResetRequest'])->name('password-requests.resolve');
     });
 });

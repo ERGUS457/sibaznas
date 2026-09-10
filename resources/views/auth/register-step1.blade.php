@@ -6,6 +6,7 @@
     <title>Daftar Akun — SIBAZNAS</title>
     <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
     <style>
         body { font-family: 'Segoe UI', sans-serif; background: #f8fafc; }
@@ -86,7 +87,7 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{ route('register.step1.submit') }}" class="space-y-5">
+            <form method="POST" action="{{ route('register.step1.submit') }}" class="space-y-5" x-data="{ showPass: false, showConfirmPass: false }">
                 @csrf
 
                 <div>
@@ -123,17 +124,27 @@
 
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1.5">Password <span class="text-red-500">*</span></label>
-                    <input type="password" name="password"
-                           placeholder="Minimal 8 karakter"
-                           class="form-input {{ $errors->has('password') ? 'error' : '' }}">
+                    <div class="relative">
+                        <input :type="showPass ? 'text' : 'password'" name="password"
+                               placeholder="Minimal 8 karakter"
+                               class="form-input pr-10 {{ $errors->has('password') ? 'error' : '' }}">
+                        <button type="button" @click="showPass = !showPass" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 focus:outline-none" tabindex="-1" title="Lihat/Sembunyikan Kata Sandi">
+                            <i class="fa-solid text-sm" :class="showPass ? 'fa-eye-slash' : 'fa-eye'"></i>
+                        </button>
+                    </div>
                     @error('password') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
                 </div>
 
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1.5">Konfirmasi Password <span class="text-red-500">*</span></label>
-                    <input type="password" name="password_confirmation"
-                           placeholder="Ulangi password"
-                           class="form-input">
+                    <div class="relative">
+                        <input :type="showConfirmPass ? 'text' : 'password'" name="password_confirmation"
+                               placeholder="Ulangi password"
+                               class="form-input pr-10">
+                        <button type="button" @click="showConfirmPass = !showConfirmPass" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 focus:outline-none" tabindex="-1" title="Lihat/Sembunyikan Konfirmasi Kata Sandi">
+                            <i class="fa-solid text-sm" :class="showConfirmPass ? 'fa-eye-slash' : 'fa-eye'"></i>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="pt-2">

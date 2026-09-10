@@ -34,18 +34,22 @@
     @endif
 
     {{-- Stats Cards --}}
-    <div class="grid grid-cols-3 gap-4">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <div class="clay-card p-5 text-center">
             <div class="text-3xl font-bold text-amber-600">{{ $pendingCount }}</div>
-            <div class="text-sm text-gray-500 mt-1"><i class="fas fa-clock mr-1"></i>Menunggu Verifikasi</div>
+            <div class="text-xs text-gray-500 mt-1"><i class="fas fa-clock mr-1"></i>Menunggu Verifikasi</div>
         </div>
         <div class="clay-card p-5 text-center">
             <div class="text-3xl font-bold text-emerald-600">{{ $activeCount }}</div>
-            <div class="text-sm text-gray-500 mt-1"><i class="fas fa-circle-check mr-1"></i>Akun Aktif</div>
+            <div class="text-xs text-gray-500 mt-1"><i class="fas fa-circle-check mr-1"></i>Akun Aktif</div>
         </div>
         <div class="clay-card p-5 text-center">
             <div class="text-3xl font-bold text-red-500">{{ $rejectedCount }}</div>
-            <div class="text-sm text-gray-500 mt-1"><i class="fas fa-ban mr-1"></i>Ditolak</div>
+            <div class="text-xs text-gray-500 mt-1"><i class="fas fa-ban mr-1"></i>Ditolak / Nonaktif</div>
+        </div>
+        <div class="clay-card p-5 text-center">
+            <div class="text-3xl font-bold text-sky-600">{{ $pendingResetCount }}</div>
+            <div class="text-xs text-gray-500 mt-1"><i class="fas fa-envelope-open-text mr-1"></i>Pesan Lupa Password</div>
         </div>
     </div>
 
@@ -124,13 +128,21 @@
                                 {{ $user->created_at->format('H:i') }}
                             </td>
                             <td class="px-5 py-4">
-                                <div class="flex items-center justify-center gap-2">
+                                <div class="flex items-center justify-center gap-1.5 flex-wrap">
+                                    {{-- Edit Button --}}
+                                    <a href="{{ route('admin.users.edit', $user) }}"
+                                       class="px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1"
+                                       title="Edit data & kata sandi pengguna">
+                                        <i class="fas fa-pen-to-square text-xs text-slate-500"></i>
+                                        <span>Edit</span>
+                                    </a>
+
                                     @if ($user->isPending())
                                         {{-- Approve Button (SweetAlert2) --}}
                                         <form id="approve-form-{{ $user->id }}" method="POST" action="{{ route('admin.users.approve', $user) }}">
                                             @csrf
                                             <button type="button"
-                                                    class="px-3 py-1.5 bg-emerald-600 text-white rounded-lg text-xs font-semibold hover:bg-emerald-700 transition-colors flex items-center gap-1"
+                                                    class="px-2.5 py-1.5 bg-emerald-600 text-white rounded-lg text-xs font-semibold hover:bg-emerald-700 transition-colors flex items-center gap-1"
                                                     onclick="confirmApprove('approve-form-{{ $user->id }}', '{{ addslashes($user->name) }}')">
                                                 <i class="fas fa-check text-xs"></i>
                                                 <span>Setujui</span>
@@ -142,7 +154,7 @@
                                             @csrf
                                             <input type="hidden" name="rejection_reason" id="reject-reason-{{ $user->id }}">
                                             <button type="button"
-                                                    class="px-3 py-1.5 bg-red-50 text-red-600 border border-red-200 rounded-lg text-xs font-semibold hover:bg-red-100 transition-colors flex items-center gap-1"
+                                                    class="px-2.5 py-1.5 bg-red-50 text-red-600 border border-red-200 rounded-lg text-xs font-semibold hover:bg-red-100 transition-colors flex items-center gap-1"
                                                     onclick="promptReject('reject-form-{{ $user->id }}', 'reject-reason-{{ $user->id }}', '{{ addslashes($user->name) }}')">
                                                 <i class="fas fa-ban text-xs"></i>
                                                 <span>Tolak</span>
@@ -153,7 +165,7 @@
                                         <form id="suspend-form-{{ $user->id }}" method="POST" action="{{ route('admin.users.suspend', $user) }}">
                                             @csrf
                                             <button type="button"
-                                                    class="px-3 py-1.5 bg-gray-100 text-gray-600 rounded-lg text-xs font-semibold hover:bg-gray-200 transition-colors flex items-center gap-1"
+                                                    class="px-2.5 py-1.5 bg-gray-100 text-gray-600 rounded-lg text-xs font-semibold hover:bg-gray-200 transition-colors flex items-center gap-1"
                                                     onclick="confirmSuspend('suspend-form-{{ $user->id }}', '{{ addslashes($user->name) }}')">
                                                 <i class="fas fa-pause text-xs"></i>
                                                 <span>Nonaktifkan</span>
@@ -164,14 +176,12 @@
                                         <form id="reactivate-form-{{ $user->id }}" method="POST" action="{{ route('admin.users.reactivate', $user) }}">
                                             @csrf
                                             <button type="button"
-                                                    class="px-3 py-1.5 bg-emerald-50 text-emerald-600 border border-emerald-200 rounded-lg text-xs font-semibold hover:bg-emerald-100 transition-colors flex items-center gap-1"
+                                                    class="px-2.5 py-1.5 bg-emerald-50 text-emerald-600 border border-emerald-200 rounded-lg text-xs font-semibold hover:bg-emerald-100 transition-colors flex items-center gap-1"
                                                     onclick="confirmReactivate('reactivate-form-{{ $user->id }}', '{{ addslashes($user->name) }}')">
                                                 <i class="fas fa-rotate-right text-xs"></i>
                                                 <span>Aktifkan</span>
                                             </button>
                                         </form>
-                                    @else
-                                        <span class="text-xs text-gray-400 italic">Superadmin</span>
                                     @endif
                                 </div>
                             </td>
@@ -193,6 +203,105 @@
                 {{ $users->links() }}
             </div>
         @endif
+    </div>
+
+    {{-- Password Reset Requests from Login --}}
+    <div class="clay-card p-6 space-y-4">
+        <div class="flex items-center justify-between flex-wrap gap-2 pb-3 border-b border-gray-100">
+            <div>
+                <h2 class="text-base font-bold text-gray-800 flex items-center gap-2">
+                    <i class="fas fa-envelope-open-text text-sky-600"></i>
+                    <span>Permohonan Bantuan Lupa Password</span>
+                    @if ($pendingResetCount > 0)
+                        <span class="bg-sky-500 text-white text-[11px] font-bold px-2 py-0.5 rounded-full">
+                            {{ $pendingResetCount }} Baru
+                        </span>
+                    @endif
+                </h2>
+                <p class="text-xs text-gray-500 mt-0.5">Daftar pesan bantuan yang dikirimkan oleh pengguna/pengurus melalui halaman login.</p>
+            </div>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="text-left px-4 py-3 font-semibold text-gray-600 text-xs uppercase tracking-wide">Pengirim</th>
+                        <th class="text-left px-4 py-3 font-semibold text-gray-600 text-xs uppercase tracking-wide">Akun / Kontak</th>
+                        <th class="text-left px-4 py-3 font-semibold text-gray-600 text-xs uppercase tracking-wide">Isi Pesan Permohonan</th>
+                        <th class="text-center px-4 py-3 font-semibold text-gray-600 text-xs uppercase tracking-wide">Status</th>
+                        <th class="text-center px-4 py-3 font-semibold text-gray-600 text-xs uppercase tracking-wide">Waktu</th>
+                        <th class="text-center px-4 py-3 font-semibold text-gray-600 text-xs uppercase tracking-wide">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-50">
+                    @forelse ($resetRequests as $req)
+                        <tr class="hover:bg-gray-50 {{ $req->isPending() ? 'bg-sky-50/40' : '' }}">
+                            <td class="px-4 py-3 font-semibold text-gray-800 text-xs">{{ $req->name }}</td>
+                            <td class="px-4 py-3 text-xs text-gray-600">
+                                <div class="font-medium text-slate-800">{{ $req->username_or_email }}</div>
+                                @if($req->phone)
+                                    <div class="text-gray-400 text-[11px]"><i class="fab fa-whatsapp mr-1 text-emerald-600"></i>{{ $req->phone }}</div>
+                                @endif
+                            </td>
+                            <td class="px-4 py-3 text-xs text-gray-700 max-w-xs">
+                                <p class="line-clamp-2" title="{{ $req->message }}">{{ $req->message }}</p>
+                            </td>
+                            <td class="px-4 py-3 text-center">
+                                @if ($req->isPending())
+                                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-amber-100 text-amber-700">
+                                        <i class="fas fa-clock text-[10px]"></i> Menunggu
+                                    </span>
+                                @else
+                                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-700">
+                                        <i class="fas fa-check text-[10px]"></i> Selesai
+                                    </span>
+                                @endif
+                            </td>
+                            <td class="px-4 py-3 text-center text-xs text-gray-400 whitespace-nowrap">
+                                {{ $req->created_at->diffForHumans() }}
+                            </td>
+                            <td class="px-4 py-3 text-center">
+                                <div class="flex items-center justify-center gap-1.5">
+                                    @php
+                                        // Cari user terkait jika ada
+                                        $matchedUser = \App\Models\User::where('username', $req->username_or_email)
+                                            ->orWhere('email', $req->username_or_email)
+                                            ->first();
+                                    @endphp
+                                    @if($matchedUser)
+                                        <a href="{{ route('admin.users.edit', $matchedUser) }}"
+                                           class="px-2.5 py-1 bg-emerald-600 text-white rounded-lg text-xs font-semibold hover:bg-emerald-700 transition flex items-center gap-1"
+                                           title="Reset password pengguna ini langsung">
+                                            <i class="fas fa-key text-[10px]"></i>
+                                            <span>Reset Password</span>
+                                        </a>
+                                    @endif
+
+                                    @if ($req->isPending())
+                                        <form method="POST" action="{{ route('admin.password-requests.resolve', $req) }}">
+                                            @csrf
+                                            <button type="submit"
+                                                    class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition flex items-center gap-1"
+                                                    title="Tandai permohonan ini sudah selesai">
+                                                <i class="fas fa-check-double text-[10px] text-emerald-600"></i>
+                                                <span>Selesai</span>
+                                            </button>
+                                        </form>
+                                    @endif
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="6" class="px-4 py-6 text-center text-gray-400 text-xs">
+                                Belum ada permohonan bantuan lupa password dari pengguna.
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
     </div>
 
     {{-- Organization Overview (for superadmin monitoring) --}}

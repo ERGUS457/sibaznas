@@ -98,4 +98,31 @@ class AuthController extends Controller
 
         return redirect()->route('landing')->with('success', 'Anda telah berhasil keluar dari sistem.');
     }
+
+    /**
+     * Kirim permohonan bantuan lupa password ke administrator.
+     */
+    public function sendForgotPasswordRequest(Request $request)
+    {
+        $validated = $request->validate([
+            'name'              => ['required', 'string', 'max:255'],
+            'username_or_email' => ['required', 'string', 'max:255'],
+            'phone'             => ['nullable', 'string', 'max:30'],
+            'message'           => ['required', 'string', 'max:1000'],
+        ], [
+            'name.required'              => 'Nama lengkap atau nama pengurus wajib diisi.',
+            'username_or_email.required' => 'Username atau email akun wajib diisi.',
+            'message.required'           => 'Pesan permohonan wajib diisi.',
+        ]);
+
+        \App\Models\PasswordResetRequest::create([
+            'name'              => $validated['name'],
+            'username_or_email' => $validated['username_or_email'],
+            'phone'             => $validated['phone'] ?? null,
+            'message'           => $validated['message'],
+            'status'            => 'pending',
+        ]);
+
+        return back()->with('success', 'Permohonan reset password Anda telah berhasil dikirim ke Administrator. Admin akan segera meninjau permohonan akun Anda.');
+    }
 }
