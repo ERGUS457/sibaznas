@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard Operasional UPZ BAZNAS')
+@section('title', 'Dashboard Operasional Organisasi')
 
 @section('content')
 <div class="space-y-6">
@@ -10,16 +10,14 @@
         <div>
             <div class="flex items-center gap-2 mb-1.5">
                 <span class="text-[10px] font-semibold uppercase tracking-wider bg-emerald-50 text-emerald-800 px-2.5 py-0.5 rounded border border-emerald-200">
-                    MODUL UNIT PENGUMPUL ZAKAT (UPZ)
+                    MODUL OPERASIONAL ORGANISASI
                 </span>
-                <span class="text-xs text-slate-300">&bull;</span>
-                <span class="text-xs text-slate-500 font-medium">Peraturan BAZNAS RI No. 2 Tahun 2016</span>
             </div>
             <h1 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
-                Pengelolaan &amp; Pelaporan Zakat UPZ {{ $upz->name ?? 'BAZNAS' }}
+                Pengelolaan Penerimaan &amp; Penyaluran {{ $upz->name ?? 'Organisasi' }}
             </h1>
             <p class="text-xs text-slate-600 font-normal mt-0.5">
-                Penerimaan ZIS, penerbitan Bukti Setor Zakat (BSZ), penyaluran 8 Asnaf, dan kepatuhan hak amil maks 12,5%.
+                Penerimaan donasi/ZIS, penerbitan Bukti Tanda Terima Setor (BSZ), penyaluran program bantuan, dan alokasi operasional.
             </p>
         </div>
 

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard Panel Kerja - SIM-UPZ BAZNAS & ISAK 35')
+@section('title', 'Dashboard Panel Kerja - SIM-ORGANISASI & ISAK 35')
 
 @section('content')
 <div x-data="{ activeTab: 'operasional' }" class="space-y-6">
@@ -24,7 +24,7 @@
                 :class="activeTab === 'operasional' ? 'clay-btn-white font-extrabold text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-800 font-semibold'"
                 class="flex items-center space-x-2 px-4 py-2 rounded-xl text-xs transition">
                 <i class="fa-solid fa-hand-holding-heart text-emerald-600"></i>
-                <span>Operasional UPZ (Perbaznas)</span>
+                <span>Operasional Organisasi</span>
             </button>
             <button 
                 @click="activeTab = 'akuntansi'"
@@ -37,19 +37,19 @@
     </div>
 
     <!-- ============================================================= -->
-    <!-- TAB 1: OPERASIONAL UPZ (PERBAZNAS NO. 2/2016)                 -->
+    <!-- TAB 1: OPERASIONAL ORGANISASI                                 -->
     <!-- ============================================================= -->
     <div x-show="activeTab === 'operasional'" x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" class="space-y-6">
 
-        <!-- Action Bar & UPZ Info -->
+        <!-- Action Bar & Org Info -->
         <div class="clay-card p-5 flex flex-wrap items-center justify-between gap-4">
             <div class="text-xs text-slate-600 space-y-0.5">
                 <div class="font-extrabold text-slate-900 text-sm flex items-center gap-1.5">
                     <i class="fa-solid fa-building text-amber-500"></i>
-                    <span>{{ $upz->name ?? 'UPZ BAZNAS' }}</span>
+                    <span>{{ $upz->name ?? 'Organisasi' }}</span>
                 </div>
                 <div class="text-[11px] text-slate-500">
-                    SK BAZNAS: <strong>{{ $upz->sk_number ?? 'Resmi' }}</strong> &bull; Hak Amil Terkait: <strong class="text-emerald-700">{{ $upz->amil_share_percentage ?? 12.50 }}%</strong>
+                    SK / Legalitas: <strong>{{ $upz->sk_number ?? 'Resmi' }}</strong> &bull; Hak Amil / Operasional: <strong class="text-emerald-700">{{ $upz->amil_share_percentage ?? 12.50 }}%</strong>
                 </div>
             </div>
 
@@ -57,15 +57,15 @@
             <div class="flex flex-wrap items-center gap-2.5">
                 <a href="{{ route('collections.create') }}" class="clay-btn-emerald text-xs font-bold px-4 py-2.5 flex items-center space-x-2">
                     <i class="fa-solid fa-receipt text-xs"></i>
-                    <span>Terima ZIS / Buat BSZ</span>
+                    <span>Terima Dana / Buat BSZ</span>
                 </a>
                 <a href="{{ route('distributions.create') }}" class="clay-btn-white text-xs font-bold px-4 py-2.5 flex items-center space-x-2 text-slate-700">
                     <i class="fa-solid fa-parachute-box text-xs text-teal-600"></i>
-                    <span>Salurkan ke Mustahik</span>
+                    <span>Salurkan ke Penerima</span>
                 </a>
                 <a href="{{ route('remittances.create') }}" class="clay-btn-white text-xs font-bold px-4 py-2.5 flex items-center space-x-2 text-slate-700">
                     <i class="fa-solid fa-arrow-up-right-from-square text-xs text-amber-600"></i>
-                    <span>Setor BAZNAS</span>
+                    <span>Setor Induk</span>
                 </a>
             </div>
         </div>

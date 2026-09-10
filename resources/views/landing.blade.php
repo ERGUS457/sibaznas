@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIM-UPZ BAZNAS &bull; Terintegrasi DE ISAK 35 FORMAT A</title>
+    <title>SIM-ORGANISASI &bull; Terintegrasi DE ISAK 35 FORMAT A</title>
     <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -89,11 +89,11 @@
         <nav class="clay-card px-5 py-3.5 flex items-center justify-between">
             <!-- Brand Logo -->
             <a href="{{ route('landing') }}" class="flex items-center space-x-3">
-                <img src="{{ asset('images/logo.png') }}" alt="Logo SIM-UPZ BAZNAS" class="w-10 h-10 rounded-lg object-contain bg-white border border-slate-200 p-0.5 shadow-xs flex-shrink-0">
+                <img src="{{ asset('images/logo.png') }}" alt="Logo SIM-ORGANISASI" class="w-10 h-10 rounded-lg object-contain bg-white border border-slate-200 p-0.5 shadow-xs flex-shrink-0">
                 <div>
                     <div class="flex items-center gap-1.5">
-                        <span class="font-bold text-slate-900 text-base tracking-tight">SIM-UPZ BAZNAS</span>
-                        <span class="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">RESMI</span>
+                        <span class="font-bold text-slate-900 text-base tracking-tight">SIM-ORGANISASI</span>
+                        <span class="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">PORTAL</span>
                     </div>
                     <span class="text-[11px] font-medium text-slate-500 tracking-wide block">DE ISAK 35 FORMAT A</span>
                 </div>
@@ -137,16 +137,16 @@
         <section class="text-center space-y-6 pt-4">
             <div class="inline-flex items-center gap-2 px-4 py-1.5 clay-pill bg-white text-emerald-800 text-xs font-bold">
                 <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span>Standar Kepatuhan: Perbaznas No. 2 Tahun 2016 &bull; Format A DE ISAK 35</span>
+                <span>Standar Kepatuhan: Format A DE ISAK 35 &bull; Pelaporan Keuangan Entitas Nonlaba</span>
             </div>
 
             <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight max-w-4xl mx-auto">
                 Sistem Terpadu Pengelolaan <br class="hidden sm:inline">
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-700">UPZ BAZNAS &amp; Akuntansi Nonlaba</span>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-700">Keuangan Organisasi &amp; Akuntansi Nonlaba</span>
             </h1>
 
             <p class="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
-                Platform modern untuk mencatat penerimaan ZIS, penerbitan Bukti Setor Zakat (BSZ) resmi, penyaluran 8 Asnaf, serta otomasi pembukuan jurnal dan 4 laporan keuangan standar IAI untuk pertanggungjawaban amil.
+                Platform modern untuk mencatat penerimaan donasi/ZIS, penerbitan Bukti Tanda Terima Setor resmi, penyaluran program bantuan, serta otomasi pembukuan jurnal dan 4 laporan keuangan standar IAI untuk akuntabilitas organisasi.
             </p>
 
             <!-- CTA Buttons -->
@@ -249,18 +249,18 @@
         </section>
 
         <!-- ============================================================= -->
-        <!-- 2. MODUL 1: OPERASIONAL UPZ (Perbaznas No. 2/2016)           -->
+        <!-- 2. MODUL 1: OPERASIONAL ORGANISASI                           -->
         <!-- ============================================================= -->
         <section id="modul-operasional" class="space-y-8 scroll-mt-24">
             <div class="text-center space-y-2">
                 <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider clay-pill px-3.5 py-1 bg-emerald-50 inline-block">
-                    Modul 1 &bull; Peraturan BAZNAS No. 2 Tahun 2016
+                    Modul 1 &bull; Penerimaan &amp; Penyaluran Dana
                 </span>
                 <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
-                    Modul Operasional UPZ BAZNAS
+                    Modul Operasional Organisasi
                 </h2>
                 <p class="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto">
-                    Panduan teknis dan alur operasional pengumpulan, penyaluran, serta pelaporan pertanggungjawaban amil.
+                    Panduan teknis dan alur operasional pengumpulan dana, penyaluran program bantuan, serta pelaporan pertanggungjawaban pengelolaan.
                 </p>
             </div>
 
@@ -270,43 +270,43 @@
                     <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-xl font-bold">
                         <i class="fa-solid fa-receipt"></i>
                     </div>
-                    <h3 class="text-base font-bold text-slate-900">1. Penerimaan ZIS &amp; Bukti Setor Zakat (BSZ)</h3>
+                    <h3 class="text-base font-bold text-slate-900">1. Penerimaan Dana &amp; Bukti Setor</h3>
                     <p class="text-xs text-slate-600 leading-relaxed">
-                        Sesuai <strong>Lampiran 1 &amp; 6 Perbaznas</strong>. Amil mencatat penerimaan Zakat Maal, Fitrah, Infak/Sedekah, dan DSKL. Sistem secara otomatis menerbitkan dokumen resmi <strong>Bukti Setor Zakat (BSZ)</strong> dengan verifikasi hash keaslian yang dapat dicetak langsung dan diperhitungkan sebagai <u>pengurang penghasilan bruto (UU No. 23/2011 Pasal 22)</u>.
+                        Mencatat penerimaan donasi, ZIS, bantuan sosial, dan dana terikat/tidak terikat. Sistem secara otomatis menerbitkan dokumen resmi <strong>Bukti Tanda Terima Setor</strong> yang dapat dicetak langsung sebagai bukti transaksi sah.
                     </p>
                     <div class="pt-2 border-t border-slate-100 text-[11px] text-emerald-800 font-semibold flex items-center gap-1.5">
                         <i class="fa-solid fa-circle-check text-emerald-600"></i>
-                        <span>Cetak BSZ Standar BAZNAS RI</span>
+                        <span>Cetak Bukti Setor Resmi Organisasi</span>
                     </div>
                 </div>
 
-                <!-- Fitur 2: Penyaluran 8 Asnaf -->
+                <!-- Fitur 2: Penyaluran Bantuan -->
                 <div class="clay-card clay-card-interactive p-6 space-y-4">
                     <div class="w-12 h-12 rounded-2xl bg-teal-100 text-teal-800 flex items-center justify-center text-xl font-bold">
                         <i class="fa-solid fa-parachute-box"></i>
                     </div>
-                    <h3 class="text-base font-bold text-slate-900">2. Penyaluran ke 8 Asnaf Mustahik</h3>
+                    <h3 class="text-base font-bold text-slate-900">2. Penyaluran Program &amp; Bantuan</h3>
                     <p class="text-xs text-slate-600 leading-relaxed">
-                        Sesuai <strong>Lampiran 2, 3, &amp; 7 Perbaznas</strong>. Penyaluran dana zakat diklasifikasikan secara ketat ke 8 Asnaf syariah (Fakir, Miskin, Amil, Mualaf, Riqab, Gharimin, Fii Sabilillah, Ibnu Sabil) ke dalam 5 Pilar Program BAZNAS: <em>Pendidikan, Kesehatan, Kemanusiaan, Ekonomi, dan Dakwah &amp; Advokasi</em>.
+                        Penyaluran dana diklasifikasikan secara terstruktur menurut pilar program organisasi (Pendidikan, Kesehatan, Kemanusiaan, Ekonomi, dan Sosial Dakwah) kepada penerima manfaat (*Mustahik* / Penerima Bantuan).
                     </p>
                     <div class="pt-2 border-t border-slate-100 text-[11px] text-teal-800 font-semibold flex items-center gap-1.5">
                         <i class="fa-solid fa-circle-check text-teal-600"></i>
-                        <span>Validasi Kategori Mustahik &amp; Asnaf</span>
+                        <span>Validasi Penerima Manfaat &amp; Program</span>
                     </div>
                 </div>
 
-                <!-- Fitur 3: Penyetoran BAZNAS -->
+                <!-- Fitur 3: Penyetoran Organisasi Induk -->
                 <div class="clay-card clay-card-interactive p-6 space-y-4">
                     <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center text-xl font-bold">
                         <i class="fa-solid fa-building-columns"></i>
                     </div>
-                    <h3 class="text-base font-bold text-slate-900">3. Penyetoran ke Rekening BAZNAS</h3>
+                    <h3 class="text-base font-bold text-slate-900">3. Penyetoran ke Organisasi Induk</h3>
                     <p class="text-xs text-slate-600 leading-relaxed">
-                        Sesuai <strong>Lampiran 5 Perbaznas</strong>. Bagi UPZ pengumpul yang bertugas menyetorkan dana ke BAZNAS Pusat/Daerah, modul ini mencatat nomor bukti transfer bank, validasi verifikasi BAZNAS, serta mengurangi kewajiban utang penyetoran secara akuntansi otomatis.
+                        Bagi unit/cabang yang bertugas menyetorkan dana hasil pengumpulan ke Organisasi Induk/Pembina, modul ini mencatat nomor bukti transfer bank dan verifikasi penyetoran secara akuntansi otomatis.
                     </p>
                     <div class="pt-2 border-t border-slate-100 text-[11px] text-amber-800 font-semibold flex items-center gap-1.5">
                         <i class="fa-solid fa-circle-check text-amber-600"></i>
-                        <span>Rekonsiliasi Bukti Setor Bank Resmi</span>
+                        <span>Rekonsiliasi Transfer Bank Resmi</span>
                     </div>
                 </div>
 
@@ -340,14 +340,14 @@
                     </div>
                 </div>
 
-                <!-- Fitur 6: Laporan Rekapitulasi UPZ -->
+                <!-- Fitur 6: Laporan Rekapitulasi Organisasi -->
                 <div class="clay-card clay-card-interactive p-6 space-y-4">
                     <div class="w-12 h-12 rounded-2xl bg-rose-100 text-rose-800 flex items-center justify-center text-xl font-bold">
                         <i class="fa-solid fa-file-contract"></i>
                     </div>
-                    <h3 class="text-base font-bold text-slate-900">6. Laporan Pertanggungjawaban UPZ</h3>
+                    <h3 class="text-base font-bold text-slate-900">6. Laporan Pertanggungjawaban Organisasi</h3>
                     <p class="text-xs text-slate-600 leading-relaxed">
-                        Merekapitulasi seluruh kepatuhan tata kerja UPZ (Lampiran 1 hingga Lampiran 7) dalam satu dokumen konsolidasi yang rapi, siap ditandatangani oleh Ketua UPZ dan Bagian Keuangan untuk diserahkan ke BAZNAS pembina saat audit periodik.
+                        Merekapitulasi seluruh aktivitas operasional dan keuangan organisasi dalam satu dokumen konsolidasi yang rapi, siap ditandatangani oleh Pimpinan Organisasi dan Bagian Keuangan.
                     </p>
                     <div class="pt-2 border-t border-slate-100 text-[11px] text-rose-800 font-semibold flex items-center gap-1.5">
                         <i class="fa-solid fa-circle-check text-rose-600"></i>
@@ -547,12 +547,12 @@
     <footer class="mt-16 py-8 border-t border-slate-200/80 bg-white/70 text-center text-xs text-slate-500 space-y-2">
         <div class="max-w-7xl mx-auto px-4 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
             <div class="flex items-center space-x-2">
-                <span class="font-extrabold text-slate-800">SIM-UPZ BAZNAS</span>
+                <span class="font-extrabold text-slate-800">SIM-ORGANISASI</span>
                 <span>&bull;</span>
                 <span>Terintegrasi DE ISAK 35 FORMAT A</span>
             </div>
             <div>
-                Regulasi: <strong>Perbaznas No. 2/2016</strong> &bull; Standar: <strong>DE ISAK 35 Format A</strong>
+                Standar: <strong>DE ISAK 35 Format A Entitas Nonlaba</strong>
             </div>
         </div>
     </footer>
