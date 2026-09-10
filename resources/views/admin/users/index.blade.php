@@ -88,7 +88,7 @@
                         <tr class="hover:bg-gray-50 transition-colors" x-data="{ showRejectForm: false }">
                             <td class="px-5 py-4">
                                 <div class="font-semibold text-gray-800">{{ $user->name }}</div>
-                                <div class="text-gray-400 text-xs mt-0.5">@{{ $user->username }} · {{ $user->email }}</div>
+                                <div class="text-gray-400 text-xs mt-0.5">{{ '@' . ($user->username ?? '-') }} · {{ $user->email }}</div>
                             </td>
                             <td class="px-5 py-4">
                                 @if ($user->upzProfile)
@@ -126,62 +126,53 @@
                             <td class="px-5 py-4">
                                 <div class="flex items-center justify-center gap-2">
                                     @if ($user->isPending())
-                                        {{-- Approve --}}
-                                        <form method="POST" action="{{ route('admin.users.approve', $user) }}">
+                                        {{-- Approve Button (SweetAlert2) --}}
+                                        <form id="approve-form-{{ $user->id }}" method="POST" action="{{ route('admin.users.approve', $user) }}">
                                             @csrf
-                                            <button type="submit"
-                                                    class="px-3 py-1.5 bg-emerald-600 text-white rounded-lg text-xs font-semibold hover:bg-emerald-700 transition-colors"
-                                                    onclick="return confirm('Verifikasi dan aktifkan akun {{ addslashes($user->name) }}?')">
-                                                <i class="fas fa-check mr-1"></i>Setujui
+                                            <button type="button"
+                                                    class="px-3 py-1.5 bg-emerald-600 text-white rounded-lg text-xs font-semibold hover:bg-emerald-700 transition-colors flex items-center gap-1"
+                                                    onclick="confirmApprove('approve-form-{{ $user->id }}', '{{ addslashes($user->name) }}')">
+                                                <i class="fas fa-check text-xs"></i>
+                                                <span>Setujui</span>
                                             </button>
                                         </form>
-                                        {{-- Reject Button --}}
-                                        <button @click="showRejectForm = !showRejectForm"
-                                                class="px-3 py-1.5 bg-red-50 text-red-600 border border-red-200 rounded-lg text-xs font-semibold hover:bg-red-100 transition-colors">
-                                            <i class="fas fa-ban mr-1"></i>Tolak
-                                        </button>
-                                    @elseif ($user->isActive() && !$user->isSuperAdmin())
-                                        {{-- Suspend --}}
-                                        <form method="POST" action="{{ route('admin.users.suspend', $user) }}">
+
+                                        {{-- Reject Button (SweetAlert2 Prompt) --}}
+                                        <form id="reject-form-{{ $user->id }}" method="POST" action="{{ route('admin.users.reject', $user) }}">
                                             @csrf
-                                            <button type="submit"
-                                                    class="px-3 py-1.5 bg-gray-100 text-gray-600 rounded-lg text-xs font-semibold hover:bg-gray-200 transition-colors"
-                                                    onclick="return confirm('Nonaktifkan akun {{ addslashes($user->name) }}?')">
-                                                <i class="fas fa-pause mr-1"></i>Nonaktifkan
+                                            <input type="hidden" name="rejection_reason" id="reject-reason-{{ $user->id }}">
+                                            <button type="button"
+                                                    class="px-3 py-1.5 bg-red-50 text-red-600 border border-red-200 rounded-lg text-xs font-semibold hover:bg-red-100 transition-colors flex items-center gap-1"
+                                                    onclick="promptReject('reject-form-{{ $user->id }}', 'reject-reason-{{ $user->id }}', '{{ addslashes($user->name) }}')">
+                                                <i class="fas fa-ban text-xs"></i>
+                                                <span>Tolak</span>
+                                            </button>
+                                        </form>
+                                    @elseif ($user->isActive() && !$user->isSuperAdmin())
+                                        {{-- Suspend (SweetAlert2) --}}
+                                        <form id="suspend-form-{{ $user->id }}" method="POST" action="{{ route('admin.users.suspend', $user) }}">
+                                            @csrf
+                                            <button type="button"
+                                                    class="px-3 py-1.5 bg-gray-100 text-gray-600 rounded-lg text-xs font-semibold hover:bg-gray-200 transition-colors flex items-center gap-1"
+                                                    onclick="confirmSuspend('suspend-form-{{ $user->id }}', '{{ addslashes($user->name) }}')">
+                                                <i class="fas fa-pause text-xs"></i>
+                                                <span>Nonaktifkan</span>
                                             </button>
                                         </form>
                                     @elseif ($user->isRejected())
-                                        {{-- Reactivate --}}
-                                        <form method="POST" action="{{ route('admin.users.reactivate', $user) }}">
+                                        {{-- Reactivate (SweetAlert2) --}}
+                                        <form id="reactivate-form-{{ $user->id }}" method="POST" action="{{ route('admin.users.reactivate', $user) }}">
                                             @csrf
-                                            <button type="submit"
-                                                    class="px-3 py-1.5 bg-emerald-50 text-emerald-600 border border-emerald-200 rounded-lg text-xs font-semibold hover:bg-emerald-100 transition-colors"
-                                                    onclick="return confirm('Aktifkan kembali akun {{ addslashes($user->name) }}?')">
-                                                <i class="fas fa-rotate-right mr-1"></i>Aktifkan
+                                            <button type="button"
+                                                    class="px-3 py-1.5 bg-emerald-50 text-emerald-600 border border-emerald-200 rounded-lg text-xs font-semibold hover:bg-emerald-100 transition-colors flex items-center gap-1"
+                                                    onclick="confirmReactivate('reactivate-form-{{ $user->id }}', '{{ addslashes($user->name) }}')">
+                                                <i class="fas fa-rotate-right text-xs"></i>
+                                                <span>Aktifkan</span>
                                             </button>
                                         </form>
                                     @else
                                         <span class="text-xs text-gray-400 italic">Superadmin</span>
                                     @endif
-                                </div>
-
-                                {{-- Reject Form (inline, collapsible) --}}
-                                <div x-show="showRejectForm" x-cloak class="mt-3">
-                                    <form method="POST" action="{{ route('admin.users.reject', $user) }}">
-                                        @csrf
-                                        <textarea name="rejection_reason" rows="2" required
-                                                  placeholder="Alasan penolakan (wajib diisi)..."
-                                                  class="w-full text-xs px-3 py-2 border border-red-200 rounded-lg focus:outline-none focus:border-red-400 resize-none"></textarea>
-                                        <div class="flex gap-2 mt-1.5">
-                                            <button type="submit" class="flex-1 py-1.5 bg-red-600 text-white rounded-lg text-xs font-semibold hover:bg-red-700">
-                                                Konfirmasi Penolakan
-                                            </button>
-                                            <button type="button" @click="showRejectForm = false"
-                                                    class="px-3 py-1.5 border border-gray-200 rounded-lg text-xs text-gray-500 hover:bg-gray-50">
-                                                Batal
-                                            </button>
-                                        </div>
-                                    </form>
                                 </div>
                             </td>
                         </tr>
@@ -241,3 +232,112 @@
 
 </div>
 @endsection
+
+@push('scripts')
+<script>
+function confirmApprove(formId, userName) {
+    Swal.fire({
+        title: 'Verifikasi & Aktifkan?',
+        html: `Apakah Anda yakin ingin memverifikasi dan mengaktifkan akun <b>${userName}</b>?<br><span class="text-xs text-slate-500 mt-1 block">Pengguna akan langsung dapat masuk ke sistem.</span>`,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#059669',
+        cancelButtonColor: '#94a3b8',
+        confirmButtonText: '<i class="fas fa-check mr-1.5"></i>Ya, Aktifkan',
+        cancelButtonText: 'Batal',
+        reverseButtons: true,
+        customClass: {
+            popup: 'rounded-2xl shadow-xl border border-slate-200',
+            confirmButton: 'px-4 py-2.5 rounded-xl font-semibold text-xs',
+            cancelButton: 'px-4 py-2.5 rounded-xl font-semibold text-xs'
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById(formId).submit();
+        }
+    });
+}
+
+function confirmSuspend(formId, userName) {
+    Swal.fire({
+        title: 'Nonaktifkan Akun?',
+        html: `Apakah Anda yakin ingin menonaktifkan akun <b>${userName}</b>?<br><span class="text-xs text-slate-500 mt-1 block">Pengguna tidak akan dapat mengakses aplikasi sementara waktu.</span>`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#dc2626',
+        cancelButtonColor: '#94a3b8',
+        confirmButtonText: '<i class="fas fa-pause mr-1.5"></i>Ya, Nonaktifkan',
+        cancelButtonText: 'Batal',
+        reverseButtons: true,
+        customClass: {
+            popup: 'rounded-2xl shadow-xl border border-slate-200',
+            confirmButton: 'px-4 py-2.5 rounded-xl font-semibold text-xs',
+            cancelButton: 'px-4 py-2.5 rounded-xl font-semibold text-xs'
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById(formId).submit();
+        }
+    });
+}
+
+function confirmReactivate(formId, userName) {
+    Swal.fire({
+        title: 'Aktifkan Kembali Akun?',
+        html: `Apakah Anda yakin ingin mengaktifkan kembali akun <b>${userName}</b>?`,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#059669',
+        cancelButtonColor: '#94a3b8',
+        confirmButtonText: '<i class="fas fa-rotate-right mr-1.5"></i>Ya, Aktifkan',
+        cancelButtonText: 'Batal',
+        reverseButtons: true,
+        customClass: {
+            popup: 'rounded-2xl shadow-xl border border-slate-200',
+            confirmButton: 'px-4 py-2.5 rounded-xl font-semibold text-xs',
+            cancelButton: 'px-4 py-2.5 rounded-xl font-semibold text-xs'
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById(formId).submit();
+        }
+    });
+}
+
+function promptReject(formId, inputId, userName) {
+    Swal.fire({
+        title: 'Tolak Pendaftaran Akun',
+        html: `<div class="text-xs text-slate-600 mb-2">Tuliskan alasan penolakan untuk akun <b>${userName}</b>:</div>`,
+        input: 'textarea',
+        inputPlaceholder: 'Tuliskan alasan penolakan (contoh: Dokumen SK belum sesuai atau identitas tidak valid)...',
+        inputAttributes: {
+            'aria-label': 'Alasan penolakan',
+            'rows': 3
+        },
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#dc2626',
+        cancelButtonColor: '#94a3b8',
+        confirmButtonText: '<i class="fas fa-ban mr-1.5"></i>Konfirmasi Penolakan',
+        cancelButtonText: 'Batal',
+        reverseButtons: true,
+        inputValidator: (value) => {
+            if (!value || !value.trim()) {
+                return 'Alasan penolakan wajib diisi agar pengguna mengetahui penyebabnya.';
+            }
+        },
+        customClass: {
+            popup: 'rounded-2xl shadow-xl border border-slate-200',
+            confirmButton: 'px-4 py-2.5 rounded-xl font-semibold text-xs',
+            cancelButton: 'px-4 py-2.5 rounded-xl font-semibold text-xs',
+            input: 'text-xs rounded-xl border border-slate-300'
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById(inputId).value = result.value;
+            document.getElementById(formId).submit();
+        }
+    });
+}
+</script>
+@endpush

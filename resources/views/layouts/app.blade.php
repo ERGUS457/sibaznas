@@ -32,6 +32,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -724,5 +726,35 @@
             </footer>
         </div>
     </div>
+
+    <!-- SweetAlert2 Global Configuration & Flash Handlers -->
+    <script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3500,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer);
+                toast.addEventListener('mouseleave', Swal.resumeTimer);
+            }
+        });
+
+        @if(session('success'))
+            Toast.fire({
+                icon: 'success',
+                title: '{{ addslashes(session('success')) }}'
+            });
+        @endif
+
+        @if(session('error'))
+            Toast.fire({
+                icon: 'error',
+                title: '{{ addslashes(session('error')) }}'
+            });
+        @endif
+    </script>
+    @stack('scripts')
 </body>
 </html>
