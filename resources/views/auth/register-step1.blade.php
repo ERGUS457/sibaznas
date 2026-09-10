@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Akun — SIBAZNAS</title>
+    <title>Daftar Akun — SIM-ORGANISASI</title>
     <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -43,9 +43,9 @@
 
         {{-- Header --}}
         <div class="text-center mb-8">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo SIBAZNAS" class="w-16 h-16 rounded-2xl object-contain bg-white border border-slate-200 p-1 shadow-md mx-auto mb-4">
-            <h1 class="text-2xl font-bold text-gray-800">SIBAZNAS</h1>
-            <p class="text-gray-500 text-sm mt-1">Sistem Informasi Baznas — Pendaftaran Organisasi</p>
+            <img src="{{ asset('images/logo.png') }}" alt="Logo Organisasi" class="w-16 h-16 rounded-2xl object-contain bg-white border border-slate-200 p-1 shadow-md mx-auto mb-4">
+            <h1 class="text-2xl font-bold text-gray-800">SIM-ORGANISASI</h1>
+            <p class="text-gray-500 text-sm mt-1">Sistem Informasi Akuntansi &amp; Manajemen Organisasi — Pendaftaran Organisasi</p>
         </div>
 
         {{-- Step Indicator --}}

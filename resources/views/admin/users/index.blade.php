@@ -81,7 +81,7 @@
                 <thead class="bg-gray-50 border-b border-gray-100">
                     <tr>
                         <th class="text-left px-5 py-3.5 font-semibold text-gray-600 text-xs uppercase tracking-wide">Pengguna</th>
-                        <th class="text-left px-5 py-3.5 font-semibold text-gray-600 text-xs uppercase tracking-wide">Organisasi / UPZ</th>
+                        <th class="text-left px-5 py-3.5 font-semibold text-gray-600 text-xs uppercase tracking-wide">Organisasi</th>
                         <th class="text-center px-5 py-3.5 font-semibold text-gray-600 text-xs uppercase tracking-wide">Status</th>
                         <th class="text-left px-5 py-3.5 font-semibold text-gray-600 text-xs uppercase tracking-wide">Didaftarkan</th>
                         <th class="text-center px-5 py-3.5 font-semibold text-gray-600 text-xs uppercase tracking-wide">Aksi</th>
@@ -99,7 +99,7 @@
                                     <div class="font-medium text-gray-700">{{ $user->upzProfile->name }}</div>
                                     <div class="text-gray-400 text-xs mt-0.5">{{ $user->upzProfile->code }} · {{ $user->upzProfile->institution_type }}</div>
                                 @else
-                                    <span class="text-gray-400 text-xs italic">Tidak ada UPZ</span>
+                                    <span class="text-gray-400 text-xs italic">Tidak ada Afiliasi Organisasi</span>
                                 @endif
                             </td>
                             <td class="px-5 py-4 text-center">

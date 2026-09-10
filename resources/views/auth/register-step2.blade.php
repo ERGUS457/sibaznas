@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Organisasi — SIBAZNAS</title>
+    <title>Data Organisasi — SIM-ORGANISASI</title>
     <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
@@ -42,9 +42,9 @@
 
         {{-- Header --}}
         <div class="text-center mb-8">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo SIBAZNAS" class="w-16 h-16 rounded-2xl object-contain bg-white border border-slate-200 p-1 shadow-md mx-auto mb-4">
-            <h1 class="text-2xl font-bold text-gray-800">SIBAZNAS</h1>
-            <p class="text-gray-500 text-sm mt-1">Sistem Informasi Baznas — Pendaftaran Organisasi</p>
+            <img src="{{ asset('images/logo.png') }}" alt="Logo Organisasi" class="w-16 h-16 rounded-2xl object-contain bg-white border border-slate-200 p-1 shadow-md mx-auto mb-4">
+            <h1 class="text-2xl font-bold text-gray-800">SIM-ORGANISASI</h1>
+            <p class="text-gray-500 text-sm mt-1">Sistem Informasi Akuntansi &amp; Manajemen Organisasi — Pendaftaran Organisasi</p>
         </div>
 
         {{-- Step Indicator --}}
@@ -69,8 +69,8 @@
 
         {{-- Card --}}
         <div class="clay-card p-8">
-            <h2 class="text-xl font-bold text-gray-800 mb-1">Data Organisasi / UPZ</h2>
-            <p class="text-gray-500 text-sm mb-6">Langkah 2 dari 2 — Isi data organisasi atau Unit Pengumpul Zakat (UPZ) Anda</p>
+            <h2 class="text-xl font-bold text-gray-800 mb-1">Data Profil Organisasi</h2>
+            <p class="text-gray-500 text-sm mb-6">Langkah 2 dari 2 — Isi data profil organisasi Anda</p>
 
             @if ($errors->any())
                 <div class="bg-red-50 border border-red-200 rounded-xl p-4 mb-6">
@@ -91,24 +91,24 @@
             <form method="POST" action="{{ route('register.step2.submit') }}" class="space-y-6">
                 @csrf
 
-                {{-- Identitas UPZ --}}
+                {{-- Identitas Organisasi --}}
                 <div>
-                    <p class="section-title"><i class="fas fa-building mr-2"></i>Identitas Organisasi / UPZ</p>
+                    <p class="section-title"><i class="fas fa-building mr-2"></i>Identitas Organisasi</p>
                     <div class="grid grid-cols-1 gap-4">
                         <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-1.5">Nama UPZ / Organisasi <span class="text-red-500">*</span></label>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1.5">Nama Organisasi <span class="text-red-500">*</span></label>
                             <input type="text" name="upz_name" value="{{ old('upz_name') }}"
-                                   placeholder="contoh: UPZ Masjid Al-Ikhlas"
+                                   placeholder="contoh: Yayasan Bina Mandiri"
                                    class="form-input {{ $errors->has('upz_name') ? 'error' : '' }}">
                             @error('upz_name') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
                         </div>
                         <div class="grid grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-1.5">Kode UPZ <span class="text-red-500">*</span></label>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1.5">Kode Organisasi <span class="text-red-500">*</span></label>
                                 <input type="text" name="upz_code" value="{{ old('upz_code') }}"
-                                       placeholder="contoh: UPZ-MSA-001"
+                                       placeholder="contoh: ORG-YBM-001"
                                        class="form-input {{ $errors->has('upz_code') ? 'error' : '' }}">
-                                <p class="text-xs text-gray-400 mt-1">Kode unik untuk UPZ Anda (huruf/angka/tanda minus)</p>
+                                <p class="text-xs text-gray-400 mt-1">Kode unik untuk Organisasi Anda (huruf/angka/tanda minus)</p>
                                 @error('upz_code') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
                             </div>
                             <div>
@@ -125,31 +125,31 @@
                     </div>
                 </div>
 
-                {{-- SK & BAZNAS Induk --}}
+                {{-- Legalitas & Pembina --}}
                 <div>
-                    <p class="section-title"><i class="fas fa-file-contract mr-2"></i>SK Pengukuhan & BAZNAS Induk</p>
+                    <p class="section-title"><i class="fas fa-file-contract mr-2"></i>Legalitas &amp; Pembina Organisasi</p>
                     <div class="grid grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-1.5">Tingkat BAZNAS Induk <span class="text-red-500">*</span></label>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1.5">Tingkat Pembina / Induk <span class="text-red-500">*</span></label>
                             <select name="parent_baznas_level" class="form-select {{ $errors->has('parent_baznas_level') ? 'error' : '' }}">
                                 <option value="">-- Pilih --</option>
-                                @foreach(['BAZNAS RI', 'BAZNAS Provinsi', 'BAZNAS Kab/Kota'] as $level)
+                                @foreach(['Tingkat Nasional', 'Tingkat Provinsi', 'Tingkat Kab/Kota'] as $level)
                                     <option value="{{ $level }}" {{ old('parent_baznas_level') === $level ? 'selected' : '' }}>{{ $level }}</option>
                                 @endforeach
                             </select>
                             @error('parent_baznas_level') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
                         </div>
                         <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-1.5">Nama BAZNAS Induk <span class="text-red-500">*</span></label>
-                            <input type="text" name="parent_baznas_name" value="{{ old('parent_baznas_name', 'BAZNAS RI') }}"
-                                   placeholder="contoh: BAZNAS Kab. Bandung"
+                            <label class="block text-sm font-semibold text-gray-700 mb-1.5">Nama Instansi / Pembina Induk <span class="text-red-500">*</span></label>
+                            <input type="text" name="parent_baznas_name" value="{{ old('parent_baznas_name', 'Organisasi Induk') }}"
+                                   placeholder="contoh: Dinas Sosial / Pembina Organisasi"
                                    class="form-input {{ $errors->has('parent_baznas_name') ? 'error' : '' }}">
                             @error('parent_baznas_name') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
                         </div>
                         <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-1.5">Nomor SK Pengukuhan</label>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1.5">Nomor SK / Izin Pendirian</label>
                             <input type="text" name="sk_number" value="{{ old('sk_number') }}"
-                                   placeholder="contoh: 001/SK-UPZ/2024" class="form-input">
+                                   placeholder="contoh: 001/SK-ORG/2024" class="form-input">
                         </div>
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-1.5">Tanggal SK</label>
@@ -186,11 +186,11 @@
 
                 {{-- Pengurus --}}
                 <div>
-                    <p class="section-title"><i class="fas fa-users mr-2"></i>Data Pengurus</p>
+                    <p class="section-title"><i class="fas fa-users mr-2"></i>Data Pengurus Organisasi</p>
                     <div class="grid grid-cols-3 gap-4">
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-1.5">Nama Ketua</label>
-                            <input type="text" name="chairman_name" value="{{ old('chairman_name') }}" placeholder="Nama Ketua UPZ" class="form-input">
+                            <input type="text" name="chairman_name" value="{{ old('chairman_name') }}" placeholder="Nama Ketua Organisasi" class="form-input">
                         </div>
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-1.5">Nama Sekretaris</label>
@@ -203,9 +203,9 @@
                     </div>
                 </div>
 
-                {{-- Rekening & Amil --}}
+                {{-- Rekening & Operasional --}}
                 <div>
-                    <p class="section-title"><i class="fas fa-university mr-2"></i>Rekening Bank & Persentase Amil</p>
+                    <p class="section-title"><i class="fas fa-university mr-2"></i>Rekening Bank &amp; Alokasi Operasional</p>
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-1.5">Nama Bank</label>
@@ -220,10 +220,10 @@
                             <input type="text" name="bank_account_name" value="{{ old('bank_account_name') }}" placeholder="Nama sesuai buku rekening" class="form-input">
                         </div>
                         <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-1.5">Persentase Amil (%)</label>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1.5">Persentase Operasional / Amil (%)</label>
                             <input type="number" name="amil_share_percentage" value="{{ old('amil_share_percentage', 12.5) }}"
-                                   placeholder="12.50" min="0" max="12.50" step="0.01" class="form-input">
-                            <p class="text-xs text-gray-400 mt-1">Maksimal 12.50% sesuai syariat dan regulasi BAZNAS</p>
+                                   placeholder="12.50" min="0" max="100" step="0.01" class="form-input">
+                            <p class="text-xs text-gray-400 mt-1">Alokasi maksimal hak operasional / pengelola</p>
                         </div>
                     </div>
                 </div>

@@ -1,18 +1,18 @@
 @extends('layouts.app')
 
-@section('title', 'Setoran Penyetoran ZIS ke BAZNAS')
+@section('title', 'Setoran Keuangan ke Organisasi Induk')
 
 @section('content')
 <div class="space-y-6">
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-            <h1 class="text-xl font-bold text-slate-900">Setoran Hasil Pengumpulan ke BAZNAS</h1>
-            <p class="text-xs text-slate-500">Kepatuhan penyetoran hasil pengumpulan ZIS oleh UPZ ke rekening resmi BAZNAS sesuai Perbaznas No. 2/2016 Pasal 14.</p>
+            <h1 class="text-xl font-bold text-slate-900">Setoran Keuangan ke Organisasi Induk</h1>
+            <p class="text-xs text-slate-500">Penyetoran hasil pengumpulan dana oleh Organisasi ke rekening resmi Organisasi Induk / Pembina.</p>
         </div>
         <div>
             <a href="{{ route('remittances.create') }}" class="inline-flex items-center space-x-2 bg-amber-600 hover:bg-amber-700 text-white font-semibold text-sm px-4 py-2 rounded-xl shadow-sm transition">
                 <i class="fa-solid fa-building-columns"></i>
-                <span>Rekam Setoran BAZNAS</span>
+                <span>Rekam Setoran Induk</span>
             </a>
         </div>
     </div>
@@ -20,7 +20,7 @@
     <!-- Summary Card -->
     <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
         <div>
-            <span class="text-xs font-semibold text-slate-500 uppercase">Total Setoran Tervalidasi BAZNAS</span>
+            <span class="text-xs font-semibold text-slate-500 uppercase">Total Setoran Tervalidasi Organisasi Induk</span>
             <div class="text-2xl font-bold text-amber-600 mt-1">Rp {{ number_format($totalRemitted, 0, ',', '.') }}</div>
         </div>
         <div class="text-xs text-slate-500 text-right">

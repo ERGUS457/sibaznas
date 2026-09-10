@@ -95,9 +95,9 @@
                     <label class="text-xs font-bold text-slate-700">Peran / Role <span class="text-red-500">*</span></label>
                     <select name="role" required class="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-emerald-600">
                         <option value="superadmin" {{ old('role', $user->role) === 'superadmin' ? 'selected' : '' }}>Superadmin</option>
-                        <option value="pengurus_upz" {{ old('role', $user->role) === 'pengurus_upz' ? 'selected' : '' }}>Pengurus UPZ</option>
+                        <option value="pengurus_upz" {{ old('role', $user->role) === 'pengurus_upz' ? 'selected' : '' }}>Pengurus Organisasi</option>
                         <option value="akuntan" {{ old('role', $user->role) === 'akuntan' ? 'selected' : '' }}>Akuntan</option>
-                        <option value="baznas_supervisor" {{ old('role', $user->role) === 'baznas_supervisor' ? 'selected' : '' }}>Supervisor BAZNAS</option>
+                        <option value="baznas_supervisor" {{ old('role', $user->role) === 'baznas_supervisor' ? 'selected' : '' }}>Supervisor / Pengawas Organisasi</option>
                     </select>
                 </div>
 
@@ -111,9 +111,9 @@
                     </select>
                 </div>
 
-                {{-- Afiliasi UPZ --}}
+                {{-- Afiliasi Organisasi --}}
                 <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-700">Afiliasi UPZ / Organisasi</label>
+                    <label class="text-xs font-bold text-slate-700">Afiliasi Organisasi</label>
                     <select name="upz_profile_id" class="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-emerald-600">
                         <option value="">-- Tidak Terhubung / Independen --</option>
                         @foreach ($organizations as $org)

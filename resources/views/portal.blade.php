@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Ruang Kerja - SIM-UPZ BAZNAS &amp; DE ISAK 35</title>
+    <title>Portal Ruang Kerja - SIM-ORGANISASI &amp; DE ISAK 35</title>
     <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -134,7 +134,7 @@
                     <div>
                         <div class="flex items-center gap-2 flex-wrap">
                             <span class="text-[10px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-800 px-2 py-0.5 rounded border border-emerald-200">
-                                ENTITAS ORGANISASI / UPZ
+                                ENTITAS ORGANISASI
                             </span>
                             <span class="text-xs text-slate-500 font-mono font-semibold">
                                 Kode: {{ $upz->code }}
@@ -144,8 +144,8 @@
                             {{ $upz->name }}
                         </h3>
                         <p class="text-xs text-slate-500">
-                            {{ ucfirst(str_replace('_', ' ', $upz->institution_type ?? 'Organisasi')) }} &bull; 
-                            Pembina: {{ $upz->parent_baznas_name ?? 'BAZNAS' }} &bull; 
+                            {{ ucfirst(str_replace('_', ' ', $upz->institution_type ?? 'Organisasi')) }} &bull;
+                            Pembina: {{ $upz->parent_baznas_name ?? 'Organisasi Induk' }} &bull;
                             SK: {{ $upz->sk_number ?? 'Belum ada SK' }}
                         </p>
                     </div>
@@ -257,35 +257,35 @@
                             <i class="fa-solid fa-hand-holding-heart"></i>
                         </div>
                         <span class="text-[11px] font-semibold uppercase tracking-wider bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded border border-emerald-200">
-                            UPZ BAZNAS RESMI
+                            MODUL PENERIMAAN &amp; PENYALURAN DANA
                         </span>
                     </div>
 
                     <!-- Title & Description -->
                     <h3 class="text-lg sm:text-xl font-bold text-slate-900 tracking-tight mb-2">
-                        Pengelolaan &amp; Pelaporan Zakat (BAZNAS RI)
+                        Pengelolaan Penerimaan &amp; Penyaluran Dana
                     </h3>
                     <p class="text-xs text-slate-600 leading-relaxed mb-6">
-                        Khusus organisasi yang memiliki hak/legalitas mengumpulkan zakat (UPZ). Mengelola penerimaan ZIS, penerbitan Bukti Setor Zakat (BSZ), penyaluran 8 Asnaf, serta pelaporan resmi <strong>Perbaznas No. 2 Tahun 2016</strong>.
+                        Khusus pengelolaan penerimaan donasi / ZIS, penerbitan Bukti Tanda Terima Setor (BSZ), penyaluran bantuan sosial, serta pelaporan aktivitas dana masyarakat.
                     </p>
 
                     <!-- Features Checklist -->
                     <div class="space-y-2.5 mb-6 text-xs text-slate-700">
                         <div class="flex items-center gap-2.5">
                             <i class="fa-solid fa-circle-check text-emerald-700 text-sm"></i>
-                            <span>Penerimaan ZIS &amp; Cetak Bukti Setor Zakat (BSZ)</span>
+                            <span>Input Penerimaan Dana &amp; Cetak Bukti Setor</span>
                         </div>
                         <div class="flex items-center gap-2.5">
                             <i class="fa-solid fa-circle-check text-emerald-700 text-sm"></i>
-                            <span>Penyaluran 8 Asnaf &amp; Setoran ke BAZNAS</span>
+                            <span>Penyaluran Program &amp; Bantuan Sosial</span>
                         </div>
                         <div class="flex items-center gap-2.5">
                             <i class="fa-solid fa-circle-check text-emerald-700 text-sm"></i>
-                            <span>Evaluasi Batasan Hak Amil (Maksimal 12,5%)</span>
+                            <span>Master Data Donatur / Muzakki &amp; Penerima Bantuan</span>
                         </div>
                         <div class="flex items-center gap-2.5">
                             <i class="fa-solid fa-circle-check text-emerald-700 text-sm"></i>
-                            <span>Lampiran Resmi I, II, III, V, VII Perbaznas 2/2016</span>
+                            <span>Laporan Periodik Penerimaan &amp; Penyaluran</span>
                         </div>
                     </div>
 
@@ -307,7 +307,7 @@
                 <!-- CTA Action Button -->
                 <div>
                     <a href="{{ route('dashboard.baznas') }}" class="btn-formal-primary w-full py-3 px-5 text-sm flex items-center justify-center gap-2">
-                        <span>Buka Modul Zakat BAZNAS</span>
+                        <span>Buka Modul Pengelolaan Dana</span>
                         <i class="fa-solid fa-arrow-right text-xs"></i>
                     </a>
                 </div>
@@ -324,7 +324,7 @@
 
     <!-- Footer -->
     <footer class="max-w-6xl mx-auto w-full text-center text-xs text-slate-500 mt-10">
-        <span>SIM-ORGANISASI &amp; ZAKAT &bull; STANDAR DE ISAK 35 &amp; PERATURAN BAZNAS NO. 2 TAHUN 2016</span>
+        <span>SIM-ORGANISASI &bull; STANDAR DE ISAK 35 &amp; PELAPORAN KEUANGAN ORGANISASI</span>
     </footer>
 
 </body>
