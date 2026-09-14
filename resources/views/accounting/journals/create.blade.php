@@ -8,11 +8,11 @@
         <div>
             <div class="flex items-center gap-2 mb-1">
                 <span class="text-[10px] font-semibold uppercase tracking-wider bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded border border-slate-200">
-                    AKUNTANSI KEUANGAN ORGANISASI (DE ISAK 35)
+                    JURNAL UMUM
                 </span>
             </div>
             <h1 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Input Transaksi Keuangan / Jurnal Umum</h1>
-            <p class="text-xs text-slate-500">Pencatatan transaksi pembukuan manual, beban operasional, jurnal penyesuaian, dan aset/kewajiban entitas nonlaba.</p>
+            <p class="text-xs text-slate-500">Catat transaksi harian: pemasukan, pengeluaran, penyaluran, dan penyesuaian saldo.</p>
         </div>
         <a href="{{ route('journals.index') }}" class="clay-btn-white px-3.5 py-2 text-xs font-semibold inline-flex items-center gap-2 text-slate-700 w-fit">
             <i class="fa-solid fa-arrow-left text-slate-400"></i>
@@ -33,6 +33,20 @@
         </ul>
     </div>
     @endif
+
+    <!-- Panduan Debit Kredit Sederhana -->
+    <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 flex gap-3">
+        <i class="fa-solid fa-lightbulb text-amber-600 mt-0.5"></i>
+        <div class="text-xs leading-relaxed text-amber-900">
+            <span class="font-bold">Panduan Debit &amp; Kredit (sederhana):</span>
+            <span class="text-amber-800">
+            <b>Aset</b> (Kas, Bank, Piutang, Peralatan) — <span class="text-emerald-700 font-bold">Debit = Bertambah</span>, Kredit = Berkurang &nbsp;|&nbsp;
+            <b>Utang &amp; Modal</b> — Kredit = Bertambah, Debit = Berkurang &nbsp;|&nbsp;
+            <b>Pendapatan</b> — Kredit = Bertambah &nbsp;|&nbsp;
+            <b>Beban</b> — Debit = Bertambah. Pilih akun, lalu isi <b>Debit</b> atau <b>Kredit</b> — keterangan otomatis muncul di kolom Info.
+            </span>
+        </div>
+    </div>
 
     <div class="bg-white rounded-xl border border-slate-200 shadow-xs p-6 space-y-6">
         <form method="POST" action="{{ route('journals.store') }}" class="space-y-6" @submit="handleSubmit">
@@ -79,12 +93,12 @@
                     <table class="w-full text-xs text-left">
                         <thead class="bg-slate-100 text-slate-700 font-bold uppercase tracking-wider text-[10px] border-b border-slate-200">
                             <tr>
-                                <th class="p-3 w-12 text-center">#</th>
-                                <th class="p-3 min-w-[220px]">Pilih Akun (COA) <span class="text-rose-500">*</span></th>
-                                <th class="p-3 min-w-[150px]">Pembatasan ISAK 35</th>
+                                <th class="p-3 w-10 text-center">#</th>
+                                <th class="p-3 min-w-[260px]">Akun <span class="text-rose-500">*</span></th>
                                 <th class="p-3 min-w-[140px] text-right">Debit (Rp)</th>
                                 <th class="p-3 min-w-[140px] text-right">Kredit (Rp)</th>
-                                <th class="p-3 w-12 text-center">Aksi</th>
+                                <th class="p-3 min-w-[180px]">Keterangan</th>
+                                <th class="p-3 w-10 text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100 bg-white">
@@ -92,32 +106,32 @@
                                 <tr class="hover:bg-slate-50/70 transition-colors">
                                     <td class="p-3 text-center text-slate-400 font-mono text-[11px]" x-text="index + 1"></td>
                                     <td class="p-2.5">
-                                        <select :name="`items[${index}][account_id]`" x-model="row.account_id" required
+                                        <select :name="`items[${index}][account_id]`" x-model="row.account_id" @change="updateHint(index)" required
                                             class="w-full text-xs border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-slate-700 focus:outline-none">
                                             <option value="">-- Pilih Akun --</option>
                                             @foreach($accounts as $account)
                                             <option value="{{ $account->id }}">
-                                                {{ $account->code }} - {{ $account->name }} ({{ $account->category }})
+                                                {{ $account->code }} - {{ $account->name }}
                                             </option>
                                             @endforeach
                                         </select>
-                                    </td>
-                                    <td class="p-2.5">
-                                        <select :name="`items[${index}][restriction_type]`" x-model="row.restriction_type"
-                                            class="w-full text-xs border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-slate-700 focus:outline-none">
-                                            <option value="WITHOUT_RESTRICTION">Tanpa Pembatasan</option>
-                                            <option value="WITH_RESTRICTION">Dengan Pembatasan</option>
-                                        </select>
+                                        <div x-show="getAccount(index)" class="mt-1 text-[10px] leading-tight" :class="getAccount(index)?.normal_balance === 'DEBIT' ? 'text-emerald-700' : 'text-sky-700'">
+                                            <span x-text="getAccount(index) ? `Normal: ${getAccount(index).normal_balance} — ${getAccount(index).normal_balance === 'DEBIT' ? 'Debit menambah, Kredit mengurangi' : 'Kredit menambah, Debit mengurangi'}` : ''"></span>
+                                        </div>
+                                        <input type="hidden" :name="`items[${index}][restriction_type]`" :value="getDefaultRestriction(index)">
                                     </td>
                                     <td class="p-2.5 text-right">
                                         <input type="number" step="any" min="0" :name="`items[${index}][debit]`" x-model.number="row.debit"
-                                            @input="if(row.debit > 0) row.credit = 0" placeholder="0"
+                                            @input="if(row.debit > 0) row.credit = 0; updateHint(index)" placeholder="0"
                                             class="w-full text-xs text-right border border-slate-300 rounded-lg p-2 font-mono font-medium focus:ring-2 focus:ring-slate-700 focus:outline-none">
                                     </td>
                                     <td class="p-2.5 text-right">
                                         <input type="number" step="any" min="0" :name="`items[${index}][credit]`" x-model.number="row.credit"
-                                            @input="if(row.credit > 0) row.debit = 0" placeholder="0"
+                                            @input="if(row.credit > 0) row.debit = 0; updateHint(index)" placeholder="0"
                                             class="w-full text-xs text-right border border-slate-300 rounded-lg p-2 font-mono font-medium focus:ring-2 focus:ring-slate-700 focus:outline-none">
+                                    </td>
+                                    <td class="p-2.5">
+                                        <span class="text-[11px] leading-tight block" :class="row.hintColor" x-text="row.hint || '— Pilih akun & isi nominal'"></span>
                                     </td>
                                     <td class="p-2.5 text-center">
                                         <button type="button" @click="removeRow(index)" :disabled="rows.length <= 2"
@@ -130,6 +144,7 @@
                         </tbody>
                     </table>
                 </div>
+                <p class="text-[11px] text-slate-500"><i class="fa-solid fa-circle-info mr-1"></i> Isi <b>salah satu</b> saja per baris: Debit <b>atau</b> Kredit. Total Debit harus sama dengan Total Kredit.</p>
             </div>
 
             <!-- Live Calculation & Balance Summary Footer -->
@@ -180,14 +195,49 @@
 </div>
 
 <script>
+const ACCOUNT_MAP = {
+    @foreach($accounts as $a)
+    "{{ $a->id }}": { code: "{{ $a->code }}", name: "{{ addslashes($a->name) }}", category: "{{ $a->category }}", normal_balance: "{{ $a->normal_balance }}" },
+    @endforeach
+};
 function journalForm() {
     return {
         rows: [
-            { account_id: '', restriction_type: 'WITHOUT_RESTRICTION', debit: 0, credit: 0 },
-            { account_id: '', restriction_type: 'WITHOUT_RESTRICTION', debit: 0, credit: 0 }
+            { account_id: '', debit: 0, credit: 0, hint: '', hintColor: 'text-slate-400' },
+            { account_id: '', debit: 0, credit: 0, hint: '', hintColor: 'text-slate-400' }
         ],
+        getAccount(index) {
+            return ACCOUNT_MAP[this.rows[index].account_id] || null;
+        },
+        getDefaultRestriction(index) {
+            const acc = this.getAccount(index);
+            if (!acc) return 'WITHOUT_RESTRICTION';
+            // Aset bersih / pendapatan terbatas -> WITH_RESTRICTION
+            if (acc.category === 'NET_ASSET' || acc.code.startsWith('4-2') || acc.code.startsWith('5-1')) return 'WITH_RESTRICTION';
+            return 'WITHOUT_RESTRICTION';
+        },
+        updateHint(index) {
+            const acc = this.getAccount(index);
+            const row = this.rows[index];
+            if (!acc) { row.hint = '— Pilih akun & isi nominal'; row.hintColor='text-slate-400'; return; }
+            const hasDebit = (parseFloat(row.debit)||0) > 0;
+            const hasCredit = (parseFloat(row.credit)||0) > 0;
+            if (!hasDebit && !hasCredit) {
+                row.hint = acc.normal_balance === 'DEBIT' ? 'Isi Debit untuk menambah, Kredit untuk mengurangi' : 'Isi Kredit untuk menambah, Debit untuk mengurangi';
+                row.hintColor = 'text-slate-500';
+                return;
+            }
+            const isNormal = (hasDebit && acc.normal_balance==='DEBIT') || (hasCredit && acc.normal_balance==='CREDIT');
+            if (isNormal) {
+                row.hint = hasDebit ? `Debit ${acc.name}: menambah saldo` : `Kredit ${acc.name}: menambah saldo`;
+                row.hintColor = 'text-emerald-700 font-medium';
+            } else {
+                row.hint = hasDebit ? `Debit ${acc.name}: mengurangi saldo` : `Kredit ${acc.name}: mengurangi saldo`;
+                row.hintColor = 'text-amber-700 font-medium';
+            }
+        },
         addRow() {
-            this.rows.push({ account_id: '', restriction_type: 'WITHOUT_RESTRICTION', debit: 0, credit: 0 });
+            this.rows.push({ account_id: '', debit: 0, credit: 0, hint: '', hintColor: 'text-slate-400' });
         },
         removeRow(index) {
             if (this.rows.length > 2) {
