@@ -104,7 +104,6 @@
                 <a href="#modul-operasional" class="hover:text-emerald-700 transition">Modul Operasional</a>
                 <a href="#modul-akuntansi" class="hover:text-emerald-700 transition">Modul Akuntansi</a>
                 <a href="#alur-kerja" class="hover:text-emerald-700 transition">Alur Kerja</a>
-                <a href="#panduan-login" class="hover:text-emerald-700 transition">Kredensial Login</a>
             </div>
 
             <!-- CTA Button -->
@@ -487,56 +486,6 @@
                     <p class="text-xs text-slate-500 leading-relaxed">
                         Seluruh 4 laporan DE ISAK 35 dan laporan tata kerja UPZ Perbaznas langsung terbentuk secara otomatis tanpa perlu rekap manual.
                     </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============================================================= -->
-        <!-- 5. KREDENSIAL LOGIN & AKSES CEPAT (Clay Card)                 -->
-        <!-- ============================================================= -->
-        <section id="panduan-login" class="clay-card p-8 sm:p-10 scroll-mt-24 bg-gradient-to-b from-white to-emerald-50/40">
-            <div class="max-w-3xl mx-auto text-center space-y-6">
-                <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-emerald-700 text-white text-xl shadow-xs mx-auto">
-                    <i class="fa-solid fa-key"></i>
-                </div>
-
-                <div class="space-y-2">
-                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
-                        Akses Sistem &bull; Kredensial Login
-                    </h2>
-                    <p class="text-xs sm:text-sm text-slate-600 max-w-lg mx-auto">
-                        Gunakan akun administrator berikut untuk masuk ke panel kerja operasional UPZ dan akuntansi keuangan:
-                    </p>
-                </div>
-
-                <!-- Inset Box Credential -->
-                <div class="clay-card-soft p-5 max-w-md mx-auto space-y-3 text-left">
-                    <div class="flex items-center justify-between pb-2 border-b border-slate-200 text-xs font-bold text-slate-600">
-                        <span>Akun Administrator Bawaan</span>
-                        <span class="text-emerald-700 bg-emerald-100 px-2.5 py-0.5 rounded-full text-[10px]">Aktif &amp; Terverifikasi</span>
-                    </div>
-                    <div class="grid grid-cols-2 gap-3 text-xs font-mono">
-                        <div class="bg-white p-2.5 rounded-xl border border-slate-200">
-                            <span class="text-[10px] text-slate-400 block font-sans">Username</span>
-                            <span class="text-base font-extrabold text-slate-900">admin</span>
-                        </div>
-                        <div class="bg-white p-2.5 rounded-xl border border-slate-200">
-                            <span class="text-[10px] text-slate-400 block font-sans">Password</span>
-                            <span class="text-base font-extrabold text-slate-900">admin123</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CTA Button to Login & Register -->
-                <div class="pt-2 flex flex-wrap items-center justify-center gap-3">
-                    <a href="{{ route('login') }}" class="clay-btn-emerald inline-flex items-center space-x-2 px-8 py-3.5 font-bold text-sm tracking-wide">
-                        <span>Buka Halaman Login</span>
-                        <i class="fa-solid fa-arrow-right text-xs"></i>
-                    </a>
-                    <a href="{{ route('register.step1') }}" class="clay-btn-white inline-flex items-center space-x-2 px-6 py-3.5 font-bold text-sm text-emerald-800 border-emerald-300 hover:bg-emerald-50">
-                        <i class="fa-solid fa-building-user text-emerald-600 text-xs"></i>
-                        <span>Daftarkan Organisasi Baru</span>
-                    </a>
                 </div>
             </div>
         </section>
