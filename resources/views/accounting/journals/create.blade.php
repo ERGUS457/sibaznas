@@ -34,19 +34,7 @@
     </div>
     @endif
 
-    <!-- Panduan Debit Kredit Sederhana -->
-    <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 flex gap-3">
-        <i class="fa-solid fa-lightbulb text-amber-600 mt-0.5"></i>
-        <div class="text-xs leading-relaxed text-amber-900">
-            <span class="font-bold">Panduan Debit &amp; Kredit (sederhana):</span>
-            <span class="text-amber-800">
-            <b>Aset</b> (Kas, Bank, Piutang, Peralatan) — <span class="text-emerald-700 font-bold">Debit = Bertambah</span>, Kredit = Berkurang &nbsp;|&nbsp;
-            <b>Utang &amp; Modal</b> — Kredit = Bertambah, Debit = Berkurang &nbsp;|&nbsp;
-            <b>Pendapatan</b> — Kredit = Bertambah &nbsp;|&nbsp;
-            <b>Beban</b> — Debit = Bertambah. Pilih akun, lalu isi <b>Debit</b> atau <b>Kredit</b> — keterangan otomatis muncul di kolom Info.
-            </span>
-        </div>
-    </div>
+
 
     <div class="bg-white rounded-xl border border-slate-200 shadow-xs p-6 space-y-6">
         <form method="POST" action="{{ route('journals.store') }}" class="space-y-6" @submit="handleSubmit">
