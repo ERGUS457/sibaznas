@@ -273,7 +273,7 @@
                 <!-- CTA Action Button -->
                 <div>
                     <a href="{{ route('dashboard.baznas') }}" class="btn-formal-primary w-full py-3 px-5 text-sm flex items-center justify-center gap-2">
-                        <span>Buka Modul Pengelolaan Dana</span>
+                        <span>Buka Laporan Zakat</span>
                         <i class="fa-solid fa-arrow-right text-xs"></i>
                     </a>
                 </div>
@@ -281,11 +281,7 @@
 
         </div>
 
-        <!-- Extensibility Notice / Future Slot Placeholder -->
-        <div class="mt-8 p-4 rounded-xl border border-dashed border-slate-300 bg-white text-center text-slate-600 text-xs">
-            <span class="font-semibold text-slate-800"><i class="fa-solid fa-circle-plus mr-1 text-slate-400"></i> Arsitektur Siap Berkembang:</span>
-            Modul pelaporan lain (Card ke-3, seperti Pelaporan Pajak Lembaga, CSR, atau Modul Audit) dapat ditambahkan ke portal ini dengan mudah di masa mendatang.
-        </div>
+
     </main>
 
     <!-- Footer -->
