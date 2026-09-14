@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard Panel Kerja - SIM-ORGANISASI & ISAK 35')
+@section('title', 'Dashboard Panel Kerja - ARTHAWISE')
 
 @section('content')
 <div x-data="{ activeTab: 'operasional' }" class="space-y-6">

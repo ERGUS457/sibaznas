@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIM-ORGANISASI &bull; Terintegrasi DE ISAK 35 FORMAT A</title>
+    <title>ARTHAWISE &bull; Artha Wise Finance — Sistem Keuangan Organisasi</title>
     <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -89,10 +89,10 @@
         <nav class="clay-card px-5 py-3.5 flex items-center justify-between">
             <!-- Brand Logo -->
             <a href="{{ route('landing') }}" class="flex items-center space-x-3">
-                <img src="{{ asset('images/logo.png') }}" alt="Logo SIM-ORGANISASI" class="w-10 h-10 rounded-lg object-contain bg-white border border-slate-200 p-0.5 shadow-xs flex-shrink-0">
+                <img src="{{ asset('images/logo.png') }}" alt="Logo ARTHAWISE" class="w-10 h-10 rounded-lg object-contain bg-white border border-slate-200 p-0.5 shadow-xs flex-shrink-0">
                 <div>
                     <div class="flex items-center gap-1.5">
-                        <span class="font-bold text-slate-900 text-base tracking-tight">SIM-ORGANISASI</span>
+                        <span class="font-bold text-slate-900 text-base tracking-tight">ARTHAWISE</span>
                         <span class="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">PORTAL</span>
                     </div>
                     <span class="text-[11px] font-medium text-slate-500 tracking-wide block">DE ISAK 35 FORMAT A</span>
@@ -547,7 +547,7 @@
     <footer class="mt-16 py-8 border-t border-slate-200/80 bg-white/70 text-center text-xs text-slate-500 space-y-2">
         <div class="max-w-7xl mx-auto px-4 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
             <div class="flex items-center space-x-2">
-                <span class="font-extrabold text-slate-800">SIM-ORGANISASI</span>
+                <span class="font-extrabold text-slate-800">ARTHAWISE</span>
                 <span>&bull;</span>
                 <span>Terintegrasi DE ISAK 35 FORMAT A</span>
             </div>

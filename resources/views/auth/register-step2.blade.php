@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Organisasi — SIM-ORGANISASI</title>
+    <title>Data Organisasi — ARTHAWISE</title>
     <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
@@ -43,7 +43,7 @@
         {{-- Header --}}
         <div class="text-center mb-8">
             <img src="{{ asset('images/logo.png') }}" alt="Logo Organisasi" class="w-16 h-16 rounded-2xl object-contain bg-white border border-slate-200 p-1 shadow-md mx-auto mb-4">
-            <h1 class="text-2xl font-bold text-gray-800">SIM-ORGANISASI</h1>
+            <h1 class="text-2xl font-bold text-gray-800">ARTHAWISE</h1>
             <p class="text-gray-500 text-sm mt-1">Sistem Informasi Akuntansi &amp; Manajemen Organisasi — Pendaftaran Organisasi</p>
         </div>
 
