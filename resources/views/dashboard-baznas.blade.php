@@ -113,31 +113,31 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 text-xs">
             <a href="{{ route('reports.perbaznas.lampiran1') }}" class="p-3.5 rounded-lg border border-slate-200 bg-slate-50/50 hover:bg-slate-50 hover:border-slate-300 transition block">
-                <span class="text-[10px] font-semibold uppercase text-emerald-700 block">Laporan I</span>
-                <strong class="text-slate-900 text-xs font-semibold block mt-0.5">Rencana Penerimaan</strong>
+                <span class="text-[10px] font-semibold uppercase text-emerald-700 block">Laporan</span>
+                <strong class="text-slate-900 text-xs font-semibold block mt-0.5">Laporan Penerimaan</strong>
                 <span class="text-[10px] text-slate-500 font-normal">Hal. 33 PDF</span>
             </a>
 
             <a href="{{ route('reports.perbaznas.lampiran2') }}" class="p-3.5 rounded-lg border border-slate-200 bg-slate-50/50 hover:bg-slate-50 hover:border-slate-300 transition block">
-                <span class="text-[10px] font-semibold uppercase text-emerald-700 block">Laporan II</span>
-                <strong class="text-slate-900 text-xs font-semibold block mt-0.5">Distribusi Asnaf</strong>
+                <span class="text-[10px] font-semibold uppercase text-emerald-700 block">Laporan</span>
+                <strong class="text-slate-900 text-xs font-semibold block mt-0.5">Laporan Asnaf</strong>
                 <span class="text-[10px] text-slate-500 font-normal">Hal. 34 PDF</span>
             </a>
 
             <a href="{{ route('reports.perbaznas.lampiran3') }}" class="p-3.5 rounded-lg border border-slate-200 bg-slate-50/50 hover:bg-slate-50 hover:border-slate-300 transition block">
-                <span class="text-[10px] font-semibold uppercase text-emerald-700 block">Laporan III</span>
-                <strong class="text-slate-900 text-xs font-semibold block mt-0.5">Distribusi Program</strong>
+                <span class="text-[10px] font-semibold uppercase text-emerald-700 block">Laporan</span>
+                <strong class="text-slate-900 text-xs font-semibold block mt-0.5">Laporan Program</strong>
                 <span class="text-[10px] text-slate-500 font-normal">Hal. 35 PDF</span>
             </a>
 
             <a href="{{ route('reports.perbaznas.lampiran5') }}" class="p-3.5 rounded-lg border border-slate-200 bg-slate-50/50 hover:bg-slate-50 hover:border-slate-300 transition block">
-                <span class="text-[10px] font-semibold uppercase text-emerald-700 block">Laporan V</span>
-                <strong class="text-slate-900 text-xs font-semibold block mt-0.5">Dana Operasional</strong>
+                <span class="text-[10px] font-semibold uppercase text-emerald-700 block">Laporan</span>
+                <strong class="text-slate-900 text-xs font-semibold block mt-0.5">Laporan Operasional</strong>
                 <span class="text-[10px] text-slate-500 font-normal">Hal. 37 PDF (12,5%)</span>
             </a>
 
             <a href="{{ route('reports.perbaznas.lampiran7') }}" class="p-3.5 rounded-lg border border-slate-200 bg-slate-50/50 hover:bg-slate-50 hover:border-slate-300 transition block">
-                <span class="text-[10px] font-semibold uppercase text-emerald-700 block">Laporan VII</span>
+                <span class="text-[10px] font-semibold uppercase text-emerald-700 block">Laporan</span>
                 <strong class="text-slate-900 text-xs font-semibold block mt-0.5">Laporan Penyaluran</strong>
                 <span class="text-[10px] text-slate-500 font-normal">Hal. 39 PDF (Verifikasi)</span>
             </a>

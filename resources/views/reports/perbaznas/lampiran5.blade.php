@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Laporan V - Rencana Penerimaan dan Penggunaan Dana Operasional (Perbaznas No. 2/2016)')
+@section('title', 'Laporan Operasional (Perbaznas No. 2/2016)')
 
 @section('content')
 <div class="max-w-4xl mx-auto space-y-6 print:max-w-none print:space-y-0 print:m-0 print:p-0">
@@ -12,7 +12,7 @@
                     <i class="fa-solid fa-arrow-left"></i> Kembali ke Menu Perbaznas
                 </a>
             </div>
-            <h1 class="text-base font-bold text-slate-900 mt-1">Laporan V: Rencana Penerimaan & Penggunaan Dana Operasional</h1>
+            <h1 class="text-base font-bold text-slate-900 mt-1">Laporan Operasional</h1>
             <p class="text-xs text-slate-500">Peraturan Badan Amil Zakat Nasional No. 2 Tahun 2016 (Halaman 37) - Alokasi Hak Amil Maks. 12,5%.</p>
         </div>
         <div class="flex items-center space-x-2">
@@ -33,7 +33,7 @@
         
         <!-- Official Regulation Header (Top Left, no underline as in PDF) -->
         <div class="text-left text-xs uppercase font-bold tracking-wider leading-snug mb-5">
-            <div>LAPORAN V</div>
+            <div>LAPORAN</div>
             <div>PERATURAN BADAN AMIL ZAKAT NASIONAL</div>
             <div>NOMOR 2 TAHUN 2016</div>
             <div>TENTANG</div>
