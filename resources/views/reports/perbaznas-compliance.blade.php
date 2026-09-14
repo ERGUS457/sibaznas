@@ -9,7 +9,7 @@
         <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-3">
             <div>
                 <h1 class="text-base font-bold text-slate-900">Format Laporan Peraturan BAZNAS No. 2 Tahun 2016</h1>
-                <p class="text-xs text-slate-500">Pilih lembar lampiran resmi untuk dicetak sesuai format asli standar BAZNAS RI:</p>
+                <p class="text-xs text-slate-500">Pilih lembar laporan resmi untuk dicetak sesuai format asli standar BAZNAS RI:</p>
             </div>
             <div class="flex items-center gap-2">
                 <button onclick="window.print()" class="bg-black hover:bg-slate-800 text-white font-medium text-xs px-3 py-1.5 rounded shadow flex items-center gap-1.5">
@@ -23,20 +23,20 @@
             <a href="{{ route('reports.perbaznas-compliance') }}" class="px-3 py-1.5 rounded-lg bg-black text-white font-semibold">
                 Ringkasan Kepatuhan
             </a>
-            <a href="{{ route('reports.perbaznas.lampiran1') }}" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">
-                Lampiran I: Penerimaan
+            <a href="{{ route('reports.perbaznas.laporan1') }}" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">
+                Laporan I: Penerimaan
             </a>
-            <a href="{{ route('reports.perbaznas.lampiran2') }}" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">
-                Lampiran II: Asnaf
+            <a href="{{ route('reports.perbaznas.laporan2') }}" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">
+                Laporan II: Asnaf
             </a>
-            <a href="{{ route('reports.perbaznas.lampiran3') }}" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">
-                Lampiran III: Program
+            <a href="{{ route('reports.perbaznas.laporan3') }}" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">
+                Laporan III: Program
             </a>
-            <a href="{{ route('reports.perbaznas.lampiran5') }}" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">
-                Lampiran V: Operasional (12,5%)
+            <a href="{{ route('reports.perbaznas.laporan5') }}" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">
+                Laporan V: Operasional (12,5%)
             </a>
-            <a href="{{ route('reports.perbaznas.lampiran7') }}" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">
-                Lampiran VII: Penyaluran Dana
+            <a href="{{ route('reports.perbaznas.laporan7') }}" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">
+                Laporan VII: Penyaluran Dana
             </a>
         </div>
     </div>
@@ -50,7 +50,7 @@
                 LAPORAN PERTANGGUNGJAWABAN DAN TATA KERJA UPZ
             </h1>
             <p class="text-xs font-semibold text-slate-700">Tahun Anggaran {{ $year }}</p>
-            <p class="text-[11px] text-slate-400 italic">Berdasarkan Format Lampiran Peraturan BAZNAS No. 2 Tahun 2016</p>
+            <p class="text-[11px] text-slate-400 italic">Berdasarkan Format Laporan Peraturan BAZNAS No. 2 Tahun 2016</p>
         </div>
 
         <!-- Compliance Evaluation Card -->
