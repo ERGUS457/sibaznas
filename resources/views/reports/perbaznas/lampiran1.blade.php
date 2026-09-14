@@ -115,20 +115,6 @@
             </tbody>
         </table>
 
-        @if(($totalZakatGross ?? 0) > 0)
-        <!-- Rekonsiliasi Sinkronisasi: Bruto - Hak Amil = Netto (PSAK 109 / QS At-Taubah:60) -->
-        <div class="mt-4 border border-black bg-gray-50 p-2.5 text-[11px] font-sans leading-tight text-black">
-            <div class="font-bold uppercase tracking-wider mb-1">Rekonsiliasi — Sinkron Hak Amil</div>
-            <div class="font-mono">
-                Bruto Zakat (sebelum potong) <span class="font-bold">Rp {{ number_format($totalZakatGross ?? 0, 0, ',', '.') }}</span>
-                &nbsp;−&nbsp; Hak Amil maks 12,5% <span class="font-bold">Rp {{ number_format($totalAmilPotongan ?? 0, 0, ',', '.') }}</span>
-                &nbsp;=&nbsp; <span class="font-bold">Netto untuk Mustahiq Rp {{ number_format($totalZakat ?? 0, 0, ',', '.') }}</span>
-                (angka netto inilah yang masuk ke “TOTAL PENERIMAAN” di atas).
-            </div>
-            <div class="mt-1 italic text-[10px]">Hak Amil Rp {{ number_format($totalAmilPotongan ?? 0, 0, ',', '.') }} tercatat terpisah pada <strong>Laporan Operasional (Laporan V) — Penerimaan dana operasional 12,5%</strong> dan pada <strong>Laporan Asnaf baris Amil</strong> (Lampiran II) agar neraca sinkron. Hanya zakat (maal & fitrah) yang berhak atas bagian amil; infak/sedekah/DSKL = 100% untuk program (PSAK 109).</div>
-        </div>
-        @endif
-
         <!-- Signature Section (Clean, no obstruction) -->
         <div class="signature-block mt-10 flex justify-end text-xs font-serif text-black">
             <div class="text-center w-72">
