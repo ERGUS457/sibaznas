@@ -47,6 +47,7 @@ class Muzakki extends Model
 
     public function scopeActive($query)
     {
-        return $query->where('is_active', true);
+        // Postgres boolean + PDO emulate prepares: where('is_active', true) binds 1 -> 42883. Pakai RAW TRUE.
+        return $query->whereRaw('"is_active" = TRUE');
     }
 }

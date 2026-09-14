@@ -45,7 +45,7 @@ class ZisDistributionController extends Controller
     {
         $upz       = $this->getUpz();
         $mustahiqs = Mustahiq::where('upz_profile_id', $upz->id)
-            ->where('is_active', true)
+            ->active()
             ->orderBy('name')
             ->get();
 
