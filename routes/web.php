@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\PortalController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Upz\BaznasRemittanceController;
 use App\Http\Controllers\Upz\MustahiqController;
 use App\Http\Controllers\Upz\MuzakkiController;
@@ -46,6 +47,10 @@ Route::get('pending-approval', function () {
 
 // ─── Protected Routes (User aktif) ───────────────────────────────────────────
 Route::middleware(['auth', 'active'])->group(function () {
+
+    // Profile Management
+    Route::get('profile', [ProfileController::class, 'edit'])->name('profile.show');
+    Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
 
     // Portal & Dashboard
     Route::get('portal', [PortalController::class, 'index'])->name('portal');

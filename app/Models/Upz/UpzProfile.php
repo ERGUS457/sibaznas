@@ -32,6 +32,7 @@ class UpzProfile extends Model
         'bank_account_number',
         'bank_account_name',
         'amil_share_percentage',
+        'logo_path',
         'is_active',
     ];
 

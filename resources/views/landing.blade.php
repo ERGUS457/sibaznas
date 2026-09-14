@@ -86,14 +86,38 @@
 
     <!-- Top Sticky Clay Navigation Bar -->
     <header class="sticky top-4 z-50 px-4 sm:px-8 max-w-7xl mx-auto">
-        <nav class="clay-card px-5 py-3.5 flex items-center justify-between">
-            <!-- Brand Logo -->
-            <a href="{{ route('landing') }}" class="flex items-center space-x-3">
-                <img src="{{ asset('images/logo.png') }}" alt="Logo ARTHAWISE" class="w-10 h-10 rounded-lg object-contain bg-white border border-slate-200 p-0.5 shadow-xs flex-shrink-0">
-                <div>
-                    <span class="font-bold text-slate-900 text-base tracking-tight block">ARTHAWISE</span>
-                </div>
-            </a>
+        <nav class="clay-card px-5 py-3.5 flex items-center justify-between gap-3">
+            <!-- Left: Profil Organisasi & Akun + Brand -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                @auth
+                <a href="{{ route('profile.show') }}" class="hidden sm:inline-flex clay-btn-white px-3.5 py-1.5 text-xs font-bold items-center gap-1.5 text-slate-700 hover:text-emerald-700">
+                    <i class="fa-solid fa-building-user text-emerald-600 text-xs"></i>
+                    <span>Profil Organisasi</span>
+                </a>
+                <a href="{{ route('profile.show') }}#akun" class="hidden sm:inline-flex clay-btn-white px-3.5 py-1.5 text-xs font-bold items-center gap-1.5 text-slate-700 hover:text-emerald-700">
+                    <i class="fa-solid fa-user text-slate-500 text-xs"></i>
+                    <span>Akun</span>
+                </a>
+                <!-- mobile icon -->
+                <a href="{{ route('profile.show') }}" class="sm:hidden clay-btn-white px-2.5 py-1.5 text-xs font-bold inline-flex items-center justify-center" title="Profil Organisasi & Akun">
+                    <i class="fa-solid fa-user-gear text-slate-700"></i>
+                </a>
+                @else
+                <a href="{{ route('login') }}" class="hidden sm:inline-flex clay-btn-white px-3.5 py-1.5 text-xs font-bold items-center gap-1.5 text-slate-500 hover:text-emerald-700">
+                    <i class="fa-solid fa-user-gear text-xs"></i>
+                    <span>Profil Organisasi</span>
+                </a>
+                <a href="{{ route('login') }}" class="sm:hidden clay-btn-white px-2.5 py-1.5 text-xs font-bold inline-flex items-center justify-center" title="Profil — Masuk dulu">
+                    <i class="fa-solid fa-user-gear text-slate-700"></i>
+                </a>
+                @endauth
+                <a href="{{ route('landing') }}" class="flex items-center space-x-3">
+                    <img src="{{ isset($upz) && $upz->logo_path ? asset($upz->logo_path) : asset('images/logo.png') }}" alt="Logo ARTHAWISE" class="w-10 h-10 rounded-lg object-contain bg-white border border-slate-200 p-0.5 shadow-xs flex-shrink-0">
+                    <div class="hidden sm:block">
+                        <span class="font-bold text-slate-900 text-base tracking-tight block">ARTHAWISE</span>
+                    </div>
+                </a>
+            </div>
 
             <!-- Nav Links (Desktop) -->
             <div class="hidden md:flex items-center space-x-6 text-xs font-semibold text-slate-600">
