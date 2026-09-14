@@ -30,7 +30,7 @@
             </a>
             <a href="{{ route('portal') }}" class="clay-btn-white px-3.5 py-2 text-xs font-semibold flex items-center gap-2 text-slate-700">
                 <i class="fa-solid fa-arrow-left text-slate-400"></i>
-                <span>Ganti Modul</span>
+                <span>Ganti Laporan</span>
             </a>
             <a href="{{ route('reports.financial-position') }}" class="clay-btn-white px-3.5 py-2 text-xs font-semibold flex items-center gap-2 text-slate-700">
                 <i class="fa-solid fa-file-invoice-dollar text-[11px]"></i>

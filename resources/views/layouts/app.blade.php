@@ -420,7 +420,7 @@
                         <i class="fa-solid fa-arrow-left text-slate-400 text-[11px]"></i>
                         <span>Kembali ke Portal</span>
                     </span>
-                    <span class="text-[10px] uppercase font-semibold text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">Ganti Modul</span>
+                    <span class="text-[10px] uppercase font-semibold text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">Ganti Laporan</span>
                 </a>
             </div>
 
@@ -488,7 +488,7 @@
                         <a href="{{ route('dashboard.baznas') }}" class="flex items-center justify-between p-3 rounded-xl bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100 transition font-bold text-[11px]">
                             <span class="flex items-center gap-2">
                                 <i class="fa-solid fa-hand-holding-dollar text-emerald-600"></i>
-                                <span>Ke Modul Zakat BAZNAS</span>
+                                <span>Ke Laporan Zakat BAZNAS</span>
                             </span>
                             <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </a>
@@ -572,7 +572,7 @@
                         <a href="{{ route('dashboard.isak35') }}" class="flex items-center justify-between p-3 rounded-xl bg-sky-50 text-sky-800 border border-sky-200 hover:bg-sky-100 transition font-bold text-[11px]">
                             <span class="flex items-center gap-2">
                                 <i class="fa-solid fa-book-journal-whills text-sky-600"></i>
-                                <span>Ke Modul ISAK 35</span>
+                                <span>Ke Laporan ISAK 35</span>
                             </span>
                             <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </a>
@@ -651,12 +651,12 @@
                             @if($isIsak35)
                                 <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-800 border border-slate-200 font-semibold text-xs">
                                     <span class="w-1.5 h-1.5 rounded-full bg-slate-700"></span>
-                                    <span>Modul: Akuntansi DE ISAK 35</span>
+                                    <span>Laporan: Akuntansi DE ISAK 35</span>
                                 </span>
                             @elseif($isBaznas)
                                 <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 font-semibold text-xs">
                                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
-                                    <span>Modul: Pengelolaan Zakat BAZNAS</span>
+                                    <span>Laporan: Pengelolaan Zakat BAZNAS</span>
                                 </span>
                             @endif
                         </div>

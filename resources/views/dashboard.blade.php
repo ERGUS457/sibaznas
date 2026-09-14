@@ -14,7 +14,7 @@
                     DE ISAK 35 FORMAT A
                 </span>
             </div>
-            <p class="text-xs text-slate-500">Pilih modul kerja sesuai tugas operasional atau laporan keuangan</p>
+            <p class="text-xs text-slate-500">Pilih laporan kerja sesuai tugas operasional atau laporan keuangan</p>
         </div>
 
         <!-- Interactive Clay Segmented Tab Switcher -->
@@ -221,7 +221,7 @@
         <div class="clay-card p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div class="space-y-1">
                 <h2 class="text-sm font-extrabold text-slate-900">Ikhtisar Laporan Keuangan DE ISAK 35</h2>
-                <p class="text-xs text-slate-500">Format A Entitas Nonlaba &bull; Otomatis dari modul operasional UPZ</p>
+                <p class="text-xs text-slate-500">Format A Entitas Nonlaba &bull; Otomatis dari laporan operasional UPZ</p>
             </div>
             <div>
                 @if($financialPosition['is_balanced'] ?? true)
