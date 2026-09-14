@@ -143,11 +143,7 @@
                         <h3 class="text-base font-bold text-slate-900 mt-0.5">
                             {{ $upz->name }}
                         </h3>
-                        <p class="text-xs text-slate-500">
-                            {{ ucfirst(str_replace('_', ' ', $upz->institution_type ?? 'Organisasi')) }} &bull;
-                            Pembina: {{ $upz->parent_baznas_name ?? 'Organisasi Induk' }} &bull;
-                            SK: {{ $upz->sk_number ?? 'Belum ada SK' }}
-                        </p>
+
                     </div>
                 </div>
 
