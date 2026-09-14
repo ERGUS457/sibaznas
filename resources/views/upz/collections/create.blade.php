@@ -64,7 +64,7 @@
                     <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Metode Pembayaran <span class="text-rose-500">*</span></label>
                     <select name="payment_method" required class="w-full text-xs border border-slate-300 rounded-lg p-2.5 focus:ring-2 focus:ring-emerald-500 focus:outline-none">
                         <option value="transfer_bank">Transfer Bank BSI UPZ</option>
-                        <option value="kas_tunai">Kas Tunai / Kantor UPZ</option>
+                        <option value="kas">Kas</option>
                         <option value="payroll">Potong Gaji (Payroll)</option>
                         <option value="qris">QRIS BAZNAS</option>
                     </select>

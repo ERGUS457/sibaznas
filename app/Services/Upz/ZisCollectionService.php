@@ -79,7 +79,7 @@ class ZisCollectionService
     protected function createAccountingJournal(ZisCollection $collection, ?User $user = null): JournalEntry
     {
         // 1. Determine Debit Account (Kas or Bank)
-        $cashOrBankCode = $collection->payment_method === 'kas_tunai' ? '1-1101' : '1-1103';
+        $cashOrBankCode = in_array($collection->payment_method, ['kas','kas_tunai']) ? '1-1101' : '1-1103';
         $debitAccount = Account::where('code', $cashOrBankCode)->firstOrFail();
 
         // 2. Determine Credit Account for ZIS (Restricted Revenue)
