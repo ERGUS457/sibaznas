@@ -78,7 +78,7 @@ class BaznasRemittanceService
             'voucher_number' => $entryNumber,
             'entry_date' => $remittance->remittance_date,
             'description' => "Penyetoran ZIS ke BAZNAS No. {$remittance->remittance_number} (Periode {$remittance->period_label})",
-            'source_pelaporane' => 'UPZ_DISTRIBUTION',
+            'source_module' => 'UPZ_DISTRIBUTION',
         ]);
 
         // Item 1: Debit Utang Penyetoran ke BAZNAS

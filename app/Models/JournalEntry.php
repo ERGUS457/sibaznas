@@ -17,7 +17,7 @@ class JournalEntry extends Model
         'entry_date',
         'voucher_number',
         'description',
-        'source_pelaporane',
+        'source_module',
     ];
 
     protected $casts = [
@@ -25,7 +25,7 @@ class JournalEntry extends Model
         'upz_profile_id' => 'integer',
     ];
 
-    public const SOURCE_pelaporanES = [
+    public const SOURCE_MODULES = [
         'UPZ_RECEIPT',
         'UPZ_DISTRIBUTION',
         'UPZ_OPERATIONAL',
