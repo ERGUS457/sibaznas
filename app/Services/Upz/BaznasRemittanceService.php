@@ -70,8 +70,9 @@ class BaznasRemittanceService
         // 2. Credit Bank Penampungan ZIS
         $creditAccount = Account::where('code', '1-1103')->firstOrFail();
 
-        $entryCount = JournalEntry::whereYear('entry_date', Carbon::parse($remittance->remittance_date)->year)->count() + 1;
-        $entryNumber = sprintf('JV/%s/%04d', Carbon::parse($remittance->remittance_date)->format('Ym'), $entryCount);
+        $rDate = Carbon::parse($remittance->remittance_date);
+        $entryCount = JournalEntry::whereBetween('entry_date', [$rDate->copy()->startOfYear()->toDateString(), $rDate->copy()->endOfYear()->toDateString()])->count() + 1;
+        $entryNumber = sprintf('JV/%s/%04d', $rDate->format('Ym'), $entryCount);
 
         $journalEntry = JournalEntry::create([
             'upz_profile_id' => $remittance->upz_profile_id,

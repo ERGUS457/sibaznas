@@ -82,6 +82,10 @@ return [
                         ? ";options='endpoint=" . explode('.', env('DB_HOST', ''))[0] . "'"
                         : '')
             ),
+            // Neon pooler + pdo-pgsql: non-emulated prepares abort tx after 2nd query (25P02). Emulate fixes it.
+            'options' => [
+                \PDO::ATTR_EMULATE_PREPARES => true,
+            ],
         ],
 
         'sqlsrv' => [

@@ -28,11 +28,12 @@ class ZisDistributionService
                 throw new InvalidArgumentException('Nominal penyaluran ZIS harus lebih besar dari nol.');
             }
 
-            // Generate Sequential Distribution Number: DST/{UPZ_CODE}/{YEAR}{MONTH}/{COUNTER}
+            // Generate Sequential Distribution Number: DST/{UPZ_CODE}/{YEAR}{MONTH}/{COUNTER} — whereBetween hindari extract di transaksi Neon
             $yearMonth = $distributionDate->format('Ym');
+            $startOfMonth = $distributionDate->copy()->startOfMonth()->toDateString();
+            $endOfMonth = $distributionDate->copy()->endOfMonth()->toDateString();
             $countThisMonth = ZisDistribution::where('upz_profile_id', $upz->id)
-                ->whereYear('distribution_date', $distributionDate->year)
-                ->whereMonth('distribution_date', $distributionDate->month)
+                ->whereBetween('distribution_date', [$startOfMonth, $endOfMonth])
                 ->count() + 1;
 
             $distributionNumber = sprintf('DST/%s/%s/%04d', $upz->code, $yearMonth, $countThisMonth);
@@ -82,8 +83,9 @@ class ZisDistributionService
         // 2. Credit Bank / Kas Penampungan ZIS
         $creditAccount = Account::where('code', '1-1103')->firstOrFail();
 
-        $entryCount = JournalEntry::whereYear('entry_date', Carbon::parse($distribution->distribution_date)->year)->count() + 1;
-        $entryNumber = sprintf('JV/%s/%04d', Carbon::parse($distribution->distribution_date)->format('Ym'), $entryCount);
+        $dDate = Carbon::parse($distribution->distribution_date);
+        $entryCount = JournalEntry::whereBetween('entry_date', [$dDate->copy()->startOfYear()->toDateString(), $dDate->copy()->endOfYear()->toDateString()])->count() + 1;
+        $entryNumber = sprintf('JV/%s/%04d', $dDate->format('Ym'), $entryCount);
 
         $journalEntry = JournalEntry::create([
             'upz_profile_id' => $distribution->upz_profile_id,

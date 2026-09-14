@@ -44,11 +44,12 @@ class ZisCollectionService
             $amilAmount = round(($amount * $amilPercent) / 100, 2);
             $netFundAmount = round($amount - $amilAmount, 2);
 
-            // Generate Sequential BSZ Number: BSZ/{UPZ_CODE}/{YEAR}{MONTH}/{COUNTER}
+            // Generate Sequential BSZ Number: BSZ/{UPZ_CODE}/{YEAR}{MONTH}/{COUNTER} — use whereBetween (avoid extract on Neon pooler inside tx)
             $yearMonth = $transactionDate->format('Ym');
+            $startOfMonth = $transactionDate->copy()->startOfMonth()->toDateString();
+            $endOfMonth = $transactionDate->copy()->endOfMonth()->toDateString();
             $countThisMonth = ZisCollection::where('upz_profile_id', $upz->id)
-                ->whereYear('transaction_date', $transactionDate->year)
-                ->whereMonth('transaction_date', $transactionDate->month)
+                ->whereBetween('transaction_date', [$startOfMonth, $endOfMonth])
                 ->count() + 1;
 
             $bszNumber = sprintf('BSZ/%s/%s/%04d', $upz->code, $yearMonth, $countThisMonth);
@@ -100,8 +101,9 @@ class ZisCollectionService
         // 3. Amil Account (Unrestricted Revenue)
         $amilAccount = Account::where('code', '4-1100')->firstOrFail();
 
-        $entryCount = JournalEntry::whereYear('entry_date', Carbon::parse($collection->transaction_date)->year)->count() + 1;
-        $entryNumber = sprintf('JV/%s/%04d', Carbon::parse($collection->transaction_date)->format('Ym'), $entryCount);
+        $txDate = Carbon::parse($collection->transaction_date);
+        $entryCount = JournalEntry::whereBetween('entry_date', [$txDate->copy()->startOfYear()->toDateString(), $txDate->copy()->endOfYear()->toDateString()])->count() + 1;
+        $entryNumber = sprintf('JV/%s/%04d', $txDate->format('Ym'), $entryCount);
 
         $journalEntry = JournalEntry::create([
             'upz_profile_id' => $collection->upz_profile_id,

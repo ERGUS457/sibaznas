@@ -135,8 +135,7 @@ class JournalController extends Controller
     {
         $date = Carbon::parse($entryDate);
         $yearMonth = $date->format('Ym');
-        $count = JournalEntry::whereYear('entry_date', $date->year)
-            ->whereMonth('entry_date', $date->month)
+        $count = JournalEntry::whereBetween('entry_date', [$date->copy()->startOfMonth()->toDateString(), $date->copy()->endOfMonth()->toDateString()])
             ->count() + 1;
 
         return sprintf('JV/%s/%04d', $yearMonth, $count);
