@@ -91,11 +91,7 @@
             <a href="{{ route('landing') }}" class="flex items-center space-x-3">
                 <img src="{{ asset('images/logo.png') }}" alt="Logo ARTHAWISE" class="w-10 h-10 rounded-lg object-contain bg-white border border-slate-200 p-0.5 shadow-xs flex-shrink-0">
                 <div>
-                    <div class="flex items-center gap-1.5">
-                        <span class="font-bold text-slate-900 text-base tracking-tight">ARTHAWISE</span>
-                        <span class="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">PORTAL</span>
-                    </div>
-                    <span class="text-[11px] font-medium text-slate-500 tracking-wide block">DE ISAK 35 FORMAT A</span>
+                    <span class="font-bold text-slate-900 text-base tracking-tight block">ARTHAWISE</span>
                 </div>
             </a>
 

@@ -369,7 +369,7 @@
                         <img src="{{ asset('images/logo.png') }}" alt="Logo ARTHAWISE" class="w-9 h-9 rounded-lg object-contain bg-white border border-slate-200 p-0.5 shadow-xs flex-shrink-0">
                         <div>
                             <span class="font-bold text-slate-900 text-xs tracking-tight block">AKUNTANSI NONLABA</span>
-                            <span class="text-[10px] font-semibold text-slate-600 bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">DE ISAK 35 FORMAT A</span>
+                            <span class="text-[10px] font-semibold text-slate-600 bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">STANDAR AKUNTANSI</span>
                         </div>
                     </a>
                 @elseif($isBaznas)
