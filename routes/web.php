@@ -48,6 +48,7 @@ Route::get('pending-approval', function () {
 Route::middleware(['auth', 'active'])->group(function () {
 
     // Portal & Dashboard
+    Route::get('portal', [PortalController::class, 'index'])->name('portal');
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('dashboard/isak35', [DashboardController::class, 'indexIsak35'])->name('dashboard.isak35');
     Route::get('dashboard/baznas', [DashboardController::class, 'indexBaznas'])->name('dashboard.baznas');

@@ -23,19 +23,19 @@
             <a href="{{ route('reports.perbaznas-compliance') }}" class="px-3 py-1.5 rounded-lg bg-black text-white font-semibold">
                 Ringkasan Kepatuhan
             </a>
-            <a href="{{ route('reports.perbaznas.laporan1') }}" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">
+            <a href="{{ route('reports.perbaznas.lampiran1') }}" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">
                 Laporan I: Penerimaan
             </a>
-            <a href="{{ route('reports.perbaznas.laporan2') }}" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">
+            <a href="{{ route('reports.perbaznas.lampiran2') }}" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">
                 Laporan II: Asnaf
             </a>
-            <a href="{{ route('reports.perbaznas.laporan3') }}" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">
+            <a href="{{ route('reports.perbaznas.lampiran3') }}" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">
                 Laporan III: Program
             </a>
-            <a href="{{ route('reports.perbaznas.laporan5') }}" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">
+            <a href="{{ route('reports.perbaznas.lampiran5') }}" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">
                 Laporan V: Operasional (12,5%)
             </a>
-            <a href="{{ route('reports.perbaznas.laporan7') }}" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">
+            <a href="{{ route('reports.perbaznas.lampiran7') }}" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">
                 Laporan VII: Penyaluran Dana
             </a>
         </div>
