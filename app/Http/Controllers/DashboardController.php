@@ -31,7 +31,7 @@ class DashboardController extends Controller
     }
 
     /**
-     * Default dashboard route redirects to multi-module portal.
+     * Default dashboard route redirects to multi-pelaporane portal.
      */
     public function index()
     {

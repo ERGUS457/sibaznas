@@ -385,7 +385,7 @@
                         <img src="{{ asset('images/logo.png') }}" alt="Logo ARTHAWISE" class="w-9 h-9 rounded-lg object-contain bg-white border border-slate-200 p-0.5 shadow-xs flex-shrink-0">
                         <div>
                             <span class="font-bold text-slate-900 text-xs tracking-tight block">ARTHAWISE</span>
-                            <span class="text-[10px] font-semibold text-slate-600 bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">PORTAL MULTI-MODUL</span>
+                            <span class="text-[10px] font-semibold text-slate-600 bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">PORTAL MULTI-pelaporan</span>
                         </div>
                     </a>
                 @endif
@@ -420,7 +420,7 @@
                         <i class="fa-solid fa-arrow-left text-slate-400 text-[11px]"></i>
                         <span>Kembali ke Portal</span>
                     </span>
-                    <span class="text-[10px] uppercase font-semibold text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">Ganti Modul</span>
+                    <span class="text-[10px] uppercase font-semibold text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">Ganti pelaporan</span>
                 </a>
             </div>
 
@@ -428,7 +428,7 @@
             <nav class="flex-1 overflow-y-auto p-4 space-y-6 text-xs">
                 
                 @if($isIsak35)
-                    <!-- ================= MODUL ISAK 35 MENU ================= -->
+                    <!-- ================= pelaporan ISAK 35 MENU ================= -->
                     <div class="space-y-1">
                         <a href="{{ route('dashboard.isak35') }}" class="flex items-center space-x-3 px-3.5 py-2.5 rounded-2xl {{ request()->routeIs('dashboard.isak35') ? 'clay-card-soft font-extrabold text-sky-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-semibold' }} transition">
                             <i class="fa-solid fa-gauge-high w-4 text-center {{ request()->routeIs('dashboard.isak35') ? 'text-sky-600' : 'text-slate-400' }}"></i>
@@ -488,14 +488,14 @@
                         <a href="{{ route('dashboard.baznas') }}" class="flex items-center justify-between p-3 rounded-xl bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100 transition font-bold text-[11px]">
                             <span class="flex items-center gap-2">
                                 <i class="fa-solid fa-hand-holding-dollar text-emerald-600"></i>
-                                <span>Ke Modul Zakat BAZNAS</span>
+                                <span>Ke pelaporan Zakat BAZNAS</span>
                             </span>
                             <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </a>
                     </div>
 
                 @else
-                    <!-- ================= MODUL BAZNAS MENU ================= -->
+                    <!-- ================= pelaporan BAZNAS MENU ================= -->
                     <div class="space-y-1">
                         <a href="{{ route('dashboard.baznas') }}" class="flex items-center space-x-3 px-3.5 py-2.5 rounded-2xl {{ request()->routeIs('dashboard.baznas') ? 'clay-card-soft font-extrabold text-emerald-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-semibold' }} transition">
                             <i class="fa-solid fa-gauge-high w-4 text-center {{ request()->routeIs('dashboard.baznas') ? 'text-emerald-600' : 'text-slate-400' }}"></i>
@@ -572,7 +572,7 @@
                         <a href="{{ route('dashboard.isak35') }}" class="flex items-center justify-between p-3 rounded-xl bg-sky-50 text-sky-800 border border-sky-200 hover:bg-sky-100 transition font-bold text-[11px]">
                             <span class="flex items-center gap-2">
                                 <i class="fa-solid fa-book-journal-whills text-sky-600"></i>
-                                <span>Ke Modul ISAK 35</span>
+                                <span>Ke pelaporan ISAK 35</span>
                             </span>
                             <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </a>
@@ -651,12 +651,12 @@
                             @if($isIsak35)
                                 <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-800 border border-slate-200 font-semibold text-xs">
                                     <span class="w-1.5 h-1.5 rounded-full bg-slate-700"></span>
-                                    <span>Modul: Akuntansi DE ISAK 35</span>
+                                    <span>pelaporan: Akuntansi DE ISAK 35</span>
                                 </span>
                             @elseif($isBaznas)
                                 <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 font-semibold text-xs">
                                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
-                                    <span>Modul: Pengelolaan Zakat BAZNAS</span>
+                                    <span>pelaporan: Pengelolaan Zakat BAZNAS</span>
                                 </span>
                             @endif
                         </div>

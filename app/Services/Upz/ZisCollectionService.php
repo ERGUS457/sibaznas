@@ -103,7 +103,7 @@ class ZisCollectionService
             'voucher_number' => $entryNumber,
             'entry_date' => $collection->transaction_date,
             'description' => "Penerimaan {$collection->fund_type_label} No. {$collection->bsz_number} (Muzakki: {$collection->muzakki->name})",
-            'source_module' => 'UPZ_RECEIPT',
+            'source_pelaporane' => 'UPZ_RECEIPT',
         ]);
 
         // Item 1: Debit Kas / Bank

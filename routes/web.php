@@ -53,28 +53,28 @@ Route::middleware(['auth', 'active'])->group(function () {
     Route::get('dashboard/isak35', [DashboardController::class, 'indexIsak35'])->name('dashboard.isak35');
     Route::get('dashboard/baznas', [DashboardController::class, 'indexBaznas'])->name('dashboard.baznas');
 
-    // UPZ Module 1: ZIS & DSKL Collections (Penerimaan & BSZ)
+    // UPZ pelaporane 1: ZIS & DSKL Collections (Penerimaan & BSZ)
     Route::resource('collections', ZisCollectionController::class)->only(['index', 'create', 'store', 'show']);
     Route::get('collections/{collection}/print-bsz', [ZisCollectionController::class, 'printBsz'])->name('collections.print-bsz');
 
-    // UPZ Module 1: ZIS Distributions (Penyaluran Mustahiq 8 Asnaf)
+    // UPZ pelaporane 1: ZIS Distributions (Penyaluran Mustahiq 8 Asnaf)
     Route::resource('distributions', ZisDistributionController::class)->only(['index', 'create', 'store']);
 
-    // UPZ Module 1: BAZNAS Remittances (Penyetoran ke Rekening BAZNAS)
+    // UPZ pelaporane 1: BAZNAS Remittances (Penyetoran ke Rekening BAZNAS)
     Route::resource('remittances', BaznasRemittanceController::class)->only(['index', 'create', 'store']);
 
-    // UPZ Module 1: Master Data (Muzakki & Mustahiq)
+    // UPZ pelaporane 1: Master Data (Muzakki & Mustahiq)
     Route::resource('muzakkis', MuzakkiController::class)->only(['index', 'create', 'store']);
     Route::resource('mustahiqs', MustahiqController::class)->only(['index', 'create', 'store']);
 
-    // Module 2: Accounting & General Ledger
+    // pelaporane 2: Accounting & General Ledger
     Route::get('journals', [JournalController::class, 'index'])->name('journals.index');
     Route::get('journals/create', [JournalController::class, 'create'])->name('journals.create');
     Route::post('journals', [JournalController::class, 'store'])->name('journals.store');
     Route::get('journals/ledger', [JournalController::class, 'ledger'])->name('journals.ledger');
     Route::get('journals/trial-balance', [JournalController::class, 'trialBalance'])->name('journals.trial-balance');
 
-    // Module 2: Financial Reports (DE ISAK 35 Format A & Perbaznas No. 2/2016)
+    // pelaporane 2: Financial Reports (DE ISAK 35 Format A & Perbaznas No. 2/2016)
     Route::prefix('reports')->name('reports.')->group(function () {
         Route::get('financial-position', [ReportController::class, 'financialPosition'])->name('financial-position');
         Route::get('comprehensive-income', [ReportController::class, 'comprehensiveIncome'])->name('comprehensive-income');

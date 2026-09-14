@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 class PortalController extends Controller
 {
     /**
-     * Display the workspace portal with modular cards (ISAK 35 & BAZNAS).
+     * Display the workspace portal with pelaporanar cards (ISAK 35 & BAZNAS).
      */
     public function index(Isak35ReportService $reportService)
     {

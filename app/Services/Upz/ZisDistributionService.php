@@ -89,7 +89,7 @@ class ZisDistributionService
             'voucher_number' => $entryNumber,
             'entry_date' => $distribution->distribution_date,
             'description' => "Penyaluran ZIS No. {$distribution->distribution_number} ({$distribution->program_name} - Asnaf " . ucfirst($distribution->asnaf_category) . ")",
-            'source_module' => 'UPZ_DISTRIBUTION',
+            'source_pelaporane' => 'UPZ_DISTRIBUTION',
         ]);
 
         // Item 1: Debit Beban Penyaluran (Dengan Pembatasan)

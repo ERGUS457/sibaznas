@@ -10,7 +10,7 @@
         <div>
             <div class="flex items-center gap-2 mb-1.5">
                 <span class="text-[10px] font-semibold uppercase tracking-wider bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded border border-slate-200">
-                    MODUL AKUNTANSI INTERNAL ORGANISASI
+                    pelaporan AKUNTANSI INTERNAL ORGANISASI
                 </span>
                 <span class="text-xs text-slate-300">&bull;</span>
                 <span class="text-xs text-slate-500 font-medium">DSAK Ikatan Akuntan Indonesia</span>
@@ -30,7 +30,7 @@
             </a>
             <a href="{{ route('portal') }}" class="clay-btn-white px-3.5 py-2 text-xs font-semibold flex items-center gap-2 text-slate-700">
                 <i class="fa-solid fa-arrow-left text-slate-400"></i>
-                <span>Ganti Modul</span>
+                <span>Ganti pelaporan</span>
             </a>
             <a href="{{ route('reports.financial-position') }}" class="clay-btn-white px-3.5 py-2 text-xs font-semibold flex items-center gap-2 text-slate-700">
                 <i class="fa-solid fa-file-invoice-dollar text-[11px]"></i>

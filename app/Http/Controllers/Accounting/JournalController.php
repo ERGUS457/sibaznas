@@ -105,7 +105,7 @@ class JournalController extends Controller
                 'entry_date' => $request->entry_date,
                 'voucher_number' => $voucherNumber,
                 'description' => $request->description,
-                'source_module' => 'GENERAL',
+                'source_pelaporane' => 'GENERAL',
             ]);
 
             foreach ($validItems as $item) {

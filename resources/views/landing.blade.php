@@ -101,8 +101,8 @@
 
             <!-- Nav Links (Desktop) -->
             <div class="hidden md:flex items-center space-x-6 text-xs font-semibold text-slate-600">
-                <a href="#modul-operasional" class="hover:text-emerald-700 transition">Modul Operasional</a>
-                <a href="#modul-akuntansi" class="hover:text-emerald-700 transition">Modul Akuntansi</a>
+                <a href="#pelaporan-operasional" class="hover:text-emerald-700 transition">pelaporan Operasional</a>
+                <a href="#pelaporan-akuntansi" class="hover:text-emerald-700 transition">pelaporan Akuntansi</a>
                 <a href="#alur-kerja" class="hover:text-emerald-700 transition">Alur Kerja</a>
             </div>
 
@@ -165,9 +165,9 @@
                     <span>Masuk ke Aplikasi</span>
                 </a>
                 @endauth
-                <a href="#modul-operasional" class="clay-btn-white px-5 py-3.5 text-sm font-bold flex items-center gap-2 text-slate-600">
+                <a href="#pelaporan-operasional" class="clay-btn-white px-5 py-3.5 text-sm font-bold flex items-center gap-2 text-slate-600">
                     <i class="fa-solid fa-book-bookmark text-slate-400"></i>
-                    <span>Pelajari Modul</span>
+                    <span>Pelajari pelaporan</span>
                 </a>
             </div>
 
@@ -248,15 +248,15 @@
         </section>
 
         <!-- ============================================================= -->
-        <!-- 2. MODUL 1: OPERASIONAL ORGANISASI                           -->
+        <!-- 2. pelaporan 1: OPERASIONAL ORGANISASI                           -->
         <!-- ============================================================= -->
-        <section id="modul-operasional" class="space-y-8 scroll-mt-24">
+        <section id="pelaporan-operasional" class="space-y-8 scroll-mt-24">
             <div class="text-center space-y-2">
                 <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider clay-pill px-3.5 py-1 bg-emerald-50 inline-block">
-                    Modul 1 &bull; Penerimaan &amp; Penyaluran Dana
+                    pelaporan 1 &bull; Penerimaan &amp; Penyaluran Dana
                 </span>
                 <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
-                    Modul Operasional Organisasi
+                    pelaporan Operasional Organisasi
                 </h2>
                 <p class="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto">
                     Panduan teknis dan alur operasional pengumpulan dana, penyaluran program bantuan, serta pelaporan pertanggungjawaban pengelolaan.
@@ -301,7 +301,7 @@
                     </div>
                     <h3 class="text-base font-bold text-slate-900">3. Penyetoran ke Organisasi Induk</h3>
                     <p class="text-xs text-slate-600 leading-relaxed">
-                        Bagi unit/cabang yang bertugas menyetorkan dana hasil pengumpulan ke Organisasi Induk/Pembina, modul ini mencatat nomor bukti transfer bank dan verifikasi penyetoran secara akuntansi otomatis.
+                        Bagi unit/cabang yang bertugas menyetorkan dana hasil pengumpulan ke Organisasi Induk/Pembina, pelaporan ini mencatat nomor bukti transfer bank dan verifikasi penyetoran secara akuntansi otomatis.
                     </p>
                     <div class="pt-2 border-t border-slate-100 text-[11px] text-amber-800 font-semibold flex items-center gap-1.5">
                         <i class="fa-solid fa-circle-check text-amber-600"></i>
@@ -357,15 +357,15 @@
         </section>
 
         <!-- ============================================================= -->
-        <!-- 3. MODUL 2: AKUNTANSI ISAK 35 (FORMAT A)                      -->
+        <!-- 3. pelaporan 2: AKUNTANSI ISAK 35 (FORMAT A)                      -->
         <!-- ============================================================= -->
-        <section id="modul-akuntansi" class="space-y-8 scroll-mt-24">
+        <section id="pelaporan-akuntansi" class="space-y-8 scroll-mt-24">
             <div class="text-center space-y-2">
                 <span class="text-xs font-bold text-sky-700 uppercase tracking-wider clay-pill px-3.5 py-1 bg-sky-50 inline-block">
-                    Modul 2 &bull; DE ISAK 35 Format A (IAI)
+                    pelaporan 2 &bull; DE ISAK 35 Format A (IAI)
                 </span>
                 <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
-                    Modul Akuntansi Keuangan Entitas Nonlaba
+                    pelaporan Akuntansi Keuangan Entitas Nonlaba
                 </h2>
                 <p class="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto">
                     Otomatisasi penjurnalan berpasangan (*double-entry*) dan 4 laporan keuangan standar untuk kepatuhan akuntansi.
@@ -381,7 +381,7 @@
                         </span>
                         <h3 class="text-xl font-bold text-slate-900">Penjurnalan Otomatis dari Transaksi Amil</h3>
                         <p class="text-xs text-slate-600 max-w-2xl leading-relaxed">
-                            Amil operasional tidak perlu memahami debit dan kredit akuntansi. Saat amil menginput penerimaan ZIS atau penyaluran ke mustahik di Modul 1, sistem secara otomatis membentuk ayat jurnal umum berpasangan di Buku Jurnal Umum dan memutakhirkan Buku Besar secara real-time.
+                            Amil operasional tidak perlu memahami debit dan kredit akuntansi. Saat amil menginput penerimaan ZIS atau penyaluran ke mustahik di pelaporan 1, sistem secara otomatis membentuk ayat jurnal umum berpasangan di Buku Jurnal Umum dan memutakhirkan Buku Besar secara real-time.
                         </p>
                     </div>
                     <div class="flex-shrink-0">

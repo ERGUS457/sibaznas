@@ -16,7 +16,7 @@ return new class extends Migration
             $table->date('entry_date');
             $table->string('voucher_number')->unique();
             $table->text('description')->nullable();
-            $table->enum('source_module', [
+            $table->enum('source_pelaporane', [
                 'UPZ_RECEIPT',
                 'UPZ_DISTRIBUTION',
                 'UPZ_OPERATIONAL',

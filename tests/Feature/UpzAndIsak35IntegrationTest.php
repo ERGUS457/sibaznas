@@ -160,7 +160,7 @@ class UpzAndIsak35IntegrationTest extends TestCase
         $this->assertAuthenticated();
     }
 
-    public function test_portal_and_modular_dashboards_render_successfully(): void
+    public function test_portal_and_pelaporanar_dashboards_render_successfully(): void
     {
         $this->authenticateAdmin();
         // 1. Portal Workspace Selector

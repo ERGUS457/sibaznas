@@ -10,7 +10,7 @@
         <div>
             <div class="flex items-center gap-2 mb-1.5">
                 <span class="text-[10px] font-semibold uppercase tracking-wider bg-emerald-50 text-emerald-800 px-2.5 py-0.5 rounded border border-emerald-200">
-                    MODUL OPERASIONAL ORGANISASI
+                    pelaporan OPERASIONAL ORGANISASI
                 </span>
             </div>
             <h1 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
@@ -24,7 +24,7 @@
         <div class="flex items-center gap-2 flex-wrap">
             <a href="{{ route('portal') }}" class="clay-btn-white px-3.5 py-2 text-xs font-semibold flex items-center gap-2 text-slate-700">
                 <i class="fa-solid fa-arrow-left text-slate-400"></i>
-                <span>Ganti Modul</span>
+                <span>Ganti pelaporan</span>
             </a>
             <a href="{{ route('collections.create') }}" class="clay-btn-emerald px-3.5 py-2 text-xs font-semibold flex items-center gap-2">
                 <i class="fa-solid fa-receipt text-[11px]"></i>
