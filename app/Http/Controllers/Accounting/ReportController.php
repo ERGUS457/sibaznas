@@ -126,28 +126,69 @@ class ReportController extends Controller
 
     /**
      * Lampiran I Perbaznas 2/2016: Rencana Penerimaan
+     * REVISI: penerimaan NET setelah potongan hak amil (net_fund_amount) agar sinkron
+     * dengan Laporan Operasional (hak amil masuk ke amil, bukan ke mustahik).
+     * QS At-Taubah:60, PSAK 109, Perbaznas 2/2016 — hanya zakat berhak amil 12.5%.
      */
     public function perbaznasLampiran1(Request $request)
     {
         $year = $request->input('year', Carbon::now()->year);
         $upz = $this->getUpz();
 
-        $zakatMalPerorangan = (float) ZisCollection::where('upz_profile_id', $upz->id)->whereYear('transaction_date', $year)->where('fund_type', 'zakat_mal_perorangan')->sum('amount');
-        $zakatMalBadan = (float) ZisCollection::where('upz_profile_id', $upz->id)->whereYear('transaction_date', $year)->where('fund_type', 'zakat_mal_badan')->sum('amount');
-        $zakatFitrah = (float) ZisCollection::where('upz_profile_id', $upz->id)->whereYear('transaction_date', $year)->where('fund_type', 'zakat_fitrah')->sum('amount');
-        // Net zakat after amil deduction (use net_fund_amount)
-        $totalZakatNet = (float) ZisCollection::where('upz_profile_id', $upz->id)
+        // Zakat Mal Perorangan = zakat_maal + muzakki.type individu (plus legacy zakat_mal_perorangan)
+        $zakatMalPerorangan = (float) ZisCollection::where('upz_profile_id', $upz->id)
             ->whereYear('transaction_date', $year)
-            ->whereIn('fund_type', ['zakat_mal_perorangan','zakat_mal_badan','zakat_fitrah'])
+            ->where(function ($q) {
+                $q->where(function ($qq) { $qq->where('fund_type', 'zakat_maal')->whereHas('muzakki', fn($m) => $m->where('type', 'individu')); })
+                  ->orWhere('fund_type', 'zakat_mal_perorangan');
+            })
             ->sum('net_fund_amount');
-        $totalZakat = $totalZakatNet; // overwrite with net after amil
 
-        $infakSedekah = (float) ZisCollection::where('upz_profile_id', $upz->id)->whereYear('transaction_date', $year)->where('fund_type', 'infak_sedekah')->sum('amount');
-        $dskl = (float) ZisCollection::where('upz_profile_id', $upz->id)->whereYear('transaction_date', $year)->where('fund_type', 'dskl')->sum('amount');
-        $totalPenerimaan = $totalZakatNet + $infakSedekah + $dskl;
+        $zakatMalBadan = (float) ZisCollection::where('upz_profile_id', $upz->id)
+            ->whereYear('transaction_date', $year)
+            ->where(function ($q) {
+                $q->where(function ($qq) { $qq->where('fund_type', 'zakat_maal')->whereHas('muzakki', fn($m) => $m->where('type', 'badan')); })
+                  ->orWhere('fund_type', 'zakat_mal_badan');
+            })
+            ->sum('net_fund_amount');
+
+        // Fallback: jika split individu/badan belum terdeteksi (mis. muzakki type null) — total zakat_maal net masuk perorangan agar tidak hilang
+        $totalZakatMaalNet = (float) ZisCollection::where('upz_profile_id', $upz->id)
+            ->whereYear('transaction_date', $year)->where('fund_type', 'zakat_maal')->sum('net_fund_amount');
+        if (($zakatMalPerorangan + $zakatMalBadan) == 0 && $totalZakatMaalNet > 0) {
+            $zakatMalPerorangan = $totalZakatMaalNet;
+        } elseif ($totalZakatMaalNet > 0 && abs(($zakatMalPerorangan + $zakatMalBadan) - $totalZakatMaalNet) > 0.01) {
+            $zakatMalPerorangan += $totalZakatMaalNet - ($zakatMalPerorangan + $zakatMalBadan);
+        }
+
+        $zakatFitrah = (float) ZisCollection::where('upz_profile_id', $upz->id)
+            ->whereYear('transaction_date', $year)->where('fund_type', 'zakat_fitrah')->sum('net_fund_amount');
+
+        $totalZakat = $zakatMalPerorangan + $zakatMalBadan + $zakatFitrah;
+
+        // Infak/sedekah = infak_terikat + infak_tidak_terikat + legacy infak_sedekah — pakai net_fund_amount (sinkron: infak hak amil 0)
+        $infakSedekah = (float) ZisCollection::where('upz_profile_id', $upz->id)
+            ->whereYear('transaction_date', $year)
+            ->whereIn('fund_type', ['infak_terikat', 'infak_tidak_terikat', 'infak_sedekah'])
+            ->sum('net_fund_amount');
+
+        // DSKL = dskl + fidyah_kafarat
+        $dskl = (float) ZisCollection::where('upz_profile_id', $upz->id)
+            ->whereYear('transaction_date', $year)
+            ->whereIn('fund_type', ['dskl', 'fidyah_kafarat'])
+            ->sum('net_fund_amount');
+
+        $totalPenerimaan = $totalZakat + $infakSedekah + $dskl;
+
+        // Untuk info sinkronisasi (kirim ke view, tidak merusak variabel lama)
+        $totalZakatGross = (float) ZisCollection::where('upz_profile_id', $upz->id)
+            ->whereYear('transaction_date', $year)->whereIn('fund_type', ['zakat_maal','zakat_mal_perorangan','zakat_mal_badan','zakat_fitrah'])->sum('amount');
+        $totalAmilPotongan = (float) ZisCollection::where('upz_profile_id', $upz->id)
+            ->whereYear('transaction_date', $year)->whereIn('fund_type', ['zakat_maal','zakat_mal_perorangan','zakat_mal_badan','zakat_fitrah'])->sum('amil_amount');
 
         return view('reports.perbaznas.lampiran1', compact(
-            'upz', 'year', 'zakatMalPerorangan', 'zakatMalBadan', 'zakatFitrah', 'totalZakat', 'infakSedekah', 'dskl', 'totalPenerimaan'
+            'upz', 'year', 'zakatMalPerorangan', 'zakatMalBadan', 'zakatFitrah', 'totalZakat', 'infakSedekah', 'dskl', 'totalPenerimaan',
+            'totalZakatGross', 'totalAmilPotongan'
         ));
     }
 
@@ -174,6 +215,16 @@ class ReportController extends Controller
                 $distData[$asnaf]['zakat'] = $totalAsnaf;
             }
         }
+
+        // Sinkronisasi: baris ASNAF AMIL = hak amil dari koleksi (QS At-Taubah:60, PSAK 109)
+        // — hanya zakat (maal/fitrah) berhak 12.5%; infak/DSKL = 0% (100% untuk mustahik)
+        $amilZakatDariKoleksi = (float) ZisCollection::where('upz_profile_id', $upz->id)
+            ->whereYear('transaction_date', $year)
+            ->whereIn('fund_type', ['zakat_maal','zakat_mal_perorangan','zakat_mal_badan','zakat_fitrah'])
+            ->sum('amil_amount');
+        // Tambahkan ke baris AMIL kolom ZAKAT — jika sudah ada distribusi manual ke amil, jumlahkan agar tidak hilang.
+        $distData['amil']['zakat'] = ($distData['amil']['zakat'] ?? 0) + $amilZakatDariKoleksi;
+        // Pastikan infak/dskl di baris amil tetap 0 (syariah) — tidak ditambah hak amil
 
         $totalZakat = array_sum(array_column($distData, 'zakat'));
         $totalInfak = array_sum(array_column($distData, 'infak'));
@@ -222,7 +273,8 @@ class ReportController extends Controller
         $year = $request->input('year', Carbon::now()->year);
         $upz = $this->getUpz();
 
-        $amilFromZakat = (float) ZisCollection::where('upz_profile_id', $upz->id)->whereYear('transaction_date', $year)->sum('amil_amount');
+        // Hanya zakat (maal & fitrah) berhak amil 12.5% — infak/dskl tdk masuk operasional (PSAK 109, QS At-Taubah:60)
+        $amilFromZakat = (float) ZisCollection::where('upz_profile_id', $upz->id)->whereYear('transaction_date', $year)->whereIn('fund_type', ['zakat_maal','zakat_mal_perorangan','zakat_mal_badan','zakat_fitrah'])->sum('amil_amount');
         $institutionalGrant = 0.0;
         $totalPenerimaanOperasional = $amilFromZakat + $institutionalGrant;
 

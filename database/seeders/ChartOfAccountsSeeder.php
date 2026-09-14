@@ -35,19 +35,27 @@ class ChartOfAccountsSeeder extends Seeder
             ['code' => '3-2100', 'name' => 'Laba Ditahan',                         'category' => 'NET_ASSET','sub_category' => 'NET_ASSET_RESTRICTED',           'normal_balance' => 'CREDIT'],
             ['code' => '3-2200', 'name' => 'Cadangan Umum',                        'category' => 'NET_ASSET','sub_category' => 'NET_ASSET_RESTRICTED',           'normal_balance' => 'CREDIT'],
 
-            // 4. PENDAPATAN
-            ['code' => '4-1100', 'name' => 'Pendapatan Usaha',                     'category' => 'REVENUE',  'sub_category' => 'NET_ASSET_UNRESTRICTED_SURPLUS','normal_balance' => 'CREDIT'],
+            // 4. PENDAPATAN — Amil = tanpa pembatasan, ZIS Mustahiq = dengan pembatasan (PSAK 109)
+            ['code' => '4-1100', 'name' => 'Pendapatan Usaha (Hak Amil)',          'category' => 'REVENUE',  'sub_category' => 'NET_ASSET_UNRESTRICTED_SURPLUS','normal_balance' => 'CREDIT'],
             ['code' => '4-1200', 'name' => 'Pendapatan Jasa',                      'category' => 'REVENUE',  'sub_category' => 'NET_ASSET_UNRESTRICTED_SURPLUS','normal_balance' => 'CREDIT'],
-            ['code' => '4-1300', 'name' => 'Pendapatan Sumbangan & Hibah',         'category' => 'REVENUE',  'sub_category' => 'NET_ASSET_UNRESTRICTED_SURPLUS','normal_balance' => 'CREDIT'],
+            ['code' => '4-1300', 'name' => 'Pendapatan Sumbangan & Hibah',         'category' => 'REVENUE',  'sub_category' => 'NET_ASSET_RESTRICTED',           'normal_balance' => 'CREDIT'],
             ['code' => '4-1400', 'name' => 'Pendapatan Bunga & Investasi',         'category' => 'REVENUE',  'sub_category' => 'NET_ASSET_UNRESTRICTED_SURPLUS','normal_balance' => 'CREDIT'],
             ['code' => '4-1500', 'name' => 'Pendapatan Lain-lain',                 'category' => 'REVENUE',  'sub_category' => 'NET_ASSET_RESTRICTED',           'normal_balance' => 'CREDIT'],
+            ['code' => '4-2100', 'name' => 'Pendapatan Sumbangan & Hibah (Zakat Maal)',   'category' => 'REVENUE','sub_category' => 'NET_ASSET_RESTRICTED','normal_balance' => 'CREDIT'],
+            ['code' => '4-2200', 'name' => 'Pendapatan Sumbangan & Hibah (Zakat Fitrah)', 'category' => 'REVENUE','sub_category' => 'NET_ASSET_RESTRICTED','normal_balance' => 'CREDIT'],
+            ['code' => '4-2300', 'name' => 'Pendapatan Sumbangan & Hibah (Infak Terikat)', 'category' => 'REVENUE','sub_category' => 'NET_ASSET_RESTRICTED','normal_balance' => 'CREDIT'],
+            ['code' => '4-2400', 'name' => 'Pendapatan Lain-lain (DSKL/Fidyah)',    'category' => 'REVENUE',  'sub_category' => 'NET_ASSET_RESTRICTED',           'normal_balance' => 'CREDIT'],
 
-            // 5. BEBAN
-            ['code' => '5-1100', 'name' => 'Beban Pokok Penjualan (HPP)',          'category' => 'EXPENSE',  'sub_category' => 'NET_ASSET_RESTRICTED',           'normal_balance' => 'DEBIT'],
+            // 5. BEBAN — program = dengan pembatasan, operasional amil = tanpa pembatasan
+            ['code' => '5-1100', 'name' => 'Penyaluran - Fakir & Miskin',          'category' => 'EXPENSE',  'sub_category' => 'NET_ASSET_RESTRICTED',           'normal_balance' => 'DEBIT'],
+            ['code' => '5-1200', 'name' => 'Beban Gaji & Honorarium',              'category' => 'EXPENSE',  'sub_category' => 'NET_ASSET_UNRESTRICTED_SURPLUS','normal_balance' => 'DEBIT'],
+            ['code' => '5-1300', 'name' => 'Beban Administrasi & Umum',            'category' => 'EXPENSE',  'sub_category' => 'NET_ASSET_UNRESTRICTED_SURPLUS','normal_balance' => 'DEBIT'],
+            ['code' => '5-1400', 'name' => 'Beban Lain-lain',                      'category' => 'EXPENSE',  'sub_category' => 'NET_ASSET_UNRESTRICTED_SURPLUS','normal_balance' => 'DEBIT'],
+            ['code' => '5-1500', 'name' => 'Program Infak Terikat',                'category' => 'EXPENSE',  'sub_category' => 'NET_ASSET_RESTRICTED',           'normal_balance' => 'DEBIT'],
             ['code' => '5-2100', 'name' => 'Beban Gaji & Honorarium',              'category' => 'EXPENSE',  'sub_category' => 'NET_ASSET_UNRESTRICTED_SURPLUS','normal_balance' => 'DEBIT'],
             ['code' => '5-2200', 'name' => 'Beban Sewa',                           'category' => 'EXPENSE',  'sub_category' => 'NET_ASSET_UNRESTRICTED_SURPLUS','normal_balance' => 'DEBIT'],
-            ['code' => '5-2300', 'name' => 'Beban Utilitas (Listrik, Air, Internet)','category' => 'EXPENSE','sub_category' => 'NET_ASSET_UNRESTRICTED_SURPLUS','normal_balance' => 'DEBIT'],
-            ['code' => '5-2400', 'name' => 'Beban Perlengkapan & ATK',             'category' => 'EXPENSE',  'sub_category' => 'NET_ASSET_UNRESTRICTED_SURPLUS','normal_balance' => 'DEBIT'],
+            ['code' => '5-2300', 'name' => 'Beban Perlengkapan & ATK',             'category' => 'EXPENSE',  'sub_category' => 'NET_ASSET_UNRESTRICTED_SURPLUS','normal_balance' => 'DEBIT'],
+            ['code' => '5-2400', 'name' => 'Beban Penyusutan',                     'category' => 'EXPENSE',  'sub_category' => 'NET_ASSET_UNRESTRICTED_SURPLUS','normal_balance' => 'DEBIT'],
             ['code' => '5-2500', 'name' => 'Beban Transportasi & Perjalanan Dinas','category' => 'EXPENSE',  'sub_category' => 'NET_ASSET_UNRESTRICTED_SURPLUS','normal_balance' => 'DEBIT'],
             ['code' => '5-2600', 'name' => 'Beban Pemasaran & Promosi',            'category' => 'EXPENSE',  'sub_category' => 'NET_ASSET_UNRESTRICTED_SURPLUS','normal_balance' => 'DEBIT'],
             ['code' => '5-2700', 'name' => 'Beban Penyusutan',                     'category' => 'EXPENSE',  'sub_category' => 'NET_ASSET_UNRESTRICTED_SURPLUS','normal_balance' => 'DEBIT'],

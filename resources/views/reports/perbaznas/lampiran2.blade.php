@@ -74,10 +74,10 @@
                     <td class="border border-black p-2 pl-6">Miskin</td>
                     <td class="border border-black p-2 text-right font-mono">{{ number_format($distData['miskin']['zakat'] ?? 0, 0, ',', '.') }}</td>
                 </tr>
-                <tr>
+                <tr class="bg-amber-50/60">
                     <td class="border border-black p-2 text-center align-top text-xs">1.1.6.</td>
-                    <td class="border border-black p-2 pl-6">Amil</td>
-                    <td class="border border-black p-2 text-right font-mono">{{ number_format($distData['amil']['zakat'] ?? 0, 0, ',', '.') }}</td>
+                    <td class="border border-black p-2 pl-6">Amil <span class="text-[9px] italic font-normal">(hak amil 12,5% zakat — sinkron dgn Laporan V & Jurnal 4-1100)</span></td>
+                    <td class="border border-black p-2 text-right font-mono font-bold">{{ number_format($distData['amil']['zakat'] ?? 0, 0, ',', '.') }}</td>
                 </tr>
                 <tr>
                     <td class="border border-black p-2 text-center align-top text-xs">1.1.7.</td>
@@ -209,6 +209,10 @@
                 </tr>
             </tbody>
         </table>
+
+        <div class="mt-3 text-[10px] italic font-sans text-black leading-tight border-t border-black pt-2">
+            Ket: baris <strong>Amil</strong> menunjukkan pendapatan hak amil (maks 12,5% dari zakat, QS At-Taubah:60 & PSAK 109) yang berasal dari potongan otomatis pada saat penerimaan — telah dikeluarkan dari <strong>Laporan Penerimaan (Lampiran I) — total NET setelah potong</strong> dan masuk ke <strong>Laporan Operasional 12,5% (Lampiran V)</strong> serta ke Laporan Keuangan (Pendapatan Usaha Hak Amil 4-1100 tanpa pembatasan). Infak/sedekah & DSKL pada baris Amil = Rp 0 sesuai ketentuan syariah (100% untuk mustahik).
+        </div>
 
         <!-- Signature Section (Clean, no obstruction) -->
         <div class="signature-block mt-10 flex justify-end text-xs font-serif text-black">
