@@ -11,7 +11,7 @@ class ChartOfAccountsSeeder extends Seeder
     {
         $accounts = [
             // 1. ASET LANCAR
-            ['code' => '1-1101', 'name' => 'Kas Tunai',                            'category' => 'ASSET',    'sub_category' => 'CURRENT_ASSET',                 'normal_balance' => 'DEBIT'],
+            ['code' => '1-1101', 'name' => 'Kas',                            'category' => 'ASSET',    'sub_category' => 'CURRENT_ASSET',                 'normal_balance' => 'DEBIT'],
             ['code' => '1-1102', 'name' => 'Bank',                                 'category' => 'ASSET',    'sub_category' => 'CURRENT_ASSET',                 'normal_balance' => 'DEBIT'],
             ['code' => '1-1103', 'name' => 'Kas Kecil',                            'category' => 'ASSET',    'sub_category' => 'CURRENT_ASSET',                 'normal_balance' => 'DEBIT'],
             ['code' => '1-1201', 'name' => 'Piutang Usaha',                        'category' => 'ASSET',    'sub_category' => 'CURRENT_ASSET',                 'normal_balance' => 'DEBIT'],

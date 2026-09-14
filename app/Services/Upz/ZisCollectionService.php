@@ -83,12 +83,13 @@ class ZisCollectionService
         $debitAccount = Account::where('code', $cashOrBankCode)->firstOrFail();
 
         // 2. Determine Credit Account for ZIS (Restricted Revenue)
+        // Generic COA: all zakat/infak -> Pendapatan Sumbangan & Hibah (4-1300), dskl -> Lain-lain
         $revenueCode = match ($collection->fund_type) {
-            'zakat_maal' => '4-2100',
-            'zakat_fitrah' => '4-2200',
-            'infak_terikat' => '4-2300',
-            'dskl' => '4-2400',
-            default => '4-2100',
+            'zakat_maal' => '4-1300',
+            'zakat_fitrah' => '4-1300',
+            'infak_terikat' => '4-1300',
+            'dskl' => '4-1500',
+            default => '4-1300',
         };
         $revenueAccount = Account::where('code', $revenueCode)->firstOrFail();
 

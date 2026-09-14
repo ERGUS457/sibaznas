@@ -65,15 +65,16 @@ class ZisDistributionService
     protected function createAccountingJournal(ZisDistribution $distribution, ?User $user = null): JournalEntry
     {
         // 1. Determine Expense Account based on Asnaf Category
+        // Generic COA: map asnaf to beban umum yang ada di seeder
         $expenseCode = match ($distribution->asnaf_category) {
             'fakir', 'miskin' => '5-1100',
-            'fisabilillah' => '5-1200',
-            'gharimin' => '5-1300',
-            default => '5-1400',
+            'fisabilillah' => '5-2800',
+            'gharimin' => '5-2800',
+            default => '5-2900',
         };
 
         if ($distribution->fund_type === 'infak_terikat') {
-            $expenseCode = '5-1500';
+            $expenseCode = '5-2900';
         }
 
         $expenseAccount = Account::where('code', $expenseCode)->firstOrFail();

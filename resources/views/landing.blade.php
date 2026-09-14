@@ -308,7 +308,7 @@
                     <div class="flex-shrink-0">
                         <div class="clay-card-soft p-4 text-xs font-mono space-y-1 text-slate-700">
                             <div class="text-slate-400 text-[10px]">Contoh Ayat Jurnal Otomatis:</div>
-                            <div class="text-emerald-700 font-bold">(D) 1101 Kas ZIS di Bank &bull; Rp 10.000.000</div>
+                            <div class="text-emerald-700 font-bold">(D) 1101 Kas &bull; Rp 10.000.000</div>
                             <div class="text-slate-700 font-medium pl-4">(K) 4201 Pendapatan Amil &bull; Rp 1.250.000</div>
                             <div class="text-slate-700 font-medium pl-4">(K) 4101 Penerimaan Zakat Terikat &bull; Rp 8.750.000</div>
                         </div>

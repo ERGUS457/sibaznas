@@ -66,7 +66,7 @@
                 <thead class="bg-slate-100 text-slate-700 font-semibold border-b border-slate-200 uppercase tracking-wider">
                     <tr>
                         <th class="p-3">Tanggal</th>
-                        <th class="p-3">No. Jurnal</th>
+                        <th class="p-3">Nomor Transaksi</th>
                         <th class="p-3">Keterangan Transaksi</th>
                         <th class="p-3 text-right">Debit (Rp)</th>
                         <th class="p-3 text-right">Kredit (Rp)</th>

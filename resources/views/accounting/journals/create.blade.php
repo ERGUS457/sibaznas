@@ -40,7 +40,7 @@
         <form method="POST" action="{{ route('journals.store') }}" class="space-y-6" @submit="handleSubmit">
             @csrf
 
-            <!-- Header Info: Tanggal, Voucher, Keterangan -->
+            <!-- Header Info: Tanggal, Nomor Transaksi, Keterangan -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 bg-slate-50/70 p-4 rounded-xl border border-slate-200">
                 <div>
                     <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
@@ -51,7 +51,7 @@
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-                        No. Voucher / Jurnal <span class="text-slate-400 font-normal text-[10px]">(Opsional - Otomatis)</span>
+                        Nomor Transaksi <span class="text-slate-400 font-normal text-[10px]">(Opsional - Otomatis)</span>
                     </label>
                     <input type="text" name="voucher_number" value="{{ old('voucher_number') }}" placeholder="Contoh: JV/202609/0001"
                         class="w-full text-xs border border-slate-300 rounded-lg p-2.5 bg-white focus:ring-2 focus:ring-slate-700 focus:outline-none font-mono">

@@ -185,7 +185,7 @@
             <table class="w-full text-left text-xs border-collapse">
                 <thead class="bg-slate-50 text-slate-700 font-semibold border-b border-slate-200 text-[11px]">
                     <tr>
-                        <th class="p-3">No. Jurnal</th>
+                        <th class="p-3">Nomor Transaksi</th>
                         <th class="p-3">Tanggal</th>
                         <th class="p-3">Keterangan Transaksi</th>
                         <th class="p-3">Referensi</th>
