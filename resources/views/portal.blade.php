@@ -192,16 +192,16 @@
                             <i class="fa-solid fa-book-journal-whills"></i>
                         </div>
                         <span class="text-[11px] font-semibold uppercase tracking-wider bg-slate-100 text-slate-700 px-2.5 py-1 rounded border border-slate-200">
-                            MODUL INTERNAL ORGANISASI
+                            LAPORAN INTERNAL ORGANISASI
                         </span>
                     </div>
 
                     <!-- Title & Description -->
                     <h3 class="text-lg sm:text-xl font-bold text-slate-900 tracking-tight mb-2">
-                        Akuntansi Keuangan Organisasi (DE ISAK 35)
+                        Laporan Keuangan Organisasi
                     </h3>
                     <p class="text-xs text-slate-600 leading-relaxed mb-6">
-                        Khusus pencatatan pembukuan internal entitas nonlaba. Mengelola jurnal umum, buku besar akuntansi, neraca saldo, serta 4 laporan keuangan pokok berstandar <strong>DE ISAK 35 Format A</strong>.
+                        Khusus pencatatan pembukuan internal entitas nonlaba. Mengelola jurnal umum, buku besar akuntansi, neraca saldo, serta 4 laporan keuangan pokok Organisasi.
                     </p>
 
                     <!-- Features Checklist -->
@@ -224,19 +224,7 @@
                         </div>
                     </div>
 
-                    <!-- Metric Highlights -->
-                    <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 grid grid-cols-2 gap-3 mb-6 text-center">
-                        <div>
-                            <span class="text-[11px] font-medium text-slate-500 uppercase block">Total Aset Organisasi</span>
-                            <strong class="text-base font-bold text-slate-900">Rp {{ number_format($totalAssets, 0, ',', '.') }}</strong>
-                        </div>
-                        <div>
-                            <span class="text-[11px] font-medium text-slate-500 uppercase block">Keseimbangan Neraca</span>
-                            <span class="inline-block mt-0.5 text-xs font-semibold px-2.5 py-0.5 rounded border {{ $isBalanced ? 'bg-emerald-50 text-emerald-800 border-emerald-200' : 'bg-rose-50 text-rose-800 border-rose-200' }}">
-                                {{ $isBalanced ? '✓ Seimbang' : '! Cek Jurnal' }}
-                            </span>
-                        </div>
-                    </div>
+
                 </div>
 
                 <!-- CTA Action Button -->
@@ -257,7 +245,7 @@
                             <i class="fa-solid fa-hand-holding-heart"></i>
                         </div>
                         <span class="text-[11px] font-semibold uppercase tracking-wider bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded border border-emerald-200">
-                            MODUL PENERIMAAN &amp; PENYALURAN DANA
+                            LAPORAN PENERIMAAN &amp; PENYALURAN DANA
                         </span>
                     </div>
 
