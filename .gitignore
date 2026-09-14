@@ -17,3 +17,7 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+
+# hermes tmp
+resources/views/.hermes-tmp.*
+.hermes-tmp.*
