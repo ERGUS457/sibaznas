@@ -59,7 +59,7 @@
                         <th class="p-3">Jenis Dana &amp; Metode</th>
                         <th class="p-3 text-right">Nominal</th>
                         <th class="p-3 text-right">Hak Amil</th>
-                        <th class="p-3 text-center">Status</th>
+                        
                         <th class="p-3 text-center">Aksi</th>
                     </tr>
                 </thead>
@@ -83,11 +83,6 @@
                         </td>
                         <td class="p-3 text-right text-amber-700 font-medium whitespace-nowrap">
                             Rp {{ number_format($item->amil_amount, 0, ',', '.') }} ({{ $item->amil_percentage }}%)
-                        </td>
-                        <td class="p-3 text-center">
-                            <span class="inline-block px-2 py-0.5 rounded-full text-[10px] bg-emerald-100 text-emerald-800 font-semibold uppercase tracking-wider">
-                                {{ $item->status }}
-                            </span>
                         </td>
                         <td class="p-3 text-center whitespace-nowrap space-x-2">
                             <a href="{{ route('collections.show', $item->id) }}" class="inline-flex items-center space-x-1 text-slate-600 hover:text-emerald-700 font-semibold p-1" title="Rincian & Jurnal">
