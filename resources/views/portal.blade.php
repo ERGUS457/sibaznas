@@ -186,14 +186,11 @@
             <!-- CARD 1: AKUNTANSI KEUANGAN ORGANISASI (DE ISAK 35) -->
             <div class="formal-card p-6 sm:p-8 flex flex-col justify-between">
                 <div>
-                    <!-- Badge & Icon -->
-                    <div class="flex items-center justify-between mb-5">
+                    <!-- Icon -->
+                    <div class="mb-5">
                         <div class="w-12 h-12 rounded-lg bg-slate-800 text-white flex items-center justify-center text-xl shadow-xs">
                             <i class="fa-solid fa-book-journal-whills"></i>
                         </div>
-                        <span class="text-[11px] font-semibold uppercase tracking-wider bg-slate-100 text-slate-700 px-2.5 py-1 rounded border border-slate-200">
-                            LAPORAN INTERNAL ORGANISASI
-                        </span>
                     </div>
 
                     <!-- Title & Description -->
@@ -239,14 +236,11 @@
             <!-- CARD 2: PENGELOLAAN & PELAPORAN ZAKAT (STANDAR BAZNAS RI) -->
             <div class="formal-card p-6 sm:p-8 flex flex-col justify-between">
                 <div>
-                    <!-- Badge & Icon -->
-                    <div class="flex items-center justify-between mb-5">
+                    <!-- Icon -->
+                    <div class="mb-5">
                         <div class="w-12 h-12 rounded-lg bg-emerald-700 text-white flex items-center justify-center text-xl shadow-xs">
                             <i class="fa-solid fa-hand-holding-heart"></i>
                         </div>
-                        <span class="text-[11px] font-semibold uppercase tracking-wider bg-emerald-50 text-emerald-800 px-2.5 py-1 rounded border border-emerald-200">
-                            LAPORAN PENERIMAAN &amp; PENYALURAN DANA
-                        </span>
                     </div>
 
                     <!-- Title & Description -->
@@ -277,19 +271,7 @@
                         </div>
                     </div>
 
-                    <!-- Metric Highlights -->
-                    <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 grid grid-cols-2 gap-3 mb-6 text-center">
-                        <div>
-                            <span class="text-[11px] font-medium text-slate-500 uppercase block">Total Dihimpun (ZIS)</span>
-                            <strong class="text-base font-bold text-emerald-700">Rp {{ number_format($totalZisCollected, 0, ',', '.') }}</strong>
-                        </div>
-                        <div>
-                            <span class="text-[11px] font-medium text-slate-500 uppercase block">Kepatuhan Hak Amil</span>
-                            <span class="inline-block mt-0.5 text-xs font-semibold px-2.5 py-0.5 rounded border {{ $effectiveAmilPercentage <= 12.5 ? 'bg-emerald-50 text-emerald-800 border-emerald-200' : 'bg-rose-50 text-rose-800 border-rose-200' }}">
-                                {{ number_format($effectiveAmilPercentage, 2) }}% Patuh
-                            </span>
-                        </div>
-                    </div>
+
                 </div>
 
                 <!-- CTA Action Button -->
