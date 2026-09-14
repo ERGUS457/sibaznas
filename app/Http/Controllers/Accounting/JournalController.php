@@ -54,7 +54,7 @@ class JournalController extends Controller
         $request->validate([
             'entry_date' => 'required|date',
             'voucher_number' => 'nullable|string|max:50|unique:journal_entries,voucher_number',
-            'description' => 'required|string|max:500',
+            'description' => 'nullable|string|max:500',
             'items' => 'required|array|min:2',
             'items.*.account_id' => 'required|exists:accounts,id',
             'items.*.debit' => 'nullable|numeric|min:0',
@@ -62,7 +62,6 @@ class JournalController extends Controller
             'items.*.restriction_type' => 'nullable|string',
         ], [
             'entry_date.required' => 'Tanggal transaksi wajib diisi.',
-            'description.required' => 'Deskripsi / Keterangan transaksi wajib diisi.',
             'items.required' => 'Minimal 2 baris akun transaksi jurnal.',
             'items.min' => 'Entri jurnal akuntansi harus memiliki minimal 2 baris transaksi.',
             'items.*.account_id.required' => 'Setiap baris wajib memilih akun.',
@@ -99,12 +98,13 @@ class JournalController extends Controller
             ? trim($request->voucher_number)
             : $this->generateVoucherNumber($request->entry_date);
 
-        DB::transaction(function () use ($upz, $request, $voucherNumber, $validItems) {
+        $description = $request->filled('description') ? trim($request->description) : ('Jurnal Umum ' . $request->entry_date);
+        DB::transaction(function () use ($upz, $request, $voucherNumber, $description, $validItems) {
             $entry = JournalEntry::create([
                 'upz_profile_id' => $upz->id,
                 'entry_date' => $request->entry_date,
                 'voucher_number' => $voucherNumber,
-                'description' => $request->description,
+                'description' => $description,
                 'source_module' => 'GENERAL',
             ]);
 

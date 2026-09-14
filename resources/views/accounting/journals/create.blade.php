@@ -58,9 +58,9 @@
                 </div>
                 <div class="md:col-span-3 sm:col-span-1">
                     <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-                        Deskripsi / Keterangan Transaksi <span class="text-rose-500">*</span>
+                        Deskripsi / Keterangan Transaksi <span class="text-slate-400 font-normal text-[10px]">(Opsional)</span>
                     </label>
-                    <input type="text" name="description" value="{{ old('description') }}" required placeholder="Contoh: Pembayaran Beban Listrik & Internet Kantor Bulan September"
+                    <input type="text" name="description" value="{{ old('description') }}" placeholder="Contoh: Pembayaran Beban Listrik & Internet Kantor Bulan September"
                         class="w-full text-xs border border-slate-300 rounded-lg p-2.5 bg-white focus:ring-2 focus:ring-slate-700 focus:outline-none">
                 </div>
             </div>
