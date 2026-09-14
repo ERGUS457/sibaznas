@@ -52,6 +52,7 @@ class ZisCollection extends Model
     ];
 
     public const PAYMENT_METHODS = [
+        'kas' => 'Kas',
         'kas_tunai' => 'Kas / Tunai',
         'transfer_bank' => 'Transfer Bank',
         'qris' => 'QRIS BAZNAS',

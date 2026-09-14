@@ -16,6 +16,8 @@ class ZisCollectionService
 {
     /**
      * Record a new ZIS collection and automatically generate double-entry journal items.
+     * Syariah: hanya zakat (maal/fitrah) berhak atas bagian amil maks 12.5% (QS At-Taubah:60, PSAK 109).
+     * Infak/sedekah/DSKL/fidyah tidak dikenakan hak amil — 100% hak mustahik/program.
      */
     public function recordCollection(array $data, ?User $user = null): ZisCollection
     {
@@ -28,13 +30,15 @@ class ZisCollectionService
                 throw new InvalidArgumentException('Nominal pengumpulan ZIS harus lebih besar dari nol.');
             }
 
-            // Amil percentage calculation (capped at 12.5% per Perbaznas No. 2/2016 for zakat)
-            $amilPercent = isset($data['amil_percentage']) 
-                ? (float) $data['amil_percentage'] 
-                : (float) $upz->amil_share_percentage;
-            
-            if ($amilPercent > 12.50 && in_array($data['fund_type'], ['zakat_maal', 'zakat_fitrah'])) {
-                throw new InvalidArgumentException('Hak amil untuk dana zakat tidak boleh melebihi 12.50% sesuai syariah dan regulasi BAZNAS.');
+            // Hak amil hanya untuk zakat (QS At-Taubah:60, PSAK 109, Perbaznas 2/2016): zakat_maal/fitrah saja; infak/sedekah/DSKL/fidyah = 0
+            $isZakat = in_array($data['fund_type'], ['zakat_maal', 'zakat_fitrah']);
+            if ($isZakat) {
+                $amilPercent = (isset($data['amil_percentage']) && $data['amil_percentage'] !== '' && $data['amil_percentage'] !== null)
+                    ? (float) $data['amil_percentage']
+                    : (float) $upz->amil_share_percentage;
+                $amilPercent = min($amilPercent, 12.50);
+            } else {
+                $amilPercent = 0.0;
             }
 
             $amilAmount = round(($amount * $amilPercent) / 100, 2);

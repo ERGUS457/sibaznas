@@ -71,7 +71,7 @@ class ZisCollectionController extends Controller
             'fund_subtype'     => 'nullable|string',
             'payment_method'   => 'required|string',
             'amount'           => 'required|numeric|min:1',
-            'amil_percentage'  => 'nullable|numeric|min:0|max:12.50',
+            'amil_percentage'  => 'nullable|numeric|min:0|max:12.50', // service forces 0 untuk infak/dskl/fidyah; zakat wajib (fallback default UPZ jika kosong)
             'description'      => 'nullable|string',
             'reference_number' => 'nullable|string',
         ]);

@@ -44,12 +44,12 @@
                 <div>
                     <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Jenis Dana ZIS <span class="text-rose-500">*</span></label>
                     <select name="fund_type" id="fundType" required class="w-full text-xs border border-slate-300 rounded-lg p-2.5 focus:ring-2 focus:ring-emerald-500 focus:outline-none">
-                        <option value="zakat_maal">Zakat Maal (Penghasilan, Perdagangan, Emas, Simpanan)</option>
-                        <option value="zakat_fitrah">Zakat Fitrah</option>
-                        <option value="infak_terikat">Infak / Sedekah Terikat Program</option>
-                        <option value="infak_tidak_terikat">Infak / Sedekah Tidak Terikat</option>
-                        <option value="dskl">DSKL (Dana Sosial Keagamaan Lainnya)</option>
-                        <option value="fidyah_kafarat">Fidyah &amp; Kafarat</option>
+                        <option value="zakat_maal" {{ old('fund_type')=='zakat_maal' ? 'selected' : '' }}>Zakat Maal (Penghasilan, Perdagangan, Emas, Simpanan)</option>
+                        <option value="zakat_fitrah" {{ old('fund_type')=='zakat_fitrah' ? 'selected' : '' }}>Zakat Fitrah</option>
+                        <option value="infak_terikat" {{ old('fund_type')=='infak_terikat' ? 'selected' : '' }}>Infak / Sedekah Terikat Program</option>
+                        <option value="infak_tidak_terikat" {{ old('fund_type')=='infak_tidak_terikat' ? 'selected' : '' }}>Infak / Sedekah Tidak Terikat</option>
+                        <option value="dskl" {{ old('fund_type')=='dskl' ? 'selected' : '' }}>DSKL (Dana Sosial Keagamaan Lainnya)</option>
+                        <option value="fidyah_kafarat" {{ old('fund_type')=='fidyah_kafarat' ? 'selected' : '' }}>Fidyah &amp; Kafarat</option>
                     </select>
                 </div>
             </div>
@@ -77,12 +77,13 @@
                     <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Nominal (Rp) <span class="text-rose-500">*</span></label>
                     <input type="number" step="any" min="1" name="amount" id="amount" value="{{ old('amount') }}" required placeholder="Contoh: 2500000" class="w-full text-xs border border-slate-300 rounded-lg p-2.5 focus:ring-2 focus:ring-emerald-500 focus:outline-none font-bold text-slate-900">
                 </div>
-                <div>
+                <div id="amilField">
                     <label class="block text-xs font-bold text-slate-700 uppercase mb-1">
-                        Persentase Hak Amil (%) 
-                        <span class="text-[10px] text-emerald-600 font-normal">(Maks 12.5% Perbaznas 2/2016)</span>
+                        Persentase Hak Amil (%) <span id="amilRequiredMark" class="text-rose-500">*</span>
+                        <span class="text-[10px] text-emerald-600 font-normal">(Maks 12.5% khusus Zakat)</span>
                     </label>
                     <input type="number" step="0.01" min="0" max="12.50" name="amil_percentage" id="amilPercentage" value="{{ old('amil_percentage', $upz->amil_share_percentage ?? 12.50) }}" class="w-full text-xs border border-slate-300 rounded-lg p-2.5 focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                    <p id="amilHelp" class="text-[10px] text-slate-500 mt-1 hidden">Tidak berlaku untuk Infak/Sedekah/DSKL — amil = Rp 0 (hanya zakat yang berhak atas bagian amil QS At-Taubah:60).</p>
                 </div>
             </div>
 
@@ -128,19 +129,62 @@
 </div>
 
 <script>
+    const ZAKAT_TYPES = ['zakat_maal','zakat_fitrah'];
+    function isZakat() {
+        return ZAKAT_TYPES.includes(document.getElementById('fundType').value);
+    }
+    function toggleAmilField() {
+        const zakat = isZakat();
+        const input = document.getElementById('amilPercentage');
+        const mark = document.getElementById('amilRequiredMark');
+        const help = document.getElementById('amilHelp');
+        if (zakat) {
+            input.disabled = false;
+            input.required = true;
+            input.classList.remove('bg-slate-100','text-slate-400');
+            if (mark) mark.classList.remove('hidden');
+            if (help) help.classList.add('hidden');
+            input.placeholder = '';
+            if (!input.value || parseFloat(input.value) === 0) {
+                input.value = '{{ $upz->amil_share_percentage ?? 12.50 }}';
+            }
+        } else {
+            input.value = '';
+            input.placeholder = '— tidak berlaku';
+            input.disabled = true;
+            input.required = false;
+            input.classList.add('bg-slate-100','text-slate-400');
+            if (mark) mark.classList.add('hidden');
+            if (help) help.classList.remove('hidden');
+        }
+        updateCalculation();
+    }
     function updateCalculation() {
         const amount = parseFloat(document.getElementById('amount').value) || 0;
-        const percent = parseFloat(document.getElementById('amilPercentage').value) || 0;
-        
+        let percent = parseFloat(document.getElementById('amilPercentage').value) || 0;
+        if (!isZakat()) percent = 0;
+        if (isZakat() && percent > 12.5) {
+            percent = 12.5;
+            document.getElementById('amilPercentage').value = '12.5';
+        }
+        // infak/dskl/fidyah tidak berhak hak amil — paksa 0 di kalkulasi, UI tetap kosong
+        // (value dikosongkan, kalkulasi pakai percent=0 di atas)
         const amil = Math.round((amount * percent) / 100);
         const net = amount - amil;
-
         document.getElementById('previewAmil').innerText = 'Rp ' + amil.toLocaleString('id-ID');
         document.getElementById('previewNet').innerText = 'Rp ' + net.toLocaleString('id-ID');
+        // toggle label colors
+        if (!isZakat() && amount > 0) {
+            document.getElementById('previewAmil').classList.add('text-slate-400');
+            document.getElementById('previewAmil').classList.remove('text-amber-700');
+        } else {
+            document.getElementById('previewAmil').classList.remove('text-slate-400');
+            document.getElementById('previewAmil').classList.add('text-amber-700');
+        }
     }
-
     document.getElementById('amount').addEventListener('input', updateCalculation);
     document.getElementById('amilPercentage').addEventListener('input', updateCalculation);
-    updateCalculation();
+    document.getElementById('fundType').addEventListener('change', toggleAmilField);
+    toggleAmilField();
 </script>
 @endsection
