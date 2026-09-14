@@ -135,11 +135,16 @@ class ReportController extends Controller
         $zakatMalPerorangan = (float) ZisCollection::where('upz_profile_id', $upz->id)->whereYear('transaction_date', $year)->where('fund_type', 'zakat_mal_perorangan')->sum('amount');
         $zakatMalBadan = (float) ZisCollection::where('upz_profile_id', $upz->id)->whereYear('transaction_date', $year)->where('fund_type', 'zakat_mal_badan')->sum('amount');
         $zakatFitrah = (float) ZisCollection::where('upz_profile_id', $upz->id)->whereYear('transaction_date', $year)->where('fund_type', 'zakat_fitrah')->sum('amount');
-        $totalZakat = $zakatMalPerorangan + $zakatMalBadan + $zakatFitrah;
+        // Net zakat after amil deduction (use net_fund_amount)
+        $totalZakatNet = (float) ZisCollection::where('upz_profile_id', $upz->id)
+            ->whereYear('transaction_date', $year)
+            ->whereIn('fund_type', ['zakat_mal_perorangan','zakat_mal_badan','zakat_fitrah'])
+            ->sum('net_fund_amount');
+        $totalZakat = $totalZakatNet; // overwrite with net after amil
 
         $infakSedekah = (float) ZisCollection::where('upz_profile_id', $upz->id)->whereYear('transaction_date', $year)->where('fund_type', 'infak_sedekah')->sum('amount');
         $dskl = (float) ZisCollection::where('upz_profile_id', $upz->id)->whereYear('transaction_date', $year)->where('fund_type', 'dskl')->sum('amount');
-        $totalPenerimaan = $totalZakat + $infakSedekah + $dskl;
+        $totalPenerimaan = $totalZakatNet + $infakSedekah + $dskl;
 
         return view('reports.perbaznas.lampiran1', compact(
             'upz', 'year', 'zakatMalPerorangan', 'zakatMalBadan', 'zakatFitrah', 'totalZakat', 'infakSedekah', 'dskl', 'totalPenerimaan'
