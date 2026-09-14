@@ -42,8 +42,10 @@
 
         {{-- Header --}}
         <div class="text-center mb-8">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo Organisasi" class="w-16 h-16 rounded-2xl object-contain bg-white border border-slate-200 p-1 shadow-md mx-auto mb-4">
-            <h1 class="text-2xl font-bold text-gray-800">ARTHAWISE</h1>
+            <a href="{{ route('landing') }}" class="inline-block group">
+                <img src="{{ asset('images/logo.png') }}" alt="Logo Organisasi" class="w-16 h-16 rounded-2xl object-contain bg-white border border-slate-200 p-1 shadow-md mx-auto mb-4 group-hover:shadow-lg transition">
+                <h1 class="text-2xl font-bold text-gray-800 group-hover:text-emerald-700 transition">ARTHAWISE</h1>
+            </a>
             <p class="text-gray-500 text-sm mt-1">Sistem Informasi Akuntansi &amp; Manajemen Organisasi — Pendaftaran Organisasi</p>
         </div>
 

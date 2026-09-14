@@ -132,7 +132,7 @@
         <section class="text-center space-y-6 pt-4">
             <div class="inline-flex items-center gap-2 px-4 py-1.5 clay-pill bg-white text-emerald-800 text-xs font-bold">
                 <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span>Standar Kepatuhan: Format A DE ISAK 35 &bull; Pelaporan Keuangan Entitas Nonlaba</span>
+                <span>Sistem Keuangan Organisasi &bull; Transparan &bull; Akuntabel &bull; Terintegrasi</span>
             </div>
 
             <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight max-w-4xl mx-auto">
@@ -165,81 +165,6 @@
                     <i class="fa-solid fa-book-bookmark text-slate-400"></i>
                     <span>Pelajari Modul</span>
                 </a>
-            </div>
-
-            <!-- Live Stats Row (Clay Cards) -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 pt-8 text-left">
-                <!-- 1. Total Pengumpulan ZIS -->
-                <div class="clay-card clay-card-interactive p-5">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Total Pengumpulan ZIS</span>
-                        <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm font-bold">
-                            <i class="fa-solid fa-hand-holding-dollar"></i>
-                        </div>
-                    </div>
-                    <div class="text-xl font-extrabold text-slate-900 font-mono mt-3">
-                        Rp {{ number_format($totalZisCollected, 0, ',', '.') }}
-                    </div>
-                    <div class="text-[11px] text-slate-500 mt-1 flex items-center gap-1">
-                        <i class="fa-solid fa-users text-emerald-600"></i>
-                        <span>{{ $muzakkiCount }} Muzaki terdaftar</span>
-                    </div>
-                </div>
-
-                <!-- 2. Tersalurkan ke Mustahik -->
-                <div class="clay-card clay-card-interactive p-5">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tersalurkan ke Mustahik</span>
-                        <div class="w-9 h-9 rounded-xl bg-teal-100 text-teal-700 flex items-center justify-center text-sm font-bold">
-                            <i class="fa-solid fa-parachute-box"></i>
-                        </div>
-                    </div>
-                    <div class="text-xl font-extrabold text-slate-900 font-mono mt-3">
-                        Rp {{ number_format($totalDistributed, 0, ',', '.') }}
-                    </div>
-                    <div class="text-[11px] text-slate-500 mt-1 flex items-center gap-1">
-                        <i class="fa-solid fa-people-roof text-teal-600"></i>
-                        <span>8 Asnaf &bull; 5 Bidang Program</span>
-                    </div>
-                </div>
-
-                <!-- 3. Kas Siap Disalurkan -->
-                <div class="clay-card clay-card-interactive p-5">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Kas ZIS Siap Salur</span>
-                        <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-sm font-bold">
-                            <i class="fa-solid fa-wallet"></i>
-                        </div>
-                    </div>
-                    <div class="text-xl font-extrabold text-emerald-700 font-mono mt-3">
-                        Rp {{ number_format($availableZisCash, 0, ',', '.') }}
-                    </div>
-                    <div class="text-[11px] text-slate-500 mt-1 flex items-center gap-1">
-                        <i class="fa-solid fa-shield-check text-amber-600"></i>
-                        <span>Hak amil terjaga maks 12,5%</span>
-                    </div>
-                </div>
-
-                <!-- 4. Neraca DE ISAK 35 -->
-                <div class="clay-card clay-card-interactive p-5">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Status Neraca</span>
-                        <div class="w-9 h-9 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center text-sm font-bold">
-                            <i class="fa-solid fa-scale-balanced"></i>
-                        </div>
-                    </div>
-                    <div class="text-xl font-extrabold text-slate-900 mt-3 flex items-center gap-2">
-                        @if($financialPosition['is_balanced'] ?? true)
-                        <span class="text-emerald-700">Seimbang</span>
-                        <i class="fa-solid fa-circle-check text-emerald-600 text-sm"></i>
-                        @else
-                        <span class="text-rose-700">Perlu Koreksi</span>
-                        @endif
-                    </div>
-                    <div class="text-[11px] text-slate-500 mt-1">
-                        <span>Aset = Liabilitas + Aset Neto</span>
-                    </div>
-                </div>
             </div>
         </section>
 

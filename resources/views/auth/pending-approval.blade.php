@@ -22,8 +22,10 @@
 
         {{-- Brand Logo Header --}}
         <div class="text-center mb-6">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo ARTHAWISE" class="w-16 h-16 rounded-2xl object-contain bg-white border border-slate-200 p-1 shadow-md mx-auto mb-2">
-            <h2 class="text-xl font-bold text-gray-800">ARTHAWISE</h2>
+            <a href="{{ route('landing') }}" class="inline-block group">
+                <img src="{{ asset('images/logo.png') }}" alt="Logo ARTHAWISE" class="w-16 h-16 rounded-2xl object-contain bg-white border border-slate-200 p-1 shadow-md mx-auto mb-2 group-hover:shadow-lg transition">
+                <h2 class="text-xl font-bold text-gray-800 group-hover:text-emerald-700 transition">ARTHAWISE</h2>
+            </a>
         </div>
 
         {{-- Success card --}}

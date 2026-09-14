@@ -32,12 +32,11 @@
 
             <!-- Logo & Brand Header -->
             <div class="text-center space-y-2">
-                <img src="{{ asset('images/logo.png') }}" alt="Logo ARTHAWISE" class="w-16 h-16 rounded-xl object-contain bg-white border border-slate-200 p-1 shadow-xs mx-auto mb-1">
-                <h1 class="text-xl font-bold text-slate-900 tracking-tight">ARTHAWISE</h1>
-                <div class="inline-block text-[11px] font-semibold text-emerald-800 bg-emerald-50 py-0.5 px-2.5 rounded border border-emerald-200">
-                    DE ISAK 35 FORMAT A &bull; PERBAZNAS 2/2016
-                </div>
-                <p class="text-xs text-slate-500 font-normal">Silakan masuk untuk mengakses portal kerja amil &amp; akuntansi</p>
+                <a href="{{ route('landing') }}" class="inline-block group">
+                    <img src="{{ asset('images/logo.png') }}" alt="Logo ARTHAWISE" class="w-16 h-16 rounded-xl object-contain bg-white border border-slate-200 p-1 shadow-xs mx-auto mb-1 group-hover:shadow-md transition">
+                    <h1 class="text-xl font-bold text-slate-900 tracking-tight group-hover:text-emerald-700 transition">ARTHAWISE</h1>
+                </a>
+                <p class="text-xs text-slate-500 font-normal">Silakan masuk untuk mengakses sistem keuangan organisasi</p>
             </div>
 
             <!-- Error Alerts -->
