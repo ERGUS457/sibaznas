@@ -68,10 +68,10 @@
                             type="text" 
                             id="username" 
                             name="username" 
-                            value="{{ old('username', 'admin') }}" 
+                            value="{{ old('username') }}" 
                             required 
                             autofocus
-                            placeholder="admin"
+                            placeholder="Masukkan username"
                             class="w-full pl-9 pr-3.5 py-2 text-sm text-slate-900 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 transition">
                     </div>
                 </div>
@@ -94,9 +94,9 @@
                             :type="showPass ? 'text' : 'password'" 
                             id="password" 
                             name="password" 
-                            value="admin123"
+                            value=""
                             required
-                            placeholder="••••••••"
+                            placeholder="Masukkan kata sandi"
                             class="w-full pl-9 pr-10 py-2 text-sm text-slate-900 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 transition">
                         <button type="button" @click="showPass = !showPass" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none" tabindex="-1" title="Lihat/Sembunyikan Kata Sandi">
                             <i class="fa-solid text-xs" :class="showPass ? 'fa-eye-slash' : 'fa-eye'"></i>
@@ -121,30 +121,6 @@
                     <i class="fa-solid fa-arrow-right text-xs"></i>
                 </button>
             </form>
-
-            <!-- Quick Auto-Fill Credential Box -->
-            <div class="p-3.5 text-xs space-y-2 bg-slate-50 border border-slate-200 rounded-lg">
-                <div class="flex items-center justify-between text-slate-700 font-semibold border-b border-slate-200 pb-1.5">
-                    <span class="flex items-center gap-1.5">
-                        <i class="fa-solid fa-key text-slate-400 text-xs"></i>
-                        <span>Kredensial Login Default:</span>
-                    </span>
-                    <span class="text-[10px] bg-slate-200 text-slate-700 px-1.5 py-0.5 rounded font-medium">Siap Pakai</span>
-                </div>
-                <div class="grid grid-cols-2 gap-2 pt-1 font-mono text-xs">
-                    <div class="bg-white p-2 rounded border border-slate-200">
-                        <span class="text-[10px] text-slate-400 block uppercase font-sans">Username</span>
-                        <strong class="text-slate-800">admin</strong>
-                    </div>
-                    <div class="bg-white p-2 rounded border border-slate-200">
-                        <span class="text-[10px] text-slate-400 block uppercase font-sans">Password</span>
-                        <strong class="text-slate-800">admin123</strong>
-                    </div>
-                </div>
-                <div class="text-center pt-0.5 text-[11px] text-slate-500">
-                    Klik tombol <strong>Masuk</strong> langsung untuk login otomatis
-                </div>
-            </div>
 
             <!-- Registration Card Section -->
             <div class="pt-3 border-t border-slate-200 text-center space-y-2.5">
