@@ -19,7 +19,7 @@
                 Laporan Keuangan Organisasi
             </h1>
             <p class="text-xs text-slate-600 font-normal mt-0.5">
-                Pengelolaan jurnal, buku besar, neraca saldo, serta 4 laporan pokok entitas nonlaba Format A.
+                Pengelolaan jurnal, buku besar, neraca saldo, serta 4 laporan pokok entitas nonlaba.
             </p>
         </div>
 
@@ -38,14 +38,14 @@
             </a>
         </div>
     </div>
-    <!-- Quick Access Navigation to 4 DE ISAK 35 Statements (Format A) -->
+    <!-- 4 Laporan Keuangan Pokok -->
     <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-xs">
         <div class="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
             <div>
                 <h2 class="text-sm font-bold text-slate-900 tracking-tight">
-                    4 Laporan Keuangan Pokok DE ISAK 35 Format A (Monokrom Standar IAI)
+                    4 Laporan Keuangan Pokok
                 </h2>
-                <p class="text-xs text-slate-500 font-normal">Format baku monokrom dapat langsung dicetak sesuai dokumen standar resmi IAI:</p>
+                <p class="text-xs text-slate-500 font-normal">Pilih laporan untuk melihat atau mencetak:</p>
             </div>
         </div>
 
@@ -56,7 +56,6 @@
                 </div>
                 <div>
                     <strong class="text-slate-900 block font-semibold text-xs">Posisi Keuangan</strong>
-                    <span class="text-slate-500 text-[11px] font-normal">Format A Hal. 21 PDF &bull; Neraca</span>
                 </div>
             </a>
 
@@ -66,7 +65,6 @@
                 </div>
                 <div>
                     <strong class="text-slate-900 block font-semibold text-xs">Penghasilan Komprehensif</strong>
-                    <span class="text-slate-500 text-[11px] font-normal">Format A Hal. 24 PDF &bull; Surplus</span>
                 </div>
             </a>
 
@@ -76,7 +74,6 @@
                 </div>
                 <div>
                     <strong class="text-slate-900 block font-semibold text-xs">Perubahan Aset Neto</strong>
-                    <span class="text-slate-500 text-[11px] font-normal">Hal. 26 PDF &bull; Rekonsiliasi</span>
                 </div>
             </a>
 
@@ -86,7 +83,6 @@
                 </div>
                 <div>
                     <strong class="text-slate-900 block font-semibold text-xs">Laporan Arus Kas</strong>
-                    <span class="text-slate-500 text-[11px] font-normal">Hal. 27 PDF &bull; Metode Langsung</span>
                 </div>
             </a>
         </div>
