@@ -54,15 +54,10 @@ class ProfileController extends Controller
         ]);
 
         if ($request->hasFile('logo')) {
-            // hapus logo lama jika ada
-            if ($upz->logo_path) {
-                $old = str_replace('/storage/', '', $upz->logo_path);
-                if (Storage::disk('public')->exists($old)) {
-                    Storage::disk('public')->delete($old);
-                }
-            }
-            $path = $request->file('logo')->store('logos', 'public');
-            $upz->logo_path = '/storage/'.$path;
+            $file = $request->file('logo');
+            $data = base64_encode(file_get_contents($file->getRealPath()));
+            $mime = $file->getMimeType();
+            $upz->logo_path = "data:{$mime};base64,{$data}";
         }
         $upz->save();
 
