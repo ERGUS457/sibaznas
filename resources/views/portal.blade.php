@@ -84,17 +84,20 @@
                 <h1 class="text-base font-bold text-slate-900 tracking-tight">ARTHAWISE</h1>
                 <p class="text-xs text-slate-500 font-medium">Artha Wise Finance — Kelola Keuangan Organisasi</p>
             </div>
-            <a href="{{ route('profile.show') }}" class="hidden sm:inline-flex btn-formal-outline px-3.5 py-1.5 text-xs font-bold items-center gap-1.5 text-slate-700 hover:text-emerald-700 hover:border-emerald-300 ml-2">
-                <i class="fa-solid fa-user-gear text-emerald-600 text-[11px]"></i>
+            <a href="{{ route('profile.show') }}#organisasi" class="hidden sm:inline-flex btn-formal-outline px-3.5 py-1.5 text-xs font-bold items-center gap-1.5 text-slate-700 hover:text-emerald-700 hover:border-emerald-300 ml-2" title="Ubah nama, kode, alamat, logo organisasi">
+                <i class="fa-solid fa-building text-emerald-600 text-[11px]"></i>
                 <span>Profil Organisasi</span>
             </a>
-            <a href="{{ route('profile.show') }}#akun" class="hidden sm:inline-flex btn-formal-outline px-3.5 py-1.5 text-xs font-bold items-center gap-1.5 text-slate-700 hover:text-emerald-700 ml-1">
-                <i class="fa-solid fa-user text-slate-500 text-[11px]"></i>
+            <a href="{{ route('profile.show') }}#akun" class="hidden sm:inline-flex btn-formal-outline px-3.5 py-1.5 text-xs font-bold items-center gap-1.5 text-slate-700 hover:text-emerald-700 ml-1" title="Ubah username, email, password akun login">
+                <i class="fa-solid fa-user-gear text-slate-500 text-[11px]"></i>
                 <span>Akun</span>
             </a>
-            <!-- mobile -->
-            <a href="{{ route('profile.show') }}" class="sm:hidden btn-formal-outline px-2.5 py-1.5 text-xs font-bold inline-flex items-center justify-center ml-2" title="Profil Organisasi & Akun">
-                <i class="fa-solid fa-user-gear text-slate-700"></i>
+            <!-- mobile: dropdown singkat -->
+            <a href="{{ route('profile.show') }}#organisasi" class="sm:hidden btn-formal-outline px-2.5 py-1.5 text-xs font-bold inline-flex items-center justify-center ml-2" title="Profil Organisasi">
+                <i class="fa-solid fa-building text-emerald-600"></i>
+            </a>
+            <a href="{{ route('profile.show') }}#akun" class="sm:hidden btn-formal-outline px-2.5 py-1.5 text-xs font-bold inline-flex items-center justify-center ml-1" title="Akun (username/email/password)">
+                <i class="fa-solid fa-user text-slate-700"></i>
             </a>
         </div>
 

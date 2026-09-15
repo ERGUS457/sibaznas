@@ -3,28 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
 class ProfileController extends Controller
 {
-    /**
-     * Show the profile edit form (Organisasi + Akun).
-     */
     public function edit()
     {
-        $upz = Auth::user()->upzProfile;
-        $user = Auth::user();
+        $upz = auth()->user()->upzProfile;
+        $user = auth()->user();
         return view('profile.edit', compact('upz', 'user'));
     }
 
-    /**
-     * Update the organization profile & akun.
-     */
     public function update(Request $request)
     {
-        $user = Auth::user();
+        $user = auth()->user();
         $upz = $user->upzProfile;
 
         $validated = $request->validate([
@@ -36,13 +29,19 @@ class ProfileController extends Controller
             'phone' => ['nullable','string','max:20'],
             'email' => ['nullable','email','max:255'],
             'logo' => ['nullable','image','max:2048'],
-            // akun
-            'user_name' => ['nullable','string','max:255'],
-            'user_email' => ['nullable','email','max:255', Rule::unique('users','email')->ignore($user->id)],
-            'user_phone' => ['nullable','string','max:20'],
+            // akun — opsional, hanya jika diisi
+            'account_name' => ['nullable','string','max:255'],
+            'account_username' => ['nullable','string','max:50', Rule::unique('users','username')->ignore($user->id)],
+            'account_email' => ['nullable','email','max:255', Rule::unique('users','email')->ignore($user->id)],
+            'account_phone' => ['nullable','string','max:20'],
+            'current_password' => ['nullable','string','required_with:password'],
+            'password' => ['nullable','string','min:8','confirmed'],
+        ], [
+            'password.confirmed' => 'Konfirmasi password baru tidak cocok.',
+            'current_password.required_with' => 'Masukkan password saat ini untuk mengganti password.',
         ]);
 
-        // Update UPZ profile
+        // Update organisasi
         $upz->fill([
             'name' => $validated['name'],
             'code' => strtoupper($validated['code']),
@@ -61,21 +60,35 @@ class ProfileController extends Controller
         }
         $upz->save();
 
-        // Update akun user (jika diisi)
+        // Update akun
         $userDirty = false;
-        if (!empty($validated['user_name']) && $validated['user_name'] !== $user->name) {
-            $user->name = $validated['user_name'];
+        if (!empty($validated['account_name']) && $validated['account_name'] !== $user->name) {
+            $user->name = $validated['account_name'];
             $userDirty = true;
         }
-        if (!empty($validated['user_email']) && $validated['user_email'] !== $user->email) {
-            $user->email = $validated['user_email'];
+        if (!empty($validated['account_username']) && $validated['account_username'] !== $user->username) {
+            $user->username = $validated['account_username'];
             $userDirty = true;
         }
-        if (array_key_exists('user_phone', $validated)) {
-            if ($validated['user_phone'] !== $user->phone) {
-                $user->phone = $validated['user_phone'];
-                $userDirty = true;
+        if (!empty($validated['account_email']) && $validated['account_email'] !== $user->email) {
+            $user->email = $validated['account_email'];
+            $userDirty = true;
+        }
+        if (array_key_exists('account_phone', $validated) && $validated['account_phone'] !== $user->phone) {
+            $user->phone = $validated['account_phone'];
+            $userDirty = true;
+        }
+        if (!empty($validated['password'])) {
+            if (empty($validated['current_password']) || !Hash::check($validated['current_password'], $user->password)) {
+                return back()->withErrors(['current_password' => 'Password saat ini salah.'])->withInput();
             }
+            $user->password = Hash::make($validated['password']);
+            $userDirty = true;
+        }
+        // backward compat: field lama user_name/user_email masih didukung jika ada
+        if (!empty($request->input('user_name')) && empty($validated['account_name'])) {
+            $user->name = $request->input('user_name');
+            $userDirty = true;
         }
         if ($userDirty) $user->save();
 
