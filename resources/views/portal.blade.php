@@ -290,7 +290,7 @@
 
                     <!-- Title & Description -->
                     <h3 class="text-lg sm:text-xl font-bold text-slate-900 tracking-tight mb-2">
-                        Pengelolaan Penerimaan &amp; Penyaluran Dana
+                        Laporan Keuangan UPZ (Jika Ada)
                     </h3>
                     <p class="text-xs text-slate-600 leading-relaxed mb-6">
                         Khusus pengelolaan penerimaan donasi / ZIS, penerbitan Bukti Tanda Terima Setor (BSZ), penyaluran bantuan sosial, serta pelaporan aktivitas dana masyarakat.
