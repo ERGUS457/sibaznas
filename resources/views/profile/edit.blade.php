@@ -30,7 +30,7 @@
             <div class="flex flex-col sm:flex-row items-center gap-6 pb-6 border-b border-slate-100">
                 <div class="w-24 h-24 rounded-2xl border-2 border-slate-200 bg-slate-50 flex items-center justify-center overflow-hidden flex-shrink-0 shadow-inner">
                     @if($upz->logo_path)
-                        <img src="{{ $upz->logo_path }}" alt="Logo Organisasi" class="w-full h-full object-cover">
+                        <img src="{!! $upz->logo_path ? $upz->logo_path : asset('images/logo.png') !!}" alt="Logo Organisasi" class="w-full h-full object-cover">
                     @else
                         <i class="fa-solid fa-building text-3xl text-slate-300"></i>
                     @endif
