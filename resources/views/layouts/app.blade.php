@@ -422,19 +422,30 @@
             {{-- User's Organization Badge --}}
             @php $userUpz = auth()->user()?->upzProfile; @endphp
             @if($userUpz)
-            <div class="px-4 py-2.5 border-b border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50">
-                <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Organisasi Saya</div>
-                <div class="flex items-center gap-2.5 text-slate-800">
-                    <div class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs font-bold flex-shrink-0">
-                        <i class="fa-solid fa-building"></i>
-                    </div>
-                    <div class="truncate">
-                        <span class="font-bold text-xs block truncate text-slate-900">{{ $userUpz->name }}</span>
-                        <span class="text-[10px] text-slate-500 font-medium truncate block">{{ $userUpz->code }}</span>
-                    </div>
-                </div>
-            </div>
-            @endif
+                        <div class="px-4 py-2.5 border-b border-slate-200 bg-slate-50/50">
+                            <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Organisasi Saya</div>
+                            <div class="flex items-center gap-2.5 text-slate-800">
+                                @if($userUpz->logo_path)
+                                    @if(str_starts_with($userUpz->logo_path, 'data:'))
+                                    <img src="{!! $userUpz->logo_path !!}" alt="Logo Organisasi" class="w-7 h-7 rounded-lg object-cover bg-white border border-slate-200 p-0.5 shadow-xs flex-shrink-0">
+                                    @else
+                                    <img src="{{ asset($userUpz->logo_path) }}" alt="Logo Organisasi" class="w-7 h-7 rounded-lg object-cover bg-white border border-slate-200 p-0.5 shadow-xs flex-shrink-0" onerror="this.style.display='none';document.getElementById('orgFallbackIcon').style.display='flex'">
+                                    <div id="orgFallbackIcon" class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 border border-emerald-200 hidden items-center justify-center text-sm font-bold flex-shrink-0 shadow-xs" style="display:none">
+                                        <i class="fa-solid fa-building"></i>
+                                    </div>
+                                    @endif
+                                @else
+                                <div class="w-7 h-7 rounded-lg bg-emerald-700 text-white flex items-center justify-center text-sm font-bold flex-shrink-0 shadow-xs">
+                                    <i class="fa-solid fa-building"></i>
+                                </div>
+                                @endif
+                                <div class="truncate">
+                                    <span class="font-bold text-xs block truncate text-slate-900">{{ $userUpz->name }}</span>
+                                    <span class="text-[10px] text-slate-500 font-medium truncate block">{{ $userUpz->code }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
 
 
             <div class="p-3 border-b border-slate-200 bg-slate-50/70">
