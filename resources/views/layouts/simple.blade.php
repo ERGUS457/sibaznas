@@ -14,6 +14,13 @@
         .dark body{ background:#0f172a; color:#e2e8f0; }
         .dark header{ background:#0f172a; border-color:#334155; }
         .dark .bg-white{ background-color:#1e293b !important; border-color:#334155 !important; }
+        .dark [class*="text-slate-900"]{ color:#f1f5f9 !important; }
+        .dark [class*="text-slate-800"]{ color:#e2e8f0 !important; }
+        .dark [class*="text-slate-700"]{ color:#cbd5e1 !important; }
+        .dark [class*="text-slate-600"]{ color:#94a3b8 !important; }
+        .dark [class*="text-slate-500"]{ color:#94a3b8 !important; }
+        .dark [class*="bg-slate-50"]{ background-color:#1e293b !important; border-color:#334155 !important; color:#cbd5e1 !important; }
+        .dark [class*="border-slate-200"]{ border-color:#334155 !important; }
         body {font-family: 'Plus Jakarta Sans', sans-serif; background:#f8fafc; color:#1e293b;}
     </style>
 </head>
@@ -21,7 +28,7 @@
     <header class="flex items-center justify-between px-4 py-3 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 gap-4">
         <div class="flex items-center space-x-3">
             <img src="{{ asset('images/logo.png') }}" alt="Logo ARTHAWISE" class="w-8 h-8">
-            <h1 class="text-base font-bold text-slate-900">ARTHAWISE</h1>
+            <h1 class="text-base font-bold text-slate-900 dark:text-white">ARTHAWISE</h1>
         </div>
         <div class="flex items-center gap-2">
             <button type="button" onclick="document.documentElement.classList.toggle('dark'); try{localStorage.setItem('theme', document.documentElement.classList.contains('dark')?'dark':'light')}catch(e){}" class="px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs" title="Ganti tema" aria-label="Toggle dark mode"><i class="fa-solid fa-moon hidden dark:inline"></i><i class="fa-solid fa-sun dark:hidden text-amber-500"></i></button>

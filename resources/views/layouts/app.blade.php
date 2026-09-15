@@ -180,12 +180,23 @@
         main > * + * { margin-top: 0.5rem; }
         /* Dark mode */
         .dark body { background-color:#0f172a; color:#e2e8f0; }
-        .dark .clay-card, .dark .maxi-card { background:#1e293b; border-color:#334155; }
+        .dark .clay-card, .dark .maxi-card { background:#1e293b; border-color:#334155; color:#e2e8f0; }
         .dark .clay-card:hover, .dark .maxi-card:hover { border-color:#475569; }
         .dark .clay-sidebar, .dark .maxi-sidebar { background:#0f172a; border-color:#334155; }
         .dark .clay-topbar, .dark .maxi-topbar { background:#1e293b; border-color:#334155; }
-        .dark .clay-card-soft, .dark .maxi-card-soft { background:#1e293b; border-color:#334155; }
+        .dark .clay-card-soft, .dark .maxi-card-soft { background:#1e293b; border-color:#334155; color:#e2e8f0; }
         .dark .clay-input, .dark .maxi-input { background:#1e293b; border-color:#475569; color:#e2e8f0; }
+        /* Fix teks gelap agar terbaca di dark mode — override utility slate */
+        .dark [class*="text-slate-900"] { color:#f1f5f9 !important; }
+        .dark [class*="text-slate-800"] { color:#e2e8f0 !important; }
+        .dark [class*="text-slate-700"] { color:#cbd5e1 !important; }
+        .dark [class*="text-slate-600"] { color:#94a3b8 !important; }
+        .dark [class*="text-slate-500"] { color:#94a3b8 !important; }
+        .dark [class*="bg-white"] { background-color:#1e293b !important; border-color:#334155 !important; }
+        .dark [class*="bg-slate-50"] { background-color:#1e293b !important; border-color:#334155 !important; color:#cbd5e1 !important; }
+        .dark [class*="bg-slate-100"] { background-color:#334155 !important; color:#e2e8f0 !important; border-color:#475569 !important; }
+        .dark [class*="border-slate-200"] { border-color:#334155 !important; }
+        .dark [class*="border-slate-100"] { border-color:#334155 !important; }
 
         .maxi-pill, .clay-pill, .maxi-badge {
             border: 1px solid #cbd5e1;

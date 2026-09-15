@@ -85,13 +85,24 @@
         .btn-formal-outline:focus-visible { box-shadow: 0 0 0 3px rgba(148,163,184,0.45); }
         /* Spasi vertikal: beri napas antar section */
         .formal-card + .formal-card, .formal-card + .grid, .grid + .formal-card { margin-top: 0.25rem; }
-        /* Dark mode */
-        .dark .formal-card { background:#1e293b; border-color:#334155; }
+        /* Dark mode — base */
+        .dark .formal-card { background:#1e293b; border-color:#334155; color:#e2e8f0; }
         .dark .formal-card:hover { border-color:#475569; }
         .dark .btn-formal-outline { background:#1e293b; color:#e2e8f0; border-color:#475569; }
         .dark .btn-formal-outline:hover { background:#334155; color:#f1f5f9; }
         .dark .btn-formal-primary { background:#047857; border-color:#047857; }
         .dark header, .dark footer { color:#94a3b8; }
+        /* Dark mode — teks kontras (fix font tidak terlihat) */
+        .dark [class*="text-slate-900"] { color:#f1f5f9 !important; }
+        .dark [class*="text-slate-800"] { color:#e2e8f0 !important; }
+        .dark [class*="text-slate-700"] { color:#cbd5e1 !important; }
+        .dark [class*="text-slate-600"] { color:#94a3b8 !important; }
+        .dark [class*="text-slate-500"] { color:#94a3b8 !important; }
+        .dark [class*="bg-white"] { background-color:#1e293b !important; border-color:#334155 !important; }
+        .dark [class*="bg-slate-50"] { background-color:#1e293b !important; border-color:#334155 !important; color:#cbd5e1 !important; }
+        .dark [class*="bg-slate-100"] { background-color:#334155 !important; color:#e2e8f0 !important; border-color:#475569 !important; }
+        .dark [class*="border-slate-200"] { border-color:#334155 !important; }
+        .dark [class*="border-slate-100"] { border-color:#334155 !important; }
     </style>
 </head>
 <body class="min-h-full flex flex-col justify-between p-4 sm:p-8 md:p-12 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 antialiased">
@@ -217,11 +228,11 @@
                 <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
                 <span>Selamat Datang, {{ auth()->user()->name ?? 'Administrator' }}</span>
             </div>
-            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-white tracking-tight">
                 Pilih Ruang Kerja Aplikasi
             </h2>
-            <p class="text-sm text-slate-600 max-w-2xl mx-auto mt-2 font-normal">
-                Data keuangan dan operasional di bawah ini secara otomatis disesuaikan dengan organisasi aktif: <strong class="text-slate-900">{{ $upz->name }}</strong>.
+            <p class="text-sm text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mt-2 font-normal">
+                Data keuangan dan operasional di bawah ini secara otomatis disesuaikan dengan organisasi aktif: <strong class="text-slate-900 dark:text-slate-100">{{ $upz->name }}</strong>.
             </p>
         </div>
 
@@ -239,15 +250,15 @@
                     </div>
 
                     <!-- Title & Description -->
-                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 tracking-tight mb-2">
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight mb-2">
                         Laporan Keuangan Organisasi
                     </h3>
-                    <p class="text-xs text-slate-600 leading-relaxed mb-6">
+                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
                         Khusus pencatatan pembukuan internal entitas nonlaba. Mengelola jurnal umum, buku besar akuntansi, neraca saldo, serta 4 laporan keuangan pokok Organisasi.
                     </p>
 
                     <!-- Features Checklist -->
-                    <div class="space-y-2.5 mb-6 text-xs text-slate-700">
+                    <div class="space-y-2.5 mb-6 text-xs text-slate-700 dark:text-slate-300">
                         <div class="flex items-center gap-2.5">
                             <i class="fa-solid fa-circle-check text-slate-700 text-sm"></i>
                             <span>Jurnal Umum &amp; Buku Besar Kas / Bank</span>
@@ -289,15 +300,15 @@
                     </div>
 
                     <!-- Title & Description -->
-                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 tracking-tight mb-2">
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight mb-2">
                         Laporan Keuangan UPZ (Jika Ada)
                     </h3>
-                    <p class="text-xs text-slate-600 leading-relaxed mb-6">
+                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
                         Khusus pengelolaan penerimaan donasi / ZIS, penerbitan Bukti Tanda Terima Setor (BSZ), penyaluran bantuan sosial, serta pelaporan aktivitas dana masyarakat.
                     </p>
 
                     <!-- Features Checklist -->
-                    <div class="space-y-2.5 mb-6 text-xs text-slate-700">
+                    <div class="space-y-2.5 mb-6 text-xs text-slate-700 dark:text-slate-300">
                         <div class="flex items-center gap-2.5">
                             <i class="fa-solid fa-circle-check text-emerald-700 text-sm"></i>
                             <span>Input Penerimaan Dana &amp; Cetak Bukti Setor</span>
