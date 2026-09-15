@@ -16,7 +16,7 @@
                 <span class="text-xs text-slate-500 font-medium">DSAK Ikatan Akuntan Indonesia</span>
             </div>
             <h1 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
-                Pembukuan &amp; Laporan Keuangan DE ISAK 35
+                Laporan Keuangan Organisasi
             </h1>
             <p class="text-xs text-slate-600 font-normal mt-0.5">
                 Pengelolaan jurnal, buku besar, neraca saldo, serta 4 laporan pokok entitas nonlaba Format A.
