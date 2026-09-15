@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-<html lang="id" class="h-full bg-slate-50">
+<html lang="id" class="h-full bg-slate-50 dark:bg-slate-900">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal Ruang Kerja - ARTHAWISE</title>
     <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: { 50:'#f0fdf4',100:'#dcfce7',500:'#22c55e',700:'#15803d' } } } } }
+    </script>
+    <script>
+        (function(){ try{ var s=localStorage.getItem('theme'); var m=window.matchMedia('(prefers-color-scheme: dark)').matches; if(s==='dark' || (!s && m)) document.documentElement.classList.add('dark'); }catch(e){} })();
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -72,43 +78,60 @@
             color: #0f172a;
             border-color: #94a3b8;
         }
+        .btn-formal-primary:focus-visible, .btn-formal-dark:focus-visible, .btn-formal-outline:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(4,120,87,0.35);
+        }
+        .btn-formal-outline:focus-visible { box-shadow: 0 0 0 3px rgba(148,163,184,0.45); }
+        /* Spasi vertikal: beri napas antar section */
+        .formal-card + .formal-card, .formal-card + .grid, .grid + .formal-card { margin-top: 0.25rem; }
+        /* Dark mode */
+        .dark .formal-card { background:#1e293b; border-color:#334155; }
+        .dark .formal-card:hover { border-color:#475569; }
+        .dark .btn-formal-outline { background:#1e293b; color:#e2e8f0; border-color:#475569; }
+        .dark .btn-formal-outline:hover { background:#334155; color:#f1f5f9; }
+        .dark .btn-formal-primary { background:#047857; border-color:#047857; }
+        .dark header, .dark footer { color:#94a3b8; }
     </style>
 </head>
-<body class="min-h-full flex flex-col justify-between p-4 sm:p-8 md:p-12">
+<body class="min-h-full flex flex-col justify-between p-4 sm:p-8 md:p-12 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 antialiased">
 
     <!-- Top Navigation Bar -->
-    <header class="max-w-6xl mx-auto w-full flex items-center justify-between mb-8 sm:mb-12">
+    <header class="max-w-6xl mx-auto w-full flex items-center justify-between mb-10 sm:mb-14 gap-4">
         <div class="flex items-center space-x-3">
             <img src="{{ asset('images/logo.png') }}" alt="Logo ARTHAWISE" class="w-10 h-10 rounded-lg object-contain bg-white border border-slate-200 p-0.5 shadow-xs flex-shrink-0">
             <div>
-                <h1 class="text-base font-bold text-slate-900 tracking-tight">ARTHAWISE</h1>
-                <p class="text-xs text-slate-500 font-medium">Artha Wise Finance — Kelola Keuangan Organisasi</p>
+                <h1 class="text-base font-bold text-slate-900 dark:text-white tracking-tight mb-0.5">ARTHAWISE</h1>
+                <p class="text-xs text-slate-500 dark:text-slate-400 font-medium mt-0.5">Artha Wise Finance — Kelola Keuangan Organisasi</p>
             </div>
-            <a href="{{ route('profile.show') }}#organisasi" class="hidden sm:inline-flex btn-formal-outline px-3.5 py-1.5 text-xs font-bold items-center gap-1.5 text-slate-700 hover:text-emerald-700 hover:border-emerald-300 ml-2" title="Ubah nama, kode, alamat, logo organisasi">
+            <a href="{{ route('profile.show') }}#organisasi" class="hidden sm:inline-flex btn-formal-outline px-3.5 py-1.5 text-xs font-bold items-center gap-1.5 text-slate-700 hover:text-emerald-700 hover:border-emerald-300 ml-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900" title="Ubah nama, kode, alamat, logo organisasi">
                 <i class="fa-solid fa-building text-emerald-600 text-[11px]"></i>
                 <span>Profil Organisasi</span>
             </a>
-            <a href="{{ route('profile.show') }}#akun" class="hidden sm:inline-flex btn-formal-outline px-3.5 py-1.5 text-xs font-bold items-center gap-1.5 text-slate-700 hover:text-emerald-700 ml-1" title="Ubah username, email, password akun login">
+            <a href="{{ route('profile.show') }}#akun" class="hidden sm:inline-flex btn-formal-outline px-3.5 py-1.5 text-xs font-bold items-center gap-1.5 text-slate-700 hover:text-emerald-700 ml-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900" title="Ubah username, email, password akun login">
                 <i class="fa-solid fa-user-gear text-slate-500 text-[11px]"></i>
                 <span>Akun</span>
             </a>
             <!-- mobile: dropdown singkat -->
-            <a href="{{ route('profile.show') }}#organisasi" class="sm:hidden btn-formal-outline px-2.5 py-1.5 text-xs font-bold inline-flex items-center justify-center ml-2" title="Profil Organisasi">
+            <a href="{{ route('profile.show') }}#organisasi" class="sm:hidden btn-formal-outline px-2.5 py-1.5 text-xs font-bold inline-flex items-center justify-center ml-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900" title="Profil Organisasi">
                 <i class="fa-solid fa-building text-emerald-600"></i>
             </a>
-            <a href="{{ route('profile.show') }}#akun" class="sm:hidden btn-formal-outline px-2.5 py-1.5 text-xs font-bold inline-flex items-center justify-center ml-1" title="Akun (username/email/password)">
+            <a href="{{ route('profile.show') }}#akun" class="sm:hidden btn-formal-outline px-2.5 py-1.5 text-xs font-bold inline-flex items-center justify-center ml-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900" title="Akun (username/email/password)">
                 <i class="fa-solid fa-user text-slate-700"></i>
             </a>
         </div>
 
         <div class="flex items-center space-x-3">
-            <a href="{{ route('landing') }}" class="btn-formal-outline px-3.5 py-1.5 text-xs flex items-center gap-2">
+            <button type="button" onclick="document.documentElement.classList.toggle('dark'); try{localStorage.setItem('theme', document.documentElement.classList.contains('dark')?'dark':'light')}catch(e){}" class="btn-formal-outline px-2.5 py-1.5 text-xs focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900" title="Ganti tema gelap/terang" aria-label="Toggle dark mode">
+                    <i class="fa-solid fa-moon hidden dark:inline text-slate-300"></i><i class="fa-solid fa-sun dark:hidden text-amber-500"></i>
+                </button>
+            <a href="{{ route('landing') }}" class="btn-formal-outline px-3.5 py-1.5 text-xs flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900">
                 <i class="fa-solid fa-house text-slate-400 text-[11px]"></i>
                 <span class="hidden sm:inline">Landing Page</span>
             </a>
             <form action="{{ route('logout') }}" method="POST" class="inline">
                 @csrf
-                <button type="submit" class="btn-formal-outline px-3.5 py-1.5 text-xs text-rose-600 hover:text-rose-700 hover:border-rose-300 flex items-center gap-2">
+                <button type="submit" class="btn-formal-outline px-3.5 py-1.5 text-xs text-rose-600 hover:text-rose-700 hover:border-rose-300 flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900">
                     <i class="fa-solid fa-arrow-right-from-bracket text-[11px]"></i>
                     <span class="hidden sm:inline">Keluar</span>
                 </button>
@@ -166,7 +189,7 @@
                                 Kode: {{ $upz->code }}
                             </span>
                         </div>
-                        <h3 class="text-base font-bold text-slate-900 mt-0.5">
+                        <h3 class="text-base font-bold text-slate-900 dark:text-white mt-1 mb-0.5">
                             {{ $upz->name }}
                         </h3>
 
@@ -189,7 +212,7 @@
         </div>
 
         <!-- Title & Subtitle -->
-        <div class="text-center mb-10">
+        <div class="text-center mb-12 space-y-2">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold border border-slate-200 mb-3">
                 <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
                 <span>Selamat Datang, {{ auth()->user()->name ?? 'Administrator' }}</span>
@@ -203,7 +226,7 @@
         </div>
 
         <!-- 2 Main Cards Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 gap-y-8">
             
             <!-- CARD 1: AKUNTANSI KEUANGAN ORGANISASI (DE ISAK 35) -->
             <div class="formal-card p-6 sm:p-8 flex flex-col justify-between">
@@ -248,7 +271,7 @@
 
                 <!-- CTA Action Button -->
                 <div>
-                    <a href="{{ route('dashboard.isak35') }}" class="btn-formal-dark w-full py-3 px-5 text-sm flex items-center justify-center gap-2">
+                    <a href="{{ route('dashboard.isak35') }}" class="btn-formal-dark w-full py-3 px-5 text-sm flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-800 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900">
                         <span>Buka Pembukuan ISAK 35</span>
                         <i class="fa-solid fa-arrow-right text-xs"></i>
                     </a>
@@ -298,7 +321,7 @@
 
                 <!-- CTA Action Button -->
                 <div>
-                    <a href="{{ route('dashboard.baznas') }}" class="btn-formal-primary w-full py-3 px-5 text-sm flex items-center justify-center gap-2">
+                    <a href="{{ route('dashboard.baznas') }}" class="btn-formal-primary w-full py-3 px-5 text-sm flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900">
                         <span>Buka Laporan Zakat</span>
                         <i class="fa-solid fa-arrow-right text-xs"></i>
                     </a>

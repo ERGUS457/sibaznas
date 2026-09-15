@@ -9,6 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
@@ -26,6 +27,9 @@
                 }
             }
         }
+    </script>
+    <script>
+        (function(){ try{ var s=localStorage.getItem('theme'); var m=window.matchMedia('(prefers-color-scheme: dark)').matches; if(s==='dark' || (!s && m)) document.documentElement.classList.add('dark'); }catch(e){} })();
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -162,6 +166,26 @@
             border-color: #047857;
             box-shadow: 0 0 0 2px rgba(4, 120, 87, 0.15);
         }
+
+        /* Focus ring — keyboard accessibility */
+        .clay-btn-emerald:focus-visible, .clay-btn-sky:focus-visible, .clay-btn-white:focus-visible, .clay-btn-rose:focus-visible,
+        .maxi-btn-emerald:focus-visible, .maxi-btn-sky:focus-visible, .maxi-btn-white:focus-visible, .maxi-btn-rose:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(4,120,87,0.35);
+        }
+        .clay-btn-white:focus-visible, .maxi-btn-white:focus-visible { box-shadow: 0 0 0 3px rgba(148,163,184,0.45); }
+        .clay-btn-sky:focus-visible, .maxi-btn-sky:focus-visible { box-shadow: 0 0 0 3px rgba(15,23,42,0.35); }
+        .clay-btn-rose:focus-visible, .maxi-btn-rose:focus-visible { box-shadow: 0 0 0 3px rgba(244,63,94,0.35); }
+        /* Spasi vertikal — beri napas antar section */
+        main > * + * { margin-top: 0.5rem; }
+        /* Dark mode */
+        .dark body { background-color:#0f172a; color:#e2e8f0; }
+        .dark .clay-card, .dark .maxi-card { background:#1e293b; border-color:#334155; }
+        .dark .clay-card:hover, .dark .maxi-card:hover { border-color:#475569; }
+        .dark .clay-sidebar, .dark .maxi-sidebar { background:#0f172a; border-color:#334155; }
+        .dark .clay-topbar, .dark .maxi-topbar { background:#1e293b; border-color:#334155; }
+        .dark .clay-card-soft, .dark .maxi-card-soft { background:#1e293b; border-color:#334155; }
+        .dark .clay-input, .dark .maxi-input { background:#1e293b; border-color:#475569; color:#e2e8f0; }
 
         .maxi-pill, .clay-pill, .maxi-badge {
             border: 1px solid #cbd5e1;
@@ -335,7 +359,7 @@
         }
     </style>
 </head>
-<body class="h-full flex flex-col font-sans text-slate-800 antialiased" x-data="{ sidebarOpen: false }">
+<body class="h-full flex flex-col font-sans text-slate-800 antialiased dark:bg-slate-900 dark:text-slate-100" x-data="{ sidebarOpen: false }">
     <div class="flex h-full min-h-screen">
         <!-- Backdrop for mobile -->
         <div x-show="sidebarOpen" @click="sidebarOpen = false" x-cloak class="fixed inset-0 z-40 bg-slate-900/30 backdrop-blur-xs lg:hidden no-print"></div>
@@ -363,7 +387,7 @@
             class="fixed lg:static inset-y-0 left-0 z-50 w-72 clay-sidebar text-slate-700 flex flex-col flex-shrink-0 transition-transform duration-200 ease-in-out no-print">
             
             <!-- Header Brand -->
-            <div class="h-16 px-5 border-b border-slate-200 flex items-center justify-between bg-white">
+            <div class="h-16 px-5 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between bg-white dark:bg-slate-900">
                 @if($isIsak35)
                     <a href="{{ route('dashboard.isak35') }}" class="flex items-center space-x-3">
                         <img src="{{ asset('images/logo.png') }}" alt="Logo ARTHAWISE" class="w-9 h-9 rounded-lg object-contain bg-white border border-slate-200 p-0.5 shadow-xs flex-shrink-0">
@@ -398,7 +422,7 @@
             {{-- User's Organization Badge --}}
             @php $userUpz = auth()->user()?->upzProfile; @endphp
             @if($userUpz)
-            <div class="px-4 py-2.5 border-b border-slate-200 bg-slate-50/50">
+            <div class="px-4 py-2.5 border-b border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50">
                 <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Organisasi Saya</div>
                 <div class="flex items-center gap-2.5 text-slate-800">
                     <div class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs font-bold flex-shrink-0">
@@ -635,8 +659,8 @@
         <!-- Main Content Area -->
         <div class="flex-1 flex flex-col min-w-0 overflow-y-auto">
             <!-- Top App Bar (Formal Corporate) -->
-            <header class="px-4 sm:px-8 pt-4 pb-2 no-print sticky top-0 z-10 bg-slate-50/80 backdrop-blur-xs">
-                <div class="clay-topbar px-5 py-2.5 flex items-center justify-between border border-slate-200 bg-white shadow-xs">
+            <header class="px-4 sm:px-8 pt-4 pb-2 no-print sticky top-0 z-10 bg-slate-50/80 dark:bg-slate-900/80 backdrop-blur-xs">
+                <div class="clay-topbar px-5 py-2.5 flex items-center justify-between border border-slate-200 bg-white shadow-xs dark:bg-slate-800 dark:border-slate-700">
                     <div class="flex items-center space-x-3">
                         <button @click="sidebarOpen = true" class="lg:hidden text-slate-600 hover:text-slate-900 p-2 rounded-lg hover:bg-slate-100">
                             <i class="fa-solid fa-bars text-sm"></i>
@@ -661,6 +685,9 @@
                         </div>
                     </div>
                     <div class="flex items-center space-x-2 sm:space-x-3">
+                        <button type="button" onclick="document.documentElement.classList.toggle('dark'); try{localStorage.setItem('theme', document.documentElement.classList.contains('dark')?'dark':'light')}catch(e){}" class="clay-btn-white px-2 py-1.5 text-xs hidden sm:inline-flex items-center justify-center" title="Ganti tema" aria-label="Toggle dark mode">
+                            <i class="fa-solid fa-moon hidden dark:inline"></i><i class="fa-solid fa-sun dark:hidden text-amber-500"></i>
+                        </button>
                         {{-- User Organization Badge (simple, no switcher) --}}
                         @php $topbarUpz = auth()->user()?->upzProfile; @endphp
                         @if($topbarUpz)
@@ -719,7 +746,7 @@
             </main>
 
             <!-- Footer -->
-            <footer class="px-4 sm:px-8 py-5 text-center text-xs text-slate-400 no-print flex flex-col sm:flex-row justify-between items-center gap-2">
+            <footer class="px-4 sm:px-8 py-5 text-center text-xs text-slate-400 dark:text-slate-500 no-print flex flex-col sm:flex-row justify-between items-center gap-2">
                 <span>ARTHAWISE &bull; Artha Wise Finance</span>
                 <span>Regulasi: Perbaznas No. 2/2016</span>
             </footer>
