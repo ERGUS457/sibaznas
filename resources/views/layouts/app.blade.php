@@ -718,12 +718,6 @@
                             <span class="max-w-[150px] truncate">{{ $topbarUpz->name }}</span>
                         </div>
                         @endif
-                                                    @else
-                                                        <i class="fa-solid fa-building text-emerald-700 text-[11px]"></i>
-                                                    @endif
-                                                    <span class="max-w-[150px] truncate">{{ $topbarUpz->name }}</span>
-                                                </div>
-                                                @endif
 
 
                         @if($isBaznas)
