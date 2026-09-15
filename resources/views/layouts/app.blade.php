@@ -422,7 +422,7 @@
             {{-- User's Organization Badge --}}
             @php $userUpz = auth()->user()?->upzProfile; @endphp
             @if($userUpz)
-                        <div class="px-4 py-2.5 border-b border-slate-200 bg-slate-50/50">
+            <div class="px-4 py-2.5 border-b border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50">
                             <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Organisasi Saya</div>
                             <div class="flex items-center gap-2.5 text-slate-800">
                                 @if($userUpz->logo_path)
@@ -703,10 +703,27 @@
                         @php $topbarUpz = auth()->user()?->upzProfile; @endphp
                         @if($topbarUpz)
                         <div class="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-700">
-                            <i class="fa-solid fa-building text-emerald-700 text-[11px]"></i>
+                            @if($topbarUpz->logo_path)
+                                @if(str_starts_with($topbarUpz->logo_path, 'data:'))
+                                    <img src="{!! $topbarUpz->logo_path !!}" alt="Logo Organisasi" class="w-5 h-5 rounded object-cover bg-white border border-slate-200 shadow-xs flex-shrink-0">
+                                @else
+                                    <img src="{{ asset($topbarUpz->logo_path) }}" alt="Logo Organisasi" class="w-5 h-5 rounded object-cover bg-white border border-slate-200 shadow-xs flex-shrink-0" onerror="this.style.display='none';document.getElementById('topbarFallbackIcon').style.display='flex'">
+                                    <div id="topbarFallbackIcon" class="w-5 h-5 rounded bg-emerald-100 text-emerald-700 border border-emerald-200 hidden items-center justify-center text-xs font-bold shadow-xs" style="display:none">
+                                        <i class="fa-solid fa-building"></i>
+                                    </div>
+                                @endif
+                            @else
+                                <i class="fa-solid fa-building text-emerald-700 text-[11px]"></i>
+                            @endif
                             <span class="max-w-[150px] truncate">{{ $topbarUpz->name }}</span>
                         </div>
                         @endif
+                                                    @else
+                                                        <i class="fa-solid fa-building text-emerald-700 text-[11px]"></i>
+                                                    @endif
+                                                    <span class="max-w-[150px] truncate">{{ $topbarUpz->name }}</span>
+                                                </div>
+                                                @endif
 
 
                         @if($isBaznas)
