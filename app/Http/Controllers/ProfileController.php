@@ -79,6 +79,6 @@ class ProfileController extends Controller
         }
         if ($userDirty) $user->save();
 
-        return redirect()->route('profile.show')->with('success', 'Profil organisasi & akun berhasil diperbarui.');
+        return redirect()->route('portal')->with('success', 'Profil organisasi & akun berhasil diperbarui.');
     }
 }
