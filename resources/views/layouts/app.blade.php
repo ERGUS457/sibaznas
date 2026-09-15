@@ -413,12 +413,6 @@
             @endif
 
 
-            <!-- Profil Organisasi Button -->
-            <a href="{{ route('profile.show') }}" class="clay-btn-white w-full mt-2 py-2 text-xs font-bold flex items-center justify-center gap-1.5">
-                <i class="fa-solid fa-user-gear text-xs"></i>
-                <span>Profil Organisasi</span>
-            </a>
-
             <div class="p-3 border-b border-slate-200 bg-slate-50/70">
                 <a href="{{ route('portal') }}" class="clay-btn-white w-full py-1.5 px-3 text-xs font-semibold flex items-center justify-between text-slate-700 hover:text-slate-900">
                     <span class="flex items-center gap-2">

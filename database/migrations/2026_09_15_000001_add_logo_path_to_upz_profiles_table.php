@@ -9,7 +9,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('upz_profiles', function (Blueprint $table) {
-            $table->string('logo_path')->nullable()->after('code');
+            $table->text('logo_path')->nullable()->after('code');
         });
     }
 

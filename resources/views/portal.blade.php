@@ -79,7 +79,7 @@
     <!-- Top Navigation Bar -->
     <header class="max-w-6xl mx-auto w-full flex items-center justify-between mb-8 sm:mb-12">
         <div class="flex items-center space-x-3">
-            <img src="{{ isset($upz) && $upz->logo_path ? asset($upz->logo_path) : asset('images/logo.png') }}" alt="Logo ARTHAWISE" class="w-10 h-10 rounded-lg object-contain bg-white border border-slate-200 p-0.5 shadow-xs flex-shrink-0">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo ARTHAWISE" class="w-10 h-10 rounded-lg object-contain bg-white border border-slate-200 p-0.5 shadow-xs flex-shrink-0">
             <div>
                 <h1 class="text-base font-bold text-slate-900 tracking-tight">ARTHAWISE</h1>
                 <p class="text-xs text-slate-500 font-medium">Artha Wise Finance — Kelola Keuangan Organisasi</p>
@@ -140,9 +140,13 @@
         <div class="formal-card p-4 sm:p-5 mb-8 bg-white border-slate-200">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div class="flex items-center gap-3.5">
+                    @if($upz->logo_path)
+                    <img src="{{ str_starts_with($upz->logo_path, 'data:') ? $upz->logo_path : asset($upz->logo_path) }}" alt="Logo Organisasi" class="w-11 h-11 rounded-lg object-cover bg-white border border-slate-200 p-0.5 shadow-xs flex-shrink-0">
+                    @else
                     <div class="w-11 h-11 rounded-lg bg-emerald-700 text-white flex items-center justify-center text-lg font-bold flex-shrink-0 shadow-xs">
                         <i class="fa-solid fa-building-shield"></i>
                     </div>
+                    @endif
                     <div>
                         <div class="flex items-center gap-2 flex-wrap">
                             <span class="text-[10px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-800 px-2 py-0.5 rounded border border-emerald-200">
