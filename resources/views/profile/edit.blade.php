@@ -28,17 +28,23 @@
 
             <!-- Logo Section -->
             <div class="flex flex-col sm:flex-row items-center gap-6 pb-6 border-b border-slate-100">
-                <div class="w-24 h-24 rounded-2xl border-2 border-slate-200 bg-slate-50 flex items-center justify-center overflow-hidden flex-shrink-0 shadow-inner">
+                <div class="w-24 h-24 rounded-2xl border-2 border-slate-200 bg-slate-50 flex items-center justify-center overflow-hidden flex-shrink-0 shadow-inner" id="logoPreviewWrap">
                     @if($upz->logo_path)
-                        <img src="{!! $upz->logo_path ? $upz->logo_path : asset('images/logo.png') !!}" alt="Logo Organisasi" class="w-full h-full object-cover">
+                        @if(str_starts_with($upz->logo_path, 'data:'))
+                        <img id="logoPreviewImg" src="{!! $upz->logo_path !!}" alt="Logo Organisasi" class="w-full h-full object-cover">
+                        @else
+                        <img id="logoPreviewImg" src="{{ asset($upz->logo_path) }}" alt="Logo Organisasi" class="w-full h-full object-cover" onerror="this.style.display='none';document.getElementById('logoFallbackIcon').style.display='flex'">
+                        <i id="logoFallbackIcon" class="fa-solid fa-building text-3xl text-slate-300" style="display:none"></i>
+                        @endif
                     @else
-                        <i class="fa-solid fa-building text-3xl text-slate-300"></i>
+                        <i id="logoFallbackIcon" class="fa-solid fa-building text-3xl text-slate-300"></i>
+                        <img id="logoPreviewImg" alt="Logo Organisasi" class="w-full h-full object-cover hidden">
                     @endif
                 </div>
                 <div class="space-y-2 text-center sm:text-left flex-1">
                     <label class="block text-xs font-bold uppercase tracking-wider text-slate-700">Logo / Foto Profil Organisasi</label>
-                    <input type="file" name="logo" class="text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer">
-                    <p class="text-[11px] text-slate-400">Format JPG, PNG, atau WEBP maksimal 2MB. Tampil di landing page dan laporan resmi.</p>
+                    <input type="file" name="logo" id="logoInput" accept="image/png,image/jpeg,image/jpg,image/webp" class="text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer">
+                    <p class="text-[11px] text-slate-400">Format JPG, PNG, atau WEBP maksimal 2MB. Logo organisasi tampil di portal ruang kerja (card ENTITAS). Logo aplikasi tetap ARTHAWISE tidak terganti.</p>
                 </div>
             </div>
 
@@ -80,4 +86,22 @@
         </form>
     </div>
 </div>
+
+    <script>
+    document.getElementById('logoInput')?.addEventListener('change', function(e){
+        const f=e.target.files[0]; if(!f) return;
+        if(f.size>2*1024*1024){ alert('Maksimal 2MB'); e.target.value=''; return; }
+        const r=new FileReader();
+        r.onload=function(ev){
+            const img=document.getElementById('logoPreviewImg');
+            const icon=document.getElementById('logoFallbackIcon');
+            if(icon) icon.style.display='none';
+            img.src=ev.target.result;
+            img.classList.remove('hidden');
+            img.style.display='block';
+        };
+        r.readAsDataURL(f);
+    });
+    </script>
+
 @endsection

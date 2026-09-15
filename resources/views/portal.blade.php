@@ -141,7 +141,14 @@
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div class="flex items-center gap-3.5">
                     @if($upz->logo_path)
-                    <img src="{{ str_starts_with($upz->logo_path, 'data:') ? $upz->logo_path : asset($upz->logo_path) }}" alt="Logo Organisasi" class="w-11 h-11 rounded-lg object-cover bg-white border border-slate-200 p-0.5 shadow-xs flex-shrink-0">
+                        @if(str_starts_with($upz->logo_path, 'data:'))
+                        <img src="{!! $upz->logo_path !!}" alt="Logo Organisasi" class="w-11 h-11 rounded-lg object-cover bg-white border border-slate-200 p-0.5 shadow-xs flex-shrink-0">
+                        @else
+                        <img src="{{ asset($upz->logo_path) }}" alt="Logo Organisasi" class="w-11 h-11 rounded-lg object-cover bg-white border border-slate-200 p-0.5 shadow-xs flex-shrink-0" onerror="this.style.display='none';document.getElementById('orgFallbackIcon').style.display='flex'">
+                        <div id="orgFallbackIcon" class="w-11 h-11 rounded-lg bg-amber-50 text-amber-700 border border-amber-200 hidden items-center justify-center text-lg font-bold flex-shrink-0 shadow-xs" style="display:none">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                        </div>
+                        @endif
                     @else
                     <div class="w-11 h-11 rounded-lg bg-emerald-700 text-white flex items-center justify-center text-lg font-bold flex-shrink-0 shadow-xs">
                         <i class="fa-solid fa-building-shield"></i>
