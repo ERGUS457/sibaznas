@@ -206,6 +206,23 @@
             border-color:#cbd5e1 !important;
             box-shadow:0 8px 30px rgba(0,0,0,0.35) !important;
         }
+        /* Inner white kop/header must stay white in dark mode — override generic .dark main [class*="bg-white"] (30 vs 31, must be more specific & later) */
+        html.dark body main .report-sheet [class*="bg-white"],
+        html.dark body .report-sheet [class*="bg-white"],
+        html.dark main .report-sheet [class*="bg-white"],
+        .dark main .report-sheet [class*="bg-white"],
+        .dark .report-sheet .bg-white,
+        html.dark body .report-sheet.report-sheet .bg-white,
+        .dark .report-sheet.report-sheet [class*="bg-white"] {
+            background:#ffffff !important;
+            background-color:#ffffff !important;
+            color:#000000 !important;
+            border-color:#cbd5e1 !important;
+        }
+        html.dark body .report-sheet .bg-white *,
+        .dark .report-sheet .bg-white * {
+            color:#000000 !important;
+        }
         .dark .report-sheet * {
             border-color: #000000;
         }
