@@ -74,13 +74,10 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
-            'search_path' => 'public',
-            'sslmode' => env('DB_SSLMODE', 'require') . (
-                env('DB_ENDPOINT')
-                    ? ";options='endpoint=" . env('DB_ENDPOINT') . "'"
-                    : (str_contains(env('DB_HOST', ''), 'neon.tech')
-                        ? ";options='endpoint=" . explode('.', env('DB_HOST', ''))[0] . "'"
-                        : '')
+            'search_path' => 'public',            'sslmode' => env('DB_SSLMODE', 'require') . (
+                str_contains(env('DB_HOST', ''), 'neon.tech')
+                    ? ";options='endpoint=" . explode('.', env('DB_HOST', ''))[0] . "'"
+                    : (env('DB_ENDPOINT') ? ";options='endpoint=" . env('DB_ENDPOINT') . "'" : '')
             ),
             // Neon pooler + pdo-pgsql: non-emulated prepares abort tx after 2nd query (25P02). Emulate fixes it.
             'options' => [
