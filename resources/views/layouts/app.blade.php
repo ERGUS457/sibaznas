@@ -209,7 +209,7 @@
         .dark .report-sheet * {
             border-color: #000000;
         }
-        .dark .report-sheet .bg-black { background:#000000 !important; color:#ffffff !important; }
+        .dark .report-sheet .bg-black:not(.text-white) { background:#000000 !important; color:#ffffff !important; }
         .dark .report-sheet .bg-black * { color:#ffffff !important; }
         .dark .report-sheet table, .dark .report-sheet thead, .dark .report-sheet tbody, .dark .report-sheet tr, .dark .report-sheet th, .dark .report-sheet td {
             color:#000000 !important;
