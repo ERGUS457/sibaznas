@@ -108,7 +108,7 @@
 <body class="min-h-full flex flex-col justify-between p-4 sm:p-8 md:p-12 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 antialiased">
 
     <!-- Top Navigation Bar -->
-    <header class="max-w-6xl mx-auto w-full flex items-center justify-between mb-10 sm:mb-14 gap-4">
+    <header class="max-w-6xl mx-auto w-full flex flex-col sm:flex-row items-start sm:items-center justify-between mb-10 sm:mb-14 gap-4">
         <div class="flex items-center space-x-3">
             <img src="{{ asset('images/logo.png') }}" alt="Logo SILVER-ZIS" class="w-10 h-10 rounded-lg object-contain bg-white border border-slate-200 p-0.5 shadow-xs flex-shrink-0">
             <div>
