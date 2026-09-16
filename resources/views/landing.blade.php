@@ -136,8 +136,8 @@
             </div>
 
             <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight max-w-4xl mx-auto">
-                Sistem Terpadu Pengelolaan <br class="hidden sm:inline">
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-700">Keuangan Organisasi &amp; Akuntansi Nonlaba</span>
+                Sistem Laporan Keuangan <br class="hidden sm:inline">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-700">Nirlaba Terintegrasi ZIS</span>
             </h1>
 
             <p class="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
