@@ -41,7 +41,7 @@
         </div>
     </div>
 
-    <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm space-y-6">
+    <div class="bg-white border border-slate-200 rounded-2xl p-4 sm:p-6 lg:p-8 shadow-sm space-y-6 overflow-hidden">
         <!-- Official Header -->
         <div class="text-center border-b-2 border-slate-800 pb-4">
             <h2 class="text-base font-extrabold text-slate-900 uppercase tracking-wide">{{ $upz->name }}</h2>
@@ -89,7 +89,7 @@
             <h3 class="font-bold text-slate-900 uppercase tracking-wider text-[11px] border-b border-slate-200 pb-1">
                 I. Rekapitulasi Pengumpulan ZIS &amp; DSKL (Pasal 9 Perbaznas 2/2016)
             </h3>
-            <table class="w-full text-left">
+            <div class="overflow-x-auto rounded-lg border border-slate-200"><table class="w-full text-left min-w-[640px]">
                 <thead class="bg-slate-100 text-slate-700 font-bold">
                     <tr>
                         <th class="p-2.5">Jenis Dana ZIS</th>
@@ -122,7 +122,7 @@
                         <td class="p-2.5 text-right font-mono text-emerald-800">Rp {{ number_format($grandTotalCollected - $grandTotalAmil, 0, ',', '.') }}</td>
                     </tr>
                 </tfoot>
-            </table>
+            </table></div>
         </div>
 
         <!-- Section 2: Rekapitulasi Penyaluran per 8 Asnaf -->
@@ -130,7 +130,7 @@
             <h3 class="font-bold text-slate-900 uppercase tracking-wider text-[11px] border-b border-slate-200 pb-1">
                 II. Rekapitulasi Penyaluran Zakat Berdasarkan 8 Asnaf (Pasal 16 Perbaznas 2/2016)
             </h3>
-            <table class="w-full text-left">
+            <div class="overflow-x-auto rounded-lg border border-slate-200"><table class="w-full text-left min-w-[640px]">
                 <thead class="bg-slate-100 text-slate-700 font-bold">
                     <tr>
                         <th class="p-2.5">Kategori Asnaf (QS. At-Taubah: 60)</th>
@@ -163,7 +163,7 @@
                         <td class="p-2.5 text-right font-mono">100.0%</td>
                     </tr>
                 </tfoot>
-            </table>
+            </table></div>
         </div>
 
         <!-- Section 3: Rekapitulasi Setoran ke BAZNAS -->
@@ -171,7 +171,7 @@
             <h3 class="font-bold text-slate-900 uppercase tracking-wider text-[11px] border-b border-slate-200 pb-1">
                 III. Penyetoran ke Rekening BAZNAS Pembina (Pasal 14 Perbaznas 2/2016)
             </h3>
-            <table class="w-full text-left">
+            <div class="overflow-x-auto rounded-lg border border-slate-200"><table class="w-full text-left min-w-[640px]">
                 <thead class="bg-slate-100 text-slate-700 font-bold">
                     <tr>
                         <th class="p-2.5">No. Setoran</th>
@@ -198,7 +198,7 @@
                     </tr>
                     @endforelse
                 </tbody>
-            </table>
+            </table></div>
         </div>
 
         <!-- Official Signatures -->

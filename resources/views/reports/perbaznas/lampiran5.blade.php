@@ -5,7 +5,7 @@
 @section('content')
 <div class="max-w-4xl mx-auto space-y-6 print:max-w-none print:space-y-0 print:m-0 print:p-0">
     <!-- Action Bar (Strictly Hidden on Print) -->
-    <div class="no-print print:hidden flex items-center justify-between bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+    <div class="no-print print:hidden flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
         <div>
             <div class="flex items-center gap-2">
                 <a href="{{ route('reports.perbaznas-compliance') }}" class="text-slate-500 hover:text-black font-semibold text-xs flex items-center gap-1">
@@ -15,7 +15,7 @@
             <h1 class="text-base font-bold text-slate-900 mt-1">Laporan Operasional</h1>
             <p class="text-xs text-slate-500">Peraturan Badan Amil Zakat Nasional No. 2 Tahun 2016 (Halaman 37) - Alokasi Hak Amil Maks. 12,5%.</p>
         </div>
-        <div class="flex items-center space-x-2">
+        <div class="flex flex-wrap items-center gap-2">
             <form method="GET" class="flex items-center space-x-2 text-xs">
                 <label for="year" class="font-medium text-slate-600">Tahun:</label>
                 <input type="number" id="year" name="year" value="{{ $year }}" min="2020" max="2035" class="w-20 border border-slate-300 rounded px-2 py-1 focus:ring-1 focus:ring-black">
@@ -29,7 +29,7 @@
     </div>
 
     <!-- PURE OFFICIAL STATEMENT SHEET (100% Monokrom Sesuai PDF Hal. 37) -->
-    <div class="report-sheet bg-white p-8 sm:p-12 border border-slate-300 shadow-sm text-black font-serif text-[13px] leading-relaxed print:p-0 print:border-none print:shadow-none">
+    <div class="report-sheet-wrapper overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0"><div class="report-sheet bg-white p-4 sm:p-8 lg:p-12 border border-slate-300 shadow-sm text-black font-serif text-[13px] leading-relaxed print:p-0 print:border-none print:shadow-none">
         
         <!-- Official Regulation Header (Top Left, no underline as in PDF) -->
         <div class="text-left text-xs uppercase font-bold tracking-wider leading-snug mb-5">
@@ -163,7 +163,7 @@
             </div>
         </div>
 
-    </div>
+    </div></div>
 </div>
 
 <style>

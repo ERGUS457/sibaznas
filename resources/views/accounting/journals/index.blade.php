@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="space-y-6">
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
             <h1 class="text-xl font-bold text-slate-900">Jurnal Umum (General Journal)</h1>
             <p class="text-xs text-slate-500">Pencatatan berpasangan (Double-Entry Bookkeeping) transaksi penerimaan, penyaluran, dan setoran BAZNAS.</p>
@@ -60,7 +60,7 @@
                 </div>
             </div>
 
-            <table class="w-full text-xs text-left">
+            <div class="overflow-x-auto border border-slate-200 rounded-xl shadow-2xs"><table class="w-full text-xs text-left">
                 <thead class="bg-slate-100/50 text-slate-500 uppercase tracking-wider text-[10px] border-b border-slate-200">
                     <tr>
                         <th class="p-2.5">Kode</th>
@@ -89,7 +89,7 @@
                     </tr>
                     @endforeach
                 </tbody>
-            </table>
+            </table></div>
         </div>
         @empty
         <div class="bg-white p-8 rounded-xl border border-slate-200 text-center text-slate-400 text-xs">

@@ -40,18 +40,15 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        <style>
+    <style>
         [x-cloak] { display: none !important; }
         /* ========================================================= */
         /* FORMAL CORPORATE & INSTITUTIONAL DESIGN SYSTEM            */
-        /* Linear-inspired dark refinement + print-isolated paper   */
         /* ========================================================= */
         body {
-            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #f8fafc;
             color: #1e293b;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
         /* Formal Cards */
@@ -66,16 +63,19 @@
             border-color: #cbd5e1;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
         }
+
         .maxi-card-soft, .clay-card-soft {
             background: #f8fafc;
             border: 1px solid #e2e8f0;
             border-radius: 10px;
         }
+
         .maxi-sidebar, .clay-sidebar {
             background: #ffffff;
             border-right: 1px solid #e2e8f0;
             box-shadow: none;
         }
+
         .maxi-topbar, .clay-topbar {
             background: #ffffff;
             border: 1px solid #e2e8f0;
@@ -93,7 +93,14 @@
             box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             transition: all 0.15s ease-in-out;
         }
-        .maxi-btn-emerald:hover, .clay-btn-emerald:hover { background: #065f46; border-color: #065f46; }
+        .maxi-btn-emerald:hover, .clay-btn-emerald:hover {
+            background: #065f46;
+            border-color: #065f46;
+        }
+        .maxi-btn-emerald:active, .clay-btn-emerald:active {
+            transform: scale(0.99);
+        }
+
         .maxi-btn-sky, .clay-btn-sky {
             background: #0f172a;
             color: #ffffff;
@@ -103,7 +110,14 @@
             box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             transition: all 0.15s ease-in-out;
         }
-        .maxi-btn-sky:hover, .clay-btn-sky:hover { background: #1e293b; border-color: #1e293b; }
+        .maxi-btn-sky:hover, .clay-btn-sky:hover {
+            background: #1e293b;
+            border-color: #1e293b;
+        }
+        .maxi-btn-sky:active, .clay-btn-sky:active {
+            transform: scale(0.99);
+        }
+
         .maxi-btn-white, .clay-btn-white {
             background: #ffffff;
             color: #334155;
@@ -113,7 +127,15 @@
             box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
             transition: all 0.15s ease-in-out;
         }
-        .maxi-btn-white:hover, .clay-btn-white:hover { background: #f8fafc; color: #0f172a; border-color: #94a3b8; }
+        .maxi-btn-white:hover, .clay-btn-white:hover {
+            background: #f8fafc;
+            color: #0f172a;
+            border-color: #94a3b8;
+        }
+        .maxi-btn-white:active, .clay-btn-white:active {
+            transform: scale(0.99);
+        }
+
         .maxi-btn-rose, .clay-btn-rose {
             background: #ffffff;
             color: #dc2626;
@@ -123,7 +145,15 @@
             box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
             transition: all 0.15s ease-in-out;
         }
-        .maxi-btn-rose:hover, .clay-btn-rose:hover { background: #fef2f2; border-color: #f87171; color: #b91c1c; }
+        .maxi-btn-rose:hover, .clay-btn-rose:hover {
+            background: #fef2f2;
+            border-color: #f87171;
+            color: #b91c1c;
+        }
+        .maxi-btn-rose:active, .clay-btn-rose:active {
+            transform: scale(0.99);
+        }
+
         .maxi-input, .clay-input {
             background: #ffffff;
             border: 1px solid #cbd5e1;
@@ -136,6 +166,8 @@
             border-color: #047857;
             box-shadow: 0 0 0 2px rgba(4, 120, 87, 0.15);
         }
+
+        /* Focus ring — keyboard accessibility */
         .clay-btn-emerald:focus-visible, .clay-btn-sky:focus-visible, .clay-btn-white:focus-visible, .clay-btn-rose:focus-visible,
         .maxi-btn-emerald:focus-visible, .maxi-btn-sky:focus-visible, .maxi-btn-white:focus-visible, .maxi-btn-rose:focus-visible {
             outline: none;
@@ -144,78 +176,27 @@
         .clay-btn-white:focus-visible, .maxi-btn-white:focus-visible { box-shadow: 0 0 0 3px rgba(148,163,184,0.45); }
         .clay-btn-sky:focus-visible, .maxi-btn-sky:focus-visible { box-shadow: 0 0 0 3px rgba(15,23,42,0.35); }
         .clay-btn-rose:focus-visible, .maxi-btn-rose:focus-visible { box-shadow: 0 0 0 3px rgba(244,63,94,0.35); }
-        main > * + * { margin-top: 0.75rem; }
-
-        /* ========== DARK MODE — Linear-inspired refined ========== */
-        .dark body { background-color:#080c18; color:#e2e8f0; }
-        .dark .clay-card, .dark .maxi-card { background:#111c2e; border-color:rgba(255,255,255,0.07); color:#e2e8f0; box-shadow:0 1px 3px rgba(0,0,0,0.4); }
-        .dark .clay-card:hover, .dark .maxi-card:hover { border-color:rgba(255,255,255,0.12); box-shadow:0 4px 12px rgba(0,0,0,0.35); }
-        .dark .clay-sidebar, .dark .maxi-sidebar { background:#0b1220; border-color:rgba(255,255,255,0.06); }
-        .dark .clay-topbar, .dark .maxi-topbar { background:#111c2e; border-color:rgba(255,255,255,0.07); }
-        .dark .clay-card-soft, .dark .maxi-card-soft { background:#121e33; border-color:rgba(255,255,255,0.06); color:#e2e8f0; }
-        .dark .clay-input, .dark .maxi-input { background:#0f1a2e; border-color:#23324d; color:#e2e8f0; }
-        .dark .clay-input::placeholder, .dark .maxi-input::placeholder { color:#64748b; }
-        .dark .clay-input:focus, .dark .maxi-input:focus { border-color:#047857; box-shadow:0 0 0 2px rgba(16,185,129,0.18); }
-        /* Text utilities — exclude report-sheet */
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="text-slate-900"] { color:#f1f5f9 !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="text-slate-800"] { color:#e2e8f0 !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="text-slate-700"] { color:#cbd5e1 !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="text-slate-600"] { color:#94a3b8 !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="text-slate-500"] { color:#94a3b8 !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="text-slate-400"] { color:#64748b !important; }
-        /* Background overrides — exclude report-sheet and bsz-card paper */
-        .dark :not(.report-sheet):not(.report-sheet *):not(.bsz-card):not(.bsz-card *)[class*="bg-white"] { background-color:#111c2e !important; border-color:rgba(255,255,255,0.07) !important; }
-        .dark :not(.report-sheet):not(.report-sheet *):not(.bsz-card):not(.bsz-card *)[class*="bg-slate-50"] { background-color:#121e33 !important; border-color:rgba(255,255,255,0.06) !important; color:#cbd5e1 !important; }
-        .dark :not(.report-sheet):not(.report-sheet *):not(.bsz-card):not(.bsz-card *)[class*="bg-slate-100"] { background-color:#1a2942 !important; color:#e2e8f0 !important; border-color:#23324d !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="border-slate-200"] { border-color:rgba(255,255,255,0.07) !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="border-slate-100"] { border-color:rgba(255,255,255,0.06) !important; }
-        /* Semantic pills — dark variants */
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="bg-emerald-50"] { background:rgba(16,185,129,0.10) !important; border-color:rgba(16,185,129,0.22) !important; color:#6ee7b7 !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="bg-teal-50"] { background:rgba(20,184,166,0.10) !important; border-color:rgba(20,184,166,0.22) !important; color:#5eead4 !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="bg-amber-50"] { background:rgba(245,158,11,0.10) !important; border-color:rgba(245,158,11,0.22) !important; color:#fcd34d !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="bg-rose-50"] { background:rgba(244,63,94,0.10) !important; border-color:rgba(244,63,94,0.22) !important; color:#fda4af !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="bg-indigo-50"] { background:rgba(99,102,241,0.10) !important; border-color:rgba(99,102,241,0.22) !important; color:#a5b4fc !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="bg-sky-50"] { background:rgba(14,165,233,0.10) !important; border-color:rgba(14,165,233,0.22) !important; color:#7dd3fc !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="bg-blue-50"] { background:rgba(59,130,246,0.10) !important; border-color:rgba(59,130,246,0.22) !important; color:#93c5fd !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="text-emerald-800"], .dark :not(.report-sheet):not(.report-sheet *)[class*="text-emerald-700"] { color:#6ee7b7 !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="text-amber-700"], .dark :not(.report-sheet):not(.report-sheet *)[class*="text-amber-800"] { color:#fcd34d !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="text-rose-700"], .dark :not(.report-sheet):not(.report-sheet *)[class*="text-rose-800"] { color:#fda4af !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="text-sky-700"], .dark :not(.report-sheet):not(.report-sheet *)[class*="text-sky-800"] { color:#7dd3fc !important; }
-        /* Buttons in dark */
-        .dark .clay-btn-white, .dark .maxi-btn-white { background:#1a2942; color:#e2e8f0; border-color:#23324d; }
-        .dark .clay-btn-white:hover, .dark .maxi-btn-white:hover { background:#1e3350; color:#ffffff; border-color:#2d4a6b; }
-        .dark .clay-btn-sky, .dark .maxi-btn-sky { background:#e2e8f0; color:#0b1220; border-color:#e2e8f0; }
-        .dark .clay-btn-sky:hover, .dark .maxi-btn-sky:hover { background:#f1f5f9; border-color:#f1f5f9; }
-        .dark .clay-btn-emerald, .dark .maxi-btn-emerald { background:#059669; border-color:#059669; }
-        .dark .clay-btn-emerald:hover, .dark .maxi-btn-emerald:hover { background:#047857; border-color:#047857; }
-
-        /* Report sheet MUST stay paper-white even in dark mode — floating paper effect */
-        .dark .report-sheet,
-        .dark .bsz-card {
-            background:#ffffff !important;
-            color:#000000 !important;
-            border-color:#cbd5e1 !important;
-            box-shadow:0 8px 30px rgba(0,0,0,0.35) !important;
-        }
-        .dark .report-sheet .bg-black { background:#000000 !important; color:#ffffff !important; }
-        .dark .report-sheet .bg-black * { color:#ffffff !important; }
-        .dark .report-sheet table, .dark .report-sheet thead, .dark .report-sheet tbody, .dark .report-sheet tr, .dark .report-sheet th, .dark .report-sheet td {
-            color:#000000 !important;
-            border-color:#000000 !important;
-        }
-        .dark .report-sheet .bg-gray-100 { background:#f3f4f6 !important; color:#000 !important; }
-        .dark .report-sheet .bg-gray-50 { background:#f9fafb !important; color:#000 !important; }
-        .dark .report-sheet .text-gray-600, .dark .report-sheet .text-gray-500 { color:#4b5563 !important; }
-        .dark .report-sheet [class*="text-slate-"] { color:#000 !important; }
-        .dark .report-sheet .signature-block, .dark .report-sheet .signature-block * { color:#000 !important; }
-
-        /* Responsive helpers */
-        .report-sheet-wrapper { overflow-x:auto; -webkit-overflow-scrolling:touch; }
-        .report-sheet { min-width: 640px; }
-        @media (max-width: 640px) {
-            .report-sheet { min-width: 520px; }
-            main { padding-left: 0.75rem; padding-right: 0.75rem; }
-        }
+        /* Spasi vertikal — beri napas antar section */
+        main > * + * { margin-top: 0.5rem; }
+        /* Dark mode */
+        .dark body { background-color:#0f172a; color:#e2e8f0; }
+        .dark .clay-card, .dark .maxi-card { background:#1e293b; border-color:#334155; color:#e2e8f0; }
+        .dark .clay-card:hover, .dark .maxi-card:hover { border-color:#475569; }
+        .dark .clay-sidebar, .dark .maxi-sidebar { background:#0f172a; border-color:#334155; }
+        .dark .clay-topbar, .dark .maxi-topbar { background:#1e293b; border-color:#334155; }
+        .dark .clay-card-soft, .dark .maxi-card-soft { background:#1e293b; border-color:#334155; color:#e2e8f0; }
+        .dark .clay-input, .dark .maxi-input { background:#1e293b; border-color:#475569; color:#e2e8f0; }
+        /* Fix teks gelap agar terbaca di dark mode — override utility slate */
+        .dark [class*="text-slate-900"] { color:#f1f5f9 !important; }
+        .dark [class*="text-slate-800"] { color:#e2e8f0 !important; }
+        .dark [class*="text-slate-700"] { color:#cbd5e1 !important; }
+        .dark [class*="text-slate-600"] { color:#94a3b8 !important; }
+        .dark [class*="text-slate-500"] { color:#94a3b8 !important; }
+        .dark [class*="bg-white"] { background-color:#1e293b !important; border-color:#334155 !important; }
+        .dark [class*="bg-slate-50"] { background-color:#1e293b !important; border-color:#334155 !important; color:#cbd5e1 !important; }
+        .dark [class*="bg-slate-100"] { background-color:#334155 !important; color:#e2e8f0 !important; border-color:#475569 !important; }
+        .dark [class*="border-slate-200"] { border-color:#334155 !important; }
+        .dark [class*="border-slate-100"] { border-color:#334155 !important; }
 
         .maxi-pill, .clay-pill, .maxi-badge {
             border: 1px solid #cbd5e1;
@@ -224,69 +205,170 @@
             box-shadow: none;
         }
 
-        /* ===================== PRINT — force light paper ===================== */
         @media print {
-            :root { color-scheme: light !important; }
-            @page { size: A4 portrait; margin: 10mm 12mm 12mm 12mm; }
-            html, body, html.dark, html.dark body, .dark body {
-                height: auto !important; min-height:0 !important; max-height:none !important;
-                overflow: visible !important; overflow-x:visible !important; overflow-y:visible !important;
+            @page {
+                size: A4 portrait;
+                margin: 10mm 12mm 12mm 12mm;
+            }
+
+            /* 1. Root & Viewport Reset: Crucial for multi-page pagination without clipping in Chromium */
+            html,
+            body {
+                height: auto !important;
+                min-height: 0 !important;
+                max-height: none !important;
+                overflow: visible !important;
+                overflow-x: visible !important;
+                overflow-y: visible !important;
                 position: static !important;
-                background: #ffffff !important; background-image:none !important;
+                background: #ffffff !important;
+                background-image: none !important;
                 color: #000000 !important;
                 font-family: 'Times New Roman', Times, Georgia, serif !important;
                 font-size: 10pt !important;
-                width:100% !important; margin:0 !important; padding:0 !important;
-                -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
-            /* Reset dark surfaces for print — everything paper white */
-            .dark .clay-card, .dark .maxi-card, .dark .clay-sidebar, .dark .maxi-sidebar,
-            .dark .clay-topbar, .dark .maxi-topbar, .dark .clay-card-soft, .dark .maxi-card-soft,
-            .dark .clay-input, .dark .maxi-input,
-            .dark [class*="bg-white"], .dark [class*="bg-slate-50"], .dark [class*="bg-slate-100"],
-            .clay-card, .maxi-card, .clay-sidebar, .maxi-sidebar {
-                background: #ffffff !important; border-color:#e2e8f0 !important; color:#000000 !important; box-shadow:none !important;
+
+            /* 2. Structural Unwrapping: Unwrap only layout wrappers without overriding utility or hiding classes */
+            body > div:not(.no-print),
+            .min-h-screen,
+            .h-full,
+            main:not(.no-print) {
+                display: block !important;
+                height: auto !important;
+                min-height: 0 !important;
+                max-height: none !important;
+                overflow: visible !important;
+                overflow-x: visible !important;
+                overflow-y: visible !important;
+                position: static !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                float: none !important;
+                flex: none !important;
+                background: transparent !important;
             }
-            .dark [class*="text-slate-"] { color:#000000 !important; }
-            .dark [class*="bg-emerald-"], .dark [class*="bg-teal-"], .dark [class*="bg-amber-"], .dark [class*="bg-rose-"], .dark [class*="bg-sky-"], .dark [class*="bg-blue-"], .dark [class*="bg-indigo-"] {
-                background:#f8fafc !important; border-color:#e2e8f0 !important; color:#000 !important;
+
+            .max-w-4xl:not(.no-print),
+            .max-w-5xl:not(.no-print),
+            .max-w-6xl:not(.no-print),
+            .max-w-7xl:not(.no-print) {
+                max-width: 100% !important;
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
             }
-            body > div:not(.no-print), .min-h-screen, .h-full, main:not(.no-print) {
-                display: block !important; height:auto !important; min-height:0 !important; max-height:none !important;
-                overflow: visible !important; position: static !important; width:100% !important; max-width:100% !important;
-                margin:0 !important; padding:0 !important; float:none !important; flex:none !important; background: transparent !important;
+
+            .space-y-6:not(.no-print) {
+                margin: 0 !important;
+                padding: 0 !important;
             }
-            .max-w-4xl:not(.no-print), .max-w-5xl:not(.no-print), .max-w-6xl:not(.no-print), .max-w-7xl:not(.no-print) {
-                max-width:100% !important; width:100% !important; margin:0 !important; padding:0 !important;
+
+            .space-y-6:not(.no-print) > :not(.no-print) {
+                margin-top: 0 !important;
+                margin-bottom: 0 !important;
             }
-            .space-y-6:not(.no-print) { margin:0 !important; padding:0 !important; }
-            .space-y-6:not(.no-print) > :not(.no-print) { margin-top:0 !important; margin-bottom:0 !important; }
-            .report-sheet, .bsz-card {
-                display:block !important; border:none !important; box-shadow:none !important;
-                padding:0 !important; margin:0 !important; width:100% !important; max-width:100% !important;
-                min-width:0 !important;
-                background:#ffffff !important; color:#000000 !important;
-                font-family:'Times New Roman', Times, Georgia, serif !important; font-size:9.5pt !important; line-height:1.25 !important;
+
+            /* 3. Official Report Sheet Print Rules */
+            .report-sheet,
+            .bsz-card {
+                display: block !important;
+                border: none !important;
+                box-shadow: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                background: #ffffff !important;
+                color: #000000 !important;
+                font-family: 'Times New Roman', Times, Georgia, serif !important;
+                font-size: 9.5pt !important;
+                line-height: 1.25 !important;
             }
-            .report-sheet .bg-black { background:#000000 !important; color:#ffffff !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-            .report-sheet .bg-black * { color:#ffffff !important; }
-            .report-sheet-wrapper { overflow: visible !important; }
-            table { width:100% !important; border-collapse:collapse !important; page-break-inside:auto !important; }
-            thead { display:table-header-group !important; }
-            tfoot { display:table-footer-group !important; }
-            tr { page-break-inside:avoid !important; page-break-after:auto !important; }
-            td, th { padding-top:1.5px !important; padding-bottom:1.5px !important; }
-            h1,h2,h3,h4,h5,h6 { page-break-after:avoid !important; color:#000 !important; }
-            .signature-block, .signature-section, .signatures { page-break-inside:avoid !important; page-break-before:auto !important; margin-top:16px !important; padding-top:8px !important; }
-            .no-print, .no-print *, [class*="no-print"], .print\:hidden, aside, header, nav, footer, button, form, input, select, [x-cloak], .backdrop-blur-xs {
-                display:none !important; visibility:hidden !important; height:0 !important; width:0 !important; min-height:0 !important; max-height:0 !important;
-                margin:0 !important; padding:0 !important; border:none !important; outline:none !important; box-shadow:none !important;
-                position:absolute !important; left:-99999px !important; top:-99999px !important; overflow:hidden !important; pointer-events:none !important;
+
+            /* 4. Table Pagination & Avoid Bad Breaks */
+            table {
+                width: 100% !important;
+                border-collapse: collapse !important;
+                page-break-inside: auto !important;
             }
-            .print-only { display:block !important; }
+
+            thead {
+                display: table-header-group !important;
+            }
+
+            tfoot {
+                display: table-footer-group !important;
+            }
+
+            tr {
+                page-break-inside: avoid !important;
+                page-break-after: auto !important;
+            }
+
+            td, th {
+                padding-top: 1.5px !important;
+                padding-bottom: 1.5px !important;
+            }
+
+            /* 5. Headers & Signature Blocks */
+            h1, h2, h3, h4, h5, h6 {
+                page-break-after: avoid !important;
+            }
+
+            .signature-block,
+            .signature-section,
+            .signatures {
+                page-break-inside: avoid !important;
+                page-break-before: auto !important;
+                margin-top: 16px !important;
+                padding-top: 8px !important;
+            }
+
+            /* 6. ABSOLUTE HIDING OF UI & NON-PRINT ELEMENTS (DECLARED LAST) */
+            .no-print,
+            .no-print *,
+            [class*="no-print"],
+            .print\:hidden,
+            aside,
+            header,
+            nav,
+            footer,
+            button,
+            form,
+            input,
+            select,
+            [x-cloak],
+            .backdrop-blur-xs {
+                display: none !important;
+                visibility: hidden !important;
+                height: 0 !important;
+                width: 0 !important;
+                min-height: 0 !important;
+                max-height: 0 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                border: none !important;
+                outline: none !important;
+                box-shadow: none !important;
+                position: absolute !important;
+                left: -99999px !important;
+                top: -99999px !important;
+                overflow: hidden !important;
+                pointer-events: none !important;
+            }
+
+            .print-only {
+                display: block !important;
+            }
         }
     </style>
-
 </head>
 <body class="h-full flex flex-col font-sans text-slate-800 antialiased dark:bg-slate-900 dark:text-slate-100" x-data="{ sidebarOpen: false }">
     <div class="flex h-full min-h-screen">

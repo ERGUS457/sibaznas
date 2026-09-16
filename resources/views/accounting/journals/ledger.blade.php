@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="space-y-6">
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
             <h1 class="text-xl font-bold text-slate-900">Buku Besar (General Ledger)</h1>
             <p class="text-xs text-slate-500">Mutasi dan saldo historis per akun Bagan Akun Standar (COA) DE ISAK 35.</p>

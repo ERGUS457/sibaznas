@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="max-w-5xl mx-auto space-y-6" x-data="journalForm()">
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
             <div class="flex items-center gap-2 mb-1">
                 <span class="text-[10px] font-semibold uppercase tracking-wider bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded border border-slate-200">

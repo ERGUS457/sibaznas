@@ -5,12 +5,12 @@
 @section('content')
 <div class="max-w-4xl mx-auto space-y-6 print:max-w-none print:space-y-0 print:m-0 print:p-0">
     <!-- Action Bar (Strictly Hidden on Print) -->
-    <div class="no-print print:hidden flex items-center justify-between bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+    <div class="no-print print:hidden flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
         <div>
             <h1 class="text-base font-bold text-slate-900">Laporan Perubahan Aset Neto (DE ISAK 35)</h1>
             <p class="text-xs text-slate-500">Format resmi entitas berorientasi nonlaba sesuai lampiran Draf Eksposur ISAK 35 (Hal. 26).</p>
         </div>
-        <div class="flex items-center space-x-2">
+        <div class="flex flex-wrap items-center gap-2">
             <form method="GET" class="flex items-center space-x-2 text-xs">
                 <label for="start_date" class="font-medium text-slate-600">Periode:</label>
                 <input type="date" id="start_date" name="start_date" value="{{ $startDate }}" class="border border-slate-300 rounded px-2 py-1 focus:ring-1 focus:ring-black">
@@ -26,7 +26,7 @@
     </div>
 
     <!-- PURE OFFICIAL STATEMENT SHEET (100% Monokrom Sesuai PDF Hal. 26) -->
-    <div class="report-sheet bg-white p-8 sm:p-12 border border-slate-300 shadow-sm text-black font-serif text-[13px] leading-relaxed print:p-0 print:border-none print:shadow-none">
+    <div class="report-sheet-wrapper overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0"><div class="report-sheet bg-white p-4 sm:p-8 lg:p-12 border border-slate-300 shadow-sm text-black font-serif text-[13px] leading-relaxed print:p-0 print:border-none print:shadow-none">
         
         <!-- Black Box Header as in DE ISAK 35 Page 26 -->
         <div class="bg-black text-white text-center py-3 px-4 mb-6">
@@ -154,7 +154,7 @@
             </div>
         </div>
 
-    </div>
+    </div></div>
 </div>
 
 <style>
@@ -195,4 +195,3 @@
 }
 </style>
 @endsection
-
