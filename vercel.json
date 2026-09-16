@@ -21,15 +21,7 @@
         "APP_ENV": "production",
         "APP_DEBUG": "false",
         "APP_URL": "https://silver-zis.vercel.app",
-        "APP_KEY": "base64:qbWHNYwu318i5PmB87nKyAy8M/q4lLQjZGUrLkgvDy4=",
         "DB_CONNECTION": "pgsql",
-        "DB_HOST": "ep-plain-lab-aeponamh-pooler.c-2.us-east-2.aws.neon.tech",
-        "DB_PORT": "5432",
-        "DB_DATABASE": "neondb",
-        "DB_USERNAME": "neondb_owner",
-        "DB_PASSWORD": "npg_Oq8pcS1IMzfg",
-        "DB_SSLMODE": "require",
-        "DB_ENDPOINT": "ep-plain-lab-aeponamh-pooler",
         "APP_CONFIG_CACHE": "/tmp/config.php",
         "APP_EVENTS_CACHE": "/tmp/events.php",
         "APP_PACKAGES_CACHE": "/tmp/packages.php",
@@ -40,5 +32,32 @@
         "LOG_CHANNEL": "stderr",
         "SESSION_DRIVER": "cookie",
         "APP_NAME": "SILVER-ZIS"
-    }
+    },
+    "headers": [
+        {
+            "source": "/(.*)",
+            "headers": [
+                {
+                    "key": "X-Frame-Options",
+                    "value": "SAMEORIGIN"
+                },
+                {
+                    "key": "X-Content-Type-Options",
+                    "value": "nosniff"
+                },
+                {
+                    "key": "Referrer-Policy",
+                    "value": "strict-origin-when-cross-origin"
+                },
+                {
+                    "key": "Permissions-Policy",
+                    "value": "camera=(), microphone=(), geolocation=()"
+                },
+                {
+                    "key": "X-Powered-By",
+                    "value": ""
+                }
+            ]
+        }
+    ]
 }

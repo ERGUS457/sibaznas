@@ -27,17 +27,17 @@ Route::get('/', [LandingPageController::class, 'index'])->name('landing');
 
 // ─── Authentication Routes ────────────────────────────────────────────────────
 Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('login', [AuthController::class, 'login'])->name('login.submit');
+Route::post('login', [AuthController::class, 'login'])->middleware('throttle:login')->name('login.submit');
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('logout', [AuthController::class, 'logout']);
-Route::post('forgot-password-request', [AuthController::class, 'sendForgotPasswordRequest'])->name('password.request.send');
+Route::post('forgot-password-request', [AuthController::class, 'sendForgotPasswordRequest'])->middleware('throttle:forgot')->name('password.request.send');
 
 // ─── Registration Routes (2-Step) ────────────────────────────────────────────
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisterController::class, 'showStep1'])->name('register.step1');
-    Route::post('register', [RegisterController::class, 'submitStep1'])->name('register.step1.submit');
+    Route::post('register', [RegisterController::class, 'submitStep1'])->middleware('throttle:register')->name('register.step1.submit');
     Route::get('register/upz', [RegisterController::class, 'showStep2'])->name('register.step2');
-    Route::post('register/upz', [RegisterController::class, 'submitStep2'])->name('register.step2.submit');
+    Route::post('register/upz', [RegisterController::class, 'submitStep2'])->middleware('throttle:register')->name('register.step2.submit');
 });
 
 // ─── Pending Approval Page (auth tapi belum aktif) ───────────────────────────

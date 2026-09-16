@@ -77,7 +77,7 @@ class AuthController extends Controller
             \Illuminate\Support\Facades\Log::error('Login error: ' . $e->getMessage());
 
             return back()->withErrors([
-                'username' => 'Gagal menghubungkan ke server database: ' . $e->getMessage(),
+                'username' => 'Terjadi kesalahan sistem. Silakan coba lagi dalam beberapa saat.',
             ])->onlyInput('username');
         }
 
