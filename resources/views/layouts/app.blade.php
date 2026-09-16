@@ -191,7 +191,9 @@
         .dark .clay-btn-emerald:hover, .dark .maxi-btn-emerald:hover { background:#047857; border-color:#047857; }
 
         /* Report sheet MUST stay paper-white even in dark mode — floating paper effect */
+        html.dark .report-sheet,
         .dark .report-sheet,
+        html.dark .bsz-card,
         .dark .bsz-card {
             background:#ffffff !important;
             color:#000000 !important;
