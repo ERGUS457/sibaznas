@@ -107,43 +107,88 @@
 </head>
 <body class="min-h-full flex flex-col justify-between p-4 sm:p-8 md:p-12 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 antialiased">
 
-    <!-- Top Navigation Bar -->
+    <!-- Top Navigation Bar — Responsive: desktop horizontal, mobile vertikal menumpuk -->
     <header class="max-w-6xl mx-auto w-full mb-10 sm:mb-14">
-        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
-            <div class="flex items-center space-x-3">
-                <img src="{{ asset('images/logo.png') }}" alt="Logo SILVER-ZIS" class="w-10 h-10 rounded-lg object-contain bg-white border border-slate-200 p-0.5 shadow-xs flex-shrink-0">
-                <div>
-                    <h1 class="text-base font-bold text-slate-900 dark:text-white tracking-tight mb-0.5">SILVER-ZIS</h1>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium mt-0.5">Sistem Laporan Keuangan Nirlaba Terintegrasi ZIS — Kelola Keuangan Organisasi</p>
-                </div>
-            </div>
-            <div class="flex items-center gap-2">
-                <a href="{{ route('profile.show') }}#organisasi" class="btn-formal-outline px-3 py-1.5 text-xs font-bold items-center gap-1.5 text-slate-700 hover:text-emerald-700 hover:border-emerald-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500" title="Profil Organisasi">
-                    <i class="fa-solid fa-building text-emerald-600 text-[11px]"></i>
-                    <span class="hidden sm:inline">Profil</span>
-                </a>
-                <a href="{{ route('profile.show') }}#akun" class="btn-formal-outline px-3 py-1.5 text-xs font-bold items-center gap-1.5 text-slate-700 hover:text-emerald-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500" title="Akun">
-                    <i class="fa-solid fa-user-gear text-slate-500 text-[11px]"></i>
-                    <span class="hidden sm:inline">Akun</span>
-                </a>
-                <button type="button" onclick="document.documentElement.classList.toggle('dark');" class="btn-formal-outline px-2.5 py-1.5 text-xs" title="Ganti tema">
-                    <i class="fa-solid fa-moon hidden dark:inline"></i><i class="fa-solid fa-sun dark:hidden text-amber-500"></i>
-                </button>
+        <!-- Brand -->
+        <div class="flex items-center gap-3 mb-5">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo SILVER-ZIS" class="w-11 h-11 rounded-xl object-contain bg-white border border-slate-200 p-1 shadow-xs flex-shrink-0">
+            <div class="min-w-0">
+                <h1 class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white tracking-tight leading-none">SILVER-ZIS</h1>
+                <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium leading-tight mt-1">Sistem Laporan Keuangan Nirlaba Terintegrasi ZIS — Kelola Keuangan Organisasi</p>
             </div>
         </div>
-        <div class="flex items-center gap-2 border-t border-slate-200 pt-4 mt-2">
-            <a href="{{ route('landing') }}" class="btn-formal-outline px-3.5 py-1.5 text-xs flex items-center gap-2">
-                <i class="fa-solid fa-house text-slate-400 text-[11px]"></i>
-                <span class="hidden sm:inline">Landing Page</span>
+
+        <!-- DESKTOP: bar horizontal (hidden di HP) -->
+        <nav class="hidden sm:flex items-center gap-2 flex-wrap bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 shadow-sm">
+            <a href="{{ route('profile.show') }}#organisasi" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-700 text-xs font-bold hover:bg-emerald-100 dark:hover:bg-emerald-900/50 transition">
+                <i class="fa-solid fa-building text-[11px]"></i> Profil Organisasi
             </a>
-            <form action="{{ route('logout') }}" method="POST" class="inline">
+            <a href="{{ route('profile.show') }}#akun" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600 text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-600 transition">
+                <i class="fa-solid fa-user-gear text-[11px] text-slate-500"></i> Akun
+            </a>
+            <div class="h-6 w-px bg-slate-200 dark:bg-slate-600 mx-1"></div>
+            <button type="button" onclick="document.documentElement.classList.toggle('dark'); try{localStorage.setItem('theme', document.documentElement.classList.contains('dark')?'dark':'light')}catch(e){}" class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-xs font-semibold hover:bg-slate-50 transition" title="Ganti tema">
+                <i class="fa-solid fa-moon hidden dark:inline text-slate-300"></i><i class="fa-solid fa-sun dark:hidden text-amber-500"></i> Tema
+            </button>
+            <a href="{{ route('landing') }}" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-xs font-bold hover:bg-slate-50 transition">
+                <i class="fa-solid fa-house text-slate-400 text-[11px]"></i> Landing Page
+            </a>
+            <form action="{{ route('logout') }}" method="POST" class="inline ml-auto">
                 @csrf
-                <button type="submit" class="btn-formal-outline px-3.5 py-1.5 text-xs text-rose-600 hover:text-rose-700 hover:border-rose-300 flex items-center gap-2">
-                    <i class="fa-solid fa-arrow-right-from-bracket text-[11px]"></i>
-                    <span class="hidden sm:inline">Keluar</span>
+                <button type="submit" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-white dark:bg-slate-700 text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-700/50 text-xs font-bold hover:bg-rose-50 dark:hover:bg-rose-900/20 transition">
+                    <i class="fa-solid fa-arrow-right-from-bracket text-[11px]"></i> Keluar
                 </button>
             </form>
-        </div>
+        </nav>
+
+        <!-- MOBILE: menumpuk vertikal dari atas ke bawah, label di sebelah ikon (sm:hidden) -->
+        <nav class="sm:hidden flex flex-col gap-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-3 shadow-sm">
+            <p class="text-[10px] font-extrabold tracking-widest text-slate-400 uppercase px-1 mb-1">Menu Navigasi</p>
+            <a href="{{ route('profile.show') }}#organisasi" class="flex items-center gap-3 w-full px-4 py-3 rounded-xl bg-emerald-50 dark:bg-emerald-900/25 border border-emerald-200 dark:border-emerald-800 text-left active:scale-[0.99] transition">
+                <span class="w-9 h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-building text-sm"></i></span>
+                <span class="flex-1 min-w-0">
+                    <span class="block text-sm font-bold text-emerald-900 dark:text-emerald-100 leading-none">Profil Organisasi</span>
+                    <span class="block text-[11px] text-emerald-700/70 dark:text-emerald-300/70 mt-1">Kelola nama, kode & logo</span>
+                </span>
+                <i class="fa-solid fa-chevron-right text-emerald-400 text-xs"></i>
+            </a>
+            <a href="{{ route('profile.show') }}#akun" class="flex items-center gap-3 w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 text-left active:scale-[0.99] transition">
+                <span class="w-9 h-9 rounded-xl bg-slate-800 dark:bg-slate-600 text-white flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-user-gear text-sm"></i></span>
+                <span class="flex-1 min-w-0">
+                    <span class="block text-sm font-bold text-slate-900 dark:text-white leading-none">Akun</span>
+                    <span class="block text-[11px] text-slate-500 dark:text-slate-400 mt-1">Username, email & password</span>
+                </span>
+                <i class="fa-solid fa-chevron-right text-slate-300 text-xs"></i>
+            </a>
+            <button type="button" onclick="document.documentElement.classList.toggle('dark'); try{localStorage.setItem('theme', document.documentElement.classList.contains('dark')?'dark':'light')}catch(e){}" class="flex items-center gap-3 w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-left active:scale-[0.99] transition">
+                <span class="w-9 h-9 rounded-xl bg-amber-500 text-white flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-circle-half-stroke text-sm"></i></span>
+                <span class="flex-1 min-w-0">
+                    <span class="block text-sm font-bold text-slate-900 dark:text-white leading-none">Ganti Tema</span>
+                    <span class="block text-[11px] text-slate-500 dark:text-slate-400 mt-1">Terang / Gelap</span>
+                </span>
+                <i class="fa-solid fa-chevron-right text-slate-300 text-xs"></i>
+            </button>
+            <div class="h-px bg-slate-100 dark:bg-slate-700 my-1"></div>
+            <a href="{{ route('landing') }}" class="flex items-center gap-3 w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-left active:scale-[0.99] transition">
+                <span class="w-9 h-9 rounded-xl bg-white dark:bg-slate-600 border border-slate-200 dark:border-slate-500 text-slate-600 dark:text-slate-200 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-house text-sm"></i></span>
+                <span class="flex-1 min-w-0">
+                    <span class="block text-sm font-bold text-slate-900 dark:text-white leading-none">Landing Page</span>
+                    <span class="block text-[11px] text-slate-500 dark:text-slate-400 mt-1">Kembali ke halaman utama</span>
+                </span>
+                <i class="fa-solid fa-chevron-right text-slate-300 text-xs"></i>
+            </a>
+            <form action="{{ route('logout') }}" method="POST" class="w-full">
+                @csrf
+                <button type="submit" class="flex items-center gap-3 w-full px-4 py-3 rounded-xl bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800 text-left active:scale-[0.99] transition">
+                    <span class="w-9 h-9 rounded-xl bg-rose-600 text-white flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-arrow-right-from-bracket text-sm"></i></span>
+                    <span class="flex-1 min-w-0">
+                        <span class="block text-sm font-bold text-rose-700 dark:text-rose-300 leading-none">Keluar Sistem</span>
+                        <span class="block text-[11px] text-rose-600/70 dark:text-rose-300/70 mt-1">Akhiri sesi & logout</span>
+                    </span>
+                    <i class="fa-solid fa-chevron-right text-rose-300 text-xs"></i>
+                </button>
+            </form>
+        </nav>
     </header>
 
     <!-- Main Content: Welcome & Cards -->
