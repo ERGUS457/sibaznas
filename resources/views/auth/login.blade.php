@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masuk — ARTHAWISE</title>
+    <title>Masuk — SILVER-ZIS</title>
     <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -33,8 +33,8 @@
             <!-- Logo & Brand Header -->
             <div class="text-center space-y-2">
                 <a href="{{ route('landing') }}" class="inline-block group">
-                    <img src="{{ asset('images/logo.png') }}" alt="Logo ARTHAWISE" class="w-16 h-16 rounded-xl object-contain bg-white border border-slate-200 p-1 shadow-xs mx-auto mb-1 group-hover:shadow-md transition">
-                    <h1 class="text-xl font-bold text-slate-900 tracking-tight group-hover:text-emerald-700 transition">ARTHAWISE</h1>
+                    <img src="{{ asset('images/logo.png') }}" alt="Logo SILVER-ZIS" class="w-16 h-16 rounded-xl object-contain bg-white border border-slate-200 p-1 shadow-xs mx-auto mb-1 group-hover:shadow-md transition">
+                    <h1 class="text-xl font-bold text-slate-900 tracking-tight group-hover:text-emerald-700 transition">SILVER-ZIS</h1>
                 </a>
                 <p class="text-xs text-slate-500 font-normal">Silakan masuk untuk mengakses sistem keuangan organisasi</p>
             </div>
@@ -145,7 +145,7 @@
         </div>
 
         <p class="text-center text-xs text-slate-400">
-            &copy; {{ date('Y') }} ARTHAWISE &bull; Artha Wise Finance
+            &copy; {{ date('Y') }} SILVER-ZIS &bull; Sistem Laporan Keuangan Nirlaba Terintegrasi ZIS
         </p>
 
     </div>

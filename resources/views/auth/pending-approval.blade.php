@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menunggu Verifikasi — ARTHAWISE</title>
+    <title>Menunggu Verifikasi — SILVER-ZIS</title>
     <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
@@ -23,8 +23,8 @@
         {{-- Brand Logo Header --}}
         <div class="text-center mb-6">
             <a href="{{ route('landing') }}" class="inline-block group">
-                <img src="{{ asset('images/logo.png') }}" alt="Logo ARTHAWISE" class="w-16 h-16 rounded-2xl object-contain bg-white border border-slate-200 p-1 shadow-md mx-auto mb-2 group-hover:shadow-lg transition">
-                <h2 class="text-xl font-bold text-gray-800 group-hover:text-emerald-700 transition">ARTHAWISE</h2>
+                <img src="{{ asset('images/logo.png') }}" alt="Logo SILVER-ZIS" class="w-16 h-16 rounded-2xl object-contain bg-white border border-slate-200 p-1 shadow-md mx-auto mb-2 group-hover:shadow-lg transition">
+                <h2 class="text-xl font-bold text-gray-800 group-hover:text-emerald-700 transition">SILVER-ZIS</h2>
             </a>
         </div>
 
@@ -103,7 +103,7 @@
         </div>
 
         <p class="text-center text-xs text-gray-400 mt-4">
-            ARTHAWISE — Artha Wise Finance
+            SILVER-ZIS — Sistem Laporan Keuangan Nirlaba Terintegrasi ZIS
         </p>
     </div>
 </body>

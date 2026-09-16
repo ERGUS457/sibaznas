@@ -41,7 +41,7 @@
                 <div class="w-9 h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-sm"><i class="fa-solid fa-building"></i></div>
                 <div>
                     <h2 class="text-sm font-extrabold text-slate-900 tracking-tight">Profil Organisasi</h2>
-                    <p class="text-[11px] text-slate-500">Nama, kode, alamat, kontak, dan logo organisasi. Logo organisasi tampil di card ENTITAS di portal — bukan logo aplikasi ARTHAWISE.</p>
+                    <p class="text-[11px] text-slate-500">Nama, kode, alamat, kontak, dan logo organisasi. Logo organisasi tampil di card ENTITAS di portal — bukan logo aplikasi SILVER-ZIS.</p>
                 </div>
             </div>
 

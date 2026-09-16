@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Ruang Kerja - ARTHAWISE</title>
+    <title>Portal Ruang Kerja - SILVER-ZIS</title>
     <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -110,10 +110,10 @@
     <!-- Top Navigation Bar -->
     <header class="max-w-6xl mx-auto w-full flex items-center justify-between mb-10 sm:mb-14 gap-4">
         <div class="flex items-center space-x-3">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo ARTHAWISE" class="w-10 h-10 rounded-lg object-contain bg-white border border-slate-200 p-0.5 shadow-xs flex-shrink-0">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo SILVER-ZIS" class="w-10 h-10 rounded-lg object-contain bg-white border border-slate-200 p-0.5 shadow-xs flex-shrink-0">
             <div>
-                <h1 class="text-base font-bold text-slate-900 dark:text-white tracking-tight mb-0.5">ARTHAWISE</h1>
-                <p class="text-xs text-slate-500 dark:text-slate-400 font-medium mt-0.5">Artha Wise Finance — Kelola Keuangan Organisasi</p>
+                <h1 class="text-base font-bold text-slate-900 dark:text-white tracking-tight mb-0.5">SILVER-ZIS</h1>
+                <p class="text-xs text-slate-500 dark:text-slate-400 font-medium mt-0.5">Sistem Laporan Keuangan Nirlaba Terintegrasi ZIS — Kelola Keuangan Organisasi</p>
             </div>
             <a href="{{ route('profile.show') }}#organisasi" class="hidden sm:inline-flex btn-formal-outline px-3.5 py-1.5 text-xs font-bold items-center gap-1.5 text-slate-700 hover:text-emerald-700 hover:border-emerald-300 ml-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900" title="Ubah nama, kode, alamat, logo organisasi">
                 <i class="fa-solid fa-building text-emerald-600 text-[11px]"></i>
@@ -346,7 +346,7 @@
 
     <!-- Footer -->
     <footer class="max-w-6xl mx-auto w-full text-center text-xs text-slate-500 mt-10">
-        <span>ARTHAWISE &bull; Artha Wise Finance</span>
+        <span>SILVER-ZIS &bull; Sistem Laporan Keuangan Nirlaba Terintegrasi ZIS</span>
     </footer>
 
 </body>

@@ -25,7 +25,7 @@ class UpzAndIsak35IntegrationTest extends TestCase
     {
         $response = $this->get('/');
         $response->assertStatus(200);
-        $response->assertSee('ARTHAWISE');
+        $response->assertSee('SILVER-ZIS');
         $response->assertSee('DE ISAK 35 FORMAT A');
         $response->assertSee('Total Pengumpulan ZIS');
     }
@@ -143,7 +143,7 @@ class UpzAndIsak35IntegrationTest extends TestCase
     {
         $response = $this->get(route('login'));
         $response->assertStatus(200);
-        $response->assertSee('ARTHAWISE');
+        $response->assertSee('SILVER-ZIS');
         $response->assertSee('Kredensial Login Default');
         $response->assertSee('admin');
         $response->assertSee('admin123');

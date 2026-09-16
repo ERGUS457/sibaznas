@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'ARTHAWISE')</title>
+    <title>@yield('title', 'SILVER-ZIS')</title>
     <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config = { darkMode: 'class' }</script>
@@ -27,8 +27,8 @@
 <body class="h-full flex flex-col antialiased bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100">
     <header class="flex items-center justify-between px-4 py-3 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 gap-4">
         <div class="flex items-center space-x-3">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo ARTHAWISE" class="w-8 h-8">
-            <h1 class="text-base font-bold text-slate-900 dark:text-white">ARTHAWISE</h1>
+            <img src="{{ asset('images/logo.png') }}" alt="Logo SILVER-ZIS" class="w-8 h-8">
+            <h1 class="text-base font-bold text-slate-900 dark:text-white">SILVER-ZIS</h1>
         </div>
         <div class="flex items-center gap-2">
             <button type="button" onclick="document.documentElement.classList.toggle('dark'); try{localStorage.setItem('theme', document.documentElement.classList.contains('dark')?'dark':'light')}catch(e){}" class="px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs" title="Ganti tema" aria-label="Toggle dark mode"><i class="fa-solid fa-moon hidden dark:inline"></i><i class="fa-solid fa-sun dark:hidden text-amber-500"></i></button>
@@ -39,7 +39,7 @@
         @yield('content')
     </main>
     <footer class="text-center text-xs text-slate-400 dark:text-slate-500 py-6">
-        ARTHAWISE &bull; Artha Wise Finance
+        SILVER-ZIS &bull; Sistem Laporan Keuangan Nirlaba Terintegrasi ZIS
     </footer>
 </body>
 </html>
