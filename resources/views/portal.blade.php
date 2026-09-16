@@ -108,41 +108,37 @@
 <body class="min-h-full flex flex-col justify-between p-4 sm:p-8 md:p-12 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 antialiased">
 
     <!-- Top Navigation Bar -->
-    <header class="max-w-6xl mx-auto w-full flex flex-col sm:flex-row items-start sm:items-center justify-between mb-10 sm:mb-14 gap-4">
-        <div class="flex items-center space-x-3">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo SILVER-ZIS" class="w-10 h-10 rounded-lg object-contain bg-white border border-slate-200 p-0.5 shadow-xs flex-shrink-0">
-            <div>
-                <h1 class="text-base font-bold text-slate-900 dark:text-white tracking-tight mb-0.5">SILVER-ZIS</h1>
-                <p class="text-xs text-slate-500 dark:text-slate-400 font-medium mt-0.5">Sistem Laporan Keuangan Nirlaba Terintegrasi ZIS — Kelola Keuangan Organisasi</p>
+    <header class="max-w-6xl mx-auto w-full mb-10 sm:mb-14">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
+            <div class="flex items-center space-x-3">
+                <img src="{{ asset('images/logo.png') }}" alt="Logo SILVER-ZIS" class="w-10 h-10 rounded-lg object-contain bg-white border border-slate-200 p-0.5 shadow-xs flex-shrink-0">
+                <div>
+                    <h1 class="text-base font-bold text-slate-900 dark:text-white tracking-tight mb-0.5">SILVER-ZIS</h1>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium mt-0.5">Sistem Laporan Keuangan Nirlaba Terintegrasi ZIS — Kelola Keuangan Organisasi</p>
+                </div>
             </div>
-            <a href="{{ route('profile.show') }}#organisasi" class="hidden sm:inline-flex btn-formal-outline px-3.5 py-1.5 text-xs font-bold items-center gap-1.5 text-slate-700 hover:text-emerald-700 hover:border-emerald-300 ml-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900" title="Ubah nama, kode, alamat, logo organisasi">
-                <i class="fa-solid fa-building text-emerald-600 text-[11px]"></i>
-                <span>Profil Organisasi</span>
-            </a>
-            <a href="{{ route('profile.show') }}#akun" class="hidden sm:inline-flex btn-formal-outline px-3.5 py-1.5 text-xs font-bold items-center gap-1.5 text-slate-700 hover:text-emerald-700 ml-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900" title="Ubah username, email, password akun login">
-                <i class="fa-solid fa-user-gear text-slate-500 text-[11px]"></i>
-                <span>Akun</span>
-            </a>
-            <!-- mobile: dropdown singkat -->
-            <a href="{{ route('profile.show') }}#organisasi" class="sm:hidden btn-formal-outline px-2.5 py-1.5 text-xs font-bold inline-flex items-center justify-center ml-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900" title="Profil Organisasi">
-                <i class="fa-solid fa-building text-emerald-600"></i>
-            </a>
-            <a href="{{ route('profile.show') }}#akun" class="sm:hidden btn-formal-outline px-2.5 py-1.5 text-xs font-bold inline-flex items-center justify-center ml-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900" title="Akun (username/email/password)">
-                <i class="fa-solid fa-user text-slate-700"></i>
-            </a>
-        </div>
-
-        <div class="flex items-center space-x-3">
-            <button type="button" onclick="document.documentElement.classList.toggle('dark'); try{localStorage.setItem('theme', document.documentElement.classList.contains('dark')?'dark':'light')}catch(e){}" class="btn-formal-outline px-2.5 py-1.5 text-xs focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900" title="Ganti tema gelap/terang" aria-label="Toggle dark mode">
-                    <i class="fa-solid fa-moon hidden dark:inline text-slate-300"></i><i class="fa-solid fa-sun dark:hidden text-amber-500"></i>
+            <div class="flex items-center gap-2">
+                <a href="{{ route('profile.show') }}#organisasi" class="btn-formal-outline px-3 py-1.5 text-xs font-bold items-center gap-1.5 text-slate-700 hover:text-emerald-700 hover:border-emerald-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500" title="Profil Organisasi">
+                    <i class="fa-solid fa-building text-emerald-600 text-[11px]"></i>
+                    <span class="hidden sm:inline">Profil</span>
+                </a>
+                <a href="{{ route('profile.show') }}#akun" class="btn-formal-outline px-3 py-1.5 text-xs font-bold items-center gap-1.5 text-slate-700 hover:text-emerald-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500" title="Akun">
+                    <i class="fa-solid fa-user-gear text-slate-500 text-[11px]"></i>
+                    <span class="hidden sm:inline">Akun</span>
+                </a>
+                <button type="button" onclick="document.documentElement.classList.toggle('dark');" class="btn-formal-outline px-2.5 py-1.5 text-xs" title="Ganti tema">
+                    <i class="fa-solid fa-moon hidden dark:inline"></i><i class="fa-solid fa-sun dark:hidden text-amber-500"></i>
                 </button>
-            <a href="{{ route('landing') }}" class="btn-formal-outline px-3.5 py-1.5 text-xs flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900">
+            </div>
+        </div>
+        <div class="flex items-center gap-2 border-t border-slate-200 pt-4 mt-2">
+            <a href="{{ route('landing') }}" class="btn-formal-outline px-3.5 py-1.5 text-xs flex items-center gap-2">
                 <i class="fa-solid fa-house text-slate-400 text-[11px]"></i>
                 <span class="hidden sm:inline">Landing Page</span>
             </a>
             <form action="{{ route('logout') }}" method="POST" class="inline">
                 @csrf
-                <button type="submit" class="btn-formal-outline px-3.5 py-1.5 text-xs text-rose-600 hover:text-rose-700 hover:border-rose-300 flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900">
+                <button type="submit" class="btn-formal-outline px-3.5 py-1.5 text-xs text-rose-600 hover:text-rose-700 hover:border-rose-300 flex items-center gap-2">
                     <i class="fa-solid fa-arrow-right-from-bracket text-[11px]"></i>
                     <span class="hidden sm:inline">Keluar</span>
                 </button>
