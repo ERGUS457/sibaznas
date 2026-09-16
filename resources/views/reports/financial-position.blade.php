@@ -27,7 +27,7 @@
     <div class="report-sheet-wrapper overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0"><div class="report-sheet bg-white p-4 sm:p-8 lg:p-12 border border-slate-300 shadow-sm text-black font-serif text-[13px] leading-relaxed print:p-0 print:border-none print:shadow-none">
         
         <!-- Black Box Header as in DE ISAK 35 Page 21 -->
-        <div class="bg-black text-white text-center py-3 px-4 mb-6">
+        <div class="bg-white text-black text-center py-3 px-4 mb-6 border-b border-slate-200">
             <div class="font-bold text-base tracking-wider uppercase">{{ $upz->name ?? 'ENTITAS XYZ' }}</div>
             <div class="font-semibold text-sm tracking-wide mt-0.5 uppercase">LAPORAN POSISI KEUANGAN</div>
             <div class="text-xs">per {{ \Carbon\Carbon::parse($asOfDate)->isoFormat('D MMMM Y') }}</div>
