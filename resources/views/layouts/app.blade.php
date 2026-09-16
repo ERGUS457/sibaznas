@@ -146,7 +146,7 @@
         .clay-btn-rose:focus-visible, .maxi-btn-rose:focus-visible { box-shadow: 0 0 0 3px rgba(244,63,94,0.35); }
         main > * + * { margin-top: 0.75rem; }
 
-        /* ========== DARK MODE — Linear-inspired refined ========== */
+                /* ========== DARK MODE — Linear-inspired refined ========== */
         .dark body { background-color:#080c18; color:#e2e8f0; }
         .dark .clay-card, .dark .maxi-card { background:#111c2e; border-color:rgba(255,255,255,0.07); color:#e2e8f0; box-shadow:0 1px 3px rgba(0,0,0,0.4); }
         .dark .clay-card:hover, .dark .maxi-card:hover { border-color:rgba(255,255,255,0.12); box-shadow:0 4px 12px rgba(0,0,0,0.35); }
@@ -156,31 +156,32 @@
         .dark .clay-input, .dark .maxi-input { background:#0f1a2e; border-color:#23324d; color:#e2e8f0; }
         .dark .clay-input::placeholder, .dark .maxi-input::placeholder { color:#64748b; }
         .dark .clay-input:focus, .dark .maxi-input:focus { border-color:#047857; box-shadow:0 0 0 2px rgba(16,185,129,0.18); }
-        /* Text utilities — exclude report-sheet */
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="text-slate-900"] { color:#f1f5f9 !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="text-slate-800"] { color:#e2e8f0 !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="text-slate-700"] { color:#cbd5e1 !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="text-slate-600"] { color:#94a3b8 !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="text-slate-500"] { color:#94a3b8 !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="text-slate-400"] { color:#64748b !important; }
-        /* Background overrides — exclude report-sheet and bsz-card paper */
-        .dark :not(.report-sheet):not(.report-sheet *):not(.bsz-card):not(.bsz-card *)[class*="bg-white"] { background-color:#111c2e !important; border-color:rgba(255,255,255,0.07) !important; }
-        .dark :not(.report-sheet):not(.report-sheet *):not(.bsz-card):not(.bsz-card *)[class*="bg-slate-50"] { background-color:#121e33 !important; border-color:rgba(255,255,255,0.06) !important; color:#cbd5e1 !important; }
-        .dark :not(.report-sheet):not(.report-sheet *):not(.bsz-card):not(.bsz-card *)[class*="bg-slate-100"] { background-color:#1a2942 !important; color:#e2e8f0 !important; border-color:#23324d !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="border-slate-200"] { border-color:rgba(255,255,255,0.07) !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="border-slate-100"] { border-color:rgba(255,255,255,0.06) !important; }
-        /* Semantic pills — dark variants */
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="bg-emerald-50"] { background:rgba(16,185,129,0.10) !important; border-color:rgba(16,185,129,0.22) !important; color:#6ee7b7 !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="bg-teal-50"] { background:rgba(20,184,166,0.10) !important; border-color:rgba(20,184,166,0.22) !important; color:#5eead4 !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="bg-amber-50"] { background:rgba(245,158,11,0.10) !important; border-color:rgba(245,158,11,0.22) !important; color:#fcd34d !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="bg-rose-50"] { background:rgba(244,63,94,0.10) !important; border-color:rgba(244,63,94,0.22) !important; color:#fda4af !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="bg-indigo-50"] { background:rgba(99,102,241,0.10) !important; border-color:rgba(99,102,241,0.22) !important; color:#a5b4fc !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="bg-sky-50"] { background:rgba(14,165,233,0.10) !important; border-color:rgba(14,165,233,0.22) !important; color:#7dd3fc !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="bg-blue-50"] { background:rgba(59,130,246,0.10) !important; border-color:rgba(59,130,246,0.22) !important; color:#93c5fd !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="text-emerald-800"], .dark :not(.report-sheet):not(.report-sheet *)[class*="text-emerald-700"] { color:#6ee7b7 !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="text-amber-700"], .dark :not(.report-sheet):not(.report-sheet *)[class*="text-amber-800"] { color:#fcd34d !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="text-rose-700"], .dark :not(.report-sheet):not(.report-sheet *)[class*="text-rose-800"] { color:#fda4af !important; }
-        .dark :not(.report-sheet):not(.report-sheet *)[class*="text-sky-700"], .dark :not(.report-sheet):not(.report-sheet *)[class*="text-sky-800"] { color:#7dd3fc !important; }
+        /* Text utilities — scoped to not affect paper */
+        .dark .maxi-card [class*="text-slate-900"], .dark .clay-card [class*="text-slate-900"],
+        .dark .maxi-sidebar [class*="text-slate-900"], .dark aside [class*="text-slate-900"],
+        .dark main > div:not(.report-sheet-wrapper) [class*="text-slate-900"],
+        .dark header [class*="text-slate-900"], .dark nav [class*="text-slate-900"] { color:#f1f5f9 !important; }
+        .dark .maxi-card [class*="text-slate-800"], .dark .clay-card [class*="text-slate-800"],
+        .dark aside [class*="text-slate-800"], .dark header [class*="text-slate-800"] { color:#e2e8f0 !important; }
+        .dark .maxi-card [class*="text-slate-700"], .dark .clay-card [class*="text-slate-700"],
+        .dark aside [class*="text-slate-700"], .dark header [class*="text-slate-700"] { color:#cbd5e1 !important; }
+        .dark .maxi-card [class*="text-slate-600"], .dark .clay-card [class*="text-slate-600"],
+        .dark aside [class*="text-slate-600"], .dark header [class*="text-slate-600"] { color:#94a3b8 !important; }
+        .dark .maxi-card [class*="text-slate-500"], .dark .clay-card [class*="text-slate-500"],
+        .dark aside [class*="text-slate-500"], .dark header [class*="text-slate-500"] { color:#94a3b8 !important; }
+        /* Background overrides — only outside paper */
+        .dark .clay-card[class*="bg-white"], .dark .maxi-card[class*="bg-white"],
+        .dark aside [class*="bg-white"], .dark header [class*="bg-white"],
+        .dark main > div:not(.report-sheet-wrapper) [class*="bg-white"] { background-color:#111c2e !important; border-color:rgba(255,255,255,0.07) !important; }
+        .dark .clay-card[class*="bg-slate-50"], .dark aside [class*="bg-slate-50"] { background-color:#121e33 !important; border-color:rgba(255,255,255,0.06) !important; color:#cbd5e1 !important; }
+        .dark .clay-card[class*="bg-slate-100"], .dark aside [class*="bg-slate-100"], .dark header [class*="bg-slate-100"] { background-color:#1a2942 !important; color:#e2e8f0 !important; border-color:#23324d !important; }
+        .dark aside [class*="border-slate-200"], .dark header [class*="border-slate-200"] { border-color:rgba(255,255,255,0.07) !important; }
+        .dark aside [class*="border-slate-100"] { border-color:rgba(255,255,255,0.06) !important; }
+        /* Semantic pills — dark variants (outside paper) */
+        .dark aside [class*="bg-emerald-50"], .dark header [class*="bg-emerald-50"], .dark .clay-card [class*="bg-emerald-50"] { background:rgba(16,185,129,0.10) !important; border-color:rgba(16,185,129,0.22) !important; color:#6ee7b7 !important; }
+        .dark aside [class*="bg-sky-50"], .dark header [class*="bg-sky-50"], .dark .clay-card [class*="bg-sky-50"] { background:rgba(14,165,233,0.10) !important; border-color:rgba(14,165,233,0.22) !important; color:#7dd3fc !important; }
+        .dark [class*="text-emerald-800"], .dark [class*="text-emerald-700"] { color:#6ee7b7 !important; }
+        .dark [class*="text-sky-800"], .dark [class*="text-sky-700"] { color:#7dd3fc !important; }
         /* Buttons in dark */
         .dark .clay-btn-white, .dark .maxi-btn-white { background:#1a2942; color:#e2e8f0; border-color:#23324d; }
         .dark .clay-btn-white:hover, .dark .maxi-btn-white:hover { background:#1e3350; color:#ffffff; border-color:#2d4a6b; }
@@ -197,6 +198,9 @@
             border-color:#cbd5e1 !important;
             box-shadow:0 8px 30px rgba(0,0,0,0.35) !important;
         }
+        .dark .report-sheet * {
+            border-color: #000000;
+        }
         .dark .report-sheet .bg-black { background:#000000 !important; color:#ffffff !important; }
         .dark .report-sheet .bg-black * { color:#ffffff !important; }
         .dark .report-sheet table, .dark .report-sheet thead, .dark .report-sheet tbody, .dark .report-sheet tr, .dark .report-sheet th, .dark .report-sheet td {
@@ -210,7 +214,14 @@
         .dark .report-sheet .signature-block, .dark .report-sheet .signature-block * { color:#000 !important; }
 
         /* Responsive helpers */
-        .report-sheet-wrapper { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+        .report-sheet-wrapper { overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:thin; }
+        /* Sidebar scrollbar — thin, themed */
+        aside nav::-webkit-scrollbar { width:6px; height:6px; }
+        aside nav::-webkit-scrollbar-thumb { background:rgba(148,163,184,0.35); border-radius:9999px; }
+        .dark aside nav::-webkit-scrollbar-thumb { background:rgba(255,255,255,0.12); }
+        .report-sheet-wrapper::-webkit-scrollbar { height:8px; }
+        .report-sheet-wrapper::-webkit-scrollbar-thumb { background:rgba(148,163,184,0.45); border-radius:9999px; }
+        .dark .report-sheet-wrapper::-webkit-scrollbar-thumb { background:rgba(255,255,255,0.18); }
         .report-sheet { min-width: 640px; }
         @media (max-width: 640px) {
             .report-sheet { min-width: 520px; }
@@ -422,9 +433,9 @@
 
                     <!-- 4 Laporan Pokok DE ISAK 35 Format A -->
                     <div>
-                        <div class="px-3 mb-2 text-[10px] font-extrabold uppercase tracking-wider text-slate-400 flex items-center justify-between">
-                            <span>Laporan DE ISAK 35</span>
-                            <span class="text-[9px] bg-sky-100 text-sky-800 px-1.5 py-0.5 rounded font-bold">Format A</span>
+                        <div class="px-3 mb-2 text-[10px] font-extrabold uppercase tracking-wider text-slate-400 flex items-center justify-between gap-2">
+                            <span class="truncate">Laporan DE ISAK 35</span>
+                            <span class="text-[9px] bg-sky-100 text-sky-800 px-1.5 py-0.5 rounded font-bold flex-shrink-0 whitespace-nowrap">Format A</span>
                         </div>
                         <div class="space-y-1">
                             <a href="{{ route('reports.financial-position') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('reports.financial-position') ? 'clay-card-soft font-bold text-sky-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
@@ -468,9 +479,9 @@
 
                     <!-- Operasional UPZ -->
                     <div>
-                        <div class="px-3 mb-2 text-[10px] font-extrabold uppercase tracking-wider text-slate-400 flex items-center justify-between">
-                            <span>Operasional UPZ</span>
-                            <span class="text-[9px] bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded font-bold">ZIS &amp; DSKL</span>
+                        <div class="px-3 mb-2 text-[10px] font-extrabold uppercase tracking-wider text-slate-400 flex items-center justify-between gap-2">
+                            <span class="truncate">Operasional UPZ</span>
+                            <span class="text-[9px] bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded font-bold flex-shrink-0 whitespace-nowrap">ZIS &amp; DSKL</span>
                         </div>
                         <div class="space-y-1">
                             <a href="{{ route('collections.index') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('collections.*') ? 'clay-card-soft font-bold text-emerald-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
@@ -498,9 +509,9 @@
 
                     <!-- Laporan Peraturan BAZNAS No. 2/2016 -->
                     <div>
-                        <div class="px-3 mb-2 text-[10px] font-extrabold uppercase tracking-wider text-slate-400 flex items-center justify-between">
-                            <span>Laporan Perbaznas</span>
-                            <span class="text-[9px] bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded font-bold">No. 2/2016</span>
+                        <div class="px-3 mb-2 text-[10px] font-extrabold uppercase tracking-wider text-slate-400 flex items-center justify-between gap-2">
+                            <span class="truncate">Laporan Perbaznas</span>
+                            <span class="text-[9px] bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded font-bold flex-shrink-0 whitespace-nowrap">No. 2/2016</span>
                         </div>
                         <div class="space-y-1">
                             <a href="{{ route('reports.perbaznas-compliance') }}" class="flex items-center space-x-3 px-3.5 py-2 rounded-2xl {{ request()->routeIs('reports.perbaznas-compliance') ? 'clay-card-soft font-bold text-emerald-800' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900' }} transition">
@@ -599,13 +610,13 @@
         <!-- Main Content Area -->
         <div class="flex-1 flex flex-col min-w-0 overflow-y-auto">
             <!-- Top App Bar (Formal Corporate) -->
-            <header class="px-4 sm:px-8 pt-4 pb-2 no-print sticky top-0 z-10 bg-slate-50/80 dark:bg-slate-900/80 backdrop-blur-xs">
-                <div class="clay-topbar px-5 py-2.5 flex items-center justify-between border border-slate-200 bg-white shadow-xs dark:bg-slate-800 dark:border-slate-700">
-                    <div class="flex items-center space-x-3">
-                        <button @click="sidebarOpen = true" class="lg:hidden text-slate-600 hover:text-slate-900 p-2 rounded-lg hover:bg-slate-100">
+            <header class="px-3 sm:px-6 lg:px-8 pt-3 sm:pt-4 pb-2 no-print sticky top-0 z-10 bg-slate-50/80 dark:bg-slate-900/80 backdrop-blur supports-[backdrop-filter]:bg-slate-50/60">
+                <div class="clay-topbar px-3 sm:px-5 py-2.5 flex flex-wrap items-center justify-between gap-2 border border-slate-200 bg-white shadow-xs dark:bg-slate-800 dark:border-slate-700">
+                    <div class="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+                        <button @click="sidebarOpen = true" class="lg:hidden text-slate-600 hover:text-slate-900 p-2 rounded-lg hover:bg-slate-100 flex-shrink-0">
                             <i class="fa-solid fa-bars text-sm"></i>
                         </button>
-                        <div class="flex items-center space-x-2 text-xs">
+                        <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 text-xs min-w-0">
                             <a href="{{ route('portal') }}" class="clay-btn-white px-2.5 py-1 text-xs font-semibold flex items-center gap-1.5 text-slate-700 hover:text-slate-900">
                                 <i class="fa-solid fa-grip text-slate-400"></i>
                                 <span class="hidden sm:inline">Portal</span>
@@ -624,8 +635,8 @@
                             @endif
                         </div>
                     </div>
-                    <div class="flex items-center space-x-2 sm:space-x-3">
-                        <button type="button" onclick="document.documentElement.classList.toggle('dark'); try{localStorage.setItem('theme', document.documentElement.classList.contains('dark')?'dark':'light')}catch(e){}" class="clay-btn-white px-2 py-1.5 text-xs hidden sm:inline-flex items-center justify-center" title="Ganti tema" aria-label="Toggle dark mode">
+                    <div class="flex flex-wrap items-center gap-2 sm:gap-3 justify-end">
+                        <button type="button" onclick="document.documentElement.classList.toggle('dark'); try{localStorage.setItem('theme', document.documentElement.classList.contains('dark')?'dark':'light')}catch(e){}" class="clay-btn-white px-2 py-1.5 text-xs inline-flex items-center justify-center flex-shrink-0" title="Ganti tema" aria-label="Toggle dark mode">
                             <i class="fa-solid fa-moon hidden dark:inline"></i><i class="fa-solid fa-sun dark:hidden text-amber-500"></i>
                         </button>
                         {{-- User Organization Badge (simple, no switcher) --}}
@@ -692,7 +703,7 @@
             @endif
 
             <!-- Body View -->
-            <main class="flex-1 p-4 sm:p-8 max-w-7xl w-full mx-auto">
+            <main class="flex-1 p-3 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto min-w-0">
                 @yield('content')
             </main>
 

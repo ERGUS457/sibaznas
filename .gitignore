@@ -21,3 +21,7 @@ yarn-error.log
 # hermes tmp
 resources/views/.hermes-tmp.*
 .hermes-tmp.*
+
+.vercel
+.env.local
+*.bak

@@ -15,13 +15,13 @@
             <h1 class="text-base font-bold text-slate-900 mt-1">Laporan Asnaf</h1>
             <p class="text-xs text-slate-500">Peraturan Badan Amil Zakat Nasional No. 2 Tahun 2016 (Halaman 34).</p>
         </div>
-        <div class="flex flex-wrap items-center gap-2">
-            <form method="GET" class="flex items-center space-x-2 text-xs">
+        <div class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2 w-full lg:w-auto">
+            <form method="GET" class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2 text-xs w-full sm:w-auto">
                 <label for="year" class="font-medium text-slate-600">Tahun:</label>
-                <input type="number" id="year" name="year" value="{{ $year }}" min="2020" max="2035" class="w-20 border border-slate-300 rounded px-2 py-1 focus:ring-1 focus:ring-black">
-                <button type="submit" class="bg-slate-800 hover:bg-black text-white px-3 py-1 rounded font-medium">Tampilkan</button>
+                <input type="number" id="year" name="year" value="{{ $year }}" min="2020" max="2035" class="w-full sm:w-20 border border-slate-300 rounded px-2 py-1.5 sm:py-1 focus:ring-1 focus:ring-black text-sm sm:text-xs">
+                <button type="submit" class="bg-slate-800 hover:bg-black text-white px-3 py-2 sm:py-1 rounded font-medium w-full sm:w-auto text-center text-sm sm:text-xs">Tampilkan</button>
             </form>
-            <button onclick="window.print()" class="bg-black hover:bg-slate-800 text-white font-medium text-xs px-3 py-1.5 rounded shadow flex items-center gap-1.5">
+            <button onclick="window.print()" class="bg-black hover:bg-slate-800 text-white font-medium text-xs px-3 py-2.5 sm:py-1.5 rounded shadow flex items-center justify-center gap-1.5 w-full sm:w-auto whitespace-nowrap">
                 <i class="fa-solid fa-print"></i>
                 <span>Cetak Lembar Laporan</span>
             </button>
