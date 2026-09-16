@@ -159,7 +159,7 @@
         /* Text utilities — scoped to not affect paper */
         .dark .maxi-card [class*="text-slate-900"], .dark .clay-card [class*="text-slate-900"],
         .dark .maxi-sidebar [class*="text-slate-900"], .dark aside [class*="text-slate-900"],
-        .dark main > div:not(.report-sheet-wrapper) [class*="text-slate-900"],
+        .dark main [class*="text-slate-900"]:not(.report-sheet),
         .dark header [class*="text-slate-900"], .dark nav [class*="text-slate-900"] { color:#f1f5f9 !important; }
         .dark .maxi-card [class*="text-slate-800"], .dark .clay-card [class*="text-slate-800"],
         .dark aside [class*="text-slate-800"], .dark header [class*="text-slate-800"] { color:#e2e8f0 !important; }
@@ -172,7 +172,7 @@
         /* Background overrides — only outside paper */
         .dark .clay-card[class*="bg-white"], .dark .maxi-card[class*="bg-white"],
         .dark aside [class*="bg-white"], .dark header [class*="bg-white"],
-        .dark main > div:not(.report-sheet-wrapper) [class*="bg-white"] { background-color:#111c2e !important; border-color:rgba(255,255,255,0.07) !important; }
+        .dark main [class*="bg-white"]:not(.report-sheet) { background-color:#111c2e !important; border-color:rgba(255,255,255,0.07) !important; }
         .dark .clay-card[class*="bg-slate-50"], .dark aside [class*="bg-slate-50"] { background-color:#121e33 !important; border-color:rgba(255,255,255,0.06) !important; color:#cbd5e1 !important; }
         .dark .clay-card[class*="bg-slate-100"], .dark aside [class*="bg-slate-100"], .dark header [class*="bg-slate-100"] { background-color:#1a2942 !important; color:#e2e8f0 !important; border-color:#23324d !important; }
         .dark aside [class*="border-slate-200"], .dark header [class*="border-slate-200"] { border-color:rgba(255,255,255,0.07) !important; }
@@ -190,12 +190,18 @@
         .dark .clay-btn-emerald, .dark .maxi-btn-emerald { background:#059669; border-color:#059669; }
         .dark .clay-btn-emerald:hover, .dark .maxi-btn-emerald:hover { background:#047857; border-color:#047857; }
 
-        /* Report sheet MUST stay paper-white even in dark mode — floating paper effect */
-        html.dark .report-sheet,
-        .dark .report-sheet,
-        html.dark .bsz-card,
-        .dark .bsz-card {
+        /* Report sheet MUST stay paper-white even in dark mode — floating paper effect (max specificity to beat generic dark rules) */
+        html.dark body main .report-sheet.report-sheet.bg-white,
+        html.dark body .report-sheet.report-sheet,
+        html.dark main .report-sheet.report-sheet.bg-white,
+        .dark main .report-sheet.report-sheet.bg-white,
+        html.dark .report-sheet.report-sheet.bg-white,
+        .dark .report-sheet.report-sheet.bg-white,
+        html.dark body .bsz-card.bsz-card,
+        html.dark main .bsz-card.bsz-card,
+        .dark .bsz-card.bsz-card {
             background:#ffffff !important;
+            background-color:#ffffff !important;
             color:#000000 !important;
             border-color:#cbd5e1 !important;
             box-shadow:0 8px 30px rgba(0,0,0,0.35) !important;
