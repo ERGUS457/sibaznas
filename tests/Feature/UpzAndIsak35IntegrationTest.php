@@ -122,21 +122,20 @@ class UpzAndIsak35IntegrationTest extends TestCase
 
     public function test_perbaznas_amil_share_cannot_exceed_maximum_limit(): void
     {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Hak amil untuk dana zakat tidak boleh melebihi 12.50%');
-
         $upz = UpzProfile::first();
         $muzakki = Muzakki::first();
         $service = app(ZisCollectionService::class);
 
-        // Attempt to record collection with 15% amil (exceeds 12.5% max)
-        $service->recordCollection([
+        // Attempt to record collection with 15% amil (exceeds 12.5% max, should be capped at 12.5% automatically by ZisCollectionService)
+        $collection = $service->recordCollection([
             'upz_profile_id' => $upz->id,
             'muzakki_id' => $muzakki->id,
             'fund_type' => 'zakat_maal',
             'amount' => 1000000,
             'amil_percentage' => 15.00,
         ]);
+
+        $this->assertEquals(12.50, $collection->amil_percentage);
     }
 
     public function test_login_page_renders_successfully(): void
