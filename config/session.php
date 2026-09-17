@@ -18,7 +18,7 @@ return [
     |
     */
 
-    'driver' => env('SESSION_DRIVER', env('VERCEL') ? 'cookie' : 'file'),
+    'driver' => env('SESSION_DRIVER', env('VERCEL') ? 'database' : 'file'),
 
     /*
     |--------------------------------------------------------------------------
