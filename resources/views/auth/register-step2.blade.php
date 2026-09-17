@@ -91,6 +91,7 @@
             @endif
 
             <form method="POST" action="{{ route('register.step2.submit') }}" class="space-y-6">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 @csrf
 
                 {{-- Identitas Organisasi --}}
