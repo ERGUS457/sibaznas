@@ -35,9 +35,9 @@ Route::post('forgot-password-request', [AuthController::class, 'sendForgotPasswo
 // ─── Registration Routes (2-Step) ────────────────────────────────────────────
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisterController::class, 'showStep1'])->name('register.step1');
-    Route::post('register', [RegisterController::class, 'submitStep1'])->middleware('throttle:register')->name('register.step1.submit');
+    Route::post('register', [RegisterController::class, 'submitStep1'])->name('register.step1.submit');
     Route::get('register/upz', [RegisterController::class, 'showStep2'])->name('register.step2');
-    Route::post('register/upz', [RegisterController::class, 'submitStep2'])->middleware('throttle:register')->name('register.step2.submit');
+    Route::post('register/upz', [RegisterController::class, 'submitStep2'])->name('register.step2.submit');
 });
 
 // ─── Pending Approval Page (auth tapi belum aktif) ───────────────────────────
